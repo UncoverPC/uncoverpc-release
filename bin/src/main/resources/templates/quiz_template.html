@@ -234,6 +234,8 @@
         }
       }
     </style>
+
+    <script></script>
   </head>
 
   <body class="color_theme" id="text_container">
@@ -243,6 +245,19 @@
         <a href="#home" class="w3-bar-item w3-button w3-wide">
           <object data="assets/Logo.svg" width="20" height="20"></object
         ></a>
+        <!-- Right-sided navbar links -->
+        <div class="w3-right w3-hide-small">
+          <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+          <a href="#team" class="w3-bar-item w3-button"
+            ><i class="fa fa-user"></i> TEAM</a
+          >
+          <a href="#work" class="w3-bar-item w3-button"
+            ><i class="fa fa-th"></i> WORK</a
+          >
+          <a href="#contact" class="w3-bar-item w3-button"
+            ><i class="fa fa-envelope"></i> CONTACT</a
+          >
+        </div>
         <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
         <a
@@ -254,28 +269,6 @@
         </a>
       </div>
       <div class="progress_bar_container w3-top" id="progress_bar"></div>
-      <div style="height: 20vh; position: absolute">
-        <p>IFrame:</p>
-        <textarea
-          id="IFrame"
-          oninput="onChangeProductTextArea(this)"
-        ></textarea>
-        <br />
-        <p>Link:</p>
-        <textarea id="link" oninput="onChangeProductTextArea(this)"></textarea>
-        <p>Price:</p>
-        <textarea id="price" oninput="onChangeProductTextArea(this)"></textarea>
-        <p>Image Link:</p>
-        <textarea
-          id="image_link"
-          oninput="onChangeProductTextArea(this)"
-        ></textarea>
-        <p>Title:</p>
-        <textarea
-          id="product_title"
-          oninput="onChangeProductTextArea(this)"
-        ></textarea>
-      </div>
     </div>
 
     <!-- Quiz -->
@@ -305,29 +298,6 @@
     //Questions & answers (injected from backend)
     const data = /*[[${questions}]]*/ "No Questions";
     const questions = data;
-    var productAnswer = new Map();
-    var productData = {
-      iframe: "",
-      link: "",
-      price: "",
-      imageLink: "",
-      title: "",
-      productAnswer,
-    };
-
-    function onChangeProductTextArea(element) {
-      if (element.id == "IFrame") {
-        productData.iframe = element.value;
-      } else if (element.id == "link") {
-        productData.link = element.value;
-      } else if (element.id == "price") {
-        productData.price = element.value;
-      } else if (element.id == "image_link") {
-        productData.imageLink = element.value;
-      } else if (element.id == "product_title") {
-        productData.title = element.value;
-      }
-    }
 
     start_quiz();
     //Start the quiz
@@ -359,14 +329,12 @@
 
     function input(answer) {
       //Save the quesiton and answer
-      var question = questions[current_question].question;
-      productData.productAnswer.set(question, answer);
       if (question == answers.length) {
         //If answer to the question is the current quesiton
-        answers.push({ question, answer });
+        answers.push({ current_question, answer });
       } else {
         //If we went back and the question isnt the same
-        answers[current_question] = { question, answer };
+        answers[current_question] = { current_question, answer };
       }
       console.log(answers);
       //Next question
@@ -471,23 +439,6 @@
       //remove back button
       document.getElementById("back").remove();
       //TODO Send request to server
-      var quizName = encodeURIComponent(
-        document.getElementById("title").textContent
-      );
-      productData.productAnswer = Object.fromEntries(productAnswer);
-      $.ajax({
-        url: "/productquiz/addProduct/" + quizName,
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(productData),
-        success: function (response) {
-          alert("success");
-          location.reload();
-        },
-        error: function () {
-          alert("error");
-        },
-      });
     }
   </script>
 </html>

@@ -3,8 +3,10 @@ package com.uncoverpc.quiz;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Answer {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class Answer {
+	
 	private Map<String, Integer> answers = new HashMap<String, Integer>();
 
 	public Answer(Map<String, Integer> answers) {
