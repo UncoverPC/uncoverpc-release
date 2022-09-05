@@ -1,6 +1,7 @@
 package com.uncoverpc.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -24,6 +25,7 @@ import com.uncoverpc.db.QuizProductService;
 import com.uncoverpc.db.QuizService;
 import com.uncoverpc.product.Product;
 import com.uncoverpc.quiz.Quiz;
+import com.uncoverpc.quiz.QuizResponseAnswer;
 
 @Controller
 public class MainController {
@@ -101,7 +103,17 @@ public class MainController {
 		}
 		return "Unexpected Error";
 	}
-
+	
+	@PostMapping("/productquiz/{quizName}/getResults")
+	@ResponseBody
+	public ResponseEntity<Object> getQuizResults(HttpServletRequest request, HttpServletResponse response, @RequestBody ArrayList<QuizResponseAnswer> answer) {
+		System.out.println(answer);
+		
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+		
+	}
+	
 	@GetMapping("/admin/createQuiz")
 	public String createQuiz() {
 		return "create_quiz.html";
