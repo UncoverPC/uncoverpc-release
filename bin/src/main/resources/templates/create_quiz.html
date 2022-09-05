@@ -91,7 +91,7 @@
       .answer {
         width: 500px;
         padding: 10px;
-        border: 2px solid gray;
+        border: 2px solid gray !important;
         margin: 10px;
         position: relative;
         background-color: transparent;
@@ -100,13 +100,13 @@
       }
 
       .answer:hover {
-        border: 2px solid rgb(47, 132, 133);
-        color: rgb(47, 132, 133);
+        border: 2px solid rgb(42, 54, 148) !important;
+        color: rgb(42, 54, 148) !important;
       }
 
       .answer_selected {
-        border: 2px solid rgb(196, 80, 80);
-        color: rgb(196, 80, 80);
+        border: 2px solid rgb(196, 80, 80) !important;
+        color: rgb(196, 80, 80) !important;
       }
 
       .back {
@@ -114,21 +114,67 @@
         border: transparent;
         position: relative;
         background-color: transparent;
-        color: green;
+        color: red;
         border-radius: 20%;
         display: inline-flex;
-        /* Fliping text*/
-        -moz-transform: scale(-1, 1);
-        -webkit-transform: scale(-1, 1);
-        -o-transform: scale(-1, 1);
-        -ms-transform: scale(-1, 1);
-        transform: scale(-1, 1);
+      }
+
+      .submit {
+        padding: 10px;
+        border: 2px solid green;
+        position: relative;
+        background-color: transparent;
+        color: rgb(119, 201, 111);
+        border-radius: 20%;
+        display: inline-flex;
+      }
+
+      .submit:hover {
+        background-color: green;
+      }
+
+      .addQuestion {
+        padding: 10px;
+        border: 2px solid rgb(27, 48, 134);
+        position: relative;
+        background-color: transparent;
+        color: rgb(27, 165, 156);
+        border-radius: 20%;
+        display: inline-flex;
+      }
+
+      .addQuestion:hover {
+        background-color: blue;
+      }
+
+      .addAnswer {
+        padding: 10px;
+        border: 2px solid rgb(134, 64, 27);
+        position: relative;
+        background-color: transparent;
+        color: rgba(106, 151, 55, 0.719);
+        border-radius: 20%;
+        display: inline-flex;
+      }
+
+      .addAnswer:hover {
+        background-color: rgb(208, 109, 86);
       }
 
       .back:hover {
         /* border: 2px solid rgb(104, 44, 6); */
         color: rgb(42, 54, 148);
-        cursor: pointer;
+      }
+
+      .textfield {
+        width: 40vw;
+        background-color: transparent;
+        border-color: transparent;
+        color: antiquewhite;
+      }
+
+      #quiz_title {
+        font-size: xx-large;
       }
 
       .lds-ring {
@@ -173,22 +219,12 @@
         }
       }
 
-      #question_title {
-        font-size: x-large;
-        color: rgb(66, 189, 74);
-      }
-
       .progress_bar_container {
         width: 0vw;
         height: 2px;
         background-color: green;
         position: relative;
         transition: 0.6s;
-      }
-
-      textarea {
-        background-color: transparent;
-        color: antiquewhite;
       }
 
       /* Next question animation */
@@ -235,6 +271,8 @@
         }
       }
     </style>
+
+    <script></script>
   </head>
 
   <body class="color_theme" id="text_container">
@@ -255,28 +293,6 @@
         </a>
       </div>
       <div class="progress_bar_container w3-top" id="progress_bar"></div>
-      <div style="height: 20vh; position: absolute">
-        <p>IFrame:</p>
-        <textarea
-          id="IFrame"
-          oninput="onChangeProductTextArea(this)"
-        ></textarea>
-        <br />
-        <p>Link:</p>
-        <textarea id="link" oninput="onChangeProductTextArea(this)"></textarea>
-        <p>Price:</p>
-        <textarea id="price" oninput="onChangeProductTextArea(this)"></textarea>
-        <p>Image Link:</p>
-        <textarea
-          id="image_link"
-          oninput="onChangeProductTextArea(this)"
-        ></textarea>
-        <p>Title:</p>
-        <textarea
-          id="product_title"
-          oninput="onChangeProductTextArea(this)"
-        ></textarea>
-      </div>
     </div>
 
     <!-- Quiz -->
@@ -284,53 +300,84 @@
       <!-- Logo -->
       <h1 id="logo">UncoverPC</h1>
       <!-- Title -->
-      <h1 class="w3-center" id="title" th:text="${quizTitle}">
-        Laptop recommendation quiz
-      </h1>
+      <input
+        type="text"
+        class="w3-center textfield"
+        id="quiz_title"
+        oninput="onChangeQuizTitle(this)"
+        name="quiz_title"
+      />
       <!-- Quiz Container -->
       <div>
         <!-- Question -->
-        <span id="question_title" question="1"></span>
+        <input
+          type="text"
+          class="w3-center textfield"
+          id="question_title"
+          name="question_title"
+        />
         <div>
           <!-- Answers -->
-          <div id="answers"></div>
-          <button class="back" onclick="back()" id="back">&gt;&gt;&gt;</button>
+          <div id="answers">
+            <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="answer"
+              name="answer"
+            />
+          </div>
+          <button class="back" onclick="back()" id="back">Back</button>
+          Scalable:
+          <input type="checkbox" id="scalable" />
+          <button class="addAnswer" onclick="addAnswer()" id="add_question">
+            Add Answer
+          </button>
+          <button class="addQuestion" onclick="addQuestion()" id="add_question">
+            Add Question
+          </button>
+          <button class="submit" onclick="submitQuiz()" id="submit_quiz">
+            Submit
+          </button>
         </div>
       </div>
     </div>
   </body>
 
-  <script th:inline="javascript">
+  <script>
+    var quiz = { quizTitle: "", question_bank: [] };
+    // quiz["quizTitle"] = "";
+    // quiz["question_bank"] = [];
+
     var current_question = 0;
 
     //Questions & answers (injected from backend)
-    const data = /*[[${questions}]]*/ "No Questions";
-    const questions = data;
-    var productAnswer = new Map();
-    var productData = {
-      iframe: "",
-      link: "",
-      price: "",
-      imageLink: "",
-      title: "",
-      productAnswer,
-    };
+    const questions = [
+      {
+        question: "Battery life",
+        answers: ["1-3 hours", "3-5 hours", "5-9 hours", "9-12 hours"],
+      },
+      {
+        question: "Performance",
+        answers: [
+          "Web-Browsing",
+          "Photo Editing",
+          "Rendering",
+          "Coding",
+          "Gaming",
+        ],
+      },
+      {
+        question: "Price",
+        answers: ["<$200", "$200-$500", "$500-$800", "$800-$1200", "$1200+"],
+      },
+      {
+        question: "Longeivity",
+        answers: ["<1year", "1-3years", "3-5years", "6-8years"],
+      },
+    ];
 
-    function onChangeProductTextArea(element) {
-      if (element.id == "IFrame") {
-        productData.iframe = element.value;
-      } else if (element.id == "link") {
-        productData.link = element.value;
-      } else if (element.id == "price") {
-        productData.price = element.value;
-      } else if (element.id == "image_link") {
-        productData.imageLink = element.value;
-      } else if (element.id == "product_title") {
-        productData.title = element.value;
-      }
-    }
-
-    start_quiz();
+    // start_quiz()
     //Start the quiz
     function start_quiz() {
       //Make home screen disapear
@@ -339,8 +386,22 @@
       nextQuestion(0);
     }
 
-    //Answers storage
-    var answers = [];
+    function addAnswer() {
+      var loc = document.getElementById("answers");
+      loc.innerHTML +=
+        '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer">';
+      //Getting placeholders to texts so the texts dont disapear
+      var answers = document
+        .getElementById("answers")
+        .querySelectorAll(".answer");
+      answers.forEach((item) => {
+        item.value = item.placeholder;
+      });
+    }
+
+    function onType(element) {
+      element.placeholder = element.value;
+    }
 
     //Procced to the last question
     function back() {
@@ -348,7 +409,6 @@
       if (current_question > 0) {
         //change questrion
         current_question--;
-        moveProgressBar(current_question);
         var current_answers = document.querySelectorAll(".answer");
         current_answers.forEach((item) => {
           item.style.animation = "previousQuestion 0.5s"; //reversed
@@ -358,22 +418,58 @@
       }
     }
 
-    function input(answer) {
-      //Save the quesiton and answer
-      var question = questions[current_question].question;
-      productData.productAnswer.set(question, answer);
-      if (question == answers.length) {
-        //If answer to the question is the current quesiton
-        answers.push({ question, answer });
-      } else {
-        //If we went back and the question isnt the same
-        answers[current_question] = { question, answer };
+    function submitQuiz() {
+      console.log({
+        quizTitle: quiz.quizTitle,
+        question_bank: quiz.question_bank,
+      });
+      //Alert
+      if (confirm("Are you sure you want to submit this quiz?")) {
+        $.ajax({
+          url: "/api/quiz/create/",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(quiz),
+          success: function (response) {
+            alert(response);
+          },
+          error: function () {
+            alert("error");
+          },
+        });
       }
-      console.log(answers);
-      //Next question
-      current_question++;
-      moveProgressBar(current_question);
+    }
 
+    function onChangeQuizTitle(element) {
+      quiz.quizTitle = element.value;
+    }
+
+    function addQuestion() {
+      //Collecting Data
+      var ans = [];
+      var answers = document
+        .getElementById("answers")
+        .querySelectorAll(".answer");
+      answers.forEach((item) => {
+        if (item.value != "") {
+          ans.push(item.value);
+        }
+      });
+      var question_title = document.getElementById("question_title").value;
+      var question = {
+        title: question_title,
+        answers: ans,
+        scalable: document.getElementById("scalable").checked,
+      };
+      if (quiz.question_bank.length > current_question) {
+        quiz.question_bank[current_question] = question;
+      } else {
+        quiz.question_bank.push(question);
+      }
+      console.log(quiz);
+
+      //Save the quesiton and answer
+      current_question++;
       //Animation to clear previous question
       if (current_question > 0) {
         var current_answers = document.querySelectorAll(".answer");
@@ -387,108 +483,42 @@
       }
     }
 
-    // Displays next question
     function nextQuestion(qNum, isReverseAnimation) {
-      //Delete Previous answers first
+      //     //Delete Previous answers first
       $("#answers").empty();
-      //Checking if there are more quesitons
-      if (qNum >= questions.length) {
-        showResult();
-        return;
+      //Clear title
+      if (quiz.question_bank.length > current_question) {
+        document.getElementById("question_title").value =
+          quiz.question_bank[current_question].title;
+        //load previous questions
+        quiz.question_bank[current_question].answers.forEach((item) => {
+          var loc = document.getElementById("answers");
+          loc.innerHTML +=
+            '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer" placeholder="' +
+            item +
+            '" value="' +
+            item +
+            '">';
+        });
+        document.getElementById("scalable").checked =
+          quiz.question_bank[current_question].scalable;
+        console.log(quiz);
+      } else {
+        document.getElementById("question_title").value = current_question;
+        //Add default answer
+        // addQuestion();
+        var loc = document.getElementById("answers");
+        loc.innerHTML +=
+          '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer">';
+        document.getElementById("scalable").checked = false;
       }
-      //Extracting question
-      question = questions[qNum];
+
       //if first question, then no back button
-      if (qNum == 0) {
+      if (current_question == 0) {
         document.getElementById("back").style.visibility = "hidden";
       } else {
         document.getElementById("back").style.visibility = "visible";
       }
-      //Display title
-      var title = document.getElementById("question_title");
-      title.innerText = question.question;
-      title.setAttribute("question", qNum);
-      //Display answers
-      //Get answer location
-      var loc = document.getElementById("answers");
-      var answer_count = 0;
-      question.answers.forEach((item) => {
-        if (isReverseAnimation) {
-          loc.innerHTML +=
-            '<button class="answer" answer= ' +
-            answer_count +
-            ' id="answer_' +
-            answer_count +
-            '" style="animation:outcomingQuestion 0.5s;">' +
-            item +
-            "</button>";
-        } else {
-          loc.innerHTML +=
-            '<button class="answer" answer= ' +
-            answer_count +
-            ' + id="answer_' +
-            answer_count +
-            '">' +
-            item +
-            "</button>";
-        }
-        answer_count++;
-      });
-      //Focusing previous answer
-      //If answer has already been selected before
-      console.log(current_question);
-      if (
-        answers != undefined &&
-        current_question < answers.length &&
-        answers[current_question].answer
-      ) {
-        //If answer has already been selected (only if back button has been pressed)
-        console.log(answers);
-        document
-          .getElementById("answer_" + answers[current_question].answer)
-          .classList.add("answer_selected");
-      }
-      current_question = qNum;
-      //Adding action listener to answers (onclick)
-      document.querySelectorAll(".answer").forEach((item) => {
-        item.addEventListener("click", (event) => {
-          //Recording answer
-          input(item.getAttribute("answer"));
-        });
-      });
-    }
-
-    function moveProgressBar(qNum) {
-      document.getElementById("progress_bar").style.width =
-        (qNum / questions.length) * 100 + "vw";
-    }
-
-    function showResult() {
-      //Show result title
-      document.getElementById("question_title").innerText = "Result:";
-      //Show loading animation
-      document.getElementById("answers").innerHTML =
-        '<div class="lds-ring"><div></div><div></div><div></div><div></div></div>';
-      //remove back button
-      document.getElementById("back").remove();
-      //TODO Send request to server
-      var quizName = encodeURIComponent(
-        document.getElementById("title").textContent
-      );
-      productData.productAnswer = Object.fromEntries(productAnswer);
-      $.ajax({
-        url: "/productquiz/addProduct/" + quizName,
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(productData),
-        success: function (response) {
-          alert("success");
-          location.reload();
-        },
-        error: function () {
-          alert("error");
-        },
-      });
     }
   </script>
 </html>
