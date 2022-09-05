@@ -106,4 +106,9 @@ public class MainController {
 	public String createQuiz() {
 		return "create_quiz.html";
 	}
+	
+	@GetMapping("/explore")
+	public String explorePage() {
+		return "explore.html";
+	}
 }
