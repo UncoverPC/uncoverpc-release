@@ -291,20 +291,20 @@
     document.getElementById("submit").addEventListener("mousedown", () => {
       var text = document.getElementById("inp-field").value;
       console.log(text);
-    });
 
-    $.ajax({
-      url: "#",
-      type: "POST",
-      contentType: "application/json",
-      data: text,
-      success: function (response) {
-        alert("success");
-        location.reload();
-      },
-      error: function () {
-        alert("error");
-      },
+      $.ajax({
+        url: "http://localhost:8080/search",
+        type: "POST",
+        contentType: "application/json",
+        data: text,
+        success: function (response) {
+          console.log("success");
+          location.reload();
+        },
+        error: function () {
+          console.log("error");
+        },
+      });
     });
   </script>
 </html>
