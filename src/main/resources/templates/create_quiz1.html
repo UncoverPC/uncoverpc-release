@@ -27,6 +27,10 @@
         font-family: "Raleway", sans-serif;
       }
 
+      ul{
+        list-style-type: none;
+      }
+      
       body,
       html {
         height: 100%;
@@ -53,12 +57,33 @@
         justify-content: center;
         text-align: center;
         height: 100vh;
+        overflow: auto;
       }
 
-      #logo {
+      #creator_body{
+        background-color: rgb(21, 21, 27);
+        border-radius: 20px;
+        max-width: 1100px;
+        margin-bottom: 20px;
+      }
+
+      #quiz_creator{
+        font-size: 60px;
+      }
+
+      #titles{
+        position: relative;
+      }
+
+      li{
+        list-style-type: none;
+        display: inline-block;
+      }
+
+      .logo {
         font-weight: 100;
         opacity: 1;
-        font-size: 72px;
+        font-size: 80px;
         font-style: italic;
         background: -webkit-linear-gradient(
           RGBA(200, 81, 81, 200),
@@ -68,6 +93,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+    
 
       #start_button {
         background-color: rgb(9, 186, 106);
@@ -119,6 +145,66 @@
         display: inline-flex;
       }
 
+
+      .question_holder{
+        border-radius: 50px;
+        margin: 10px 10px;
+        max-width: 1000px;
+        width: 1000px;
+      }
+
+      #sidenav{
+        height: 100%; 
+        width: 250px; 
+        position: fixed; 
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: rgb(18, 13, 37); 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+      }
+
+      .navbar_question{
+        font-size: x-large;
+        color: white;
+        background-color: rgb(55, 40, 104);
+        width: 90%;
+        border-radius: 20px;
+        border-color: rgb(192, 190, 190);
+        margin: 10px;
+        text-decoration: none;
+        padding: 10px;
+        float: left;
+      }
+
+      #save_button{
+        background-color: rgb(32, 23, 65);
+        margin-bottom: 20px;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+      }
+
+      #save_button:hover{
+        background-color:rgb(41, 41, 77);
+      }
+
+      .navbar_question:hover{
+        background-color: rgb(32, 23, 65);
+      }
+
+      #nav_header{
+        font-size: 32px;
+      }
+
+      .question_holder:hover {
+        background-color:rgb(24, 24, 32);
+        opacity: 80%;
+        border-radius: 20px;
+
+      }
+
       .submit {
         padding: 10px;
         border: 2px solid green;
@@ -129,22 +215,30 @@
         display: inline-flex;
       }
 
+      .submit:hover {
+        background-color: green;
+      }
+      
+      #main{
+        position: relative;
+        height: 100%;
+      }
+
+      #main_logo{
+        max-height: 100px;
+      }
+
       #submit_button{
           position: relative;
           margin-top: 600px;
           margin-left: 10px;
       }
 
-      #question_functions{
-        margin-top: 10px;
-      }
-
-      .submit:hover {
-        background-color: green;
-      }
+      
 
       .questionButton {
         padding: 10px;
+        margin-bottom: 10px;
         border: 2px solid rgb(27, 48, 134);
         position: relative;
         background-color: transparent;
@@ -159,6 +253,7 @@
 
       .addAnswer {
         padding: 10px;
+        margin-left: 10px;
         border: 2px solid rgb(134, 64, 27);
         position: relative;
         background-color: transparent;
@@ -189,6 +284,13 @@
 
       #question_title{
         font-size: 35px;
+      }
+
+      .footer{
+        position: static;
+        text-align: center;
+        width: 100%;
+
       }
 
       .lds-ring {
@@ -291,32 +393,47 @@
     <script></script>
   </head>
 
-  <body class="color_theme" id="text_container">
-    <!-- Navbar (sit on top) -->
-    <div class="w3-top">
-      <div class="w3-bar w3-black w3-card" id="myNavbar">
-        <a href="#home" class="w3-bar-item w3-button w3-wide">
-          <object data="assets/Logo.svg" width="20" height="20"></object
-        ></a>
-        <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
-        <a
-          href="javascript:void(0)"
-          class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
-          onclick="w3_open()"
-        >
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-      <div class="progress_bar_container w3-top" id="progress_bar"></div>
+
+  <body class="color_theme" id="text_container">
+
+    <div id="sidenav">
+        <h4 class = "logo" id="nav_header">Quiz Navigator</h1>
+        <button class="questionButton" onclick="newQuestion()" id="add_question">
+                Add Question
+        </button>
+
+        <div id="navbar_questions">
+          <a href="#question_1"class ="navbar_question">Question 1</a>
+        </div>
     </div>
 
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card" id="myNavbar">
+          <a href="#home" class="w3-bar-item w3-button w3-wide">
+            <object data="assets/Logo.svg" width="20" height="20"></object
+          ></a>
+          <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+  
+          <a
+            href="javascript:void(0)"
+            class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+            onclick="w3_open()"
+          >
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+        <div class="progress_bar_container w3-top" id="progress_bar"></div>
+    </div>
 
-
-    <!-- Quiz -->
-    <div>
+    <!--Quiz Creation Body-->
+    <div id="main">
       <!-- Logo -->
-      <h1 id="logo">UncoverPC</h1>
+      <div id="titles">
+        <h1 class="logo" id="main_logo">UncoverPC</h1>
+        <h1 class="logo" id="quiz_creator"> Quiz Creator</h1>
+      </div>
+
       <!-- Title -->
       <input
         type="text"
@@ -326,65 +443,57 @@
         name="quiz_title"
         placeholder = "Quiz Title"
       />
-      <!-- Quiz Container -->
-      <div>
-        <!-- Question -->
-        <h2 id="question_num"> 1 </h2>
-        <input
+      <!--Quiz Creator Body-->
+      <ul id="creator_body">
+        <!-- Question Element -->
+       <li class="question_holder" id="question_1">
+         <div>
+          <!--Question Number Indicator-->
+          <h2 id="question_num"> 1 </h2>
+          <!--Question Input-->
+          <input
           type="text"
           class="w3-center textfield"
           id="question_title"
           name="question_title"
           placeholder="Question"
-        />
-        <div>
-          <!-- Answers -->
-          <div id="answers">
-            <input
+          />
+        
+         <div class="answer_box">
+          <div id="answers_1">
+             <input
               type="text"
               class="w3-center textfield answer"
               oninput="onType(this)"
               id="answer"
               name="answer"
               placeholder="Answer"
-            />
+             />
           </div>
           Scalable:
           <input type="checkbox" id="scalable" />
-          <button class="addAnswer" onclick="addAnswer()" id="add_question">
+          <button class="addAnswer" onclick="addAnswer(1)" id="add_question">
             Add Answer
           </button>
+         </div>
         </div>
-        <!-- Add and Delete Question Buttons -->
-        <div id="question_functions">
-          <button class="questionButton" onclick="back()" id="del_question">
-            Delete Question
-          </button>
-    
-          <button class="questionButton" onclick="addQuestion()" id="add_question">
-            Add Question
-          </button>
-        </div>
+      </li>
+     </ul>
 
-      </div>
-    </div>
+     <footer class="footer">
+      <button id="save_button" onclick="saveAll()">Save Quiz</button>
+     </footer>
 
-    
+  </body>  
 
-    <div id="submit_button">
-      <button class="submit" onclick="submitQuiz()" id="submit_quiz">
-        Submit
-      </button>
-    </div>
-
-  </body>
 
   <script>
-    var quiz = { quizTitle: "", question_bank: [] };
+   var quiz = { quizTitle: "", question_bank: [] };
     // quiz["quizTitle"] = "";
     // quiz["question_bank"] = [];
 
     var current_question = 0;
+    var question_counter =1;
 
     //Questions & answers (injected from backend)
     const questions = [
@@ -421,16 +530,18 @@
       nextQuestion(0);
     }
 
-    function addAnswer() {
-      var loc = document.getElementById("answers");
+    function addAnswer(questionNum) {
+      var loc = document.getElementById("answers_"+questionNum);
       loc.innerHTML +=
         '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer" placeholder="Answer">';
       //Getting placeholders to texts so the texts dont disapear
       var answers = document
-        .getElementById("answers")
+        .getElementById("answers_"+questionNum)
         .querySelectorAll(".answer");
       answers.forEach((item) => {
-        item.value = item.placeholder;
+        if(item.placeholder != "Answer"){
+            item.value = item.placeholder;
+        }
       });
     }
 
@@ -479,8 +590,8 @@
       quiz.quizTitle = element.value;
     }
 
-    function addQuestion() {
-      //Collecting Data
+    function saveQuestion() {
+        //Saving Question and Answer Data
       var ans = [];
       var answers = document
         .getElementById("answers")
@@ -490,6 +601,7 @@
           ans.push(item.value);
         }
       });
+
       var question_title = document.getElementById("question_title").value;
       var question = {
         title: question_title,
@@ -497,29 +609,56 @@
         scalable: document.getElementById("scalable").checked,
       };
       var question_num = document.getElementById("questionButton");
-      
-      if (quiz.question_bank.length > current_question) {
-        quiz.question_bank[current_question] = question;
-      } else {
-        quiz.question_bank.push(question);
-      }
-      console.log(quiz);
-
-      //Save the quesiton and answer
-      current_question++;
-      //Animation to clear previous question
-      if (current_question > 0) {
-        var current_answers = document.querySelectorAll(".answer");
-        current_answers.forEach((item) => {
-          item.style.animation = "nextQuestion 0.5s";
-        });
-        //Then wait to delete answers
-        setTimeout(nextQuestion, 200, current_question);
-      } else {
-        nextQuestion(current_question);
-      }
     }
-    
+
+    //In Use
+    function newQuestion() {
+        question_counter++;
+        var loc = document.getElementById("creator_body");
+        var id = "answers_"+question_counter;
+        var qid = "question_"+question_counter;
+        loc.innerHTML += `<li class="question_holder" id="question_${question_counter}">
+         <div>
+          <!--Question Number Indicator-->
+          <h2 id="question_num"> ${question_counter}</h2>
+          <!--Question Input-->
+          <input
+          type="text"
+          class="w3-center textfield"
+          id="question_title"
+          name="question_title"
+          placeholder="Question"
+          />
+        
+         <div class="answer_box">
+          <div id=${id}>
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="answer"
+              name="answer"
+              placeholder="Answer"
+             />
+          </div>
+          Scalable:
+          <input type="checkbox" id="scalable" />
+          <button class="addAnswer" id=${qid}onclick="addAnswer(${question_counter})" id="add_question">
+            Add Answer
+          </button>
+         </div>
+        </div>
+      </li>`;
+      var qs = document.getElementById("navbar_questions");
+      qs.innerHTML += `<a href="#question_${question_counter}"class ="navbar_question">Question ${question_counter}</a>`
+
+    }
+
+   
+    function scrollTo(id){
+      var element = document.getElementById(id);
+    }
+
     //Saving question to database
     function nextQuestion(qNum, isReverseAnimation) {
       //     //Delete Previous answers first
