@@ -13,9 +13,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
+import com.uncoverpc.model.quiz.Questions;
+import com.uncoverpc.model.quiz.Quiz;
 import com.uncoverpc.product.Product;
-import com.uncoverpc.quiz.Questions;
-import com.uncoverpc.quiz.Quiz;
 
 @Service
 public class QuizService {
