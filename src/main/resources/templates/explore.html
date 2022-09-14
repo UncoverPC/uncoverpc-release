@@ -206,6 +206,10 @@
 
       .rec {
         max-width: 30vw;
+        border-style: solid;
+        border-color: white;
+        border-radius: 5px;
+        border-width: 5px;
       }
       .rec a {
         font-size: 20pt;
@@ -380,32 +384,54 @@
   </body>
 
   <script th:inline="javascript">
+    let state = "up";
     let oldScroll = 0;
     document
       .getElementById("down-button")
       .addEventListener("mousedown", (e) => {
         e.preventDefault();
-        document.getElementById("recs").scrollIntoView({
-          block: "start",
-          behavior: "smooth",
-        });
-
-        Array.from(document.getElementsByClassName("rec")).forEach(
-          (div, key) => {
-            var newDom = "";
-            var animationDelay = 3;
-
-            div.classList.add("fade-in");
-          }
-        );
+        scrollDown();
       });
+
     document.getElementById("up-button").addEventListener("mousedown", (e) => {
       e.preventDefault();
+      scrollUp();
+    });
+
+    document.addEventListener("wheel", (e) => {
+      //-100 for up, 100 for down
+
+      let scrollDirection = e.deltaY;
+
+      if (state == "up" && scrollDirection > 0) {
+        e.preventDefault();
+        scrollDown();
+      } else if (state == "down" && scrollDirection < 0) {
+        e.preventDefault();
+        scrollUp();
+      }
+    });
+
+    function scrollDown() {
+      document.getElementById("recs").scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      });
+      state = "down";
+
+      Array.from(document.getElementsByClassName("rec")).forEach((div, key) => {
+        var newDom = "";
+        var animationDelay = 3;
+
+        div.classList.add("fade-in");
+      });
+    }
+    function scrollUp() {
       document.getElementById("main").scrollIntoView({
         behavior: "smooth",
       });
-    });
-
+      state = "up";
+    }
     //Form Submit
     document.getElementById("submit").addEventListener("mousedown", () => {
       var text = document.getElementById("inp-field").value;
