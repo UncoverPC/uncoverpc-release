@@ -117,6 +117,16 @@ public class MainController {
 		return "under development";
 	}
 	
+	@PostMapping("/search")
+	@ResponseBody
+	public ResponseEntity<Object> getQuizResults(HttpServletRequest request, HttpServletResponse response, @RequestBody String query) {
+		System.out.println(query);
+		
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	
+	}
+	
 	@GetMapping("/admin/createQuiz")
 	public String createQuiz() {
 		return "create_quiz.html";
