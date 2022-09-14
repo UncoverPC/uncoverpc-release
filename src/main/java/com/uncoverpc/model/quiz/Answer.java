@@ -1,4 +1,4 @@
-package com.uncoverpc.quiz;
+package com.uncoverpc.model.quiz;
 
 import java.util.HashMap;
 import java.util.Map;

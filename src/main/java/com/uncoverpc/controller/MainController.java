@@ -23,9 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.uncoverpc.db.QuizProductService;
 import com.uncoverpc.db.QuizService;
+import com.uncoverpc.model.quiz.Quiz;
+import com.uncoverpc.model.quiz.QuizResponseAnswer;
 import com.uncoverpc.product.Product;
-import com.uncoverpc.quiz.Quiz;
-import com.uncoverpc.quiz.QuizResponseAnswer;
 
 @Controller
 public class MainController {
@@ -108,10 +108,13 @@ public class MainController {
 	@ResponseBody
 	public ResponseEntity<Object> getQuizResults(HttpServletRequest request, HttpServletResponse response, @RequestBody ArrayList<QuizResponseAnswer> answer) {
 		System.out.println(answer);
-		
-		
 		return new ResponseEntity<>(HttpStatus.OK);
-		
+	}
+	
+	@GetMapping("/admin/Dashboard")
+	@ResponseBody
+	public String adminDashbaord() {
+		return "under development";
 	}
 	
 	@GetMapping("/admin/createQuiz")
