@@ -135,6 +135,18 @@
         color: rgb(196, 80, 80) !important;
       }
 
+      .delete_answer {
+        border: transparent;
+        background-color: transparent;
+        color:rgb(202, 96, 96);
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .delete_answer:hover{
+        color:rgb(218, 45, 45);
+      }
+
       .back {
         padding: 10px;
         border: transparent;
@@ -457,10 +469,12 @@
           id="question_title"
           name="question_title"
           placeholder="Question"
+          oninput="onType(this)"
           />
         
          <div class="answer_box">
           <div id="answers_1">
+            <div id="answer_1_1">
              <input
               type="text"
               class="w3-center textfield answer"
@@ -469,6 +483,8 @@
               name="answer"
               placeholder="Answer"
              />
+             <button class="delete_answer" onclick="delAnswer(1,1)"> X</button>
+            </div>
           </div>
           Scalable:
           <input type="checkbox" id="scalable" />
@@ -521,6 +537,8 @@
       },
     ];
 
+    var answerCounter = [1];
+
     // start_quiz()
     //Start the quiz
     function start_quiz() {
@@ -531,9 +549,22 @@
     }
 
     function addAnswer(questionNum) {
+      answerCounter[questionNum-1] +=1;
       var loc = document.getElementById("answers_"+questionNum);
-      loc.innerHTML +=
-        '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer" placeholder="Answer">';
+      console.log(loc)
+      loc.innerHTML += 
+      `<div id="answers_+${questionNum}">
+            <div id="answer_${questionNum}_${answerCounter[questionNum-1]}">
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="answer"
+              name="answer"
+              placeholder="Answer"
+             />
+             <button class="delete_answer" onclick="delAnswer(${questionNum},${answerCounter[questionNum-1]})"> X</button>
+            </div>`;
       //Getting placeholders to texts so the texts dont disapear
       var answers = document
         .getElementById("answers_"+questionNum)
@@ -543,6 +574,12 @@
             item.value = item.placeholder;
         }
       });
+    }
+
+    function delAnswer(qNum, ansNum) {
+      var id = "answer_"+qNum+"_"+ansNum;
+      var loc = document.getElementById(id);
+      loc.remove();
     }
 
     function onType(element) {
@@ -628,10 +665,12 @@
           id="question_title"
           name="question_title"
           placeholder="Question"
+          oninput="onType(this)"
           />
         
          <div class="answer_box">
           <div id=${id}>
+            <div id="answer_${question_counter}_${answerCounter[question_counter-1]}">
              <input
               type="text"
               class="w3-center textfield answer"
@@ -640,18 +679,22 @@
               name="answer"
               placeholder="Answer"
              />
+             <button class="delete_answer" onclick="delAnswer(${question_counter},${answerCounter[question_counter-1]})"> X</button>
+            </div>
           </div>
           Scalable:
           <input type="checkbox" id="scalable" />
-          <button class="addAnswer" id=${qid}onclick="addAnswer(${question_counter})" id="add_question">
+          <button class="addAnswer" id=${qid} onclick="addAnswer(${question_counter})" id="add_question">
             Add Answer
           </button>
          </div>
         </div>
       </li>`;
+
       var qs = document.getElementById("navbar_questions");
       qs.innerHTML += `<a href="#question_${question_counter}"class ="navbar_question">Question ${question_counter}</a>`
-
+      setQuestionTitles();
+      answerCounter.push(1);
     }
 
    
