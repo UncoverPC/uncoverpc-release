@@ -1,47 +1,88 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="ISO-8859-1" />
-    <title>Login - UncoverPC</title>
-  </head>
+    <head>
+        <meta charset="ISO-8859-1" />
+        <title>Login - UncoverPC</title>
+        <link rel="stylesheet" href="../static/assets/dist/styles.css" />
+    </head>
 
-  <style>
-    .initial_frame {
-      width: 100vw;
-      height: 100vh;
-    }
-
-    .login_container {
-      width: 400px;
-      height: 700px;
-      margin: 0 auto;
-      position: absolute;
-      overflow: hidden;
-      top: 50%;
-      left: 50%;
-      -ms-transform: translateY(-50%) translateX(-50%);
-      transform: translateY(-50%) translateX(-50%);
-      border: 2px solid rgb(0, 0, 0);
-      border-radius: 20px;
-      box-shadow: 1px 1px 2px black, 0 0 10px blue, 0 0 5px rgb(22, 153, 51);
-    }
-  </style>
-
-  <body>
-    <div class="initial_frame">
-      <div class="login_container">
-        <h1>UncoverPC</h1>
-        <h1>Login</h1>
-        <form action="/action_page.php">
-          <label for="fname">Username</label><br />
-          <input type="text" id="fname" name="fname" /><br />
-          <label for="lname">Password:</label><br />
-          <input type="text" id="lname" name="lname" /><br /><br />
-          <input type="submit" value="Submit" />
-        </form>
-        <p>Forgot password?</p>
-        <p>Register</p>
-      </div>
-    </div>
-  </body>
+    <body>
+        <div class="w-screen h-screen bg-slate-900">
+            <div
+                id="login-wrapper"
+                class="absolute overflow-hidden top-1/2 left-1/2 my-0 mx-auto w-11/12 h-5/6 rounded bg-white shadow-md"
+            >
+                <div
+                    class="w-1/2 h-full absolute left-0 p-8 border-r-2 border-slate-900"
+                >
+                    <div class="flex items-center gap-x-2">
+                        <div class="w-1.5 h-1.5 rounded-full bg-black"></div>
+                        <span class="font-semibold text-md tracking-wide"
+                            >UncoverPC</span
+                        >
+                    </div>
+                    <div
+                        id="login-container"
+                        class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full px-44"
+                    >
+                        <h1 class="text-3xl font-semibold mb-8">
+                            Welcome Back
+                        </h1>
+                        <form action="/action_page.php">
+                            <input
+                                type="text"
+                                id="fname"
+                                name="fname"
+                                placeholder="Enter your email"
+                                class="border-2 mb-4 border-black rounded-md p-3 w-full placeholder:text-black"
+                            />
+                            <input
+                                type="password"
+                                id="lname"
+                                name="lname"
+                                placeholder="Password"
+                                class="border-2 mb-6 border-black rounded-md p-3 w-full placeholder:text-black"
+                            />
+                            <div class="flex justify-center mb-6">
+                                <a
+                                    href="#"
+                                    class="text-sm font-medium underline decoration-solid"
+                                    >Forgot password</a
+                                >
+                            </div>
+                            <input
+                                class="cursor-pointer bg-slate-800 hover:bg-slate-900 mb-4 text-white font-semibold p-3 rounded-md inline-flex justify-center w-full"
+                                type="submit"
+                                if="sign-in"
+                                value="Sign in"
+                            />
+                            <button
+                                class="cursor-pointer mb-6 border-2 border-black font-semibold p-3 rounded-md inline-flex justify-center items-center gap-2.5 w-full"
+                            >
+                                <img
+                                    src="../static/assets/images/Google Icon.svg"
+                                    alt="Google icon"
+                                    class="w-6 h-6"
+                                />
+                                <span>Sign in with Google</span>
+                            </button>
+                            <div class="flex justify-center gap-2">
+                                <span class="text-sm"
+                                    >Don't have an account?</span
+                                >
+                                <a
+                                    href="#"
+                                    class="text-sm font-medium underline decoration-solid"
+                                    >Sign up</a
+                                >
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div
+                    class="w-1/2 h-full absolute right-0 border-l-2 border-slate-900"
+                ></div>
+            </div>
+        </div>
+    </body>
 </html>
