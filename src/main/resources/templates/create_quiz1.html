@@ -497,14 +497,14 @@
      </ul>
 
      <footer class="footer">
-      <button id="save_button" onclick="saveAll()">Save Quiz</button>
+      <button id="save_button" onclick="saveQuiz()">Save Quiz</button>
      </footer>
 
   </body>  
 
 
   <script>
-   var quiz = { quizTitle: "", question_bank: [] };
+   var quiz = { quizTitle: "", question_bank: [], answer_bank: []};
     // quiz["quizTitle"] = "";
     // quiz["question_bank"] = [];
 
@@ -537,6 +537,11 @@
       },
     ];
 
+    function QuestionAndAnswer (question, answers) {
+      this.question = question;
+      this.answers = answers;
+    }
+
     var answerCounter = [1];
 
     // start_quiz()
@@ -546,6 +551,21 @@
 
       //Make first question appear
       nextQuestion(0);
+    }
+
+    function saveQuiz() {
+      quiz.quizTitle = document.getElementById("quiz_title").value;
+      for(let i =1; i<=question_counter; i++) {
+        var cAnswers = [];
+        var cQuestion = document.getElementById("question_"+i).value;
+        for(let j=1; j <= answerCounter[i-1]; j++) {
+          var cAnswer = document.getElementById("answer_"+i+"_"+j);
+          cAnswers.push(cAnswer);
+        }
+        quiz.question_bank.push(cQuestion);
+        quiz.answer_bank.push(cAnswers);
+      }
+      console.log(quiz);
     }
 
     function addAnswer(questionNum) {
