@@ -10,7 +10,7 @@
         <div class="w-screen h-screen bg-slate-900">
             <div
                 id="login-wrapper"
-                class="absolute overflow-hidden top-1/2 left-1/2 my-0 mx-auto w-11/12 h-5/6 rounded bg-white shadow-md"
+                class="absolute overflow-hidden top-1/2 left-1/2 my-0 mx-auto w-11/12 h-5/6 rounded-lg bg-white shadow-md"
             >
                 <div
                     class="w-1/2 h-full absolute left-0 p-8 border-r-2 border-slate-900"
@@ -26,22 +26,22 @@
                         class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full px-44"
                     >
                         <h1 class="text-3xl font-semibold mb-8">
-                            Welcome Back
+                            Welcome Back!
                         </h1>
                         <form action="/action_page.php">
                             <input
-                                type="text"
-                                id="fname"
-                                name="fname"
+                                type="email"
+                                id="email"
+                                name="email"
                                 placeholder="Enter your email"
-                                class="border-2 mb-4 border-black rounded-md p-3 w-full placeholder:text-black"
+                                class="border-2 mb-4 border-black rounded-md p-3 w-full placeholder:text-gray-700"
                             />
                             <input
                                 type="password"
-                                id="lname"
-                                name="lname"
+                                id="password"
+                                name="password"
                                 placeholder="Password"
-                                class="border-2 mb-6 border-black rounded-md p-3 w-full placeholder:text-black"
+                                class="border-2 mb-6 border-black rounded-md p-3 w-full placeholder:text-gray-700"
                             />
                             <div class="flex justify-center mb-6">
                                 <a
@@ -53,7 +53,6 @@
                             <input
                                 class="cursor-pointer bg-slate-800 hover:bg-slate-900 mb-4 text-white font-semibold p-3 rounded-md inline-flex justify-center w-full"
                                 type="submit"
-                                if="sign-in"
                                 value="Sign in"
                             />
                             <button
@@ -73,7 +72,7 @@
                                 <a
                                     href="#"
                                     class="text-sm font-medium underline decoration-solid"
-                                    >Sign up</a
+                                    >Sign up for free</a
                                 >
                             </div>
                         </form>
