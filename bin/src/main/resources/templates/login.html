@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Login - UncoverPC</title>
+  </head>
+
+  <style>
+    .initial_frame {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .login_container {
+      width: 400px;
+      height: 700px;
+      margin: 0 auto;
+      position: absolute;
+      overflow: hidden;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translateY(-50%) translateX(-50%);
+      transform: translateY(-50%) translateX(-50%);
+      border: 2px solid rgb(0, 0, 0);
+      border-radius: 20px;
+      box-shadow: 1px 1px 2px black, 0 0 10px blue, 0 0 5px rgb(22, 153, 51);
+    }
+  </style>
+
+  <body>
+    <div class="initial_frame">
+      <div class="login_container">
+        <h1>UncoverPC</h1>
+        <h1>Login</h1>
+        <form action="/action_page.php">
+          <label for="fname">Username</label><br />
+          <input type="text" id="fname" name="fname" /><br />
+          <label for="lname">Password:</label><br />
+          <input type="text" id="lname" name="lname" /><br /><br />
+          <input type="submit" value="Submit" />
+        </form>
+        <p>Forgot password?</p>
+        <p>Register</p>
+      </div>
+    </div>
+  </body>
+</html>
