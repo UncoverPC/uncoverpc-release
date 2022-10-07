@@ -57,7 +57,7 @@
         justify-content: center;
         text-align: center;
         height: 100vh;
-        overflow: auto;
+        overflow: visible;
       }
 
       #creator_body{
@@ -233,6 +233,7 @@
       
       #main{
         position: relative;
+        margin-left: 10%;
         height: 100%;
       }
 
@@ -294,7 +295,7 @@
         font-size: 50px;
       }
 
-      #question_title{
+      .question_title{
         font-size: 35px;
       }
 
@@ -465,8 +466,8 @@
           <!--Question Input-->
           <input
           type="text"
-          class="w3-center textfield"
-          id="question_title"
+          class="w3-center textfield question_title"
+          id="question_title_1"
           name="question_title"
           placeholder="Question"
           oninput="onType(this)"
@@ -479,7 +480,7 @@
               type="text"
               class="w3-center textfield answer"
               oninput="onType(this)"
-              id="answer"
+              id="ainput_1_1"
               name="answer"
               placeholder="Answer"
              />
@@ -554,12 +555,15 @@
     }
 
     function saveQuiz() {
+      quiz.quizTitle ="";
+      quiz.answer_bank = [];
+      quiz.question_bank = [];
       quiz.quizTitle = document.getElementById("quiz_title").value;
       for(let i =1; i<=question_counter; i++) {
         var cAnswers = [];
-        var cQuestion = document.getElementById("question_"+i).value;
+        var cQuestion = document.getElementById("question_title_"+i).value;
         for(let j=1; j <= answerCounter[i-1]; j++) {
-          var cAnswer = document.getElementById("answer_"+i+"_"+j);
+          var cAnswer = document.getElementById("ainput_"+i+"_"+j).value;
           cAnswers.push(cAnswer);
         }
         quiz.question_bank.push(cQuestion);
@@ -579,7 +583,7 @@
               type="text"
               class="w3-center textfield answer"
               oninput="onType(this)"
-              id="answer"
+              id="ainput_${questionNum}_${answerCounter[questionNum-1]}"
               name="answer"
               placeholder="Answer"
              />
@@ -681,8 +685,8 @@
           <!--Question Input-->
           <input
           type="text"
-          class="w3-center textfield"
-          id="question_title"
+          class="w3-center textfield question_title"
+          id="question_title_${question_counter}"
           name="question_title"
           placeholder="Question"
           oninput="onType(this)"
