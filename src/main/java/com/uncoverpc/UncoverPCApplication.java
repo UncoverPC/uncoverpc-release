@@ -9,5 +9,4 @@ public class UncoverPCApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(UncoverPCApplication.class, args);
 	}
-
 }
