@@ -35,7 +35,7 @@
                     class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full max-w-3xl px-6 xs:px-12 sm:px-24 md:px-32 lg:px-44"
                 >
                     <h1 class="text-4xl font-semibold mb-4">Sign up</h1>
-                    <h2 class="mb-8 text-gray-500">
+                    <h2 class="mb-4 text-gray-500">
                         Have an account?
                         <a
                             href="#"
@@ -48,27 +48,36 @@
                         action="/action_page.php"
                         class="flex flex-col items-start"
                     >
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Email address"
-                            class="border md:border-2 mb-6 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
-                        />
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Password"
-                            class="border md:border-2 mb-6 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
-                        />
-                        <input
-                            type="password"
-                            id="confirm-password"
-                            name="confirm-password"
-                            placeholder="Confirm password"
-                            class="border md:border-2 mb-6 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
-                        />
+                        <div class="field-mb-6">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Email address"
+                                class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
+                            />
+                            <div class="line"></div>
+                        </div>
+                        <div class="field-mb-6">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
+                            />
+                            <div class="line"></div>
+                        </div>
+                        <div class="field-mb-6">
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                name="confirm-password"
+                                placeholder="Confirm password"
+                                class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
+                            />
+                            <div class="line"></div>
+                        </div>
                         <input
                             class="cursor-pointer w-1/2 bg-slate-800 hover:bg-slate-900 text-sm md:text-base text-white font-semibold p-3 rounded-md inline-flex justify-center"
                             type="submit"
