@@ -31,7 +31,7 @@ lang="en">
                         <h1 class="text-3xl font-semibold mb-8">
                             Welcome Back!
                         </h1>
-                        <form action="/action_page.php">
+                        <form th:action="@{/login}" method="post" th:object="${user}">
                             <input
                                 type="email"
                                 id="email"
