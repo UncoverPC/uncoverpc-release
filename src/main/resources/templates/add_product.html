@@ -31,11 +31,14 @@
         html {
           height: 100%;
           line-height: 1.8;
+          overflow: auto;
         }
-  
+
+
         .w3-bar .w3-button {
           padding: 16px;
         }
+        
   
         .color_theme {
           background-color: rgba(12, 12, 14, 255);
@@ -48,13 +51,18 @@
         }
 
         #main {
-          top: 0;
-          z-index: 1;
+          overflow: auto;
         }
-        
+
+        #product_type_selector {
+          height: 100%;
+          position: sticky;
+        }
+
         label{
           font-size: 36px;
         }
+
         select{
           width: 300px;
           height: 50px;
@@ -71,6 +79,7 @@
           background-color: RGB(50, 50, 50);
           color: aliceblue;
           border-radius: 10px;
+          margin-bottom: 10px;
     
         }
         button:hover{
@@ -87,14 +96,15 @@
           align-items: center;
           justify-content: center;
           text-align: center;
-          height: 100vh;
+          height: 100%;
+          width: 100%;
         }
 
         #input_body{
           margin-top: 20px;
           border-radius: 20px;
           background-color: rgb(41, 41, 53);
-          overflow: auto;
+          position: sticky;
         }
   
         #main_logo {
@@ -119,13 +129,31 @@
         }
 
         #input_body{
-          overflow-y: auto;
+          width: 540px;
         }
 
         .input_div {
           align-self: left;
         }
-  
+
+        .label_input {
+          padding-top: 10px;
+          display: inline-block;
+          width: 210px;
+          text-align: right;
+          font-size: 24px;
+          
+        }
+
+        .input_answer {
+          width: 200px;
+          height: 40px;
+          margin-left: 30px;
+          margin-bottom: 15px;
+          background-color: transparent;
+          color: #fff;
+          border-radius: 10px;
+         }
         .lds-ring {
           display: inline-block;
           position: relative;
@@ -163,57 +191,44 @@
   </head>
 
   <body class="color_theme" id="text_container">
-    <!-- Navbar (sit on top) -->
-    <div class="w3-top">
-      <div class="w3-bar w3-black w3-card" id="myNavbar">
-        <a href="#home" class="w3-bar-item w3-button w3-wide">
-          <object data="assets/Logo.svg" width="20" height="20"></object
-        ></a>
-        <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-
-        <a
-          href="javascript:void(0)"
-          class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
-          onclick="w3_open()"
-        >
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-      <div class="progress_bar_container w3-top" id="progress_bar"></div>
-    </div>
-
     <div id="main">
         <!-- Logo -->
         <div id="titles">
           <h1 class="logo" id="main_logo">UncoverPC</h1>
-          <h1 class="logo" id="add_products"> Add Products</h1>
         </div>
 
       <div id="product_type_selector">
+        <h1 class="logo" id="add_products"> Add Products</h1>
         <label for="main_selector"> What would you like to add?</label>
         <div id="type_select">
-        <select id="main_selector">
-          <option value="laptop">Laptop</option>
-          <option value="desktop">Desktop PC</option>
-          <option value="mouse">Mouse</option>
-          <option value="keyboard">Keyboard</option>
-        </select>
-        <div class="button_div">
-        <button id="load_form" onclick="loadForm()"> Go!</button>
+          <select id="main_selector">
+            <option value="laptop">Laptop</option>
+            <option value="desktop">Desktop PC</option>
+            <option value="mouse">Mouse</option>
+            <option value="keyboard">Keyboard</option>
+          </select>
+          <div class="button_div">
+          <button id="load_form" onclick="loadForm()"> Go!</button>
+          </div>
         </div>
       </div>
-
-      <div id="input_body">
-        
-    </div>
-
-
+      <div id="input_body"> </div>
     </div>
   </body>
 
   <script>
-    const laptop_questions = ["Name", "Link","Purpose","CPU", "GPU", "RAM", "Storage Size","Battery Life"];
-    const desktop_questions = ["Name", "Link","Purpose","CPU", "GPU", "RAM", "Storage Size"];
+    const laptop_questions = ["Name","Brand", "Price", "Link","Purpose", "Screen Size (inch)","Resolution","CPU","CPU Speed (GHz)", 
+    "GPU","GPU Speed (MHz)","RAM (GB)", "RAM Speed (MHz)","Storage Type","Storage Size (TB)","Battery Life (hrs)"];
+    const desktop_questions = ["Name", "Price", "Brand","Link","Purpose","CPU","CPU Clock Speed (GHz)",
+    "GPU","Clock Speed (MHz)", "RAM", "Storage Type","Storage Size"];
+
+    const ram_options = ["4GB","8GB","16GB","32GB","64GB","128GB"];
+    const storage_options = ["M.2 NVMe SSD", "M.2 SATA SSD", "HDD"];
+   
+    var question_datalist = {
+      "RAM" : ram_options,
+      "Storage Type" : storage_options,
+    }
     
     var questions_needed = {
       "laptop" :laptop_questions,
@@ -221,26 +236,78 @@
     }
 
     function loadForm() {
-      console.log("received")
       var body = document.getElementById("input_body");
       body.innerHTML = "";
       var s = document.getElementById("main_selector");
       var value = s.value;
       var question_list = questions_needed[value];
       for(var i = 0; i < question_list.length; i++){
-        body.innerHTML += 
+        loadQuestions(question_list[i]);
+      }
+      body.innerHTML += 
+      `<button id=save_button onclick="saveProduct()">Save</button>`
+    }
+
+    function loadQuestions(input){
+      var body = document.getElementById("input_body");
+      body.innerHTML += 
         `<div class="input_div">
-          <label for="input_+${question_list[i]}" class = "label_input"> ${question_list[i]}</label>
+          <label for="input_+${input}" class = "label_input"> ${input}</label>
           <input
               type="text"
-              class="w3-center textfield answer"
-              oninput="onType(this)"
               class="input_answer"
-              id="input_+${question_list[i]}"
+              oninput="onType(this)"
+              value = ""
+              id="input_${input}"
               placeholder = "Enter Input"
+              list = "${input}list"
              />
+          <datalist id="${input}list"> 
+            
+          </datalist>
           </div>`
+
+
+      if(input in question_datalist){
+        var datalist = document.getElementById(input+"list");
+        var value_array = question_datalist[input];
+        console.log(value_array[1]);
+        for (let i=0; i < value_array.length; i++) {
+            datalist.innerHTML += 
+            `<option value="${value_array[i]}">
+            </option>`
+        }
       }
+      
+      if(input.includes("Speed")) {
+        var current = document.getElementById("input_"+input).type = 'number';
+      }
+    }
+
+    function saveProduct() {
+      var body = document.getElementById("input_body");
+      var inputs = body.getElementsByClassName("input_answer");
+      var product = {};
+
+      for(let i=0; i<inputs.length; i++){
+        var value = "";
+        if(inputs[i].placeholder=="Enter Input" || inputs[i].placeholder==""){
+          value = null;
+        }
+        else{
+        var value = inputs[i].placeholder;
+        }
+        var temp = inputs[i].id.split("_");
+        var key = temp[1];
+
+        product[key] = value;
+      }
+      console.log(product);
+      
+    }
+
+    function onType(element) {
+      element.placeholder = element.value;
     }
 
   </script>
