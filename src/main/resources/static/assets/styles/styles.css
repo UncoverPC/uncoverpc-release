@@ -58,3 +58,4 @@ input[type='email']:focus + .line:after,
 input[type='password']:focus + .line:after {
     transform: scaleX(1);
 }
+
