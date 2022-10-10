@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="ISO-8859-1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login - UncoverPC</title>
         <link rel="stylesheet" href="../static/assets/dist/styles.css" />
     </head>
@@ -10,20 +12,30 @@
         <div class="w-screen h-screen bg-slate-900">
             <div
                 id="login-wrapper"
-                class="absolute overflow-hidden top-1/2 left-1/2 my-0 mx-auto w-11/12 h-5/6 rounded-lg bg-white shadow-md"
+                class="absolute block overflow-hidden top-1/2 left-1/2 my-0 mx-auto w-full xs:w-11/12 h-full xs:h-5/6 xs:rounded-lg bg-white shadow-md"
             >
                 <div
-                    class="w-1/2 h-full absolute left-0 p-8 border-r-2 border-slate-900"
+                    class="lg:w-1/2 h-full lg:absolute lg:left-0 p-5 border-r-0 lg:border-r-2 border-slate-900"
                 >
-                    <div class="flex items-center gap-x-2">
-                        <div class="w-1.5 h-1.5 rounded-full bg-black"></div>
-                        <span class="font-semibold text-md tracking-wide"
-                            >UncoverPC</span
-                        >
+                    <div
+                        id="logo-wrapper"
+                        class="w-full flex justify-end xs:justify-start"
+                    >
+                        <div class="flex items-center gap-x-3">
+                            <img
+                                src="../static/assets/images/Logo.svg"
+                                alt="UncoverPC Logo"
+                                class="w-12 xs:w-7 h-10 xs:h-12"
+                            />
+                            <span
+                                class="hidden xs:block font-semibold text-md tracking-wide"
+                                >UncoverPC</span
+                            >
+                        </div>
                     </div>
                     <div
                         id="login-container"
-                        class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full px-44"
+                        class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full px-8 xs:px-16 sm:px-28 md:px-52 lg:px-16 xl:px-28"
                     >
                         <h1 class="text-3xl font-semibold mb-8">
                             Welcome Back!
@@ -34,44 +46,44 @@
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                class="border-2 mb-4 border-black rounded-md p-3 w-full placeholder:text-gray-700"
+                                class="border md:border-2 mb-4 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
                             />
                             <input
                                 type="password"
                                 id="password"
                                 name="password"
                                 placeholder="Password"
-                                class="border-2 mb-6 border-black rounded-md p-3 w-full placeholder:text-gray-700"
+                                class="border md:border-2 mb-6 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
                             />
                             <div class="flex justify-center mb-6">
                                 <a
                                     href="#"
-                                    class="text-sm font-medium underline decoration-solid"
+                                    class="text-xs xs:text-sm font-medium underline decoration-solid"
                                     >Forgot password</a
                                 >
                             </div>
                             <input
-                                class="cursor-pointer bg-slate-800 hover:bg-slate-900 mb-4 text-white font-semibold p-3 rounded-md inline-flex justify-center w-full"
+                                class="cursor-pointer bg-slate-800 hover:bg-slate-900 mb-4 text-sm md:text-base text-white font-semibold p-3 rounded-md inline-flex justify-center w-full"
                                 type="submit"
                                 value="Sign in"
                             />
                             <button
-                                class="cursor-pointer mb-6 border-2 border-black font-semibold p-3 rounded-md inline-flex justify-center items-center gap-2.5 w-full"
+                                class="cursor-pointer mb-6 border md:border-2 border-black text-sm md:text-base font-semibold p-3 rounded-md inline-flex justify-center items-center gap-2.5 w-full"
                             >
                                 <img
                                     src="../static/assets/images/Google Icon.svg"
                                     alt="Google icon"
-                                    class="w-6 h-6"
+                                    class="w-5 md:w-6 h-5 md:h-6"
                                 />
                                 <span>Sign in with Google</span>
                             </button>
                             <div class="flex justify-center gap-2">
-                                <span class="text-sm"
+                                <span class="text-xs xs:text-sm"
                                     >Don't have an account?</span
                                 >
                                 <a
                                     href="#"
-                                    class="text-sm font-medium underline decoration-solid"
+                                    class="text-xs xs:text-sm font-medium underline decoration-solid"
                                     >Sign up for free</a
                                 >
                             </div>
@@ -79,7 +91,7 @@
                     </div>
                 </div>
                 <div
-                    class="w-1/2 h-full absolute right-0 border-l-2 border-slate-900"
+                    class="hidden lg:block w-1/2 h-full absolute right-0 border-l-2 border-slate-900"
                 ></div>
             </div>
         </div>

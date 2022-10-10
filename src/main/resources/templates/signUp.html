@@ -2,6 +2,8 @@
 <html>
     <head>
         <meta charset="ISO-8859-1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Login - UncoverPC</title>
         <link rel="stylesheet" href="../static/assets/dist/styles.css" />
     </head>
@@ -10,17 +12,27 @@
         <div class="w-screen h-screen bg-slate-900">
             <div
                 id="login-wrapper"
-                class="absolute overflow-hidden top-1/2 left-1/2 p-8 my-0 mx-auto w-9/12 h-5/6 rounded-lg bg-white shadow-md"
+                class="absolute overflow-hidden top-1/2 left-1/2 p-5 my-0 mx-auto w-full xs:w-9/12 h-full xs:h-5/6 xs:rounded-lg bg-white shadow-md"
             >
-                <div class="flex items-center gap-x-2">
-                    <div class="w-1.5 h-1.5 rounded-full bg-black"></div>
-                    <span class="font-semibold text-md tracking-wide"
-                        >UncoverPC</span
-                    >
+                <div
+                    id="logo-wrapper"
+                    class="w-full flex justify-end xs:justify-start"
+                >
+                    <div class="flex items-center gap-x-3">
+                        <img
+                            src="../static/assets/images/Logo.svg"
+                            alt="UncoverPC Logo"
+                            class="w-12 xs:w-7 h-10 xs:h-12"
+                        />
+                        <span
+                            class="hidden xs:block font-semibold text-md tracking-wide"
+                            >UncoverPC</span
+                        >
+                    </div>
                 </div>
                 <div
                     id="login-container"
-                    class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full max-w-3xl px-44"
+                    class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full max-w-3xl px-6 xs:px-12 sm:px-24 md:px-32 lg:px-44"
                 >
                     <h1 class="text-4xl font-semibold mb-4">Sign up</h1>
                     <h2 class="mb-8 text-gray-500">
@@ -41,24 +53,24 @@
                             id="email"
                             name="email"
                             placeholder="Email address"
-                            class="border-2 mb-6 border-black rounded-md p-3 w-full placeholder:text-gray-700"
+                            class="border md:border-2 mb-6 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
                         />
                         <input
                             type="password"
                             id="password"
                             name="password"
                             placeholder="Password"
-                            class="border-2 mb-6 border-black rounded-md p-3 w-full placeholder:text-gray-700"
+                            class="border md:border-2 mb-6 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
                         />
                         <input
                             type="password"
                             id="confirm-password"
                             name="confirm-password"
                             placeholder="Confirm password"
-                            class="border-2 mb-8 border-black rounded-md p-3 w-full placeholder:text-gray-700"
+                            class="border md:border-2 mb-6 border-black rounded-md p-2.5 md:p-3 w-full placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
                         />
                         <input
-                            class="cursor-pointer w-1/2 bg-slate-800 hover:bg-slate-900 text-white font-semibold p-3 rounded-md inline-flex justify-center"
+                            class="cursor-pointer w-1/2 bg-slate-800 hover:bg-slate-900 text-sm md:text-base text-white font-semibold p-3 rounded-md inline-flex justify-center"
                             type="submit"
                             value="Create account"
                         />
