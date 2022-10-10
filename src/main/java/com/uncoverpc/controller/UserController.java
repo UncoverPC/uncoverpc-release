@@ -37,6 +37,11 @@ public class UserController {
 		return new ModelAndView(FOLDER_PATH + "/login");
 	}
 
+	@GetMapping(URI_PATH + "/forgotPassword")
+	public ModelAndView forgotPassword() {
+		return new ModelAndView(FOLDER_PATH + "/forgotPassword");
+	}
+	
 	@GetMapping(URI_PATH + "/register")
 	public ModelAndView register() {
 		return new ModelAndView(FOLDER_PATH + "/signUp");
