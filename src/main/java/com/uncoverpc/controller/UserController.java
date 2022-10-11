@@ -48,7 +48,7 @@ public class UserController {
 	}
 
 	@PostMapping(URI_PATH + "/register")
-	public ModelAndView registerUser(@RequestBody User user) {
+	public ModelAndView registerUser( User user) {
 		try {
 			// checking if account already created
 			System.out.println(user);
