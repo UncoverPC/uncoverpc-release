@@ -40,6 +40,8 @@
       .w3-bar .w3-button {
         padding: 16px;
       }
+      
+
 
       .color_theme {
         background-color: rgba(12, 12, 14, 255);
@@ -57,7 +59,7 @@
         justify-content: center;
         text-align: center;
         height: 100vh;
-        overflow: auto;
+        overflow: visible;
       }
 
       #creator_body{
@@ -66,6 +68,8 @@
         max-width: 1100px;
         margin-bottom: 20px;
       }
+
+
 
       #quiz_creator{
         font-size: 60px;
@@ -147,8 +151,23 @@
         color:rgb(218, 45, 45);
       }
 
+      .delete_question {
+        padding: 5px;
+        margin-top: 10px;
+        border: 2px solid rgb(202, 96, 96);
+        border-radius: 10px;
+        background-color: transparent;
+        color:rgb(202, 96, 96);
+        font-size: 18px;
+      }
+
+      .delete_question:hover{
+        color:rgb(218, 45, 45);
+      }
+
       .back {
-        padding: 10px;
+        margin-top: 15px;
+        padding: 5px;
         border: transparent;
         position: relative;
         background-color: transparent;
@@ -233,6 +252,7 @@
       
       #main{
         position: relative;
+        margin-left: 10%;
         height: 100%;
       }
 
@@ -294,7 +314,7 @@
         font-size: 50px;
       }
 
-      #question_title{
+      .question_title{
         font-size: 35px;
       }
 
@@ -416,7 +436,9 @@
         </button>
 
         <div id="navbar_questions">
-          <a href="#question_1"class ="navbar_question">Question 1</a>
+          <a href="#creator_body" class ="navbar_question">To the Top</a>
+          <a href="#quiz_footer" class ="navbar_question">To the Bottom</a>
+
         </div>
     </div>
 
@@ -460,13 +482,11 @@
         <!-- Question Element -->
        <li class="question_holder" id="question_1">
          <div>
-          <!--Question Number Indicator-->
-          <h2 id="question_num"> 1 </h2>
           <!--Question Input-->
           <input
           type="text"
-          class="w3-center textfield"
-          id="question_title"
+          class="w3-center textfield question_title"
+          id="question_title_1"
           name="question_title"
           placeholder="Question"
           oninput="onType(this)"
@@ -479,7 +499,7 @@
               type="text"
               class="w3-center textfield answer"
               oninput="onType(this)"
-              id="answer"
+              id="ainput_1_1"
               name="answer"
               placeholder="Answer"
              />
@@ -492,11 +512,13 @@
             Add Answer
           </button>
          </div>
+         <button class="delete_question" onclick = "delQuestion(1)"> Delete Question</button>
+
         </div>
       </li>
      </ul>
 
-     <footer class="footer">
+     <footer class="footer" id="quiz_footer">
       <button id="save_button" onclick="saveQuiz()">Save Quiz</button>
      </footer>
 
@@ -554,18 +576,36 @@
     }
 
     function saveQuiz() {
-      quiz.quizTitle = document.getElementById("quiz_title").value;
+      quiz.quizTitle ="";
+      quiz.answer_bank = [];
+      quiz.question_bank = [];
+      quiz.quizTitle = document.getElementById("quiz_title").placeholder;
       for(let i =1; i<=question_counter; i++) {
         var cAnswers = [];
-        var cQuestion = document.getElementById("question_"+i).value;
-        for(let j=1; j <= answerCounter[i-1]; j++) {
-          var cAnswer = document.getElementById("answer_"+i+"_"+j);
-          cAnswers.push(cAnswer);
-        }
-        quiz.question_bank.push(cQuestion);
-        quiz.answer_bank.push(cAnswers);
+        var cQuestion = document.getElementById("question_title_"+i);
+        if(cQuestion != null){
+            for(let j=1; j <= answerCounter[i-1]; j++) {
+              var cAnswer = document.getElementById("ainput_"+i+"_"+j).placeholder;
+              cAnswers.push(cAnswer);
+            }
+            quiz.question_bank.push(cQuestion.value);
+            quiz.answer_bank.push(cAnswers);
+          }
+    }
+      if (confirm("Are you sure you want to submit this quiz?")) {
+        $.ajax({
+          url: "/api/quiz/create/",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(quiz),
+          success: function (response) {
+            alert(response);
+          },
+          error: function () {
+            alert("error");
+          },
+        });
       }
-      console.log(quiz);
     }
 
     function addAnswer(questionNum) {
@@ -579,7 +619,7 @@
               type="text"
               class="w3-center textfield answer"
               oninput="onType(this)"
-              id="answer"
+              id="ainput_${questionNum}_${answerCounter[questionNum-1]}"
               name="answer"
               placeholder="Answer"
              />
@@ -602,70 +642,18 @@
       loc.remove();
     }
 
+    function delQuestion(qNum) {
+      var id = "question_"+qNum;
+      var loc = document.getElementById(id);
+      loc.remove();
+    }
+
     function onType(element) {
       element.placeholder = element.value;
-    }
-
-    //Procced to the last question
-    function back() {
-      //If question isnt the first, proceed
-      if (current_question > 0) {
-        //change questrion
-        current_question--;
-        var current_answers = document.querySelectorAll(".answer");
-        current_answers.forEach((item) => {
-          item.style.animation = "previousQuestion 0.5s"; //reversed
-        });
-        //Then wait to delete answers
-        setTimeout(nextQuestion, 200, current_question, true);
-      }
-    }
-
-    function submitQuiz() {
-      console.log({
-        quizTitle: quiz.quizTitle,
-        question_bank: quiz.question_bank,
-      });
-      //Alert
-      if (confirm("Are you sure you want to submit this quiz?")) {
-        $.ajax({
-          url: "/api/quiz/create/",
-          type: "POST",
-          contentType: "application/json",
-          data: JSON.stringify(quiz),
-          success: function (response) {
-            alert(response);
-          },
-          error: function () {
-            alert("error");
-          },
-        });
-      }
-    }
+    } 
 
     function onChangeQuizTitle(element) {
       quiz.quizTitle = element.value;
-    }
-
-    function saveQuestion() {
-        //Saving Question and Answer Data
-      var ans = [];
-      var answers = document
-        .getElementById("answers")
-        .querySelectorAll(".answer");
-      answers.forEach((item) => {
-        if (item.value != "") {
-          ans.push(item.value);
-        }
-      });
-
-      var question_title = document.getElementById("question_title").value;
-      var question = {
-        title: question_title,
-        answers: ans,
-        scalable: document.getElementById("scalable").checked,
-      };
-      var question_num = document.getElementById("questionButton");
     }
 
     //In Use
@@ -676,13 +664,11 @@
         var qid = "question_"+question_counter;
         loc.innerHTML += `<li class="question_holder" id="question_${question_counter}">
          <div>
-          <!--Question Number Indicator-->
-          <h2 id="question_num"> ${question_counter}</h2>
           <!--Question Input-->
           <input
           type="text"
-          class="w3-center textfield"
-          id="question_title"
+          class="w3-center textfield question_title"
+          id="question_title_${question_counter}"
           name="question_title"
           placeholder="Question"
           oninput="onType(this)"
@@ -708,57 +694,34 @@
             Add Answer
           </button>
          </div>
+         <button class="delete_question" onclick ="delQuestion(${question_counter})"> Delete Question</button>
         </div>
       </li>`;
 
-      var qs = document.getElementById("navbar_questions");
-      qs.innerHTML += `<a href="#question_${question_counter}"class ="navbar_question">Question ${question_counter}</a>`
       setQuestionTitles();
       answerCounter.push(1);
     }
 
-   
-    function scrollTo(id){
-      var element = document.getElementById(id);
-    }
-
-    //Saving question to database
-    function nextQuestion(qNum, isReverseAnimation) {
-      //     //Delete Previous answers first
-      $("#answers").empty();
-      //Clear title
-      if (quiz.question_bank.length > current_question) {
-        document.getElementById("question_title").value =
-          quiz.question_bank[current_question].title;
-        //load previous questions
-        quiz.question_bank[current_question].answers.forEach((item) => {
-          var loc = document.getElementById("answers");
-          loc.innerHTML +=
-            '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer" placeholder="' +
-            item +
-            '" value="' +
-            item +
-            '">';
+    function setQuestionTitles() {
+      for(let i=1; i<=question_counter; i++) {
+        var question = document.getElementById("question_title_"+i);
+        if(question==null){
+        }
+        else{
+          if(question.placeholder != "Question"){
+            question.value = question.placeholder;
+          }
+          var answers = document
+          .getElementById("answers_"+i)
+          .querySelectorAll(".answer");
+          answers.forEach((item) => {
+          if(item.placeholder != "Answer"){
+              item.value = item.placeholder;
+          }
         });
-        document.getElementById("scalable").checked =
-          quiz.question_bank[current_question].scalable;
-        console.log(quiz);
-      } else {
-        document.getElementById("question_title").value = current_question;
-        //Add default answer
-        // addQuestion();
-        var loc = document.getElementById("answers");
-        loc.innerHTML +=
-          '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer">';
-        document.getElementById("scalable").checked = false;
+        }
       }
-
-      //if first question, then no back button
-      if (current_question == 0) {
-        document.getElementById("back").style.visibility = "hidden";
-      } else {
-        document.getElementById("back").style.visibility = "visible";
-      }
+      
     }
   </script>
 </html>
