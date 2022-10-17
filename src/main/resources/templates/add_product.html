@@ -31,6 +31,7 @@
         html {
           height: 100%;
           line-height: 1.8;
+          overflow: auto;
         }
   
         .w3-bar .w3-button {
@@ -71,7 +72,8 @@
           background-color: RGB(50, 50, 50);
           color: aliceblue;
           border-radius: 10px;
-    
+          margin-top: 10px;
+          margin-bottom: 10px;
         }
         button:hover{
           background-color: rgb(27, 13, 65);
@@ -120,6 +122,25 @@
 
         #input_body{
           overflow-y: auto;
+          width: 550px;
+        }
+
+        .label_input {
+          width: 250px;
+          text-align: right;
+          font-size: 28px;
+        }
+
+        input {
+          display: inline-block;
+          clear:right;
+          width: 500px;
+          padding: 10px;
+          border: 2px solid gray !important;
+          margin: 10px;
+          position: relative;
+          background-color: transparent;
+          color: gray;
         }
 
         .input_div {
@@ -241,6 +262,8 @@
              />
           </div>`
       }
+      body.innerHTML += 
+      `<button id="save_button" onclick="Save()""> Save </button>`
     }
 
   </script>
