@@ -64,7 +64,8 @@
         }
 
         #admin_logo {
-            text-align: center;
+          font-size: 70px;
+          text-align: center;
         }
 
         #main_logo {
@@ -91,15 +92,32 @@
             margin: 0px;
         }
 
+        .edit_button {
+          width: 200px;
+          height: 50px;
+          border-radius: 10px;
+          font-size: 24px;
+          line-height: 26px;
+          text-align: center;
+          color: #FFFEFE;
+          background-color: #162252;
+          border-width: 0;
+          margin: 20px;
+          position: relative;
+        }
+        .edit_button:hover{
+          background-color: #21337c;
+        }
+
         #statistics {
-            background-color: #0a0f22;
             border-radius: 20px;
             padding: 20px;
             position: relative;
         }
+
         #visits-box {
             width: 798px;
-            height: 475px;
+            height: 565px;
             left: 37px;
             top: 132px;
             margin-left: 10px;
@@ -107,32 +125,69 @@
             background: #283B80;
             border-radius: 20px;
         }
+
+        #visits-graphbox {
+          width: 772px;
+          height: 502px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin: 0 auto;
+        }
         #visits-graph {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             background-color: white;
-            position: absolute;
         }
         #quiztype-box {
           position: absolute;
           width: 582px;
-          height: 230px;
+          height: 250px;
           left: 847px;
-          top: 132px;
+          top: 115px;
           overflow: hidden;
           background: #283B80;
           border-radius: 20px;
         }
-
-        #quiztype-graph{
+        #quiztype-graphbox {
+          width: 553px;
+          height: 195px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin: 0 auto;
+        }
+        #quiztype-graph {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           background-color: white;
-          position: absolute;
-          height: 200px;
         }
+
+        #productsales-box {
+          position: absolute;
+          width: 582px;
+          height: 260px;
+          left: 847px;
+          top: 419px;
+
+          background: #283B80;
+          border-radius: 20px;
+        }
+        #productsales-graphbox {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 553px;
+          height: 200px;
+          margin: 0 auto;
+        }
+        #productsales-graph {
+          background-color: white;
+          
+        }
+
     </style>
   </head>
 
@@ -145,15 +200,38 @@
 
         <div id="statistics">
             <h1 class="logo">Statistics</h1>
-            <div id="visits-box">
+
+            <div id="row1">
+              <div id="visits-box">
                 <h3 class="graph-label">Visits </h3>
-                <canvas id="visits-graph"></canvas>
+                <div id="visits-graphbox">
+                  <canvas id="visits-graph"></canvas>
+                </div>
+              </div>
+
+              <div id="quiztype-box">
+                  <h3 class="graph-label">Quizzes Taken by Type </h3>
+                  <div id="quiztype-graphbox">
+                    <canvas id="quiztype-graph"></canvas>
+                  </div>
+              </div>
+
+              <div id="productsales-box">
+                <h3 class="graph-label">Product Sales </h3>
+                <div id="productsales-graphbox">
+                  <canvas id="productsales-graph"></canvas>
+                </div>
+              </div>
+
             </div>
-            <div id="quiztype-box">
-                <h3 class="graph-label">Quizzes Taken by Type </h3>
-                <canvas id="quiztype-graph"></canvas>
+
+            <div id="row2">
+
             </div>
+
+
         </div>
+        <button class="edit_button">Edit Quizzes</button>
     </div>
   </body>
 
@@ -162,10 +240,10 @@
     var visitsGraph = new Chart(visitsChart, {
         type: 'line',
         data: {
-        labels: ['10/14', '10/15', '10/16','10/17','10/18'],
+        labels: ['10/14', '10/15', '10/16','10/17','10/18'], //x-axis
         datasets: [{
             label: '# of Visits',
-            data: [12, 19, 3, 5, 2],
+            data: [12, 19, 3, 5, 2], //y-axis
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
 
@@ -177,7 +255,7 @@
         }]
     },
     options: {
-
+        maintainAspectRatio :false,
         scales: {
             y: {
                 beginAtZero: true
@@ -214,8 +292,6 @@
         }]
     },
     options: {
-      responsive: true,
-      aspectRatio: 2,
       maintainAspectRatio: false,
         scales: {
             y: {
@@ -225,6 +301,43 @@
     }
     });
 
+    const productSaleChart = document.getElementById('productsales-graph').getContext("2d");
+
+    var produtSalesGraph = new Chart(productSaleChart, {
+      type: 'bar',
+        data: {
+        labels: ['Laptop', 'PC', 'Keyboard','Mouse'],
+        datasets: [{
+            label: 'Sales ($)',
+            data: [12, 19, 3, 5],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
   </script>
 
 </html>
