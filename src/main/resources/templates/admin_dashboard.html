@@ -102,17 +102,19 @@
           color: #FFFEFE;
           background-color: #162252;
           border-width: 0;
-          margin: 20px;
-          position: relative;
+          margin: auto;
+          margin-left: 37%;
         }
         .edit_button:hover{
           background-color: #21337c;
         }
 
-        #statistics {
+        .mainpage {
             border-radius: 20px;
             padding: 20px;
             position: relative;
+            width: 100%;
+            margin: 0 8%;
         }
 
         #visits-box {
@@ -138,7 +140,6 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            background-color: white;
         }
         #quiztype-box {
           position: absolute;
@@ -162,7 +163,6 @@
           display: flex;
           flex-direction: column;
           align-items: flex-start;
-          background-color: white;
         }
 
         #productsales-box {
@@ -183,9 +183,58 @@
           height: 200px;
           margin: 0 auto;
         }
-        #productsales-graph {
+        .stats-graph{
           background-color: white;
-          
+        }
+
+        .box {
+          margin: 20px;
+        }
+
+        .row2box {
+          width: 412px;
+          height: 320px;
+          background: #283B80;
+          border-radius: 20px;
+          top: 689px;
+        }
+        .row2graphbox{
+          width: 370px;
+          height: 260px;
+          margin: 0 auto;
+        }
+
+        #socialmedia-box {
+          left: 1004px;
+        }
+        #socialmedia-graphbox {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        #rating-box {
+          position: absolute;
+          left: 475px;
+          top: 702px;
+          margin-top: 20px;
+        }
+
+        #rating-graphbox {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        #quizvsbuy-box {
+          position: absolute;
+          left: 930px;
+          top: 700px;
+          width: 500px;
+        }
+
+        #quizvsbuy-graphbox {
+          width: 460px;
         }
 
     </style>
@@ -198,44 +247,70 @@
             <h2  class="logo" id="admin_logo">Admin Dashboard</h2>
         </div>
 
-        <div id="statistics">
+        <div class="mainpage">
             <h1 class="logo">Statistics</h1>
 
             <div id="row1">
-              <div id="visits-box">
+              <div class="box" id="visits-box">
                 <h3 class="graph-label">Visits </h3>
                 <div id="visits-graphbox">
-                  <canvas id="visits-graph"></canvas>
+                  <canvas class="stats-graph" id="visits-graph"></canvas>
                 </div>
               </div>
 
-              <div id="quiztype-box">
+              <div class="box" id="quiztype-box">
                   <h3 class="graph-label">Quizzes Taken by Type </h3>
                   <div id="quiztype-graphbox">
-                    <canvas id="quiztype-graph"></canvas>
+                    <canvas class="stats-graph" id="quiztype-graph"></canvas>
                   </div>
               </div>
 
-              <div id="productsales-box">
+              <div class="box" id="productsales-box">
                 <h3 class="graph-label">Product Sales </h3>
                 <div id="productsales-graphbox">
-                  <canvas id="productsales-graph"></canvas>
+                  <canvas class="stats-graph" id="productsales-graph"></canvas>
                 </div>
               </div>
 
             </div>
 
             <div id="row2">
+              <div class="box row2box" id="socialmedia-box">
+                <h3 class="graph-label">Social Media Visits </h3>
+                <div class="row2graphbox" id="socialmedia-graphbox">
+                  <canvas class="stats-graph" id="socialmedia-graph"></canvas>
+                </div>
+              </div>
 
+              <div class="box row2box" id="rating-box">
+                <h3 class="graph-label">Customer Ratings </h3>
+                <div class="row2graphbox" id="rating-graphbox">
+                  <canvas class="stats-graph" id="rating-graph"></canvas>
+                </div>
+              </div>
+
+              <div class="box row2box" id="quizvsbuy-box">
+                <h3 class="graph-label"># of Quizzes Taken vs Product Purchases</h3>
+                <div class="row2graphbox" id="quizvsbuy-graphbox">
+                  <canvas class="stats-graph" id="quizvsbuy-graph"></canvas>
+                </div>
+              </div>
             </div>
-
-
+            <button onClick="goTo(create_quiz1)" class="edit_button">Edit Quizzes</button>
         </div>
-        <button class="edit_button">Edit Quizzes</button>
+
+      <div class="mainpage">
+        <h1 class="logo">Quizzes</h1>
+      </div>
+
     </div>
   </body>
 
   <script>
+    function goTo(link) {
+
+    }
+
     const visitsChart = document.getElementById('visits-graph').getContext("2d");
     var visitsGraph = new Chart(visitsChart, {
         type: 'line',
@@ -246,7 +321,6 @@
             data: [12, 19, 3, 5, 2], //y-axis
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
-
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
@@ -326,6 +400,84 @@
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const socialVisitsChart = document.getElementById("socialmedia-graph")
+    var socialMediaGraph = new Chart(socialVisitsChart, {
+      type: 'pie',
+        data: {
+        labels: ['Instagram', 'YouTube', 'TikTok'],
+        datasets: [{
+            data: [12, 19, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+            ],
+            borderColor: 
+            'rgba(255,255,255,1)',
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    
+
+    const ratingsChart = document.getElementById("rating-graph");
+    var ratingsGraph = new Chart(ratingsChart, {
+      type: 'bar',
+        data: {
+        labels: [1,2,3,4,5],
+        datasets: [{
+            label: '# of Customers',
+            data: [12, 19, 3, 5, 10],
+            backgroundColor: 
+            'rgba(20, 50, 255, 0.7)',
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const takenVsBuyChart = document.getElementById("quizvsbuy-graph")
+    var takenVsBuyGraph = new Chart(takenVsBuyChart, {
+      type: 'pie',
+        data: {
+        labels: ['Purchase', 'No Purchase'],
+        datasets: [{
+            data: [12, 19],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+            ],
+            borderColor: 
+            'rgba(255,255,255,1)',
             borderWidth: 1
         }]
         },
