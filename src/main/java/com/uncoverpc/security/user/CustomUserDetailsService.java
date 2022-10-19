@@ -1,7 +1,5 @@
 package com.uncoverpc.security.user;
 
-import java.util.concurrent.ExecutionException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,14 +19,14 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 		try {
-			User user = userService.getUserDetails(email);
+			User user = userService.findByEmail(email);
 
 			if (user == null) {
 				throw new UsernameNotFoundException("User not found");
 			}
 			return new CustomUserDetails(user);
-		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			System.err.println("User not found: " + email);
 		}
 		throw new UsernameNotFoundException("User not found");
 	}

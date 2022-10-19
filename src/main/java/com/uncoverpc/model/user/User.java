@@ -2,17 +2,36 @@ package com.uncoverpc.model.user;
 
 import java.util.UUID;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("users")
 public class User {
 
+	@Id
 	private String id = UUID.randomUUID().toString();
 
 	private String email;
 
+	private String role;
+	
 	private String password;
 
 	private String firstName;
 
 	private String lastName;
+
+	
+	
+	public User(String id, String email, String role, String password, String firstName, String lastName) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.role = role;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	public String getId() {
 		return id;
@@ -52,6 +71,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override
