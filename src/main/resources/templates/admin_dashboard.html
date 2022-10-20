@@ -61,6 +61,7 @@
             font-style: italic;
             color: aliceblue;
             margin: 0;
+            font-weight: bold;
         }
 
         #admin_logo {
@@ -84,6 +85,7 @@
           -webkit-text-fill-color: transparent;
           margin: 0;
         }
+        /* Statistics Section CSS */
         .graph-label {
             text-align: center;
             color: white;
@@ -237,6 +239,75 @@
           width: 460px;
         }
 
+        .quizholder {
+          height: 300px;
+          width: 400px;
+          border: none;
+          border-radius: 20px;
+          margin: 50px;
+          background-color: #2e2f33;
+          background-blend-mode:overlay;
+          background-position: center;
+          background-size: cover;
+        }
+        /* Quiz Section CSS */
+        .quizholder:hover{
+          opacity: 60%;
+        }
+
+        .quizlabel {
+          color: white;
+          text-align: center;
+          font-size: 45px;
+          font-weight: bold;
+        }
+        #laptop-thumbnail {
+          background-image: url("thumbnails/laptop.jpg");
+        }
+        #pc-thumbnail {
+          background-image: url("thumbnails/pc.jpg");
+        }
+        #keyboard-thumbnail {
+          background-image: url("thumbnails/keyboard.jpg");
+        }
+        #mouse-thumbnail {
+          background-image: url("thumbnails/mouse.png");
+        }
+        #tablet-thumbnail {
+          background-image: url("thumbnails/tablet.jfif");
+        }
+        #headphone-thumbnail {
+          background-image: url("thumbnails/headphone.jpg");
+        }
+
+        /* Quiz Info Section CSS */
+        .quizinfo-select {
+          width: 300px;
+          height: 50px;
+          background-color: #1a1d2b;
+          color: #FFFEFE;
+          border-radius: 10px;
+          text-align: center;
+          font-size: 36px;
+          left: 35%;
+          top: 180px;
+          position: absolute;
+          margin-bottom: 20px;
+        }
+
+        .selector-label {
+          font-size: 36px;
+          text-align: center;
+          left: 37%;
+          top: 125px;
+          position: absolute;
+        }
+        #load_info {
+          position: absolute;
+          top: 250px;
+          margin-bottom: 20px;
+        }
+
     </style>
   </head>
 
@@ -296,19 +367,51 @@
                 </div>
               </div>
             </div>
-            <button onClick="goTo(create_quiz1)" class="edit_button">Edit Quizzes</button>
+            <button onClick="goTo('create_quiz1.html')" class="edit_button">Edit Quizzes</button>
         </div>
 
       <div class="mainpage">
         <h1 class="logo">Quizzes</h1>
+        <button class="quizholder" id="laptop-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Laptop</h2>
+        </button>
+        <button class="quizholder" id="pc-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> PC</h2>
+        </button>
+        <button class="quizholder" id="keyboard-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Keyboard</h2>
+        </button>
+        <button class="quizholder" id="mouse-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Mouse</h2>
+        </button>
+        <button class="quizholder" id="tablet-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Tablet</h2>
+        </button>
+        <button class="quizholder" id="headphone-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Headphones</h2>
+        </button>
+        <button onClick="goTo('create_quiz1.html')" class="edit_button">New Quiz</button>
       </div>
 
+      <div class="mainpage" id="quiz-data">
+        <h1 class="logo">Quiz Data</h1>
+            
+
+      </div>
     </div>
   </body>
 
   <script>
-    function goTo(link) {
 
+    function loadInfo(type){
+      var body = document.getElementById("input_body");
+      body.innerHTML = "";
+      var s = document.getElementById("main_selector");
+      var value = s.value;
+    }
+
+    function goTo(link) {
+      window.location.href = link;
     }
 
     const visitsChart = document.getElementById('visits-graph').getContext("2d");
@@ -440,8 +543,6 @@
         }
     });
 
-    
-
     const ratingsChart = document.getElementById("rating-graph");
     var ratingsGraph = new Chart(ratingsChart, {
       type: 'bar',
@@ -451,7 +552,9 @@
             label: '# of Customers',
             data: [12, 19, 3, 5, 10],
             backgroundColor: 
-            'rgba(20, 50, 255, 0.7)',
+            'rgba(20, 50, 200, 0.5)',
+            borderColor: 
+            'rgba(20, 50, 200, 1)',
             borderWidth: 1
         }]
         },
@@ -473,8 +576,8 @@
         datasets: [{
             data: [12, 19],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.7)',
-                'rgba(54, 162, 235, 0.7)',
+                'rgba(54, 162, 50, 0.7)',
+                'rgba(255, 70, 70, 0.7)',
             ],
             borderColor: 
             'rgba(255,255,255,1)',
