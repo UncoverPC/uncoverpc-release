@@ -9,4 +9,5 @@ import com.uncoverpc.model.user.User;
 public interface UserService extends MongoRepository<User, String> {
 
 	User findByEmail(String email);
+    User findByVerificationCode(String verificationCode);
 }

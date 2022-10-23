@@ -20,6 +20,10 @@ public class User {
 	private String firstName;
 
 	private String lastName;
+	
+	private String verificationCode;
+	
+	private boolean enabled;
 
 	
 	
@@ -73,6 +77,10 @@ public class User {
 		this.lastName = lastName;
 	}
 	
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
+	
 	public String getRole() {
 		return role;
 	}
@@ -85,6 +93,22 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
 				+ ", password=" + password + "]";
+	}
+
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 }
