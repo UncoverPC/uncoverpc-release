@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
+    <head>
+        <meta charset="ISO-8859-1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login - UncoverPC</title>
+        <link rel="stylesheet" th:href="@{/assets/dist/styles.css}" />
+    </head>
+
+    <body>
+        <div class="w-screen h-screen bg-slate-900">
+            <div
+                id="login-wrapper"
+                class="absolute overflow-hidden top-1/2 left-1/2 p-5 my-0 mx-auto w-full xs:w-9/12 h-full xs:h-5/6 xs:rounded-lg bg-white shadow-md"
+            >
+                <div
+                    id="logo-wrapper"
+                    class="w-full flex justify-end xs:justify-start"
+                >
+                    <div class="flex items-center gap-x-3">
+                        <img
+                            src="/assets/images/Logo.svg"
+                            alt="UncoverPC Logo"
+                            class="w-12 xs:w-7 h-10 xs:h-12"
+                        />
+                        <span
+                            class="hidden xs:block font-semibold text-md tracking-wide"
+                            >UncoverPC</span
+                        >
+                    </div>
+                </div>
+                <div
+                    id="login-container"
+                    class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full max-w-3xl px-6 xs:px-12 sm:px-24 md:px-32 lg:px-44"
+                >
+                    <h1 class="text-4xl font-semibold mb-4">Sign up</h1>
+                    <h2 class="mb-4 text-gray-500">
+                        Have an account?
+                        <a
+                            href="/login"
+                            class="font-medium underline decoration-solid"
+                        >
+                            Login
+                        </a>
+                    </h2>
+                    <form
+                        th:action="@{/register}" method="post" th:object="${user}"
+                        class="flex flex-col items-start"
+                    >
+                        <div class="field-mb-6">
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Email address"
+                                class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
+                            />
+                            <div class="line"></div>
+                        </div>
+                        <div class="field-mb-6">
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
+                            />
+                            <div class="line"></div>
+                        </div>
+                        <div class="field-mb-6">
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                name="confirm-password"
+                                placeholder="Confirm password"
+                                class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700"
+                            />
+                            <div class="line"></div>
+                        </div>
+                        <input
+                            class="cursor-pointer w-1/2 bg-slate-800 hover:bg-slate-900 text-sm md:text-base text-white font-semibold p-3 rounded-md inline-flex justify-center"
+                            type="submit"
+                            value="Create account"
+                        />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

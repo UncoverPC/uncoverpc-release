@@ -129,11 +129,21 @@
         display: inline-flex;
       }
 
+      #submit_button{
+          position: relative;
+          margin-top: 600px;
+          margin-left: 10px;
+      }
+
+      #question_functions{
+        margin-top: 10px;
+      }
+
       .submit:hover {
         background-color: green;
       }
 
-      .addQuestion {
+      .questionButton {
         padding: 10px;
         border: 2px solid rgb(27, 48, 134);
         position: relative;
@@ -143,7 +153,7 @@
         display: inline-flex;
       }
 
-      .addQuestion:hover {
+      .questionButton:hover {
         background-color: blue;
       }
 
@@ -174,7 +184,11 @@
       }
 
       #quiz_title {
-        font-size: xx-large;
+        font-size: 50px;
+      }
+
+      #question_title{
+        font-size: 35px;
       }
 
       .lds-ring {
@@ -226,6 +240,8 @@
         position: relative;
         transition: 0.6s;
       }
+
+
 
       /* Next question animation */
       @keyframes nextQuestion {
@@ -295,6 +311,8 @@
       <div class="progress_bar_container w3-top" id="progress_bar"></div>
     </div>
 
+
+
     <!-- Quiz -->
     <div>
       <!-- Logo -->
@@ -306,15 +324,18 @@
         id="quiz_title"
         oninput="onChangeQuizTitle(this)"
         name="quiz_title"
+        placeholder = "Quiz Title"
       />
       <!-- Quiz Container -->
       <div>
         <!-- Question -->
+        <h2 id="question_num"> 1 </h2>
         <input
           type="text"
           class="w3-center textfield"
           id="question_title"
           name="question_title"
+          placeholder="Question"
         />
         <div>
           <!-- Answers -->
@@ -325,23 +346,37 @@
               oninput="onType(this)"
               id="answer"
               name="answer"
+              placeholder="Answer"
             />
           </div>
-          <button class="back" onclick="back()" id="back">Back</button>
           Scalable:
           <input type="checkbox" id="scalable" />
           <button class="addAnswer" onclick="addAnswer()" id="add_question">
             Add Answer
           </button>
-          <button class="addQuestion" onclick="addQuestion()" id="add_question">
+        </div>
+        <!-- Add and Delete Question Buttons -->
+        <div id="question_functions">
+          <button class="questionButton" onclick="back()" id="del_question">
+            Delete Question
+          </button>
+    
+          <button class="questionButton" onclick="addQuestion()" id="add_question">
             Add Question
           </button>
-          <button class="submit" onclick="submitQuiz()" id="submit_quiz">
-            Submit
-          </button>
         </div>
+
       </div>
     </div>
+
+    
+
+    <div id="submit_button">
+      <button class="submit" onclick="submitQuiz()" id="submit_quiz">
+        Submit
+      </button>
+    </div>
+
   </body>
 
   <script>
@@ -389,7 +424,7 @@
     function addAnswer() {
       var loc = document.getElementById("answers");
       loc.innerHTML +=
-        '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer">';
+        '<input type="text" class="w3-center textfield answer" id="answer" oninput="onType(this)"name="answer" placeholder="Answer">';
       //Getting placeholders to texts so the texts dont disapear
       var answers = document
         .getElementById("answers")
@@ -461,6 +496,8 @@
         answers: ans,
         scalable: document.getElementById("scalable").checked,
       };
+      var question_num = document.getElementById("questionButton");
+      
       if (quiz.question_bank.length > current_question) {
         quiz.question_bank[current_question] = question;
       } else {
@@ -482,7 +519,8 @@
         nextQuestion(current_question);
       }
     }
-
+    
+    //Saving question to database
     function nextQuestion(qNum, isReverseAnimation) {
       //     //Delete Previous answers first
       $("#answers").empty();
