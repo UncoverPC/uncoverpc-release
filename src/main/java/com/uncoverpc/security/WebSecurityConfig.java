@@ -68,6 +68,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.authenticationProvider(authenticationProvider());
 		http.authorizeRequests().antMatchers("/admin/*").hasRole("ADMIN").and().formLogin().loginPage("/login")
 				.usernameParameter("email").defaultSuccessUrl("/admin/dashboard");
+		http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().formLogin().loginPage("/login")
+		.usernameParameter("email").defaultSuccessUrl("/user/dashboard");
 		http.logout().invalidateHttpSession(true);
 		return http.build();
 	}

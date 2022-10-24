@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/Logo.svg" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Quiz - UncoverPC</title>
+    <style>
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Raleway", sans-serif;
+      }
+
+      ul{
+        list-style-type: none;
+      }
+      
+      body,
+      html {
+        height: 100%;
+        line-height: 1.8;
+      }
+
+      .w3-bar .w3-button {
+        padding: 16px;
+      }
+      
+
+
+      .color_theme {
+        background-color: rgba(12, 12, 14, 255);
+        color: antiquewhite;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #text_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 100vh;
+        overflow: visible;
+      }
+
+      #creator_body{
+        background-color: rgb(21, 21, 27);
+        border-radius: 20px;
+        max-width: 1100px;
+        margin-bottom: 20px;
+      }
+
+
+
+      #quiz_creator{
+        font-size: 60px;
+      }
+
+      #titles{
+        position: relative;
+      }
+
+      li{
+        list-style-type: none;
+        display: inline-block;
+      }
+
+      .logo {
+        font-weight: 100;
+        opacity: 1;
+        font-size: 80px;
+        font-style: italic;
+        background: -webkit-linear-gradient(
+          RGBA(200, 81, 81, 200),
+          RGBA(60, 150, 300, 200),
+          RGBA(250, 150, 300, 200)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    
+
+      #start_button {
+        background-color: rgb(9, 186, 106);
+        /* background-color:  -webkit-linear-gradient(RGBA(200, 81, 81, 200), RGBA(60, 150, 300, 200), RGBA(250, 150, 300, 200)); */
+        /* -webkit-background-clip: text; */
+        /* -webkit-text-fill-color: transparent; */
+        width: 120px;
+        height: 50px;
+        transition: 0.25s;
+        border-radius: 20%;
+      }
+
+      #start_button:hover {
+        background-color: rgb(67, 229, 3);
+        /* background-color:  -webkit-linear-gradient(RGBA(200, 81, 81, 200), RGBA(60, 150, 300, 200), RGBA(250, 150, 300, 200)); */
+        /* -webkit-background-clip: text; */
+        /* -webkit-text-fill-color: transparent; */
+        border-radius: 30%;
+      }
+
+      .answer {
+        width: 500px;
+        padding: 10px;
+        border: 2px solid gray !important;
+        margin: 10px;
+        position: relative;
+        background-color: transparent;
+        color: gray;
+        animation: incomingQuestion 0.5s;
+      }
+
+      .answer:hover {
+        border: 2px solid rgb(42, 54, 148) !important;
+        color: rgb(42, 54, 148) !important;
+      }
+
+      .answer_selected {
+        border: 2px solid rgb(196, 80, 80) !important;
+        color: rgb(196, 80, 80) !important;
+      }
+
+      .delete_answer {
+        border: transparent;
+        background-color: transparent;
+        color:rgb(202, 96, 96);
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .delete_answer:hover{
+        color:rgb(218, 45, 45);
+      }
+
+      .delete_question {
+        padding: 5px;
+        margin-top: 10px;
+        border: 2px solid rgb(202, 96, 96);
+        border-radius: 10px;
+        background-color: transparent;
+        color:rgb(202, 96, 96);
+        font-size: 18px;
+      }
+
+      .delete_question:hover{
+        color:rgb(218, 45, 45);
+      }
+
+      .back {
+        margin-top: 15px;
+        padding: 5px;
+        border: transparent;
+        position: relative;
+        background-color: transparent;
+        color: red;
+        border-radius: 20%;
+        display: inline-flex;
+      }
+
+
+      .question_holder{
+        border-radius: 50px;
+        margin: 10px 10px;
+        max-width: 1000px;
+        width: 1000px;
+      }
+
+      #sidenav{
+        height: 100%; 
+        width: 250px; 
+        position: fixed; 
+        z-index: 1; /* Stay on top */
+        top: 0; /* Stay at the top */
+        left: 0;
+        background-color: rgb(18, 13, 37); 
+        overflow-x: hidden; /* Disable horizontal scroll */
+        padding-top: 20px;
+      }
+
+      .navbar_question{
+        font-size: x-large;
+        color: white;
+        background-color: rgb(55, 40, 104);
+        width: 90%;
+        border-radius: 20px;
+        border-color: rgb(192, 190, 190);
+        margin: 10px;
+        text-decoration: none;
+        padding: 10px;
+        float: left;
+      }
+
+      #save_button{
+        background-color: rgb(32, 23, 65);
+        margin-bottom: 20px;
+        color: aliceblue;
+        width: 100px;
+        height: 50px;
+      }
+
+      #save_button:hover{
+        background-color:rgb(41, 41, 77);
+      }
+
+      .navbar_question:hover{
+        background-color: rgb(32, 23, 65);
+      }
+
+      #nav_header{
+        font-size: 32px;
+      }
+
+      .question_holder:hover {
+        background-color:rgb(24, 24, 32);
+        opacity: 80%;
+        border-radius: 20px;
+
+      }
+
+      .submit {
+        padding: 10px;
+        border: 2px solid green;
+        position: relative;
+        background-color: transparent;
+        color: rgb(119, 201, 111);
+        border-radius: 20%;
+        display: inline-flex;
+      }
+
+      .submit:hover {
+        background-color: green;
+      }
+      
+      #main{
+        position: relative;
+        margin-left: 10%;
+        height: 100%;
+      }
+
+      #main_logo{
+        max-height: 100px;
+      }
+
+      #submit_button{
+          position: relative;
+          margin-top: 600px;
+          margin-left: 10px;
+      }
+
+      
+
+      .questionButton {
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 2px solid rgb(27, 48, 134);
+        position: relative;
+        background-color: transparent;
+        color: rgb(27, 165, 156);
+        border-radius: 20%;
+        display: inline-flex;
+      }
+
+      .questionButton:hover {
+        background-color: blue;
+      }
+
+      .addAnswer {
+        padding: 10px;
+        margin-left: 10px;
+        border: 2px solid rgb(134, 64, 27);
+        position: relative;
+        background-color: transparent;
+        color: rgba(106, 151, 55, 0.719);
+        border-radius: 20%;
+        display: inline-flex;
+      }
+
+      .addAnswer:hover {
+        background-color: rgb(208, 109, 86);
+      }
+
+      .back:hover {
+        /* border: 2px solid rgb(104, 44, 6); */
+        color: rgb(42, 54, 148);
+      }
+
+      .textfield {
+        width: 40vw;
+        background-color: transparent;
+        border-color: transparent;
+        color: antiquewhite;
+      }
+
+      #quiz_title {
+        font-size: 50px;
+      }
+
+      .question_title{
+        font-size: 35px;
+      }
+
+      .footer{
+        position: static;
+        text-align: center;
+        width: 100%;
+
+      }
+
+      .lds-ring {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+      }
+
+      .lds-ring div {
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border: 8px solid #fff;
+        border-radius: 50%;
+        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: #fff transparent transparent transparent;
+      }
+
+      .lds-ring div:nth-child(1) {
+        animation-delay: -0.45s;
+      }
+
+      .lds-ring div:nth-child(2) {
+        animation-delay: -0.3s;
+      }
+
+      .lds-ring div:nth-child(3) {
+        animation-delay: -0.15s;
+      }
+
+      @keyframes lds-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .progress_bar_container {
+        width: 0vw;
+        height: 2px;
+        background-color: green;
+        position: relative;
+        transition: 0.6s;
+      }
+
+
+
+      /* Next question animation */
+      @keyframes nextQuestion {
+        0% {
+          right: 0vw;
+        }
+
+        100% {
+          right: 100vw;
+        }
+      }
+
+      /* Next question animation */
+      @keyframes incomingQuestion {
+        0% {
+          left: 100vw;
+        }
+
+        100% {
+          left: 0vw;
+        }
+      }
+
+      /* Next question animation */
+      @keyframes previousQuestion {
+        0% {
+          left: 0vw;
+        }
+
+        100% {
+          left: 100vw;
+        }
+      }
+
+      /* Next question animation */
+      @keyframes outcomingQuestion {
+        0% {
+          right: 100vw;
+        }
+
+        100% {
+          right: 0vw;
+        }
+      }
+    </style>
+
+    <script></script>
+  </head>
+
+
+
+  <body class="color_theme" id="text_container">
+
+    <div id="sidenav">
+        <h4 class = "logo" id="nav_header">Quiz Navigator</h1>
+        <button class="questionButton" onclick="newQuestion()" id="add_question">
+                Add Question
+        </button>
+
+        <div id="navbar_questions">
+          <a href="#creator_body" class ="navbar_question">To the Top</a>
+          <a href="#quiz_footer" class ="navbar_question">To the Bottom</a>
+
+        </div>
+    </div>
+
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card" id="myNavbar">
+          <a href="#home" class="w3-bar-item w3-button w3-wide">
+            <object data="assets/Logo.svg" width="20" height="20"></object
+          ></a>
+          <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+  
+          <a
+            href="javascript:void(0)"
+            class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+            onclick="w3_open()"
+          >
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+        <div class="progress_bar_container w3-top" id="progress_bar"></div>
+    </div>
+
+    <!--Quiz Creation Body-->
+    <div id="main">
+      <!-- Logo -->
+      <div id="titles">
+        <h1 class="logo" id="main_logo">UncoverPC</h1>
+        <h1 class="logo" id="quiz_creator"> Quiz Creator</h1>
+      </div>
+
+      <!-- Title -->
+      <input
+        type="text"
+        class="w3-center textfield"
+        id="quiz_title"
+        oninput="onChangeQuizTitle(this)"
+        name="quiz_title"
+        placeholder = "Quiz Title"
+      />
+      <!--Quiz Creator Body-->
+      <ul id="creator_body">
+        <!-- Question Element -->
+       <li class="question_holder" id="question_1">
+         <div>
+          <!--Question Input-->
+          <input
+          type="text"
+          class="w3-center textfield question_title"
+          id="question_title_1"
+          name="question_title"
+          placeholder="Question"
+          oninput="onType(this)"
+          />
+        
+         <div class="answer_box">
+          <div id="answers_1">
+            <div id="answer_1_1">
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="ainput_1_1"
+              name="answer"
+              placeholder="Answer"
+             />
+             <button class="delete_answer" onclick="delAnswer(1,1)"> X</button>
+            </div>
+          </div>
+          Scalable:
+          <input type="checkbox" id="scalable" />
+          <button class="addAnswer" onclick="addAnswer(1)" id="add_question">
+            Add Answer
+          </button>
+         </div>
+         <button class="delete_question" onclick = "delQuestion(1)"> Delete Question</button>
+
+        </div>
+      </li>
+     </ul>
+
+     <footer class="footer" id="quiz_footer">
+      <button id="save_button" onclick="saveQuiz()">Save Quiz</button>
+     </footer>
+
+  </body>  
+
+
+  <script>
+   var quiz = { quizTitle: "", question_bank: [], answer_bank: []};
+    // quiz["quizTitle"] = "";
+    // quiz["question_bank"] = [];
+
+    var current_question = 0;
+    var question_counter =1;
+
+    //Questions & answers (injected from backend)
+    const questions = [
+      {
+        question: "Battery life",
+        answers: ["1-3 hours", "3-5 hours", "5-9 hours", "9-12 hours"],
+      },
+      {
+        question: "Performance",
+        answers: [
+          "Web-Browsing",
+          "Photo Editing",
+          "Rendering",
+          "Coding",
+          "Gaming",
+        ],
+      },
+      {
+        question: "Price",
+        answers: ["<$200", "$200-$500", "$500-$800", "$800-$1200", "$1200+"],
+      },
+      {
+        question: "Longeivity",
+        answers: ["<1year", "1-3years", "3-5years", "6-8years"],
+      },
+    ];
+
+    function QuestionAndAnswer (question, answers) {
+      this.question = question;
+      this.answers = answers;
+    }
+
+    var answerCounter = [1];
+
+    // start_quiz()
+    //Start the quiz
+    function start_quiz() {
+      //Make home screen disapear
+
+      //Make first question appear
+      nextQuestion(0);
+    }
+
+    function saveQuiz() {
+      quiz.quizTitle ="";
+      quiz.answer_bank = [];
+      quiz.question_bank = [];
+      quiz.quizTitle = document.getElementById("quiz_title").placeholder;
+      for(let i =1; i<=question_counter; i++) {
+        var cAnswers = [];
+        var cQuestion = document.getElementById("question_title_"+i);
+        if(cQuestion != null){
+            for(let j=1; j <= answerCounter[i-1]; j++) {
+              var cAnswer = document.getElementById("ainput_"+i+"_"+j).placeholder;
+              cAnswers.push(cAnswer);
+            }
+            quiz.question_bank.push(cQuestion.value);
+            quiz.answer_bank.push(cAnswers);
+          }
+    }
+      if (confirm("Are you sure you want to submit this quiz?")) {
+        $.ajax({
+          url: "/api/quiz/create/",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(quiz),
+          success: function (response) {
+            alert(response);
+          },
+          error: function () {
+            alert("error");
+          },
+        });
+      }
+    }
+
+    function addAnswer(questionNum) {
+      answerCounter[questionNum-1] +=1;
+      var loc = document.getElementById("answers_"+questionNum);
+      console.log(loc)
+      loc.innerHTML += 
+      `<div id="answers_+${questionNum}">
+            <div id="answer_${questionNum}_${answerCounter[questionNum-1]}">
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="ainput_${questionNum}_${answerCounter[questionNum-1]}"
+              name="answer"
+              placeholder="Answer"
+             />
+             <button class="delete_answer" onclick="delAnswer(${questionNum},${answerCounter[questionNum-1]})"> X</button>
+            </div>`;
+      //Getting placeholders to texts so the texts dont disapear
+      var answers = document
+        .getElementById("answers_"+questionNum)
+        .querySelectorAll(".answer");
+      answers.forEach((item) => {
+        if(item.placeholder != "Answer"){
+            item.value = item.placeholder;
+        }
+      });
+    }
+
+    function delAnswer(qNum, ansNum) {
+      var id = "answer_"+qNum+"_"+ansNum;
+      var loc = document.getElementById(id);
+      loc.remove();
+    }
+
+    function delQuestion(qNum) {
+      var id = "question_"+qNum;
+      var loc = document.getElementById(id);
+      loc.remove();
+    }
+
+    function onType(element) {
+      element.placeholder = element.value;
+    } 
+
+    function onChangeQuizTitle(element) {
+      quiz.quizTitle = element.value;
+    }
+
+    //In Use
+    function newQuestion() {
+        question_counter++;
+        var loc = document.getElementById("creator_body");
+        var id = "answers_"+question_counter;
+        var qid = "question_"+question_counter;
+        loc.innerHTML += `<li class="question_holder" id="question_${question_counter}">
+         <div>
+          <!--Question Input-->
+          <input
+          type="text"
+          class="w3-center textfield question_title"
+          id="question_title_${question_counter}"
+          name="question_title"
+          placeholder="Question"
+          oninput="onType(this)"
+          />
+        
+         <div class="answer_box">
+          <div id=${id}>
+            <div id="answer_${question_counter}_${answerCounter[question_counter-1]}">
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="answer"
+              name="answer"
+              placeholder="Answer"
+             />
+             <button class="delete_answer" onclick="delAnswer(${question_counter},${answerCounter[question_counter-1]})"> X</button>
+            </div>
+          </div>
+          Scalable:
+          <input type="checkbox" id="scalable" />
+          <button class="addAnswer" id=${qid} onclick="addAnswer(${question_counter})" id="add_question">
+            Add Answer
+          </button>
+         </div>
+         <button class="delete_question" onclick ="delQuestion(${question_counter})"> Delete Question</button>
+        </div>
+      </li>`;
+
+      setQuestionTitles();
+      answerCounter.push(1);
+    }
+
+    function setQuestionTitles() {
+      for(let i=1; i<=question_counter; i++) {
+        var question = document.getElementById("question_title_"+i);
+        if(question==null){
+        }
+        else{
+          if(question.placeholder != "Question"){
+            question.value = question.placeholder;
+          }
+          var answers = document
+          .getElementById("answers_"+i)
+          .querySelectorAll(".answer");
+          answers.forEach((item) => {
+          if(item.placeholder != "Answer"){
+              item.value = item.placeholder;
+          }
+        });
+        }
+      }
+      
+    }
+  </script>
+</html>
