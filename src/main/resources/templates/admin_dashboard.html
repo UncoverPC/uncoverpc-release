@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/Logo.svg" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Add Product - UncoverPC</title>
+
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+          font-family: "Raleway", sans-serif;
+        }
+  
+        body,
+        html {
+          height: 100%;
+          line-height: 1.8;
+        }
+
+
+        .w3-bar .w3-button {
+          padding: 16px;
+        }
+        
+  
+        .color_theme {
+          background-color: rgb(17, 17, 23);
+          color: antiquewhite;
+        }
+  
+        * {
+          margin: 0;
+          padding: 0;
+        }
+        #titles{
+            position: relative;
+        }
+
+        .logo {
+            font-weight: 100;
+            opacity: 1;
+            font-size: 54px;
+            font-style: italic;
+            color: aliceblue;
+            margin: 0;
+            font-weight: bold;
+        }
+
+        #admin_logo {
+          font-size: 70px;
+          text-align: center;
+        }
+
+        #main_logo {
+          position: relative;
+          text-align: center;
+          font-weight: 100;
+          opacity: 1;
+          font-size: 96px;
+          font-style: italic;
+          background: -webkit-linear-gradient(
+            RGBA(200, 81, 81, 200),
+            RGBA(60, 150, 300, 200),
+            RGBA(250, 150, 300, 200)
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          margin: 0;
+        }
+        /* Statistics Section CSS */
+        .graph-label {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .edit_button {
+          width: 200px;
+          height: 50px;
+          border-radius: 10px;
+          font-size: 24px;
+          line-height: 26px;
+          text-align: center;
+          color: #FFFEFE;
+          background-color: #162252;
+          border-width: 0;
+          margin: auto;
+          margin-left: 37%;
+        }
+        .edit_button:hover{
+          background-color: #21337c;
+        }
+
+        .mainpage {
+            border-radius: 20px;
+            padding: 20px;
+            position: relative;
+            width: 100%;
+            margin: 0 8%;
+        }
+
+        #visits-box {
+            width: 798px;
+            height: 565px;
+            left: 37px;
+            top: 132px;
+            margin-left: 10px;
+            overflow: hidden;
+            background: #283B80;
+            border-radius: 20px;
+        }
+
+        #visits-graphbox {
+          width: 772px;
+          height: 502px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin: 0 auto;
+        }
+        #visits-graph {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        #quiztype-box {
+          position: absolute;
+          width: 582px;
+          height: 250px;
+          left: 847px;
+          top: 115px;
+          overflow: hidden;
+          background: #283B80;
+          border-radius: 20px;
+        }
+        #quiztype-graphbox {
+          width: 553px;
+          height: 195px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          margin: 0 auto;
+        }
+        #quiztype-graph {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        #productsales-box {
+          position: absolute;
+          width: 582px;
+          height: 260px;
+          left: 847px;
+          top: 419px;
+
+          background: #283B80;
+          border-radius: 20px;
+        }
+        #productsales-graphbox {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 553px;
+          height: 200px;
+          margin: 0 auto;
+        }
+        .stats-graph{
+          background-color: white;
+        }
+
+        .box {
+          margin: 20px;
+        }
+
+        .row2box {
+          width: 412px;
+          height: 320px;
+          background: #283B80;
+          border-radius: 20px;
+          top: 689px;
+        }
+        .row2graphbox{
+          width: 370px;
+          height: 260px;
+          margin: 0 auto;
+        }
+
+        #socialmedia-box {
+          left: 1004px;
+        }
+        #socialmedia-graphbox {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        #rating-box {
+          position: absolute;
+          left: 475px;
+          top: 702px;
+          margin-top: 20px;
+        }
+
+        #rating-graphbox {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        #quizvsbuy-box {
+          position: absolute;
+          left: 930px;
+          top: 700px;
+          width: 500px;
+        }
+
+        #quizvsbuy-graphbox {
+          width: 460px;
+        }
+
+        .quizholder {
+          height: 300px;
+          width: 400px;
+          border: none;
+          border-radius: 20px;
+          margin: 50px;
+          background-color: #2e2f33;
+          background-blend-mode:overlay;
+          background-position: center;
+          background-size: cover;
+        }
+        /* Quiz Section CSS */
+        .quizholder:hover{
+          opacity: 60%;
+        }
+
+        .quizlabel {
+          color: white;
+          text-align: center;
+          font-size: 45px;
+          font-weight: bold;
+        }
+        #laptop-thumbnail {
+          background-image: url("thumbnails/laptop.jpg");
+        }
+        #pc-thumbnail {
+          background-image: url("thumbnails/pc.jpg");
+        }
+        #keyboard-thumbnail {
+          background-image: url("thumbnails/keyboard.jpg");
+        }
+        #mouse-thumbnail {
+          background-image: url("thumbnails/mouse.png");
+        }
+        #tablet-thumbnail {
+          background-image: url("thumbnails/tablet.jfif");
+        }
+        #headphone-thumbnail {
+          background-image: url("thumbnails/headphone.jpg");
+        }
+
+        /* Quiz Info Section CSS */
+        .quizinfo-select {
+          width: 300px;
+          height: 50px;
+          background-color: #1a1d2b;
+          color: #FFFEFE;
+          border-radius: 10px;
+          text-align: center;
+          font-size: 36px;
+          left: 35%;
+          top: 180px;
+          position: absolute;
+          margin-bottom: 20px;
+        }
+
+        .selector-label {
+          font-size: 36px;
+          text-align: center;
+          left: 37%;
+          top: 125px;
+          position: absolute;
+        }
+        #load_info {
+          position: absolute;
+          top: 250px;
+          margin-bottom: 20px;
+        }
+
+    </style>
+  </head>
+
+  <body class="color_theme" id="text_container">
+    <div id="main">
+        <div id="titles">
+            <h1 class="logo" id="main_logo">UncoverPC</h1>
+            <h2  class="logo" id="admin_logo">Admin Dashboard</h2>
+        </div>
+
+        <div class="mainpage">
+            <h1 class="logo">Statistics</h1>
+
+            <div id="row1">
+              <div class="box" id="visits-box">
+                <h3 class="graph-label">Visits </h3>
+                <div id="visits-graphbox">
+                  <canvas class="stats-graph" id="visits-graph"></canvas>
+                </div>
+              </div>
+
+              <div class="box" id="quiztype-box">
+                  <h3 class="graph-label">Quizzes Taken by Type </h3>
+                  <div id="quiztype-graphbox">
+                    <canvas class="stats-graph" id="quiztype-graph"></canvas>
+                  </div>
+              </div>
+
+              <div class="box" id="productsales-box">
+                <h3 class="graph-label">Product Sales </h3>
+                <div id="productsales-graphbox">
+                  <canvas class="stats-graph" id="productsales-graph"></canvas>
+                </div>
+              </div>
+
+            </div>
+
+            <div id="row2">
+              <div class="box row2box" id="socialmedia-box">
+                <h3 class="graph-label">Social Media Visits </h3>
+                <div class="row2graphbox" id="socialmedia-graphbox">
+                  <canvas class="stats-graph" id="socialmedia-graph"></canvas>
+                </div>
+              </div>
+
+              <div class="box row2box" id="rating-box">
+                <h3 class="graph-label">Customer Ratings </h3>
+                <div class="row2graphbox" id="rating-graphbox">
+                  <canvas class="stats-graph" id="rating-graph"></canvas>
+                </div>
+              </div>
+
+              <div class="box row2box" id="quizvsbuy-box">
+                <h3 class="graph-label"># of Quizzes Taken vs Product Purchases</h3>
+                <div class="row2graphbox" id="quizvsbuy-graphbox">
+                  <canvas class="stats-graph" id="quizvsbuy-graph"></canvas>
+                </div>
+              </div>
+            </div>
+            <button onClick="goTo('create_quiz1.html')" class="edit_button">Edit Quizzes</button>
+        </div>
+
+      <div class="mainpage">
+        <h1 class="logo">Quizzes</h1>
+        <button class="quizholder" id="laptop-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Laptop</h2>
+        </button>
+        <button class="quizholder" id="pc-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> PC</h2>
+        </button>
+        <button class="quizholder" id="keyboard-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Keyboard</h2>
+        </button>
+        <button class="quizholder" id="mouse-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Mouse</h2>
+        </button>
+        <button class="quizholder" id="tablet-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Tablet</h2>
+        </button>
+        <button class="quizholder" id="headphone-thumbnail" onclick="goTo()">
+          <h2 class="quizlabel"> Headphones</h2>
+        </button>
+        <button onClick="goTo('create_quiz1.html')" class="edit_button">New Quiz</button>
+      </div>
+
+      <div class="mainpage" id="quiz-data">
+        <h1 class="logo">Quiz Data</h1>
+            
+
+      </div>
+    </div>
+  </body>
+
+  <script>
+
+    function loadInfo(type){
+      var body = document.getElementById("input_body");
+      body.innerHTML = "";
+      var s = document.getElementById("main_selector");
+      var value = s.value;
+    }
+
+    function goTo(link) {
+      window.location.href = link;
+    }
+
+    const visitsChart = document.getElementById('visits-graph').getContext("2d");
+    var visitsGraph = new Chart(visitsChart, {
+        type: 'line',
+        data: {
+        labels: ['10/14', '10/15', '10/16','10/17','10/18'], //x-axis
+        datasets: [{
+            label: '# of Visits',
+            lineTension: 0,
+            data: [12, 19, 3, 5, 2], //y-axis
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        maintainAspectRatio :false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+    
+    const quizTypeChart = document.getElementById('quiztype-graph').getContext("2d");
+    var quizTypeGraph = new Chart(quizTypeChart, {
+        type: 'bar',
+        data: {
+        labels: ['Laptop', 'PC', 'Keyboard','Mouse'],
+        datasets: [{
+            label: '# of Quizzes Taken',
+            data: [12, 19, 3, 5],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+
+    const productSaleChart = document.getElementById('productsales-graph').getContext("2d");
+
+    var produtSalesGraph = new Chart(productSaleChart, {
+      type: 'bar',
+        data: {
+        labels: ['Laptop', 'PC', 'Keyboard','Mouse'],
+        datasets: [{
+            label: 'Sales ($)',
+            data: [12, 19, 3, 5],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const socialVisitsChart = document.getElementById("socialmedia-graph")
+    var socialMediaGraph = new Chart(socialVisitsChart, {
+      type: 'pie',
+        data: {
+        labels: ['Instagram', 'YouTube', 'TikTok'],
+        datasets: [{
+            data: [12, 19, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.7)',
+                'rgba(54, 162, 235, 0.7)',
+                'rgba(255, 206, 86, 0.7)',
+            ],
+            borderColor: 
+            'rgba(255,255,255,1)',
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const ratingsChart = document.getElementById("rating-graph");
+    var ratingsGraph = new Chart(ratingsChart, {
+      type: 'bar',
+        data: {
+        labels: [1,2,3,4,5],
+        datasets: [{
+            label: '# of Customers',
+            data: [12, 19, 3, 5, 10],
+            backgroundColor: 
+            'rgba(20, 50, 200, 0.5)',
+            borderColor: 
+            'rgba(20, 50, 200, 1)',
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    const takenVsBuyChart = document.getElementById("quizvsbuy-graph")
+    var takenVsBuyGraph = new Chart(takenVsBuyChart, {
+      type: 'pie',
+        data: {
+        labels: ['Purchase', 'No Purchase'],
+        datasets: [{
+            data: [12, 19],
+            backgroundColor: [
+                'rgba(54, 162, 50, 0.7)',
+                'rgba(255, 70, 70, 0.7)',
+            ],
+            borderColor: 
+            'rgba(255,255,255,1)',
+            borderWidth: 1
+        }]
+        },
+        options: {
+          maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+  </script>
+
+</html>
