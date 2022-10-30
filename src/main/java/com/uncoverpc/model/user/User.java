@@ -16,6 +16,10 @@ public class User {
 	private String role;
 	
 	private String password;
+	
+	private String confirmPassword;
+	
+	private String username;
 
 	private String firstName;
 
@@ -27,12 +31,14 @@ public class User {
 
 	
 	
-	public User(String id, String email, String role, String password, String firstName, String lastName) {
+	public User(String id, String email, String role, String password, String confirmPassword, String username, String firstName, String lastName) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.role = role;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
+		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -52,6 +58,14 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 
 	public String getPassword() {
 		return password;
@@ -60,7 +74,15 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -91,8 +113,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
-				+ ", password=" + password + "]";
+		return "User [email=" + email + ", username=" + username + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
+				+ ", password=" + password + ", confirmPassword=" + confirmPassword+ "]";
+		
 	}
 
 	public String getVerificationCode() {

@@ -145,6 +145,7 @@
         color:rgb(202, 96, 96);
         font-size: 20px;
         font-weight: bold;
+        animation: newDeleteButton 0.5s;
       }
 
       .delete_answer:hover{
@@ -378,6 +379,14 @@
 
 
       /* Next question animation */
+      @keyframes newDeleteButton {
+        0% {
+          transform: translateX(100vw);
+        }
+        100% {
+          transform: translateX(0vw);
+        }
+      }
       @keyframes nextQuestion {
         0% {
           right: 0vw;

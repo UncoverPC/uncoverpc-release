@@ -62,6 +62,18 @@ public class UserController {
 
 	@PostMapping(URI_PATH + "/register")
 	public ModelAndView registerUser( User user, HttpServletRequest request) {
+		//checking if passwords are the same
+		try {
+			if(!(user.getPassword().equals(user.getConfirmPassword()))) {
+				throw new Exception();
+			}
+		}
+		catch (Exception e){
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/signUp");
+			modelAndView.addObject("message", "Passwords don't match!");
+			return modelAndView;
+		}
+		
 		try {
 			// checking if account already created
 			System.out.println(user);
@@ -69,6 +81,7 @@ public class UserController {
 			if (checkUser != null) {
 				throw new Exception();
 			}
+
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedPassword = encoder.encode(user.getPassword());
 			user.setPassword(encodedPassword);
@@ -87,7 +100,7 @@ public class UserController {
 			return modelAndView;
 		} catch (Exception e) {
 			
-			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/register");
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/signUp");
 			modelAndView.addObject("message", "Email Already Exist!");
 			return modelAndView;
 		}
