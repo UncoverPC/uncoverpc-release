@@ -22,4 +22,6 @@ public class MainController {
 	public String explorePage() {
 		return "explore.html";
 	}
+
+	
 }
