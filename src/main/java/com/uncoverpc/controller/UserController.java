@@ -9,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uncoverpc.db.EmailService;
@@ -76,6 +78,7 @@ public class UserController {
 		
 		try {
 			// checking if account already created
+			//TO DO check if user contains a email and password
 			System.out.println(user);
 			User checkUser = userService.findByEmail(user.getEmail());
 			if (checkUser != null) {

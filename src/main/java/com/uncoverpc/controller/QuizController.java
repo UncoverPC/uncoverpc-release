@@ -26,7 +26,7 @@ public class QuizController {
 		return model;
 	}
 	
-	@GetMapping("az/createQuiz")
+	@GetMapping("admin/createQuiz")
 	public ModelAndView testQuiz() {
 		ModelAndView model = new ModelAndView("create_quiz1.html");
 		return model;
