@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <link rel="icon" href="assets/Logo.svg" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
@@ -516,7 +520,7 @@
             </div>
           </div>
           Scalable:
-          <input type="checkbox" id="scalable" />
+          <input type="checkbox" id="scalable_1" />
           <button class="addAnswer" onclick="addAnswer(1)" id="add_question">
             Add Answer
           </button>
@@ -535,7 +539,7 @@
 
 
   <script>
-   var quiz = { quizTitle: "", question_bank: [], answer_bank: []};
+   var quiz = { quizTitle: "", question_bank: []};
     // quiz["quizTitle"] = "";
     // quiz["question_bank"] = [];
 
@@ -585,33 +589,51 @@
     }
 
     function saveQuiz() {
+      console.log(question_counter);
       quiz.quizTitle ="";
-      quiz.answer_bank = [];
       quiz.question_bank = [];
       quiz.quizTitle = document.getElementById("quiz_title").placeholder;
-      for(let i =1; i<=question_counter; i++) {
+      
+      for(let i = 1; i<=question_counter; i++) {
         var cAnswers = [];
-        var cQuestion = document.getElementById("question_title_"+i);
+        var cQuestion = document.getElementById("question_title_"+i).placeholder;
+        var cScalable = document.getElementById("scalable_"+i).checked;
+
         if(cQuestion != null){
-            for(let j=1; j <= answerCounter[i-1]; j++) {
-              var cAnswer = document.getElementById("ainput_"+i+"_"+j).placeholder;
+            for(let j = 1; j <= answerCounter[i-1]; j++) {
+              console.log("ainput_"+i+"_"+j);
+              var cAnswer = document.getElementById("ainput_"+i+"_"+j).value;
               cAnswers.push(cAnswer);
             }
-            quiz.question_bank.push(cQuestion.value);
-            quiz.answer_bank.push(cAnswers);
+
+            var tempQuestion = {
+              question: cQuestion,
+              answers: cAnswers,
+              scalable: cScalable,
+            }
+            quiz.question_bank.push(tempQuestion);
           }
-    }
+      }
+
+      console.log(quiz);
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
+
       if (confirm("Are you sure you want to submit this quiz?")) {
         $.ajax({
           url: "/api/quiz/create/",
           type: "POST",
           contentType: "application/json",
-          data: JSON.stringify(quiz),
+          // data: JSON.stringify(
+          //   quiz
+          // ),
+          headers: {header: token},
           success: function (response) {
             alert(response);
           },
-          error: function () {
-            alert("error");
+          error: function (e) {
+            console.log(e);
+            alert("Error!");
           },
         });
       }
@@ -620,19 +642,19 @@
     function addAnswer(questionNum) {
       answerCounter[questionNum-1] +=1;
       var loc = document.getElementById("answers_"+questionNum);
-      console.log(loc)
+      console.log(questionNum +" "+ answerCounter[questionNum-1]);
+      answerNum = answerCounter[questionNum-1]
       loc.innerHTML += 
-      `<div id="answers_+${questionNum}">
-            <div id="answer_${questionNum}_${answerCounter[questionNum-1]}">
+            `<div id="answer_${questionNum}_${answerNum}">
              <input
               type="text"
               class="w3-center textfield answer"
               oninput="onType(this)"
-              id="ainput_${questionNum}_${answerCounter[questionNum-1]}"
+              id="ainput_${questionNum}_${answerNum}"
               name="answer"
               placeholder="Answer"
              />
-             <button class="delete_answer" onclick="delAnswer(${questionNum},${answerCounter[questionNum-1]})"> X</button>
+             <button class="delete_answer" onclick="delAnswer(${questionNum},${answerNum})"> X</button>
             </div>`;
       //Getting placeholders to texts so the texts dont disapear
       var answers = document
@@ -648,6 +670,7 @@
     function delAnswer(qNum, ansNum) {
       var id = "answer_"+qNum+"_"+ansNum;
       var loc = document.getElementById(id);
+      answerCounter[qNum-1] = answerCounter[qNum-1] - 1;
       loc.remove();
     }
 
@@ -668,9 +691,12 @@
     //In Use
     function newQuestion() {
         question_counter++;
+        answerCounter.push(1);
         var loc = document.getElementById("creator_body");
         var id = "answers_"+question_counter;
         var qid = "question_"+question_counter;
+        var aCounter = answerCounter[question_counter-1];
+        console.log(aCounter);
         loc.innerHTML += `<li class="question_holder" id="question_${question_counter}">
          <div>
           <!--Question Input-->
@@ -685,12 +711,12 @@
         
          <div class="answer_box">
           <div id=${id}>
-            <div id="answer_${question_counter}_${answerCounter[question_counter-1]}">
+            <div id="answer_${question_counter}_${aCounter}">
              <input
               type="text"
               class="w3-center textfield answer"
               oninput="onType(this)"
-              id="answer"
+              id="ainput_${question_counter}_${aCounter}"
               name="answer"
               placeholder="Answer"
              />
@@ -698,7 +724,7 @@
             </div>
           </div>
           Scalable:
-          <input type="checkbox" id="scalable" />
+          <input type="checkbox" id="scalable_${question_counter}" />
           <button class="addAnswer" id=${qid} onclick="addAnswer(${question_counter})" id="add_question">
             Add Answer
           </button>
@@ -706,9 +732,7 @@
          <button class="delete_question" onclick ="delQuestion(${question_counter})"> Delete Question</button>
         </div>
       </li>`;
-
       setQuestionTitles();
-      answerCounter.push(1);
     }
 
     function setQuestionTitles() {
@@ -730,7 +754,7 @@
         });
         }
       }
-      
     }
+
   </script>
 </html>
