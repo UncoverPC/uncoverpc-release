@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.uncoverpc.model.user.Role;
 import com.uncoverpc.security.user.CustomUserDetailsService;
 
 @Configuration
@@ -60,13 +61,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	    return authConfig.getAuthenticationManager();
 	}
 	
+	
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.csrf();
 		http.cors();
 		http.headers().xssProtection();
 		http.authenticationProvider(authenticationProvider());
-		http.authorizeRequests().antMatchers("/admin/*").hasRole("ADMIN").and().formLogin().loginPage("/login")
+		http.authorizeRequests().antMatchers("/admin/*").hasRole(Role.ADMIN).and().formLogin().loginPage("/login")
 				.usernameParameter("email").defaultSuccessUrl("/admin/dashboard");
 		http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().formLogin().loginPage("/login")
 		.usernameParameter("email").defaultSuccessUrl("/user/dashboard");

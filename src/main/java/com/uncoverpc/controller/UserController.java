@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uncoverpc.db.EmailService;
 import com.uncoverpc.db.UserService;
-import com.uncoverpc.model.user.Roles;
+import com.uncoverpc.model.user.Role;
 import com.uncoverpc.model.user.User;
 
 import net.bytebuddy.utility.RandomString;
@@ -43,9 +43,9 @@ public class UserController {
 		if (user != null && !user.equals("anonymousUser")) {// checking if already logged in
 			// Checking roles
 			String role = userService.findByEmail(user.toString()).getRole();
-			if (role.equals(Roles.user)) {
+			if (role.equals(Role.USER)) {
 				return new ModelAndView("redirect:/user/dashboard");
-			} else if (role.equals(Roles.admin)) {
+			} else if (role.equals(Role.ADMIN)) {
 				return new ModelAndView("redirect:/admin/dashboard");
 			}
 		}
