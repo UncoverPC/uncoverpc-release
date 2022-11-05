@@ -25,6 +25,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private CustomUserDetailsService myUserDetailsService;
+	
+	
 
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -62,7 +64,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf();
+		http.csrf().disable();
 		http.cors();
 		http.headers().xssProtection();
 		http.authenticationProvider(authenticationProvider());
