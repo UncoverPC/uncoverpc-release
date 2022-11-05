@@ -13,8 +13,4 @@ public class ProductController {
 		return new ModelAndView("/add_product.html");
 	}
 	
-	@GetMapping("/create_quiz1")
-	public ModelAndView createQuiz() {
-		return new ModelAndView("create_quiz1.html");
-	}
 }
