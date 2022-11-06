@@ -14,9 +14,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.uncoverpc.jwt.JwtRequestFilter;
+import com.uncoverpc.model.user.Role;
 import com.uncoverpc.security.user.CustomUserDetailsService;
 
 @Configuration
@@ -26,6 +29,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	@Autowired
 	private CustomUserDetailsService myUserDetailsService;
 	
+	@Autowired
+	private JwtRequestFilter jwtRequestFilter;
 	
 
 	@Bean
@@ -62,17 +67,19 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	    return authConfig.getAuthenticationManager();
 	}
 	
+	
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf().disable();
+		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 		http.cors();
 		http.headers().xssProtection();
 		http.authenticationProvider(authenticationProvider());
-		http.authorizeRequests().antMatchers("/admin/*").hasRole("ADMIN").and().formLogin().loginPage("/login")
+		http.authorizeRequests().antMatchers("/admin/*").hasRole(Role.ADMIN).and().formLogin().loginPage("/login")
 				.usernameParameter("email").defaultSuccessUrl("/admin/dashboard");
 		http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().formLogin().loginPage("/login")
 		.usernameParameter("email").defaultSuccessUrl("/user/dashboard");
-		http.logout().invalidateHttpSession(true);
+		http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID", "jwt");
+		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 }

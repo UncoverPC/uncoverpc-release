@@ -20,7 +20,7 @@ import com.uncoverpc.model.user.User;
 import com.uncoverpc.product.Product;
 
 @Service
-public interface QuizService  extends MongoRepository<Quiz, String> {
+public interface QuizService extends MongoRepository<Quiz, String> {
 
 	Quiz findByQuizTitle(String quizTitle);
 

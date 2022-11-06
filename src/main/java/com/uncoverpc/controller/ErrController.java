@@ -27,12 +27,13 @@ public class ErrController implements ErrorController{
 		        	return new ModelAndView(PATH + "404.html");
 		        }
 		        else if(statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
-		        	System.out.println(statusCode);
+		        	
+		        }else if(statusCode == HttpStatus.FORBIDDEN.value()) {
+		        	return new ModelAndView(PATH+"forbidden.html");
 		        }
-		        
+		        return new ModelAndView(PATH+"error.html").addObject("statusCode", statusCode);
 		    }
-
-		return new ModelAndView(PATH+"error.html");
+		  return new ModelAndView(PATH+"error.html").addObject("statusCode", null);
 	}
 	
 }

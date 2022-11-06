@@ -6,8 +6,8 @@ lang="en">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="_csrf" content="${_csrf.token}"/>
-    <meta name="_csrf_header" content="${_csrf.headerName}"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <link rel="icon" href="assets/Logo.svg" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
@@ -34,7 +34,7 @@ lang="en">
       ul{
         list-style-type: none;
       }
-      
+
       body,
       html {
         height: 100%;
@@ -44,7 +44,7 @@ lang="en">
       .w3-bar .w3-button {
         padding: 16px;
       }
-      
+
 
 
       .color_theme {
@@ -101,7 +101,7 @@ lang="en">
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-    
+
 
       #start_button {
         background-color: rgb(9, 186, 106);
@@ -190,13 +190,13 @@ lang="en">
       }
 
       #sidenav{
-        height: 100%; 
-        width: 250px; 
-        position: fixed; 
+        height: 100%;
+        width: 250px;
+        position: fixed;
         z-index: 1; /* Stay on top */
         top: 0; /* Stay at the top */
         left: 0;
-        background-color: rgb(18, 13, 37); 
+        background-color: rgb(18, 13, 37);
         overflow-x: hidden; /* Disable horizontal scroll */
         padding-top: 20px;
       }
@@ -254,7 +254,7 @@ lang="en">
       .submit:hover {
         background-color: green;
       }
-      
+
       #main{
         position: relative;
         margin-left: 10%;
@@ -271,7 +271,7 @@ lang="en">
           margin-left: 10px;
       }
 
-      
+
 
       .questionButton {
         padding: 10px;
@@ -461,7 +461,7 @@ lang="en">
             <object data="assets/Logo.svg" width="20" height="20"></object
           ></a>
           <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-  
+
           <a
             href="javascript:void(0)"
             class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
@@ -504,7 +504,7 @@ lang="en">
           placeholder="Question"
           oninput="onType(this)"
           />
-        
+
          <div class="answer_box">
           <div id="answers_1">
             <div id="answer_1_1">
@@ -535,7 +535,7 @@ lang="en">
       <button id="save_button" onclick="saveQuiz()">Save Quiz</button>
      </footer>
 
-  </body>  
+  </body>
 
 
   <script>
@@ -590,7 +590,7 @@ lang="en">
       quiz.questions = [];
       quiz.title ="";
       quiz.title = document.getElementById("quiz_title").value;
-      
+
       for(let i = 1; i<=question_counter; i++) {
         var cAnswers = [];
         var cQuestion = document.getElementById("question_title_"+i).placeholder;
@@ -618,15 +618,18 @@ lang="en">
       var header = $("meta[name='_csrf_header']").attr("content");
 
       if (confirm("Are you sure you want to submit this quiz?")) {
+        console.log(token)
+        console.log(quiz)
+        $.ajaxSetup({
+          headers:{"X-XSRF-TOKEN": token}
+        })
         $.ajax({
           url: "/api/quiz/create/",
           type: "POST",
-          contentType: "application/json; charset=utf-8",
-          //dataType: "json",
-          async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
-          cache: false,    //This will force requested pages not to be cached by the browser          
-          processData:false,
-          data: JSON.stringify(quiz),
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(
+            quiz
+          ),
           success: function (response) {
             alert(response);
           },
@@ -638,12 +641,14 @@ lang="en">
       }
     }
 
+
+
     function addAnswer(questionNum) {
       answerCounter[questionNum-1] +=1;
       var loc = document.getElementById("answers_"+questionNum);
       console.log(questionNum +" "+ answerCounter[questionNum-1]);
       answerNum = answerCounter[questionNum-1]
-      loc.innerHTML += 
+      loc.innerHTML +=
             `<div id="answer_${questionNum}_${answerNum}">
              <input
               type="text"
@@ -685,7 +690,7 @@ lang="en">
 
     function onType(element) {
       element.placeholder = element.value;
-    } 
+    }
 
     function onChangeQuizTitle(element) {
       quiz.title = element.value;
@@ -711,7 +716,7 @@ lang="en">
           placeholder="Question"
           oninput="onType(this)"
           />
-        
+
          <div class="answer_box">
           <div id=${id}>
             <div id="answer_${question_counter}_${aCounter}">

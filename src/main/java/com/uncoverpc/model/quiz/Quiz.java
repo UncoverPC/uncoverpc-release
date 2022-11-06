@@ -19,6 +19,8 @@ public class Quiz {
 	private ArrayList<Question> questions = new ArrayList<Question>();
 	
 	@Id
+	private String quizId;
+	
 	@JsonProperty("quizTitle")
 	private String quizTitle;
 	
