@@ -31,11 +31,10 @@ public class Quiz {
 //		
 //	}
 
-	public Quiz(ArrayList<Question> questions, String quizTitle, QuizService quizService) {
+	public Quiz(ArrayList<Question> questions, String quizTitle) {
 	super();
 	this.questions = questions;
 	this.quizTitle = quizTitle;
-	this.quizService = quizService;
 }
 
 	public ArrayList<Question> getQuestions() {
@@ -54,17 +53,10 @@ public class Quiz {
 		this.quizTitle = title;
 	}
 
-	public QuizService getQuizService() {
-		return quizService;
-	}
-
-	public void setQuizService(QuizService quizService) {
-		this.quizService = quizService;
-	}
 
 	@Override
 	public String toString() {
-		return "Quiz [questions=" + questions + ", title=" + quizTitle + ", quizService=" + quizService + "]";
+		return "Quiz [questions=" + questions + ", title=" + quizTitle + "]";
 	}
 	
 	

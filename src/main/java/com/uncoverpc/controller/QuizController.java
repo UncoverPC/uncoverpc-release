@@ -26,49 +26,47 @@ import com.uncoverpc.model.quiz.Quiz;
 
 @Controller
 public class QuizController {
-	
+
 	@Autowired
 	QuizService quizService;
-	
-	
+
+
 	@GetMapping("/productquiz/{quizName}")
 	public ModelAndView getQuiz(@PathVariable(value = "quizName") String quizName) {
-		ModelAndView model = new ModelAndView("quiz_template.html");
+		ModelAndView model = new ModelAndView("quiz.html");
 		Quiz quiz = quizService.findByQuizTitle(quizName);
 		model.addObject("questions", quiz.getQuestions());
-
 		model.addObject("quizTitle", quiz.getTitle());
 		return model;
 	}
-	
+
+	@GetMapping("/quizCreateSuccess.html")
+	public ModelAndView success() {
+		ModelAndView model = new ModelAndView("quizCreateSuccess.html");
+		return model;
+	}
+
 	@GetMapping("/create_quiz1")
 	public ModelAndView testQuiz() {
 		ModelAndView model = new ModelAndView("create_quiz1.html");
 		return model;
 	}
-	
+
 	@PostMapping("/api/quiz/create")
 	public ModelAndView addQuiz (HttpServletRequest request, @RequestBody Quiz quiz) {
 		System.out.println("Trying to add quiz");
+		System.out.println("quiz: "+quiz.toString());
 		try {
-//			System.out.println(quiz);
-//			//JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
-//			
-//			JsonArray jsonQuestions = obj.getAsJsonArray("question_bank");
-//			ArrayList<Question> questions = parseJsonArray(jsonQuestions);
-//			String title = obj.get("quizTitle").toString();
-			//Quiz newQuiz = new Quiz(questions, title, quizService);
-			//quizService.save(newQuiz);
-			
-			ModelAndView view = new ModelAndView("quizCreateSuccess.html");
+			quizService.save(quiz);
+			ModelAndView view = new ModelAndView("/quizCreateSuccess.html");
 			return view;
 		}
 		catch(Exception e) {
-			ModelAndView view = new ModelAndView("");
+			ModelAndView view = new ModelAndView("/create_quiz1.html");
 			return view;
 		}
 	}
-	
+
 //	{
 //	    "quizTitle":"Laptop Quiz",
 //	    "quizId":"90328hf09fehs0d0hfw0893",
@@ -79,7 +77,7 @@ public class QuizController {
 //	        ]
 //	    }
 //	}
-	
+
 	public ArrayList<Question> parseJsonArray(JsonArray json) {
 	ArrayList<Question> list = new ArrayList<Question>();
 		for(int i=0; i< json.size(); i++) {
@@ -88,7 +86,7 @@ public class QuizController {
 			String question = tempObj.get("question").toString();
 			JsonArray jsonAns = tempObj.get("answers").getAsJsonArray();
 			ArrayList<String> answers = new ArrayList<String>();
-			
+
 			for(int j=0; j<jsonAns.size(); j++) {
 				answers.add(jsonAns.get(j).toString());
 			}

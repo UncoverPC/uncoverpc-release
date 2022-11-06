@@ -34,7 +34,7 @@ lang="en">
       ul{
         list-style-type: none;
       }
-      
+
       body,
       html {
         height: 100%;
@@ -44,7 +44,7 @@ lang="en">
       .w3-bar .w3-button {
         padding: 16px;
       }
-      
+
 
 
       .color_theme {
@@ -101,7 +101,7 @@ lang="en">
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
-    
+
 
       #start_button {
         background-color: rgb(9, 186, 106);
@@ -190,13 +190,13 @@ lang="en">
       }
 
       #sidenav{
-        height: 100%; 
-        width: 250px; 
-        position: fixed; 
+        height: 100%;
+        width: 250px;
+        position: fixed;
         z-index: 1; /* Stay on top */
         top: 0; /* Stay at the top */
         left: 0;
-        background-color: rgb(18, 13, 37); 
+        background-color: rgb(18, 13, 37);
         overflow-x: hidden; /* Disable horizontal scroll */
         padding-top: 20px;
       }
@@ -254,7 +254,7 @@ lang="en">
       .submit:hover {
         background-color: green;
       }
-      
+
       #main{
         position: relative;
         margin-left: 10%;
@@ -271,7 +271,7 @@ lang="en">
           margin-left: 10px;
       }
 
-      
+
 
       .questionButton {
         padding: 10px;
@@ -461,7 +461,7 @@ lang="en">
             <object data="assets/Logo.svg" width="20" height="20"></object
           ></a>
           <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-  
+
           <a
             href="javascript:void(0)"
             class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
@@ -504,7 +504,7 @@ lang="en">
           placeholder="Question"
           oninput="onType(this)"
           />
-        
+
          <div class="answer_box">
           <div id="answers_1">
             <div id="answer_1_1">
@@ -535,13 +535,11 @@ lang="en">
       <button id="save_button" onclick="saveQuiz()">Save Quiz</button>
      </footer>
 
-  </body>  
+  </body>
 
 
   <script>
-   var quiz = { quizTitle: "", question_bank: []};
-    // quiz["quizTitle"] = "";
-    // quiz["question_bank"] = [];
+   var quiz = { quizTitle: "", questions: []};
 
     var current_question = 0;
     var question_counter =1;
@@ -589,15 +587,15 @@ lang="en">
     }
 
     function saveQuiz() {
-      console.log(question_counter);
-      quiz.quizTitle ="";
-      quiz.question_bank = [];
-      quiz.quizTitle = document.getElementById("quiz_title").placeholder;
-      
+      quiz.questions = [];
+      quiz.title ="";
+      quiz.title = document.getElementById("quiz_title").value;
+
       for(let i = 1; i<=question_counter; i++) {
         var cAnswers = [];
         var cQuestion = document.getElementById("question_title_"+i).placeholder;
         var cScalable = document.getElementById("scalable_"+i).checked;
+        console.log(cScalable);
 
         if(cQuestion != null){
             for(let j = 1; j <= answerCounter[i-1]; j++) {
@@ -611,11 +609,12 @@ lang="en">
               answers: cAnswers,
               scalable: cScalable,
             }
-            quiz.question_bank.push(tempQuestion);
+            quiz.questions.push(tempQuestion);
           }
       }
 
       console.log(quiz);
+      console.log(JSON.stringify(quiz));
       var token = $("meta[name='_csrf']").attr("content");
       var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -648,9 +647,8 @@ lang="en">
     function addAnswer(questionNum) {
       answerCounter[questionNum-1] +=1;
       var loc = document.getElementById("answers_"+questionNum);
-      console.log(questionNum +" "+ answerCounter[questionNum-1]);
       answerNum = answerCounter[questionNum-1]
-      loc.innerHTML += 
+      loc.innerHTML +=
             `<div id="answer_${questionNum}_${answerNum}">
              <input
               type="text"
@@ -681,6 +679,10 @@ lang="en">
     }
 
     function delQuestion(qNum) {
+      //check if deleting 1st question
+      if(question_counter==1){
+        question_counter -=1;
+      }
       var id = "question_"+qNum;
       var loc = document.getElementById(id);
       loc.remove();
@@ -688,10 +690,10 @@ lang="en">
 
     function onType(element) {
       element.placeholder = element.value;
-    } 
+    }
 
     function onChangeQuizTitle(element) {
-      quiz.quizTitle = element.value;
+      quiz.title = element.value;
     }
 
     //In Use
@@ -714,7 +716,7 @@ lang="en">
           placeholder="Question"
           oninput="onType(this)"
           />
-        
+
          <div class="answer_box">
           <div id=${id}>
             <div id="answer_${question_counter}_${aCounter}">
