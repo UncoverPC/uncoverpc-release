@@ -539,7 +539,7 @@ lang="en">
 
 
   <script>
-   var quiz = { title: "", questions: []};
+   var quiz = { quizTitle: "", questions: []};
 
     var current_question = 0;
     var question_counter =1;
@@ -595,6 +595,7 @@ lang="en">
         var cAnswers = [];
         var cQuestion = document.getElementById("question_title_"+i).placeholder;
         var cScalable = document.getElementById("scalable_"+i).checked;
+        console.log(cScalable);
 
         if(cQuestion != null){
             for(let j = 1; j <= answerCounter[i-1]; j++) {
@@ -646,7 +647,6 @@ lang="en">
     function addAnswer(questionNum) {
       answerCounter[questionNum-1] +=1;
       var loc = document.getElementById("answers_"+questionNum);
-      console.log(questionNum +" "+ answerCounter[questionNum-1]);
       answerNum = answerCounter[questionNum-1]
       loc.innerHTML +=
             `<div id="answer_${questionNum}_${answerNum}">

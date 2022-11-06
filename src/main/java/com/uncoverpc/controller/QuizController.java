@@ -57,9 +57,7 @@ public class QuizController {
 		System.out.println("Trying to add quiz");
 		System.out.println("quiz: "+quiz.toString());
 		try {
-			//Quiz newQuiz = quizService.save(quiz);
-			//System.out.println(newQuiz.toString());
-
+			quizService.save(quiz);
 			ModelAndView view = new ModelAndView("/quizCreateSuccess.html");
 			return view;
 		}
