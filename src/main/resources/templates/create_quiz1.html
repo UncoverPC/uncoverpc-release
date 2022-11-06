@@ -539,9 +539,7 @@ lang="en">
 
 
   <script>
-   var quiz = { quizTitle: "", question_bank: []};
-    // quiz["quizTitle"] = "";
-    // quiz["question_bank"] = [];
+   var quiz = { title: "", questions: []};
 
     var current_question = 0;
     var question_counter =1;
@@ -589,10 +587,9 @@ lang="en">
     }
 
     function saveQuiz() {
-      console.log(question_counter);
-      quiz.quizTitle ="";
-      quiz.question_bank = [];
-      quiz.quizTitle = document.getElementById("quiz_title").placeholder;
+      quiz.questions = [];
+      quiz.title ="";
+      quiz.title = document.getElementById("quiz_title").value;
       
       for(let i = 1; i<=question_counter; i++) {
         var cAnswers = [];
@@ -611,11 +608,12 @@ lang="en">
               answers: cAnswers,
               scalable: cScalable,
             }
-            quiz.question_bank.push(tempQuestion);
+            quiz.questions.push(tempQuestion);
           }
       }
 
       console.log(quiz);
+      console.log(JSON.stringify(quiz));
       var token = $("meta[name='_csrf']").attr("content");
       var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -623,11 +621,12 @@ lang="en">
         $.ajax({
           url: "/api/quiz/create/",
           type: "POST",
-          contentType: "application/json",
-          // data: JSON.stringify(
-          //   quiz
-          // ),
-          headers: {header: token},
+          contentType: "application/json; charset=utf-8",
+          //dataType: "json",
+          async: false,    //Cross-domain requests and dataType: "jsonp" requests do not support synchronous operation
+          cache: false,    //This will force requested pages not to be cached by the browser          
+          processData:false,
+          data: JSON.stringify(quiz),
           success: function (response) {
             alert(response);
           },
@@ -675,6 +674,10 @@ lang="en">
     }
 
     function delQuestion(qNum) {
+      //check if deleting 1st question
+      if(question_counter==1){
+        question_counter -=1;
+      }
       var id = "question_"+qNum;
       var loc = document.getElementById(id);
       loc.remove();
@@ -685,7 +688,7 @@ lang="en">
     } 
 
     function onChangeQuizTitle(element) {
-      quiz.quizTitle = element.value;
+      quiz.title = element.value;
     }
 
     //In Use

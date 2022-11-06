@@ -33,11 +33,16 @@ public class QuizController {
 	
 	@GetMapping("/productquiz/{quizName}")
 	public ModelAndView getQuiz(@PathVariable(value = "quizName") String quizName) {
-		ModelAndView model = new ModelAndView("quiz_template.html");
+		ModelAndView model = new ModelAndView("quiz.html");
 		Quiz quiz = quizService.findByQuizTitle(quizName);
 		model.addObject("questions", quiz.getQuestions());
-
 		model.addObject("quizTitle", quiz.getTitle());
+		return model;
+	}
+	
+	@GetMapping("/quizCreateSuccess.html")
+	public ModelAndView success() {
+		ModelAndView model = new ModelAndView("quizCreateSuccess.html");
 		return model;
 	}
 	
@@ -48,41 +53,21 @@ public class QuizController {
 	}
 	
 	@PostMapping("/api/quiz/create/")
-	public ModelAndView addQuiz (HttpServletRequest request, Quiz json) {
+	public ModelAndView addQuiz (Quiz quiz, HttpServletRequest request) {
+		System.out.println(quiz);
 		System.out.println("Trying to add quiz");
+		System.out.println("quiz: "+quiz.toString());
 		try {
-//			//JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
-//			
-//			JsonArray jsonQuestions = obj.getAsJsonArray("question_bank");
-//			ArrayList<Question> questions = parseJsonArray(jsonQuestions);
-//			String title = obj.get("quizTitle").toString();
-			//Quiz newQuiz = new Quiz(questions, title, quizService);
-			//quizService.save(newQuiz);
+			//Quiz newQuiz = quizService.save(quiz);
+			//System.out.println(newQuiz.toString());
 			
-			ModelAndView view = new ModelAndView("quizCreateSuccess.html");
+			ModelAndView view = new ModelAndView("/quizCreateSuccess.html");
 			return view;
 		}
 		catch(Exception e) {
-			ModelAndView view = new ModelAndView("");
+			ModelAndView view = new ModelAndView("/create_quiz1.html");
 			return view;
 		}
 	}
 	
-	public ArrayList<Question> parseJsonArray(JsonArray json) {
-	ArrayList<Question> list = new ArrayList<Question>();
-		for(int i=0; i< json.size(); i++) {
-			JsonObject tempObj = json.get(i).getAsJsonObject();
-			boolean scalable = tempObj.get("scalable").getAsBoolean();
-			String question = tempObj.get("question").toString();
-			JsonArray jsonAns = tempObj.get("answers").getAsJsonArray();
-			ArrayList<String> answers = new ArrayList<String>();
-			
-			for(int j=0; j<jsonAns.size(); j++) {
-				answers.add(jsonAns.get(j).toString());
-			}
-			Question tempQuestion = new Question(question, scalable, answers);
-			list.add(tempQuestion);
-		}
-		return list;
-	}
 }
