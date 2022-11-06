@@ -47,10 +47,11 @@ public class QuizController {
 		return model;
 	}
 	
-	@PostMapping("/api/quiz/create/")
-	public ModelAndView addQuiz (HttpServletRequest request, Quiz json) {
+	@PostMapping("/api/quiz/create")
+	public ModelAndView addQuiz (HttpServletRequest request, @RequestBody Quiz quiz) {
 		System.out.println("Trying to add quiz");
 		try {
+//			System.out.println(quiz);
 //			//JsonObject obj = JsonParser.parseString(json).getAsJsonObject();
 //			
 //			JsonArray jsonQuestions = obj.getAsJsonArray("question_bank");
@@ -67,6 +68,17 @@ public class QuizController {
 			return view;
 		}
 	}
+	
+//	{
+//	    "quizTitle":"Laptop Quiz",
+//	    "quizId":"90328hf09fehs0d0hfw0893",
+//	    "question_bank":{
+//	        "title":"Laptop",
+//	        "answers":[
+//	            "1h","4h","8h","10h"
+//	        ]
+//	    }
+//	}
 	
 	public ArrayList<Question> parseJsonArray(JsonArray json) {
 	ArrayList<Question> list = new ArrayList<Question>();
