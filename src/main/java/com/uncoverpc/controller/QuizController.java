@@ -78,21 +78,4 @@ public class QuizController {
 //	    }
 //	}
 
-	public ArrayList<Question> parseJsonArray(JsonArray json) {
-	ArrayList<Question> list = new ArrayList<Question>();
-		for(int i=0; i< json.size(); i++) {
-			JsonObject tempObj = json.get(i).getAsJsonObject();
-			boolean scalable = tempObj.get("scalable").getAsBoolean();
-			String question = tempObj.get("question").toString();
-			JsonArray jsonAns = tempObj.get("answers").getAsJsonArray();
-			ArrayList<String> answers = new ArrayList<String>();
-
-			for(int j=0; j<jsonAns.size(); j++) {
-				answers.add(jsonAns.get(j).toString());
-			}
-			Question tempQuestion = new Question(question, scalable, answers);
-			list.add(tempQuestion);
-		}
-		return list;
-	}
 }
