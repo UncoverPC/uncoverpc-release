@@ -1,5 +1,8 @@
 package com.uncoverpc.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uncoverpc.db.EmailService;
 import com.uncoverpc.db.UserService;
-import com.uncoverpc.model.user.Role;
+import com.uncoverpc.model.user.Roles;
+import com.uncoverpc.model.user.Roles.Role;
 import com.uncoverpc.model.user.User;
 
 import net.bytebuddy.utility.RandomString;
@@ -42,10 +46,10 @@ public class UserController {
 		Object user = SecurityContextHolder.getContext().getAuthentication().getName();
 		if (user != null && !user.equals("anonymousUser")) {// checking if already logged in
 			// Checking roles
-			String role = userService.findByEmail(user.toString()).getRole();
-			if (role.equals(Role.USER)) {
+			Set<Role> role = userService.findByEmail(user.toString()).getRoles();
+			if (role.contains(Roles.Role.USER)) {
 				return new ModelAndView("redirect:/user/dashboard");
-			} else if (role.equals(Role.ADMIN)) {
+			} else if (role.contains(Roles.Role.ADMIN)) {
 				return new ModelAndView("redirect:/admin/dashboard");
 			}
 		}
@@ -78,12 +82,20 @@ public class UserController {
 		
 		try {
 			// checking if account already created
-			//TO DO check if user contains a email and password
 			System.out.println(user);
 			User checkUser = userService.findByEmail(user.getEmail());
 			if (checkUser != null) {
-				throw new Exception();
+	            ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/signUp");
+	            modelAndView.addObject("message", "Email Already Exist!");
+	            return modelAndView;
 			}
+			//Adding USER role
+			HashSet<Role> roles = new HashSet<Role>();
+			roles.add(Roles.Role.USER);
+			user.setRoles(roles);
+			
+			//Deleting confirmpassword
+			user.setConfirmPassword(null);
 
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String encodedPassword = encoder.encode(user.getPassword());
@@ -102,9 +114,9 @@ public class UserController {
 			
 			return modelAndView;
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/signUp");
-			modelAndView.addObject("message", "Email Already Exist!");
+			modelAndView.addObject("message", "An unexpected error has occured.");
 			return modelAndView;
 		}
 	}
