@@ -39,6 +39,14 @@ public class QuizController {
 		model.addObject("quizTitle", quiz.getTitle());
 		return model;
 	}
+	
+	@GetMapping("/create_quiz1/edit")
+	@ResponseBody
+	public Quiz editQuiz(String quizTitle) {
+		Quiz quiz = quizService.findByQuizTitle(quizTitle);
+		System.out.println(quiz.toString());
+		return quiz;
+	}
 
 	@GetMapping("/quizCreateSuccess.html")
 	public ModelAndView success() {
@@ -51,7 +59,6 @@ public class QuizController {
 		ModelAndView model = new ModelAndView("create_quiz1.html");
 		return model;
 	}
-
 	@PostMapping("/api/quiz/create")
 	public ModelAndView addQuiz (HttpServletRequest request, @RequestBody Quiz quiz) {
 		System.out.println("Trying to add quiz");
