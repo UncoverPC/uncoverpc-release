@@ -545,10 +545,7 @@ lang="en">
 
 
   <script>
-    
-
     var quiz = { quizTitle: "", questions: []};
-    var current_question = 0;
     var question_counter =1;
 
     //Questions & answers (injected from backend)
@@ -585,6 +582,30 @@ lang="en">
     var answerCounter = [1];
 
     var scalableArr = [false];
+
+    function loadQuiz(quiz) {
+      question_counter =0;
+      answerCounter =[];
+      var titleElement  = document.getElementById(quiz_title);
+      titleElement.placeholder = quiz.quizTitle;
+      titleElement.value = quiz.quizTitle;
+      document.getElementById(question_holder).innerHTML ="";
+     
+      for (let i=0; i<quiz.questions.length; i++) {
+        var currentQuestion = quiz.questions[i];
+        newQuestion();
+        document.getElementById("question_title_"+question_counter).placeholder = currentQuestion.question;
+        document.getElementById("question_title_"+question_counter).value = currentQuestion.question;
+        
+        for (let j=0; j<currentQuestion.answers.length; j++) {
+          if(j!=0) {
+            addAnswer(i);
+          }
+            document.getElementById("ainput_"+question_counter+"_"+j).placeholder = currentQuestion.answers[j];
+            document.getElementById("ainput_"+question_counter+"_"+j).value = currentQuestion.answers[j];
+        }
+      }
+    }
 
     function showEdit() {
       var doc = document.getElementById("myForm");
