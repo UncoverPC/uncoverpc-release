@@ -15,7 +15,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Quiz - UncoverPC</title>
+    <title>Add Product - UncoverPC</title>
     <style>
         body,
         h1,
@@ -26,31 +26,31 @@
         h6 {
           font-family: "Raleway", sans-serif;
         }
-  
+
         body,
         html {
           height: 100%;
           line-height: 1.8;
+          overflow: auto;
         }
 
 
         .w3-bar .w3-button {
           padding: 16px;
         }
-        
-  
+
+
         .color_theme {
           background-color: rgb(17, 17, 23);
           color: antiquewhite;
         }
-  
+
         * {
           margin: 0;
           padding: 0;
         }
 
         #product_type_selector {
-          height: 100%;
           position: sticky;
         }
 
@@ -74,33 +74,37 @@
           background-color: RGB(50, 50, 50);
           color: aliceblue;
           border-radius: 10px;
+          margin-top: 10px;
           margin-bottom: 10px;
-    
         }
         button:hover{
           background-color: rgb(27, 13, 65);
         }
-        
+
         .button_div{
           margin-top: 20px;
         }
-  
+
         #text_container {
           display: flex;
           align-items: center;
-          justify-content: center;
           text-align: center;
-          height: 100%;
           width: 100%;
+          flex-direction: column;
         }
+
+        #titles{
+        position: relative;
+       }
 
         #input_body{
           margin-top: 20px;
           border-radius: 20px;
           background-color: rgb(41, 41, 53);
           position: sticky;
+          margin-bottom: 20px;
         }
-  
+
         #main_logo {
           position: relative;
           font-weight: 100;
@@ -123,7 +127,27 @@
         }
 
         #input_body{
-          width: 540px;
+          overflow-y: auto;
+          width: 550px;
+
+        }
+
+        .label_input {
+          width: 250px;
+          text-align: right;
+          font-size: 28px;
+        }
+
+        input {
+          display: inline-block;
+          clear:right;
+          width: 500px;
+          padding: 10px;
+          border: 2px solid gray !important;
+          margin: 10px;
+          position: relative;
+          background-color: transparent;
+          color: gray;
         }
 
         .input_div {
@@ -136,7 +160,7 @@
           width: 210px;
           text-align: right;
           font-size: 24px;
-          
+
         }
 
         .input_answer {
@@ -154,7 +178,7 @@
           width: 80px;
           height: 80px;
         }
-  
+
         .lds-ring div {
           box-sizing: border-box;
           display: block;
@@ -167,15 +191,15 @@
           animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
           border-color: #fff transparent transparent transparent;
         }
-  
+
         .lds-ring div:nth-child(1) {
           animation-delay: -0.45s;
         }
-  
+
         .lds-ring div:nth-child(2) {
           animation-delay: -0.3s;
         }
-  
+
         .lds-ring div:nth-child(3) {
           animation-delay: -0.15s;
         }
@@ -211,19 +235,19 @@
   </body>
 
   <script>
-    const laptop_questions = ["Name","Brand", "Price", "Link","Purpose", "Screen Size (inch)","Resolution","CPU","CPU Speed (GHz)", 
+    const laptop_questions = ["Name","Brand", "Price", "Link","Purpose", "Screen Size (inch)","Resolution","CPU","CPU Speed (GHz)",
     "GPU","GPU Speed (MHz)","RAM (GB)", "RAM Speed (MHz)","Storage Type","Storage Size (TB)","Battery Life (hrs)"];
     const desktop_questions = ["Name", "Price", "Brand","Link","Purpose","CPU","CPU Clock Speed (GHz)",
     "GPU","Clock Speed (MHz)", "RAM", "Storage Type","Storage Size"];
 
     const ram_options = ["4GB","8GB","16GB","32GB","64GB","128GB"];
     const storage_options = ["M.2 NVMe SSD", "M.2 SATA SSD", "HDD"];
-   
+
     var question_datalist = {
       "RAM" : ram_options,
       "Storage Type" : storage_options,
     }
-    
+
     var questions_needed = {
       "laptop" :laptop_questions,
       "desktop": desktop_questions
@@ -238,13 +262,13 @@
       for(var i = 0; i < question_list.length; i++){
         loadQuestions(question_list[i]);
       }
-      body.innerHTML += 
+      body.innerHTML +=
       `<button id=save_button onclick="saveProduct()">Save</button>`
     }
 
     function loadQuestions(input){
       var body = document.getElementById("input_body");
-      body.innerHTML += 
+      body.innerHTML +=
         `<div class="input_div">
           <label for="input_+${input}" class = "label_input"> ${input}</label>
           <input
@@ -256,8 +280,8 @@
               placeholder = "Enter Input"
               list = "${input}list"
              />
-          <datalist id="${input}list"> 
-            
+          <datalist id="${input}list">
+
           </datalist>
           </div>`
 
@@ -267,12 +291,12 @@
         var value_array = question_datalist[input];
         console.log(value_array[1]);
         for (let i=0; i < value_array.length; i++) {
-            datalist.innerHTML += 
+            datalist.innerHTML +=
             `<option value="${value_array[i]}">
             </option>`
         }
       }
-      
+
       if(input.includes("Speed")) {
         var current = document.getElementById("input_"+input).type = 'number';
       }
@@ -297,7 +321,7 @@
         product[key] = value;
       }
       console.log(product);
-      
+
     }
 
     function onType(element) {
@@ -307,4 +331,3 @@
   </script>
 
 </html>
-
