@@ -1,6 +1,5 @@
 package com.uncoverpc.controller;
 
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,17 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+
 import com.uncoverpc.db.QuizService;
 import com.uncoverpc.model.quiz.Question;
 import com.uncoverpc.model.quiz.Quiz;
@@ -30,8 +24,8 @@ public class QuizController {
 	@Autowired
 	QuizService quizService;
 
-
-	@GetMapping("/productquiz/{quizName}")
+	
+	@GetMapping("/quiz/{quizName}")
 	public ModelAndView getQuiz(@PathVariable(value = "quizName") String quizName) {
 		ModelAndView model = new ModelAndView("quiz.html");
 		Quiz quiz = quizService.findByQuizTitle(quizName);

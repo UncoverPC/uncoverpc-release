@@ -63,9 +63,11 @@ lang="en">
       }
       
       .question-holder {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-items: center;
+        text-align: center;
       }
 
       .header {
@@ -81,7 +83,7 @@ lang="en">
         font-weight: bold;
         color: white;
         text-align: center;
-        margin-top: 40vh;
+        margin-top: 30vh;
       }
 
       #wrapper {
@@ -124,26 +126,70 @@ lang="en">
       .answer-button {
         color: aliceblue;
         background-color: rgb(27, 27, 83);
-        width: 50vh;
+        width: 40vh;
         margin: 20px;
       }
       .answers {
-        display: flexbox;
+        text-align: center;
+      }
+      .btn-holder {
+        text-align: center;
       }
       .hidden {
         animation: fadeOut 1s 1 forwards;
       }
+      .selected {
+        background-color: rgb(108, 108, 204);
+      }
+
+      .selected:hover {
+        background-color: rgb(108, 108, 204);
+      }
+      
       .visible {
-        animation: fadeIn 2s 1 forwards;
+        animation: fadeIn 1.5s 1 forwards;
       }
 
       .visible-q {
-        animation: fadeInQuestion 2s 1 forwards;
+        animation: fadeInQuestion 1s 1 forwards;
+      }
+      
+      .next {
+        text-align: center;
+        margin-top: 70px;
+        margin-left: 20px;
+        background-color: rgb(26, 25, 49);
       }
 
       button:hover {
         background-color: rgb(43, 43, 133);
         transform: translateY(-5px);
+      }
+
+      .lds-dual-ring {
+        display: inline-flex;
+        margin: 35% auto;
+        width: 80px;
+        height: 80px;
+      }
+      .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+      }
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
       @keyframes fadeInQuestion{
@@ -190,55 +236,182 @@ lang="en">
       <div id="holder">
         <div class="visible" id="homepage">
           <h1 class="header">Ready to find the perfect 
-            <span class="header" id="quiz-type" th:text="${quizTitle}">laptop</span>?</h1>
+            <span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
           <button id="start-button" onclick="startQuiz('homepage')">Get Started!</button>
         </div>
       </div>
     </div>
   </body>
   
-  <script>
-    var currentQuestion = 0;
-    var question = {
+  <script th:inline="javascript">
+    let currentQuestion = 0;
+
+    let questions = [{
         question: "How many hours of battery life?",
         answers: ["1-3 hours", "3-5 hours", "5-9 hours", "9-12 hours"],
-      };
-    var quiz = { quizTitle: "", question_bank: [question]};
+      },
+      {
+        question: "How much RAM",
+        answers: ["8", "12", "16", "32"],
+      },
+      {
+        question: "How much storage",
+        answers: ["250", "500", "1000", "2000"],
+      }];
+
+    questions = /*[[${questions}]]*/ 'questions';
+    let userAnswers = new Array(questions.length);
+    userAnswers.fill("");
+    let answeredQuestions = new Array(questions.length);
+    answeredQuestions.fill(false);
+    
+    function select(id) {
+      let btn = document.getElementById(id);
+
+
+      if(btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        answeredQuestions[currentQuestion] =false;
+
+      } else if(!answeredQuestions[currentQuestion]) {
+        btn.classList += " selected";
+        answeredQuestions[currentQuestion]=true;
+      }
+    }
 
     function startQuiz(target) {
       fadeOut(target);
       nextQuestion(true);
-      
     }
 
     function fadeOut(target) {
-      var element = document.getElementById(target);
+      let element = document.getElementById(target);
       element.className = "hidden";
     }
-    function nextQuestion(start) {
-      var home = document.getElementById("holder");
-      var id = 'answers'+currentQuestion;
-      setTimeout(() => {home.innerHTML = 
-      `<div class='question-holder visible-q' id='question${currentQuestion}'>
-          <h1 class='question'> ${quiz.question_bank[currentQuestion].question} </h1>
-          <div class='answers' id=${id}> </div>
-          <button> Next </button>
-        </div>`;       
-      addAnswers(id);
-      if(!start) {
-        currentQuestion++;
-      }}, 700);
+    
+    function saveQuestion() {
+      selected = document.querySelector(".selected");
+      userAnswers[currentQuestion]= selected.innerHTML;
+    }
 
+    function saveQuiz() {
+      saveQuestion();
+      fadeOut("question"+currentQuestion);
+      let home = document.getElementById("holder");
+      setTimeout(() => {home.innerHTML = `<div class="lds-dual-ring"></div>`;},500);
+    }
+
+    function nextQuestion(start) {
+      if(!start) {
+        saveQuestion(currentQuestion);
+        currentQuestion++;
+      }
+      let questionSelector = currentQuestion;
+      let qid = "question"+(questionSelector-1);
+
+      if(!start) {
+        fadeOut(qid);
+      }
+
+      let home = document.getElementById("holder");
+      let id = 'answers'+currentQuestion;
+      if(currentQuestion+1 == questions.length) {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="saveQuiz()"> Save </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+      else if(currentQuestion==0){
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+      else {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+    }
+
+    function prevQuestion() {
+      fadeOut("question"+currentQuestion);
+      answeredQuestions[currentQuestion] = false;
+      currentQuestion--;
+      answeredQuestions[currentQuestion] = false;
+
+      let questionSelector = currentQuestion;
+      let home = document.getElementById("holder");
+      let id = 'answers'+currentQuestion;
+
+      if(currentQuestion+1 == questions.length) {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="saveQuiz()"> Save </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+      else if(currentQuestion==0){
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+      else {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
     }
 
     function addAnswers(id) {
-      var element = document.getElementById(id);
+      let element = document.getElementById(id);
       console.log(element)
-      for(let i=0; i<quiz.question_bank[currentQuestion].answers.length; i++) {
-        console.log(i);
-        element.innerHTML += `<input type=checkbox class='answer-button'>${quiz.question_bank[currentQuestion].answers[i]}>`;
-      }
-      
+      for(let i=0; i<questions[currentQuestion].answers.length; i++) {
+        element.innerHTML += `<button class="answer-button" id="answer${currentQuestion}${i}" onClick='select("answer${currentQuestion}${i}")'">${questions[currentQuestion].answers[i]}</button>`;
+      }   
     }
+
   </script>
 </html>
