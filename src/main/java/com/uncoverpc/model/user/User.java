@@ -1,9 +1,13 @@
 package com.uncoverpc.model.user;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.uncoverpc.model.user.Roles.Role;
 
 @Document("users")
 public class User {
@@ -13,7 +17,7 @@ public class User {
 
 	private String email;
 
-	private String role;
+	private Set<Role> roles = new HashSet<>();
 	
 	private String password;
 	
@@ -31,11 +35,11 @@ public class User {
 
 	
 	
-	public User(String id, String email, String role, String password, String confirmPassword, String username, String firstName, String lastName) {
+	public User(String id, String email, Set<Role> roles, String password, String confirmPassword, String username, String firstName, String lastName) {
 		super();
 		this.id = id;
 		this.email = email;
-		this.role = role;
+		this.roles = roles;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
 		this.username = username;
@@ -103,22 +107,26 @@ public class User {
 		return firstName + " " + lastName;
 	}
 	
-	public String getRole() {
-		return role;
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
+	public void addRole(Role user) {
+	    roles.add(user);
 	}
 
 	@Override
-	public String toString() {
-		return "User [email=" + email + ", username=" + username + ", firstName=" + firstName + ", id=" + id + ", lastName=" + lastName
-				+ ", password=" + password + ", confirmPassword=" + confirmPassword+ "]";
-		
-	}
+    public String toString() {
+        return "User [id=" + id + ", email=" + email + ", roles=" + roles + ", password=" + password
+                + ", confirmPassword=" + confirmPassword + ", username=" + username + ", firstName=" + firstName
+                + ", lastName=" + lastName + ", verificationCode=" + verificationCode + ", enabled=" + enabled + "]";
+    }
 
-	public String getVerificationCode() {
+    public String getVerificationCode() {
 		return verificationCode;
 	}
 

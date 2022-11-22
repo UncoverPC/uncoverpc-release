@@ -6,10 +6,10 @@ lang="en">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/static/assets/images/Logo.svg" />
-    <link rel="stylesheet" href="/static/assets/styles/homepage.css" />
+    <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
+    <link rel="stylesheet" th:href="@{/assets/styles/homepage.css}" />
     
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link th:href='@{https://fonts.googleapis.com/css?family=Raleway}' rel='stylesheet'>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -20,7 +20,7 @@ lang="en">
 
   <body class="color_theme" id="text_container">
     <div id="navbar">
-      <img src="/static/assets/images/Logo.svg" style="width: 2.5%; height:1%; margin-left: 10%; margin-top: 5px; margin-bottom: 5px;">
+      <img src="@{/assets/images/Logo.svg}" style="width: 2.5%; height:1%; margin-left: 10%; margin-top: 5px; margin-bottom: 5px;">
       <div id="nav-holder">
         <a href="#landing" class="navigator">Home</a>
         <a href="#purpose" class="navigator">What We Do</a>
