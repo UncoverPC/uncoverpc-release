@@ -109,6 +109,38 @@ public class UserController {
 		}
 	}
 	
+	@PostMapping(URI_PATH+"/register/early") 
+	public ModelAndView registerEarly(User user, HttpServletRequest request){
+		try {
+			// checking if account already created
+			//TO DO check if user contains a email and password
+			System.out.println(user);
+			User checkUser = userService.findByEmail(user.getEmail());
+			if (checkUser != null) {
+				throw new Exception();
+			}
+
+			String randomCode = RandomString.make(64);
+			user.setVerificationCode(randomCode);
+			user.setEnabled(false);
+			
+			userService.save(user);
+			
+			emailService.sendVerificationEmail(user, getSiteURL(request));
+			
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/login");
+			modelAndView.addObject("message", "Register Success!");
+			
+			return modelAndView;
+		} catch (Exception e) {
+			
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/signUp");
+			modelAndView.addObject("message", "Email Already Exist!");
+			return modelAndView;
+		}
+		
+	}
+	
 	@GetMapping(URI_PATH + "/verify")
 	public String verifyUser(@Param("code") String code) {
 	    if (emailService.verify(code)) {

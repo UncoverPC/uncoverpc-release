@@ -24,7 +24,7 @@ html {
 
 .color_theme {
   background-color: rgb(255, 255, 255);
-  color: antiquewhite;
+  color: black;
 }
 
 
@@ -34,11 +34,17 @@ html {
 }
 
 #navbar {
+  background-color: white;
+  top:0;
+  position:fixed;
   width: 100%;
   height: auto;
-  background-color: rgba(255, 255, 255, 0.486);
+  background-color: rgba(255, 255, 255);
   display: flex;
   flex-direction: row;
+  box-shadow: 1px 2px 5px grey;
+  z-index: 100;
+  opacity: 1;
 }
 .navigator {
   color: rgb(163, 193, 201);
@@ -57,43 +63,145 @@ html {
   display: flex;
 }
 
+#login {
+  width: 80px;
+  height: 35px;
+  margin: auto 15px;
+  border: 0;
+  color: aliceblue;
+  background-color: rgb(150, 187, 202);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+#login:hover {
+  background-color: rgb(112, 145, 161);
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+}
+.faded {
+  opacity: 0.5;
+}
+.visible {
+  opacity: 100%;
+}
+
+#early-access {
+  position:fixed;
+  left: 35%;
+  top: 40%;
+  z-index: 1;
+  background-color: rgb(207, 241, 248);
+  width: 30%;
+  height: 30%;
+  border-radius: 30px;
+}
+
+#ea-form {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input {
+  width: 90%;
+  height: 30px;
+  background: transparent;
+  border-radius: 1px solid grey;
+  text-align: left;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.form-submit {
+  width: 80%;
+  height: 30px;
+  margin: 10px auto;
+  border: 0px;
+  border-radius: 20px;
+  background-color: rgb(112, 145, 161);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+}
+.form-submit:hover {
+  background-color: rgb(92, 118, 131);
+}
+
+.close-button {
+  width: 25px;
+  height: 25px;
+  font-size: 16px;
+  font-weight: 700;
+  border: 0;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+.close-button:hover {
+  color: rgb(228, 72, 72);
+}
+
 .section {
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 #landing {
     color: rgb(44, 46, 59);
-    text-align: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 12%;
+    flex-direction: row;
     animation: fadeIn 1s 1 forwards;
+    height: 47em;
 }
 .text1 {
   width: 50%;
-  font-size: 26px;
-  margin: 2% auto;
-  text-align: center;
+  font-size: 24px;
+  padding-top: 1rem;
+  text-align: left;
   font-weight: bold;
+}
+.text2 {
+  font-size: 22px;
+  padding-top: 0.5rem;
+  text-align: left;
 }
 
 #purpose {
   margin-top: 10%;
+  text-align: center;
   background-color: aliceblue;
 }
-#main-text {
+#contact-us {
+  padding-top: 5%;
+  background-color: aliceblue;
+}
+#purpose-header {
+  color: rgb(14, 10, 48);
+  font-weight: 700;
   text-align: center;
-  margin: 0 auto;
+}
+.main-text {
+  text-align: left;
+  margin-left: 10rem;
+  margin-top: 21em;
 }
 
 .home-text {
-    font-size: 84px;
-    margin: auto;
+    font-size: 64px;
+    text-align: left;
     font-weight: 900;
+}
+
+.subtitle-text {
+  font-size: 56px;
+  text-align: left;
 }
 
 #early-btn {
@@ -103,9 +211,8 @@ html {
   color: white;
   background-color: rgb(2,0,36);
   background-image: linear-gradient(90deg, rgb(135, 130, 238) 0%, rgb(124, 214, 128) 100%);
-  text-align: center;
-  margin: 20px auto;
   width: 250px;
+  margin-top: 30px;
   height: 60px;
   border: 0px;
   border-radius: 40px;
@@ -121,13 +228,13 @@ html {
 }
 
 #mission {
-  margin-top: 40px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
 }
 
 #mission-explained {
-  margin-top: 40px;
+  margin-top: 70px;
 }
 
 .visible {
@@ -136,7 +243,7 @@ html {
 
 
 .mission-text {
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .counter {
