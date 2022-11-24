@@ -121,7 +121,7 @@ lang="en">
               oninput="onType(this)"
               id="keywords_1"
               name="keywords"
-              placeholder="Keywords (separate by space)"
+              placeholder="Keywords (separate by commas)"
              />
              <input
               type="text"
@@ -261,7 +261,7 @@ lang="en">
         var cQuestion = document.getElementById("question_title_"+i).placeholder;
         var cScalable = document.getElementById("scalable_"+i).checked;
         var keywordsAsStr = document.getElementById("keywords_"+i).placeholder;
-        var cKeywords = keywordsAsStr.split(" ");
+        var cKeywords = keywordsAsStr.split(",");
         var cIdentifier = document.getElementById("identifier_"+i).placeholder;
 
         if(cQuestion != null){
@@ -409,7 +409,7 @@ lang="en">
               oninput="onType(this)"
               id="keywords_${question_counter}"
               name="keywords"
-              placeholder="Keywords (separate by space)"
+              placeholder="Keywords (separate by commas)"
              />
              <input
               type="text"
