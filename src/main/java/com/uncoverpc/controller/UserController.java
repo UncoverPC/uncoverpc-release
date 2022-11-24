@@ -136,6 +136,8 @@ public class UserController {
 			user.setVerificationCode(randomCode);
 			user.setEnabled(false);
 			
+			user.setRegisterTimestamp();
+			
 			userService.save(user);
 			
 			emailService.sendVerificationEmail(user, getSiteURL(request));

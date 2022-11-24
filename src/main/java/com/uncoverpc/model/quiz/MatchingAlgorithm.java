@@ -10,6 +10,12 @@ public class MatchingAlgorithm {
 	
 	public List<Product> matchProduct(Quiz quiz, List<QuizResponseAnswer> quizResponseAnswers){
 		List<Product> products;
+		//Use hashmap
+		//Create a list of all question
+		//Get list of questions
+		//Find the question keyword
+		//Find 
+		
 		//= QuizProductService quiz.getTitle()//getting list of products
 //		for(Question question: quiz.getQuestions()) {
 //			for(Product product: products)
