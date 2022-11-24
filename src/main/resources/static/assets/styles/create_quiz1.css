@@ -286,6 +286,18 @@ body,
         background-color: rgb(208, 109, 86);
       }
 
+      .keywords {
+        width: 500px;
+        height: 40px;
+        padding: 10px;
+        border: 2px solid gray !important;
+        margin: 10px;
+        position: relative;
+        background-color: transparent;
+        color: gray;
+        animation: incomingQuestion 0.5s;
+      }
+
 
       .textfield {
         width: 40vw;

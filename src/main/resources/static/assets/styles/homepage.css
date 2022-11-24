@@ -85,7 +85,7 @@ html {
   display: none;
 }
 .faded {
-  opacity: 0.5;
+  opacity: 0.5 !important;
 }
 .visible {
   opacity: 100%;
@@ -153,11 +153,14 @@ html {
   flex-direction: column;
 }
 
+#main {
+  animation: fadeIn 1s 1 forwards;
+}
+
 #landing {
     color: rgb(44, 46, 59);
     display: flex;
     flex-direction: row;
-    animation: fadeIn 1s 1 forwards;
     height: 47em;
 }
 .text1 {
@@ -174,7 +177,8 @@ html {
 }
 
 #purpose {
-  margin-top: 10%;
+  width: 100%;
+  margin-top: 10rem;
   text-align: center;
   background-color: aliceblue;
 }
@@ -228,13 +232,16 @@ html {
 }
 
 #mission {
-  margin-top: 60px;
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
 }
 
 #mission-explained {
   margin-top: 70px;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
 }
 
 .visible {
@@ -246,8 +253,22 @@ html {
   font-size: 30px;
 }
 
+.mission-div {
+  display: flex;
+  flex-direction: column;
+  width: 30em;
+  padding: 3rem;
+  margin: 2rem auto;
+}
+
+.icon-thumbnail {
+  width: 15rem;
+  height: 15rem;
+  margin: 0 auto;
+}
+
 .counter {
-  font-size: 60px;
+  font-size: 54px;
   color: rgb(135, 130, 238);
 }
 
