@@ -10,7 +10,7 @@ public class MainController {
 
 	@GetMapping("/home")
 	public ModelAndView home() {
-		return new ModelAndView("index.html");
+		return new ModelAndView("homepage.html");
 	}
 
 	@GetMapping("/admin/dashboard")
