@@ -167,7 +167,7 @@ lang="en">
             <div class='answers' id=${id}> </div>
             <div class='btn-holder'>
               <button class="next" onClick="prevQuestion()"> Back </button>
-              <button class="next" onClick="saveQuiz()"> Save </button>
+              <button class="next" onClick="submitQuiz()"> Submit </button>
             </div>
           </div>`;       
         addAnswers(id);
@@ -208,5 +208,26 @@ lang="en">
       }   
     }
 
+
+    function submitQuiz() {
+      $.ajax({
+          url: "/api/quiz/submit",
+          type: "GET",
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(
+            userAnswers
+          ),
+          success: function (response) {
+            loadRecommendations(response);
+          },
+          error: function (e) {
+            alert("Error!");
+          },
+        });
+    }
+
+    function loadRecommendations(products) {
+      
+    }
   </script>
 </html>

@@ -114,6 +114,24 @@ lang="en">
             Add Answer
           </button>
          </div>
+         <div>
+          <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="keywords_1"
+              name="keywords"
+              placeholder="Keywords (separate by space)"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="identifier_1"
+              name="identifier"
+              placeholder="Identifier"
+             />
+         </div>
          <button class="delete_question" onclick = "delQuestion(1)"> Delete Question</button>
 
         </div>
@@ -242,6 +260,9 @@ lang="en">
         var cAnswers = [];
         var cQuestion = document.getElementById("question_title_"+i).placeholder;
         var cScalable = document.getElementById("scalable_"+i).checked;
+        var keywordsAsStr = document.getElementById("keywords_"+i).placeholder;
+        var cKeywords = keywordsAsStr.split(" ");
+        var cIdentifier = document.getElementById("identifier_"+i).placeholder;
 
         if(cQuestion != null){
             for(let j = 1; j <= answerCounter[i-1]; j++) {
@@ -253,6 +274,8 @@ lang="en">
               question: cQuestion,
               answers: cAnswers,
               scalable: cScalable,
+              identifier: cIdentifier,
+              keywords: cKeywords,
             }
             quiz.questions.push(tempQuestion);
           }
@@ -379,6 +402,24 @@ lang="en">
             Add Answer
           </button>
          </div>
+         <div>
+          <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="keywords_${question_counter}"
+              name="keywords"
+              placeholder="Keywords (separate by space)"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="identifier_${question_counter}"
+              name="identifier"
+              placeholder="Identifier"
+             />
+         </div>
          <button class="delete_question" onclick ="delQuestion(${question_counter})"> Delete Question</button>
         </div>
       </li>`;
@@ -389,9 +430,7 @@ lang="en">
     function setQuestionTitles() {
       for(let i=1; i<=question_counter; i++) {
         var question = document.getElementById("question_title_"+i);
-        if(question==null){
-        }
-        else{
+        if(question!=null){
           if(question.placeholder != "Question"){
             question.value = question.placeholder;
           }
@@ -403,6 +442,14 @@ lang="en">
               item.value = item.placeholder;
           }
         });
+        var identifier = document.getElementById("identifier_"+i)
+        var keywords = document.getElementById("keywords_"+i)
+        if(identifier.placeholder != "Identifier") {
+          identifier.value = identifier.placeholder;
+        }
+        if(keywords.placeholder!="Keywords (separate by space)") {
+          keywords.value = keywords.placeholder;
+        }
         }
       }
     }
