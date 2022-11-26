@@ -90,6 +90,7 @@ lang="en">
                             />
                             <div class="line"></div>
                         </div>
+                        <p class="text-red-500 text-sm font-thin" style="display: none;" id="passwordStrengthError">Password is not strong enough! It must be at least 8 characters, contain one upper and lowercase letter, a number, and a special character.</p>
                         <div class="field-mb-6">
                             <input
                                 type="password"
@@ -100,6 +101,7 @@ lang="en">
                             />
                             <div class="line"></div>
                         </div>
+                        <p class="text-red-500 text-sm font-thin" style="display: none;" id="passwordMatchError">Passwords do not match!</p>
                         <div class="field-mb-6">
                             <input
                                 type="password"
@@ -113,6 +115,7 @@ lang="en">
                         <input
                             class="cursor-pointer w-1/2 bg-slate-800 hover:bg-slate-900 text-sm md:text-base text-white font-semibold p-3 rounded-md inline-flex justify-center"
                             type="submit"
+                            id="submitButton"
                             value="Create account"
                         />
                     </form>
@@ -121,4 +124,42 @@ lang="en">
             </div>
         </div>
     </body>
+    <script>
+        var confirmPassword = document.getElementById("confirmPassword");
+        var password = document.getElementById("password");
+        var submitButton = document.getElementById("submitButton");
+        var passwordMatchError = document.getElementById("passwordMatchError");
+        var passwordStrengthError = document.getElementById("passwordStrengthError");
+
+        // min 8 chars, need one uppercase, one lowercase, one number, one special character
+        const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+
+        // check if passwords match
+        confirmPassword.onblur = () => {
+            if (confirmPassword.value !== password.value){
+                passwordMatchError.style.display = "block";
+                submitButton.disabled = true;
+            }else{
+                passwordMatchError.style.display = "none";
+                submitButton.disabled = false;
+            }
+        }
+
+        password.onblur = () => {
+            if (password.value.length !== 0 && !password.value.match(passwordRegex)){
+                passwordStrengthError.style.display = "block";
+                submitButton.disabled = true;
+            } else {
+                passwordStrengthError.style.display = "none";
+                
+                if (confirmPassword.value !== password.value && confirmPassword.value.length !== 0){
+                    passwordMatchError.style.display = "block";
+                    submitButton.disabled = true;
+                }else{
+                    passwordMatchError.style.display = "none";
+                    submitButton.disabled = false;
+                }
+            }
+        }
+    </script>
 </html>
