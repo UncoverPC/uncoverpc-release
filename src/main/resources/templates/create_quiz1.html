@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="icon" href="/static/assets/images/Logo.svg" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" th:href="@{/assets/styles/create_quiz1.css}"/>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Quiz Creator - UncoverPC</title>
+  </head>
+
+  <body class="color_theme" id="text_container">
+
+    <div id="sidenav">
+      <button class="questionButton" onclick="newQuestion()" id="add_question">
+              +
+      </button>
+      <div id="navbar_questions">
+        <a href="#main" class ="navbar_question">↑</a>
+        <a href="#quiz_footer" class ="navbar_question">↓</a>
+      </div>
+    </div>
+
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card" id="myNavbar">
+          <a href="#home" class="w3-bar-item w3-button w3-wide">
+            <object data="assets/Logo.svg" width="20" height="20"></object
+          ></a>
+          <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+          <a
+            href="javascript:void(0)"
+            class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+            onclick="w3_open()"
+          >
+            <i class="fa fa-bars"></i>
+          </a>
+        </div>
+        <div class="progress_bar_container w3-top" id="progress_bar"></div>
+    </div>
+
+    <!--Quiz Creation Body-->
+    <div id="main">
+      <!-- Logo -->
+      <div id="titles">
+        <h1 class="logo" id="main_logo">UncoverPC</h1>
+        <h1 class="logo" id="quiz_creator"> Quiz Creator</h1>
+      </div>
+      
+      <!-- Title -->
+      <div id="edit-holder">
+        <button id="edit-button" onClick="showEdit()">✎</button>
+        <div class="form-popup" id="myForm" >
+            <input id="edit-input" type="text" placeholder="Enter Quiz" name="quiz" required>
+            <button id="submit-form" onClick="getQuiz()">Go!</button>
+        </div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="w3-center textfield"
+          id="quiz_title"
+          oninput="onChangeQuizTitle(this)"
+          name="quiz_title"
+          placeholder = "Quiz Title"
+        />
+      </div>
+      <!--Quiz Creator Body-->
+      <ul id="creator_body">
+        <!-- Question Element -->
+       <li class="question_holder" id="question_1">
+         <div>
+          <!--Question Input-->
+          <input
+          type="text"
+          class="w3-center textfield question_title"
+          id="question_title_1"
+          name="question_title"
+          placeholder="Question"
+          oninput="onType(this)"
+          />
+
+         <div class="answer_box">
+          <div id="answers_1">
+            <div id="answer_1_1">
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="ainput_1_1"
+              name="answer"
+              placeholder="Answer"
+             />
+             <button class="delete_answer" onclick="delAnswer(1,1)"> X</button>
+            </div>
+          </div>
+          Scalable:
+          <input type="checkbox" id="scalable_1" onclick="saveScalable(1)"/>
+          <button class="addAnswer" onclick="addAnswer(1)" id="add_question">
+            Add Answer
+          </button>
+         </div>
+         <div>
+          <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="keywords_1"
+              name="keywords"
+              placeholder="Keywords (separate by commas)"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="identifier_1"
+              name="identifier"
+              placeholder="Identifier"
+             />
+         </div>
+         <button class="delete_question" onclick = "delQuestion(1)"> Delete Question</button>
+
+        </div>
+      </li>
+     </ul>
+
+     <footer class="footer" id="quiz_footer">
+      <button id="save_button" onclick="saveQuiz()">Save Quiz</button>
+     </footer>
+
+  </body>
+
+
+  <script>
+
+    var question_counter =1;
+
+    //Questions & answers (injected from backend)
+    const questions = [
+      {
+        question: "Battery life",
+        answers: ["1-3 hours", "3-5 hours", "5-9 hours", "9-12 hours"],
+      },
+      {
+        question: "Performance",
+        answers: [
+          "Web-Browsing",
+          "Photo Editing",
+          "Rendering",
+          "Coding",
+          "Gaming",
+        ],
+      },
+      {
+        question: "Price",
+        answers: ["<$200", "$200-$500", "$500-$800", "$800-$1200", "$1200+"],
+      },
+      {
+        question: "Longeivity",
+        answers: ["<1year", "1-3years", "3-5years", "6-8years"],
+      },
+    ];
+    var quiz = { quizTitle: "laptop", questions: questions};
+
+    function QuestionAndAnswer (question, answers) {
+      this.question = question;
+      this.answers = answers;
+    }
+
+    var answerCounter = [1];
+
+    var scalableArr = [false];
+
+    function getQuiz() {
+      var quizTitle = document.getElementById("edit-input").value
+      console.log(quizTitle);
+        $.ajax({
+          url: "/create_quiz1/edit",
+          type: "GET",
+          contentType: "application/json;charset=UTF-8",
+          data: {quizTitle: quizTitle},
+          success: function (response) {
+            loadQuiz(response);
+          },
+          error: function (e) {
+            alert("Error!");
+          },
+        });
+      }
+
+    function loadQuiz(quiz) {
+      question_counter =0;
+      answerCounter =[];
+
+      var titleElement  = document.getElementById("quiz_title");
+      titleElement.placeholder = quiz.quizTitle;
+      titleElement.value = quiz.quizTitle;
+      document.getElementById("creator_body").innerHTML ="";
+     
+      for (let i=0; i<quiz.question_bank.length; i++) {
+        var currentQuestion = quiz.question_bank[i];
+        newQuestion();
+        document.getElementById("question_title_"+question_counter).placeholder = currentQuestion.title;
+        document.getElementById("question_title_"+question_counter).value = currentQuestion.title;
+        console.log("question_title_"+question_counter);
+        
+        for (let j=1; j<=currentQuestion.answers.length; j++) {
+          if(j!=1) {
+            addAnswer(question_counter);
+          }
+            document.getElementById("ainput_"+question_counter+"_"+j).placeholder = currentQuestion.answers[j-1];
+            document.getElementById("ainput_"+question_counter+"_"+j).value = currentQuestion.answers[j-1];
+        }
+      }
+    }
+
+    function showEdit() {
+      var doc = document.getElementById("myForm");
+      if (doc.style.display == "block") {
+        doc.style.display = "none";
+      }
+      else {
+        doc.style.display = "block";
+      }
+    }
+
+    function saveScalable(num) {
+      scalableArr[num-1] = document.getElementById("scalable_"+num).checked;
+    }
+
+    function renderScalables() {
+      for(let i=1; i<=question_counter;i++){
+        var cScalable = document.getElementById("scalable_"+i);
+        if(cScalable !== null) {
+          cScalable.checked = scalableArr[i-1];
+        }
+      }
+    }
+
+    function saveQuiz() {
+      quiz.questions = [];
+      quiz.quizTitle ="";
+      quiz.quizTitle = document.getElementById("quiz_title").value;
+
+      for(let i = 1; i<=question_counter; i++) {
+        var cAnswers = [];
+        var cQuestion = document.getElementById("question_title_"+i).placeholder;
+        var cScalable = document.getElementById("scalable_"+i).checked;
+        var keywordsAsStr = document.getElementById("keywords_"+i).placeholder;
+        var cKeywords = keywordsAsStr.split(",");
+        var cIdentifier = document.getElementById("identifier_"+i).placeholder;
+
+        if(cQuestion != null){
+            for(let j = 1; j <= answerCounter[i-1]; j++) {
+              var cAnswer = document.getElementById("ainput_"+i+"_"+j).value;
+              cAnswers.push(cAnswer);
+            }
+
+            var tempQuestion = {
+              question: cQuestion,
+              answers: cAnswers,
+              scalable: cScalable,
+              identifier: cIdentifier,
+              keywords: cKeywords,
+            }
+            quiz.questions.push(tempQuestion);
+          }
+      }
+
+      var token = $("meta[name='_csrf']").attr("content");
+      var header = $("meta[name='_csrf_header']").attr("content");
+
+      if (confirm("Are you sure you want to submit this quiz?")) {
+        console.log(token)
+        console.log(quiz)
+        $.ajaxSetup({
+          headers:{"X-XSRF-TOKEN": token}
+        })
+        $.ajax({
+          url: "/api/quiz/create/",
+          type: "POST",
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(
+            quiz
+          ),
+          success: function (response) {
+            alert(response);
+          },
+          error: function (e) {
+            alert("Error!");
+          },
+        });
+      }
+    }
+
+
+
+    function addAnswer(questionNum) {
+      answerCounter[questionNum-1] +=1;
+      var loc = document.getElementById("answers_"+questionNum);
+      answerNum = answerCounter[questionNum-1]
+      loc.innerHTML +=
+            `<div id="answer_${questionNum}_${answerNum}">
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="ainput_${questionNum}_${answerNum}"
+              name="answer"
+              placeholder="Answer"
+             />
+             <button class="delete_answer" onclick="delAnswer(${questionNum},${answerNum})"> X</button>
+            </div>`;
+      //Getting placeholders to texts so the texts dont disapear
+      var answers = document
+        .getElementById("answers_"+questionNum)
+        .querySelectorAll(".answer");
+      answers.forEach((item) => {
+        if(item.placeholder != "Answer"){
+            item.value = item.placeholder;
+        }
+      });
+    }
+
+    function delAnswer(qNum, ansNum) {
+      var id = "answer_"+qNum+"_"+ansNum;
+      var loc = document.getElementById(id);
+      answerCounter[qNum-1] = answerCounter[qNum-1] - 1;
+      loc.remove();
+    }
+
+    function delQuestion(qNum) {
+      //check if deleting 1st question
+      if(question_counter==1){
+        question_counter -=1;
+      }
+      var id = "question_"+qNum;
+      var loc = document.getElementById(id);
+      loc.remove();
+    }
+
+    function onType(element) {
+      element.placeholder = element.value;
+    }
+
+    function onChangeQuizTitle(element) {
+      quiz.quizTitle = element.value;
+    }
+
+    //In Use
+    function newQuestion() {
+        question_counter++;
+        scalableArr.push(false);
+        answerCounter.push(1);
+        var loc = document.getElementById("creator_body");
+        var id = "answers_"+question_counter;
+        var qid = "question_"+question_counter;
+        var aCounter = answerCounter[question_counter-1];
+        loc.innerHTML += `<li class="question_holder" id="question_${question_counter}">
+         <div>
+          <!--Question Input-->
+          <input
+          type="text"
+          class="w3-center textfield question_title"
+          id="question_title_${question_counter}"
+          name="question_title"
+          placeholder="Question"
+          oninput="onType(this)"
+          />
+
+         <div class="answer_box">
+          <div id=${id}>
+            <div id="answer_${question_counter}_${aCounter}">
+             <input
+              type="text"
+              class="w3-center textfield answer"
+              oninput="onType(this)"
+              id="ainput_${question_counter}_${aCounter}"
+              name="answer"
+              placeholder="Answer"
+             />
+             <button class="delete_answer" onclick="delAnswer(${question_counter},${answerCounter[question_counter-1]})"> X</button>
+            </div>
+          </div>
+          Scalable:
+          <input type="checkbox" id="scalable_${question_counter}" onclick="saveScalable(${question_counter})"/>
+          <button class="addAnswer" id=${qid} onclick="addAnswer(${question_counter})" id="add_question">
+            Add Answer
+          </button>
+         </div>
+         <div>
+          <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="keywords_${question_counter}"
+              name="keywords"
+              placeholder="Keywords (separate by commas)"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="identifier_${question_counter}"
+              name="identifier"
+              placeholder="Identifier"
+             />
+         </div>
+         <button class="delete_question" onclick ="delQuestion(${question_counter})"> Delete Question</button>
+        </div>
+      </li>`;
+      setQuestionTitles();
+      renderScalables();
+    }
+
+    function setQuestionTitles() {
+      for(let i=1; i<=question_counter; i++) {
+        var question = document.getElementById("question_title_"+i);
+        if(question!=null){
+          if(question.placeholder != "Question"){
+            question.value = question.placeholder;
+          }
+          var answers = document
+          .getElementById("answers_"+i)
+          .querySelectorAll(".answer");
+          answers.forEach((item) => {
+          if(item.placeholder != "Answer"){
+              item.value = item.placeholder;
+          }
+        });
+        var identifier = document.getElementById("identifier_"+i)
+        var keywords = document.getElementById("keywords_"+i)
+        if(identifier.placeholder != "Identifier") {
+          identifier.value = identifier.placeholder;
+        }
+        if(keywords.placeholder!="Keywords (separate by space)") {
+          keywords.value = keywords.placeholder;
+        }
+        }
+      }
+    }
+
+  </script>
+</html>

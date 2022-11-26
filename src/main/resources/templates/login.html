@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="ISO-8859-1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login - UncoverPC</title>
+<link rel="icon" href="/assets/images/Logo.svg">
+<link rel="stylesheet" th:href="@{/assets/dist/styles.css}" />
+</head>
+
+<body>
+	<div class="w-screen h-screen bg-slate-900">
+		<div id="login-wrapper"
+			class="absolute block overflow-hidden top-1/2 left-1/2 my-0 mx-auto w-full xs:w-11/12 h-full xs:h-5/6 xs:rounded-lg bg-white shadow-md">
+			<div
+				class="lg:w-1/2 h-full lg:absolute lg:left-0 p-5 border-r-0 lg:border-r-2 border-slate-900">
+				<div id="logo-wrapper"
+					class="w-full flex justify-end xs:justify-start">
+					<div class="flex items-center gap-x-3">
+						<img src="/assets/images/Logo.svg" alt="UncoverPC Logo"
+							class="w-12 xs:w-7 h-10 xs:h-12" /> <span
+							class="hidden xs:block font-semibold text-md tracking-wide">UncoverPC</span>
+					</div>
+				</div>
+				<div id="login-container"
+					class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full px-8 xs:px-16 sm:px-28 md:px-52 lg:px-16 xl:px-28">
+					<h1 class="text-3xl font-semibold mb-4">Welcome Back!</h1>
+					<div th:if="${message != null}" class="text-green-700"
+						th:text="${message}"></div>
+
+					<div th:if="${param.error}" class="text-red-700">
+						
+						<th:block  th:switch="${param.error[0]}">
+							<p th:case="'badCredentials'">Invalid email or password</p>
+							<p th:case="'unverified'">Please verify your email</p>
+							<p th:case="*">
+							<script> window.history.pushState("", "", '/login');</script>
+							</p>
+						</th:block>
+					</div>
+					<form th:action="@{/login}" method="post" th:object="${user}">
+						<div class="field-mb-4">
+							<input type="email" id="email" name="email"
+								placeholder="Enter your email"
+								class="focus:outline-none mb-4 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700" />
+							<div class="line"></div>
+						</div>
+						<div class="field-mb-6">
+							<input type="password" id="password" name="password"
+								placeholder="Password"
+								class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700" />
+							<div class="line"></div>
+						</div>
+						<div class="flex justify-center mb-6">
+							<a href="/forgotPassword"
+								class="text-xs xs:text-sm font-medium underline decoration-solid">Forgot
+								password</a>
+						</div>
+						<input
+							class="cursor-pointer bg-slate-800 hover:bg-slate-900 mb-4 text-sm md:text-base text-white font-semibold p-3 rounded-md inline-flex justify-center w-full"
+							type="submit" value="Sign in" />
+						<button
+							class="cursor-pointer mb-6 border md:border-2 border-black text-sm md:text-base font-semibold p-3 rounded-md inline-flex justify-center items-center gap-2.5 w-full">
+							<img src="/assets/images/Google Icon.svg" alt="Google icon"
+								class="w-5 md:w-6 h-5 md:h-6" /> <span>Sign in with
+								Google</span>
+						</button>
+						<div class="flex justify-center gap-2">
+							<span class="text-xs xs:text-sm">Don't have an account?</span> <a
+								href="/register"
+								class="text-xs xs:text-sm font-medium underline decoration-solid">Sign
+								up for free</a>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div
+				class="hidden lg:block w-1/2 h-full absolute right-0 border-l-2 border-slate-900"></div>
+		</div>
+	</div>
+</body>
+</html>

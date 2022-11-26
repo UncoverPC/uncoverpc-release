@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/Logo.svg" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Explore - UncoverPC</title>
+    <style>
+      body,
+      a,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Raleway", sans-serif;
+      }
+
+      body,
+      html {
+        height: 100%;
+        line-height: 1.8;
+        overflow: hidden;
+      }
+
+      .w3-bar .w3-button {
+        padding: 16px;
+      }
+
+      .color_theme {
+        background-color: #1b2430;
+        color: antiquewhite;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .main_container {
+        width: 100vw;
+        height: calc(100vh - 72px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #logo {
+        opacity: 1;
+        font-weight: bold;
+        font-style: italic;
+        margin: 0 auto;
+
+        background: -webkit-linear-gradient(
+          RGBA(200, 81, 81, 200),
+          RGBA(60, 150, 300, 200),
+          RGBA(250, 150, 300, 200)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .two-col-wrapper {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-column-gap: 300px;
+      }
+      /* form.example input[type="text"] {
+        padding: 10px;
+        font-size: 17px;
+        border: 1px solid grey;
+        float: left;
+        width: 80%;
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      form.example button {
+        float: left;
+        width: 20%;
+        padding: 10px;
+        background: #2196f3;
+        color: white;
+        font-size: 17px;
+        border: 1px solid grey;
+        border-left: none;
+        cursor: pointer;
+      }
+
+      form.example button:hover {
+        background: #0b7dda;
+      }
+
+      form.example::after {
+        content: "";
+        clear: both;
+        display: table;
+      } */
+
+      form.exmaple {
+        display: flex;
+      }
+      .card {
+        background: var(--color-background);
+        padding: calc(4 * var(--size-bezel));
+        margin-top: calc(4 * var(--size-bezel));
+        border-radius: var(--size-radius);
+        border: 3px solid var(--color-shadow, currentColor);
+        box-shadow: 0.5rem 0.5rem 0 var(--color-shadow, currentColor);
+      }
+      .card--inverted {
+        --color-background: var(--color-dark);
+        color: var(--color-light);
+        --color-shadow: var(--color-accent);
+      }
+      .input {
+        position: relative;
+        width: 100%;
+      }
+      .input__field {
+        /* box-sizing: border-box; */
+        border: none;
+        outline: none;
+        display: block;
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+        /* border: 3px solid currentColor; */
+        /* padding: calc(var(--size-bezel) * 10) var(--size-bezel); */
+        color: currentColor;
+        background: transparent;
+        /* border-radius: var(--size-radius); */
+      }
+
+      .submit {
+        appearance: none;
+        background: darkblue;
+        border: 1px solid rgba(27, 31, 35, 0.15);
+        border-radius: 6px;
+        box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+          sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 20px;
+        padding: 6px 16px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        white-space: nowrap;
+      }
+
+      .submit:focus:not(:focus-visible):not(.focus-visible) {
+        box-shadow: none;
+        outline: none;
+      }
+
+      .submit:hover {
+        background-color: lightblue;
+      }
+
+      .submit:focus {
+        box-shadow: rgba(46, 164, 79, 0.4) 0 0 0 3px;
+        outline: none;
+      }
+
+      .rec-container {
+        height: 100%;
+        background-color: black;
+      }
+      .rec-container h1 {
+        font-weight: 16pt;
+        color: green;
+      }
+      .recs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .rec {
+        max-width: 30vw;
+      }
+      .rec a {
+        font-size: 20pt;
+        color: white;
+      }
+      .fade-in {
+        animation: anLeft 1s ease-out 1 both;
+      }
+
+      @keyframes anLeft {
+        from {
+          opacity: 0;
+          transform: perspective(500px) translate3d(-35px, -40px, -150px)
+            rotate3d(1, -1, 0, 35deg);
+        }
+        to {
+          opacity: 1;
+          transform: perspective(500px) translate3d(0, 0, 0);
+        }
+      }
+
+      #down-button {
+        color: white;
+        bottom: 0;
+        font-size: 30pt;
+        transform: scale(1/1.5 1/1.5);
+        transform: rotate(-90deg);
+        background: none;
+        border: none;
+      }
+      #up-button {
+        color: white;
+        position: relative;
+        top: 0;
+        font-size: 30pt;
+
+        transform: rotate(-90deg);
+        background: none;
+        border: none;
+      }
+    </style>
+
+    <script></script>
+  </head>
+
+  <body class="color_theme" id="body">
+    <div class="main_container" id="main">
+      <!-- Quiz -->
+
+      <!-- Search Bar -->
+      <form style="width: 500px; transform: scale(1.5, 1.5)">
+        <div class="card card--inverted">
+          <!-- Logo -->
+          <div class="center">
+            <!-- <h1 id="logo">UncoverPC</h1> -->
+            <svg viewbox="0 0 100 20">
+              <defs>
+                <linearGradient id="gradient">
+                  <stop color="#F0FFFF" />
+                </linearGradient>
+                <pattern
+                  id="wave"
+                  x="0"
+                  y="1"
+                  width="100%"
+                  height="80%"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <path
+                    id="wavePath"
+                    d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z"
+                    mask="url(#mask)"
+                    fill="url(#gradient)"
+                  >
+                    <animateTransform
+                      attributeName="transform"
+                      begin="0s"
+                      dur="1.5s"
+                      type="translate"
+                      from="0,0"
+                      to="40,0"
+                      repeatCount="indefinite"
+                    />
+                  </path>
+                </pattern>
+              </defs>
+              <text
+                text-anchor="middle"
+                x="50"
+                y="15"
+                font-size="17"
+                fill="blue"
+                fill-opacity="0.7"
+                id="logo"
+              >
+                UncoverPC
+              </text>
+              <text
+                text-anchor="middle"
+                x="50"
+                y="15"
+                font-size="17"
+                fill="url(#wave)"
+                fill-opacity="1"
+                id="logo"
+              >
+                UncoverPC
+              </text>
+            </svg>
+          </div>
+
+          <label class="input">
+            <input
+              class="input__field"
+              id="inp-field"
+              type="text"
+              placeholder="Search"
+            />
+          </label>
+
+          <div class="center">
+            <button class="submit" id="submit">Search</button>
+          </div>
+        </div>
+
+        <!-- <input type="text" placeholder="Search.." name="search2" />
+      <button type="submit"><i class="fa fa-search"></i></button> -->
+      </form>
+    </div>
+    <div class="center" style="bottom: 0" id="button-down-container">
+      <button id="down-button">&lt&lt&lt</button>
+    </div>
+    <div class="rec-container">
+      <div class="center"><button id="up-button">&gt&gt&gt</button></div>
+
+      <div class="recs"><h1>Popular Quizzes</h1></div>
+
+      <div class="recs" id="recs">
+        <div class="two-col-wrapper">
+          <div class="rec">
+            <a
+              href="http://localhost:8080/productquiz/Laptop%20Recommendation%20Quiz"
+              >Laptop Quiz</a
+            >
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
+            </p>
+          </div>
+          <div class="rec">
+            <a href="#">Desktop Quiz</a>
+            <p>
+              It has survived not only five centuries, but also the leap into
+              electronic typesetting, remaining essentially unchanged. It was
+              popularised in the 1960s with the release of Letraset sheets
+              containing Lorem Ipsum passages, and more recently with desktop
+              publishing software like Aldus PageMaker including versions of
+              Lorem Ipsum.
+            </p>
+          </div>
+          <div class="rec">
+            <a href="#">Tablet Quiz</a>
+          </div>
+          <div class="rec">
+            <a href="#">Phone Quiz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script th:inline="javascript">
+    let oldScroll = 0;
+    document
+      .getElementById("down-button")
+      .addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        document.getElementById("recs").scrollIntoView({
+          block: "start",
+          behavior: "smooth",
+        });
+
+        Array.from(document.getElementsByClassName("rec")).forEach(
+          (div, key) => {
+            var newDom = "";
+            var animationDelay = 3;
+
+            div.classList.add("fade-in");
+          }
+        );
+      });
+    document.getElementById("up-button").addEventListener("mousedown", (e) => {
+      e.preventDefault();
+      document.getElementById("main").scrollIntoView({
+        behavior: "smooth",
+      });
+    });
+
+    //Form Submit
+    document.getElementById("submit").addEventListener("mousedown", () => {
+      var text = document.getElementById("inp-field").value;
+      console.log(text);
+
+      $.ajax({
+        url: "http://localhost:8080/search",
+        type: "POST",
+        contentType: "application/json",
+        data: text,
+        success: function (response) {
+          console.log("success");
+          location.reload();
+        },
+        error: function () {
+          console.log("error");
+        },
+      });
+    });
+  </script>
+</html>

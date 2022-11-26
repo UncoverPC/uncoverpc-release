@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="assets/Logo.svg" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="/static/assets/styles/quiz.css" />
+    
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Quiz - UncoverPC</title>
+
+  </head>
+
+  <body>
+    <div id="main">
+      <div id="wrapper">
+        <img src="thumbnails/Logo.svg" class="logo-small" />
+      </div>
+      <div id="holder">
+        <div class="visible" id="homepage">
+          <h1 class="header">Ready to find the perfect 
+            <span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
+          <button id="start-button" onclick="startQuiz('homepage')">Get Started!</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+  <script th:inline="javascript">
+    let currentQuestion = 0;
+
+    let questions = [{
+        question: "How many hours of battery life?",
+        answers: ["1-3 hours", "3-5 hours", "5-9 hours", "9-12 hours"],
+      },
+      {
+        question: "How much RAM",
+        answers: ["8", "12", "16", "32"],
+      },
+      {
+        question: "How much storage",
+        answers: ["250", "500", "1000", "2000"],
+      }];
+
+    questions = /*[[${questions}]]*/ 'questions';
+    let userAnswers = new Array(questions.length);
+    userAnswers.fill("");
+    let answeredQuestions = new Array(questions.length);
+    answeredQuestions.fill(false);
+    
+    function select(id) {
+      let btn = document.getElementById(id);
+
+
+      if(btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        answeredQuestions[currentQuestion] =false;
+
+      } else if(!answeredQuestions[currentQuestion]) {
+        btn.classList += " selected";
+        answeredQuestions[currentQuestion]=true;
+      }
+    }
+
+    function startQuiz(target) {
+      fadeOut(target);
+      nextQuestion(true);
+    }
+
+    function fadeOut(target) {
+      let element = document.getElementById(target);
+      element.className = "hidden";
+    }
+    
+    function saveQuestion() {
+      selected = document.querySelector(".selected");
+      userAnswers[currentQuestion]= selected.innerHTML;
+    }
+
+    function saveQuiz() {
+      saveQuestion();
+      fadeOut("question"+currentQuestion);
+      let home = document.getElementById("holder");
+      setTimeout(() => {home.innerHTML = `<div class="lds-dual-ring"></div>`;},500);
+    }
+
+    function nextQuestion(start) {
+      if(!start) {
+        saveQuestion(currentQuestion);
+        currentQuestion++;
+      }
+      let questionSelector = currentQuestion;
+      let qid = "question"+(questionSelector-1);
+
+      if(!start) {
+        fadeOut(qid);
+      }
+
+      let home = document.getElementById("holder");
+      let id = 'answers'+currentQuestion;
+      if(currentQuestion+1 == questions.length) {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="saveQuiz()"> Save </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+      else if(currentQuestion==0){
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+      else {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+    }
+
+    function prevQuestion() {
+      fadeOut("question"+currentQuestion);
+      answeredQuestions[currentQuestion] = false;
+      currentQuestion--;
+      answeredQuestions[currentQuestion] = false;
+
+      let questionSelector = currentQuestion;
+      let home = document.getElementById("holder");
+      let id = 'answers'+currentQuestion;
+
+      if(currentQuestion+1 == questions.length) {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="submitQuiz()"> Submit </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+      else if(currentQuestion==0){
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+      else {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+    }
+
+    function addAnswers(id) {
+      let element = document.getElementById(id);
+      console.log(element)
+      for(let i=0; i<questions[currentQuestion].answers.length; i++) {
+        element.innerHTML += `<button class="answer-button" id="answer${currentQuestion}${i}" onClick='select("answer${currentQuestion}${i}")'">${questions[currentQuestion].answers[i]}</button>`;
+      }   
+    }
+
+
+    function submitQuiz() {
+      $.ajax({
+          url: "/api/quiz/submit",
+          type: "GET",
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(
+            userAnswers
+          ),
+          success: function (response) {
+            loadRecommendations(response);
+          },
+          error: function (e) {
+            alert("Error!");
+          },
+        });
+    }
+
+    function loadRecommendations(products) {
+      
+    }
+  </script>
+</html>
