@@ -3,18 +3,36 @@ package com.uncoverpc.model.quiz;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.uncoverpc.db.QuizProductService;
 import com.uncoverpc.product.Product;
 
 public class MatchingAlgorithm {
 
-	
+	@Autowired
+	private QuizProductService quizProductService;
+    
 	public List<Product> matchProduct(Quiz quiz, List<QuizResponseAnswer> quizResponseAnswers){
-		List<Product> products;
-		//Use hashmap
 		//Create a list of all question
 		//Get list of questions
 		//Find the question keyword
 		//Find 
+		List<Product> products = quizProductService.findAll();//TO DO, implement find by specific quiz
+		
+		//Iterate through ever quiz question
+		for(int i = 0; i < quiz.getQuestions().size(); i++) {
+		    //Get Users Answer
+		    String userResponse = quizResponseAnswers.get(i).getAnswer();
+		    for(int j = 0; j < products.size(); j++) {
+		        //TO DO change to identifier instead of question
+//		        Answer answer = (Answer) products.get(j).getAnswerBank().get(quiz.getQuestions().get(i).getQuestion());
+//		        if()
+		    }
+		    
+		}
+		
+		
 		
 		//= QuizProductService quiz.getTitle()//getting list of products
 //		for(Question question: quiz.getQuestions()) {
