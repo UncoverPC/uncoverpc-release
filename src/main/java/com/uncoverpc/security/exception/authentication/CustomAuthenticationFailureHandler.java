@@ -44,7 +44,7 @@ public class CustomAuthenticationFailureHandler
           response.sendRedirect("/login?error=unverified");
       }else {
           //TO DO, send email to devs
-          //TO DO, add error value
+          //TO DO, add error value 
 //          response.send
           response.sendRedirect("/error");
       }
