@@ -5,11 +5,17 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Verify Success - UncoverPC</title>
+        <link rel="icon" href="/assets/images/Logo.svg">
+        <link rel="stylesheet" th:href="@{/assets/dist/styles.css}" />
     </head>
-    <body>
-        <div class="container text-center">
-            <h3>Congratulations, your account has been verified.</h3>
-            <h4><a href="/login">Click here to Login</a></h4>
+    <body class="bg-black h-screen overflow-y-hidden">
+        <div class="text-center text-black bg-white my-12 mx-16 h-5/6 rounded-lg p-12 flex justify-center items-center gap-x-4">
+            <img src="/assets/images/Logo.svg" alt="UncoverPC Logo"
+							class="wxs:w-8 md:w-16 xs:h-8 md:h-16" />
+            <div class="flex flex-col">
+                <p ckass="text-2xl">Congratulations, your account has been verified!</p>
+                <p class="text-lg"><a href="/login">Click here to return to login</a></p>
+            </div>
         </div>
     </body>
 </html>
