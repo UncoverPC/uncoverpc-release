@@ -15,10 +15,10 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class CustomAuthenticationFailureHandler 
-implements AuthenticationFailureHandler {
+public class CustomAuthenticationFailureHandler
+        implements AuthenticationFailureHandler {
 
-  private ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper = new ObjectMapper();
 
   @Override
   public void onAuthenticationFailure(
@@ -26,7 +26,7 @@ implements AuthenticationFailureHandler {
     HttpServletResponse response,
     AuthenticationException exception) 
     throws IOException, ServletException {
-
+      
       response.setStatus(HttpStatus.UNAUTHORIZED.value());
       Map<String, Object> data = new HashMap<>();
       data.put(
@@ -37,6 +37,17 @@ implements AuthenticationFailureHandler {
         exception.getMessage());
       response.getOutputStream()
         .println(objectMapper.writeValueAsString(data));
+      if(exception.getMessage().equals("Bad credentials")) {
+          response.sendRedirect("/login?error=badCredentials");
+      }
+      else if(exception.getMessage().equals("User is disabled")) {
+          response.sendRedirect("/login?error=unverified");
+      }else {
+          //TO DO, send email to devs
+          //TO DO, add error value
+//          response.send
+          response.sendRedirect("/error");
+      }
   }
 
 }
