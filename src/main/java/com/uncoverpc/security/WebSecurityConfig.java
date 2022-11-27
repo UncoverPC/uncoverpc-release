@@ -10,6 +10,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -82,6 +83,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return roleHierarchy;
     }
     
+
     // @Bean
     // public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler() {
     //     DefaultWebSecurityExpressionHandler expressionHandler = new DefaultWebSecurityExpressionHandler();
@@ -89,19 +91,21 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     //     return expressionHandler;
     // }
 
+
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         http.cors();
         http.headers().xssProtection();
         http.authenticationProvider(authenticationProvider());
-        http.authorizeRequests().antMatchers("/admin/*").hasRole(Roles.Role.ADMIN.toString()).and().formLogin()
-                .failureHandler(authenticationFailureHandler()).loginPage("/login")
+        http.authorizeRequests().antMatchers("/admin/*").hasAuthority(Roles.Role.ADMIN.toString()).and().formLogin()
+                .failureHandler(authenticationFailureHandler()).loginPage("/login").defaultSuccessUrl("/admin/dashboard")
                 .usernameParameter("email").defaultSuccessUrl("/admin/dashboard");
-        http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().formLogin().loginPage("/login")
+        http.authorizeRequests().antMatchers("/user/*").hasAuthority(Roles.Role.USER.toString()).and().formLogin().loginPage("/login")
                 .usernameParameter("email").defaultSuccessUrl("/user/dashboard");
         http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID", "jwt");
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JWT");
         return http.build();
     }
 }
