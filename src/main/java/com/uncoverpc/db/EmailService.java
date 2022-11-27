@@ -84,7 +84,39 @@ public class EmailService {
             helper.setTo(toAddress);
             helper.setSubject(subject);
              
-            String verifyURL = siteURL + "/verify?code=" + user.getVerificationCode();
+            String verifyURL = siteURL + "/verifyEarly?code=" + user.getVerificationCode();
+             
+            content = content.replace("[[URL]]", verifyURL);
+             
+            helper.setText(content, true);
+             
+            mailSender.send(message);
+    	} catch(MessagingException | UnsupportedEncodingException e) {
+            LOGGER.error("failed to send email", e);
+            throw new IllegalStateException("failed to send email");
+    	}
+    }
+    
+    public void sendResetPasswordEmail(User user, String siteURL) {
+    	try {
+            String toAddress = user.getEmail();
+            String fromAddress = "uncoverpc@gmail.com";
+            String senderName = "UncoverPC";
+            String subject = "Reset Password";
+            String content = "Hello,<br>"
+                    + "Please click the link below to reset your password:<br>"
+                    + "<h3><a href=\"[[URL]]\" target=\"_self\">RESET</a></h3>"
+                    + "Thank you,<br>"
+                    + "UncoverPC.";
+             
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+             
+            helper.setFrom(fromAddress, senderName);
+            helper.setTo(toAddress);
+            helper.setSubject(subject);
+             
+            String verifyURL = siteURL + "/resetPassword?code=" + user.getVerificationCode();
              
             content = content.replace("[[URL]]", verifyURL);
              
@@ -99,7 +131,7 @@ public class EmailService {
     
     public boolean verify(String verificationCode) {
         User user = userService.findByVerificationCode(verificationCode);
-         
+        
         if (user == null || user.isEnabled()) {
             return false;
         } else {

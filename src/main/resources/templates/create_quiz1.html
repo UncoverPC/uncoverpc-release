@@ -131,6 +131,14 @@ lang="en">
               name="identifier"
               placeholder="Identifier"
              />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="image_1"
+              name="image"
+              placeholder="Insert Image Link"
+             />
          </div>
          <button class="delete_question" onclick = "delQuestion(1)"> Delete Question</button>
 
@@ -263,6 +271,7 @@ lang="en">
         var keywordsAsStr = document.getElementById("keywords_"+i).placeholder;
         var cKeywords = keywordsAsStr.split(",");
         var cIdentifier = document.getElementById("identifier_"+i).placeholder;
+        var cImage = document.getElementById("image_"+i).placeholder;
 
         if(cQuestion != null){
             for(let j = 1; j <= answerCounter[i-1]; j++) {
@@ -276,6 +285,7 @@ lang="en">
               scalable: cScalable,
               identifier: cIdentifier,
               keywords: cKeywords,
+              imageLink: cImage,
             }
             quiz.questions.push(tempQuestion);
           }
@@ -419,6 +429,14 @@ lang="en">
               name="identifier"
               placeholder="Identifier"
              />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="image_1"
+              name="image"
+              placeholder="Insert Image Link"
+             />
          </div>
          <button class="delete_question" onclick ="delQuestion(${question_counter})"> Delete Question</button>
         </div>
@@ -444,11 +462,15 @@ lang="en">
         });
         var identifier = document.getElementById("identifier_"+i)
         var keywords = document.getElementById("keywords_"+i)
+        var image = document.getElementById("image_1")
         if(identifier.placeholder != "Identifier") {
           identifier.value = identifier.placeholder;
         }
         if(keywords.placeholder!="Keywords (separate by space)") {
           keywords.value = keywords.placeholder;
+        }
+        if(image.placeholder!="Insert Image Link") {
+          image.value = image.placeholder;
         }
         }
       }

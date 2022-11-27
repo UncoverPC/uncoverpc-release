@@ -227,7 +227,15 @@ lang="en">
     }
 
     function loadRecommendations(products) {
-      
+      let home = document.getElementById("holder");
+      home.innerHTML = "";
+      for(let i=0; i<products.length; i++) {
+        home.innerHTML +=
+        `<div>
+          
+         </div>`
+
+      }
     }
   </script>
 </html>
