@@ -36,11 +36,38 @@ public class EmailService {
             String fromAddress = "uncoverpc@gmail.com";
             String senderName = "UncoverPC";
             String subject = "Please verify your registration";
-            String content = "Dear [[name]],<br>"
-                    + "Please click the link below to verify your registration:<br>"
-                    + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
-                    + "Thank you,<br>"
-                    + "UncoverPC.";
+            // String content = "Dear [[name]],<br>"
+            //         + "Please click the link below to verify your registration:<br>"
+            //         + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
+            //         + "Thank you,<br>"
+            //         + "UncoverPC.";
+
+            String content = """
+                <html>
+                    <head>
+                    <link rel='noopener' target='_blank' href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+                        <style>
+                            h1, p{
+                                font-family: 'Raleway', Arial, sans-serif;
+                            }
+                            a{
+                                color: white;
+                            }
+                        </style>
+                    </head>
+                    <body style='width: 90%; height: auto; background: rgb(2,0,36); background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(25,3,64,1) 5%, rgba(71,9,121,1) 32%, rgba(44,87,173,1) 61%, rgba(21,151,215,1) 90%, rgba(0,212,255,1) 100%); display: flex; align-items:center; justify-content: center; margin: 0.5rem; padding: 2rem; border-radius: 0.5rem;'>
+                        <div style='background-color: black; color:white; width: 100%; height: 100%; border-radius: 0.25rem; padding: 1rem; margin: auto; text-align: center;'>
+                            <h1>Dear [[name]],</h1>
+                            <p>
+                                Please click the link below to verify your registration:<br>
+                                <h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>
+                                Thank you,<br>
+                                UncoverPC.
+                            </p>
+                        </div>
+                    </body>
+                </html>
+            """;
              
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
