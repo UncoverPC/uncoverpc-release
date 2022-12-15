@@ -149,20 +149,7 @@ public class UserController {
 	    }
 	}
 	
-	@GetMapping("/resetPassword")
-	public ModelAndView resetPassword(@Param("code") String code) {
-		User user = userService.findByVerificationCode(code);
-		System.out.println(user);
-		ModelAndView model = new ModelAndView("resetPassword.html");
-		if(user.getEmail() == null) {
-			model.addObject("message","error");
-			return model;
-		}
-		else {
-		model.addObject("email", user.getEmail());
-		return model;
-		}
-	}
+
 	
 
 

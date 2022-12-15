@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +15,7 @@ import com.uncoverpc.model.user.EarlyUser;
 
 import net.bytebuddy.utility.RandomString;
 
+@Controller
 public class EarlyUserController {
 	@Autowired
 	private EmailService emailService;
@@ -21,10 +23,8 @@ public class EarlyUserController {
 	@Autowired
 	private EarlyUserService earlyUserService;
 	
-	private static final String URI_PATH = "";
-	private static final String FOLDER_PATH = "";
 	
-	@PostMapping(URI_PATH + "/earlyaccess")
+	@PostMapping("/signup/early")
 	public ModelAndView registerEarlyAccess( EarlyUser earlyUser, HttpServletRequest request) {
 		try {
 			EarlyUser checkUser = earlyUserService.findByEmail(earlyUser.getEmail());

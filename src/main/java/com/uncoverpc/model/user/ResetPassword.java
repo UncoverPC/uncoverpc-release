@@ -5,6 +5,10 @@ public class ResetPassword {
 	private String password;
 	private String confirmPassword;
 	
+	public ResetPassword() {
+		
+	}
+	
 	public ResetPassword(String email, String password, String confirmPassword) {
 		this.email = email;
 		this.password = password;

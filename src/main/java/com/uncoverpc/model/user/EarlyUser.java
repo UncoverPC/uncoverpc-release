@@ -1,11 +1,18 @@
 package com.uncoverpc.model.user;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document("early-users")
 public class EarlyUser {
+
 	private String name;
 	private String email;
 	private String referral;
 	private String verificationCode;
 	private Boolean enabled = false;
+	
+	public EarlyUser() {
+		
+	}
 	
 	public EarlyUser(String name, String email, String referral) {
 		this.name = name;

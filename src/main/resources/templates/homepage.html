@@ -36,8 +36,7 @@ lang="en">
         <h2 style="margin-left: 5%;">Get Updates</h2>
         <h4 style="margin-left: 5%;">Thank you for your interest and support!</h2>
 
-      <form id="ea-form" th:action="@{/earlyaccess}" method="post" th:object="${earlyuser}">
-        <input type="hidden" name="${_csrf.headerName}" value="${_csrf.token}"/>
+      <form id="ea-form" th:action="@{/signup/early}" method="post" th:object="${earlyuser}">
         <input class="form-input" name="name" id="name" type="name" placeholder="Enter Name" />
         <input class="form-input" name="email" id="email" type="email" placeholder=" Enter E-mail" />
         <select class="form-input" name="referral" id="referral" type="referral" placeholder=" Referral"> 
