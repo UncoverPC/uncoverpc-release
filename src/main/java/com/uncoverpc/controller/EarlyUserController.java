@@ -24,7 +24,7 @@ public class EarlyUserController {
 	private EarlyUserService earlyUserService;
 	
 	
-	@PostMapping("/signup/early")
+	@PostMapping("/earlyaccess")
 	public ModelAndView registerEarlyAccess( EarlyUser earlyUser, HttpServletRequest request) {
 		try {
 			EarlyUser checkUser = earlyUserService.findByEmail(earlyUser.getEmail());

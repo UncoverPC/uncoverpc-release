@@ -1,12 +1,11 @@
 package com.uncoverpc.model.user;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-@Document("early-users")
+@Document("earlyusers")
 public class EarlyUser {
 
 	private String name;
 	private String email;
-	private String referral;
 	private String verificationCode;
 	private Boolean enabled = false;
 	
@@ -14,10 +13,9 @@ public class EarlyUser {
 		
 	}
 	
-	public EarlyUser(String name, String email, String referral) {
+	public EarlyUser(String name, String email) {
 		this.name = name;
 		this.email = email;
-		this.referral = referral;
 	}
 	public String getName() {
 		return this.name;
@@ -28,9 +26,7 @@ public class EarlyUser {
 	public String getEmail() {
 		return this.email;
 	}
-	public String getReferral() {
-		return this.referral;
-	}
+
 	public String getVerificationCode() {
 		return this.verificationCode;
 	}
@@ -41,9 +37,6 @@ public class EarlyUser {
 		this.email = email;
 	}
 	
-	public void setReferral(String referral) {
-		this.referral = referral;
-	}
 	
 	public void setVerificationCode(String code) {
 		this.verificationCode = code;
