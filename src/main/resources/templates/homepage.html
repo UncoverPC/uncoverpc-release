@@ -8,7 +8,7 @@ lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
     <link rel="stylesheet" th:href="@{/assets/styles/homepage.css}" />
-    <link rel="stylesheet" href="/main/resources/static/assets/styles/homepage.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/styles/homepage.css" />
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     
@@ -24,12 +24,7 @@ lang="en">
   <body class="color_theme" id="text_container">
     <div id="navbar">
       <img src="@{/assets/images/Logo.svg}" style="width: 2.5%; height:1%; margin-left: 10%; margin-top: 5px; margin-bottom: 5px;">
-      <div id="nav-holder">
-        <a href="#landing" class="navigator">Home</a>
-        <a href="#purpose" class="navigator">What We Do</a>
-        <a href="#contact" class="navigator">Contact Us</a>
-        <button id="login">Login</button>
-      </div>      
+      <button id="login" style="left: 90%;">Login</button>   
     </div>
 
     <div class="hidden" id="early-access">
