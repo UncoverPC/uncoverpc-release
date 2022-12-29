@@ -109,8 +109,8 @@ public class UserController {
 			
 			emailService.sendVerificationEmail(user, getSiteURL(request));
 			
-			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/login");
-			modelAndView.addObject("message", "Register Success!");
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/registersuccess");
+			//modelAndView.addObject("message", "Register Success!");
 			
 			return modelAndView;
 		} catch (Exception e) {
@@ -162,6 +162,11 @@ public class UserController {
 	    } else {
 	        return "verifyFail.html";
 	    }
+	}
+
+	@GetMapping(URI_PATH + "/registersuccess")
+	public ModelAndView registerSuccess() {
+		return new ModelAndView(FOLDER_PATH + "/registerSuccess");
 	}
 
 }
