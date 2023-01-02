@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
+    <!-- <link rel="stylesheet" th:href="@{/assets/styles/homepage.css}" /> -->
+    
+    <!-- <link th:href='@{https://fonts.googleapis.com/css?family=Raleway}' rel='stylesheet'> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Home - UncoverPC</title>
+    <style>
+        #property-table{
+            border: 1px solid black;
+        }
+    </style>
+  </head>
+
+  <body>
+    <form id="property-form" onsubmit = "send(event)">
+        <select id = "property-select" required>
+            <option value="" disabled selected >Choose Product...</option>
+            <option value="laptop">Laptop</option>
+            <option value="desktop">Desktop</option>
+            <option value="mouse">Mouse</option>
+        </select>  
+        <input type = "text" id = "include-property" placeholder = "Insert Property" onkeyup="checkProp()" autocomplete="off">
+        <button id = "add-btn" type="button" onclick="addProperty()" disabled>Add Property</button>
+        <input id = "submit-btn" type="submit" data-action="search" value = "Go">
+
+        <table id = "property-table"></table>
+    </form>
+
+  </body>
+
+  <script>
+    var numRows = 0;
+    var numCols = 0;
+
+    function addProperty(){
+        
+        var table = document.getElementById("property-table");
+        var textbox = document.getElementById("include-property");
+        var content = textbox.value;
+        var cells = table.getElementsByTagName("td");
+        var row = table.insertRow(0);
+        var cell = row.insertCell(0);
+        cell.innerHTML = '<p class = "property-value">'+textbox.value+'</p>';
+        cell = row.insertCell(1);
+        cell.innerHTML = '<button class = "del-cell" onclick = "removeCell()">X</button>';
+        
+
+
+        textbox.value="";
+        document.getElementById('add-btn').disabled = true; 
+    }
+    function removeCell(){
+        var td = event.target.parentNode; 
+        var tr = td.parentNode;
+        tr.parentNode.removeChild(tr);
+    }
+    function checkProp(){
+        if(document.getElementById("include-property").value==="") { 
+            document.getElementById('add-btn').disabled = true; 
+        } else { 
+            document.getElementById('add-btn').disabled = false;
+        }
+    }
+
+    function send(event){
+        event.preventDefault();
+        var tableContents = document.querySelectorAll(".property-value")
+        var properties = []
+
+
+        for (var i = 0; i < tableContents.length; i++) {
+            properties.push(tableContents[i].textContent);
+        }
+
+        console.log(properties)
+        var product = document.getElementById("property-select").value
+        var propertyJSON = {
+            "Product": product,
+            "Properties": properties,
+        }
+        
+        fetch("http://localhost:8080/searchProduct", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "post",
+            body: JSON.stringify(propertyJSON)
+        })
+    }
+   
+  </script>
+</html>
