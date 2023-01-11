@@ -172,7 +172,7 @@ public class UserController {
 	}
 	
 	@GetMapping(URI_PATH + "/verify")
-	public String verifyUser(@Param("code") String code) {
+	public ModelAndView verifyUser(@Param("code") String code) {
 
 	    if (emailService.verify(code)) {
 	    	ModelAndView model = new ModelAndView("verifySuccess.html");

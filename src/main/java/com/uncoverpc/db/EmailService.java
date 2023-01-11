@@ -40,33 +40,31 @@ public class EmailService {
             //         + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
             //         + "Thank you,<br>"
             //         + "UncoverPC.";
-
-            String content = """
-                <html>
-                    <head>
-                    <link rel='noopener' target='_blank' href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
-                        <style>
-                            h1, p{
-                                font-family: 'Raleway', Arial, sans-serif;
-                            }
-                            a{
-                                color: white;
-                            }
-                        </style>
-                    </head>
-                    <body style='width: 90%; height: auto; background: rgb(2,0,36); background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(25,3,64,1) 5%, rgba(71,9,121,1) 32%, rgba(44,87,173,1) 61%, rgba(21,151,215,1) 90%, rgba(0,212,255,1) 100%); display: flex; align-items:center; justify-content: center; margin: 0.5rem; padding: 2rem; border-radius: 0.5rem;'>
-                        <div style='background-color: black; color:white; width: 100%; height: 100%; border-radius: 0.25rem; padding: 1rem; margin: auto; text-align: center;'>
-                            <h1>Dear [[name]],</h1>
-                            <p>
-                                Please click the link below to verify your registration:<br>
-                                <h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>
-                                Thank you,<br>
-                                UncoverPC.
-                            </p>
-                        </div>
-                    </body>
-                </html>
-            """;
+            String content = "<html>\r\n"
+            		+ "                    <head>\r\n"
+            		+ "                    <link rel='noopener' target='_blank' href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>\r\n"
+            		+ "                        <style>\r\n"
+            		+ "                            h1, p{\r\n"
+            		+ "                                font-family: 'Raleway', Arial, sans-serif;\r\n"
+            		+ "                            }\r\n"
+            		+ "                            a{\r\n"
+            		+ "                                color: white;\r\n"
+            		+ "                            }\r\n"
+            		+ "                        </style>\r\n"
+            		+ "                    </head>\r\n"
+            		+ "                    <body style='width: 90%; height: auto; background: rgb(2,0,36); background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(25,3,64,1) 5%, rgba(71,9,121,1) 32%, rgba(44,87,173,1) 61%, rgba(21,151,215,1) 90%, rgba(0,212,255,1) 100%); display: flex; align-items:center; justify-content: center; margin: 0.5rem; padding: 2rem; border-radius: 0.5rem;'>\r\n"
+            		+ "                        <div style='background-color: black; color:white; width: 100%; height: 100%; border-radius: 0.25rem; padding: 1rem; margin: auto; text-align: center;'>\r\n"
+            		+ "                            <h1>Dear [[name]],</h1>\r\n"
+            		+ "                            <p>\r\n"
+            		+ "                                Please click the link below to verify your registration:<br>\r\n"
+            		+ "                                <h3><a href='[[URL]]' target='_self'>VERIFY</a></h3>\r\n"
+            		+ "                                Thank you,<br>\r\n"
+            		+ "                                UncoverPC.\r\n"
+            		+ "                            </p>\r\n"
+            		+ "                        </div>\r\n"
+            		+ "                    </body>\r\n"
+            		+ "                </html>";
+           
              
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
