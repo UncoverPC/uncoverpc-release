@@ -125,8 +125,8 @@ public class UserController {
 			
 			emailService.sendVerificationEmail(user, getSiteURL(request));
 			
-			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/login");
-			modelAndView.addObject("message", "Register Success!");
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/registersuccess");
+			//modelAndView.addObject("message", "Register Success!");
 			
 			return modelAndView;
 		} catch (Exception e) {
@@ -136,10 +136,44 @@ public class UserController {
 			return modelAndView;
 		}
 	}
+
+	@PostMapping(URI_PATH+"/register/early") 
+	public ModelAndView registerEarly(User user, HttpServletRequest request){
+		try {
+			// checking if account already created
+			//TO DO check if user contains a email and password
+			System.out.println(user);
+			User checkUser = userService.findByEmail(user.getEmail());
+			if (checkUser != null) {
+				throw new Exception();
+			}
+
+			String randomCode = RandomString.make(64);
+			user.setVerificationCode(randomCode);
+			user.setEnabled(false);
+			
+			user.setRegisterTimestamp();
+			
+			userService.save(user);
+			
+			emailService.sendVerificationEmail(user, getSiteURL(request));
+			
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/login");
+			modelAndView.addObject("message", "Register Success!");
+			
+			return modelAndView;
+		} catch (Exception e) {
+			
+			ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/signUp");
+			modelAndView.addObject("message", "Email Already Exist!");
+			return modelAndView;
+		}
+		
+	}
 	
-	@GetMapping("/verify")
-	public ModelAndView verifyUser(@Param("code") String code) {
-		System.out.println("verifying");
+	@GetMapping(URI_PATH + "/verify")
+	public String verifyUser(@Param("code") String code) {
+
 	    if (emailService.verify(code)) {
 	    	ModelAndView model = new ModelAndView("verifySuccess.html");
 	    	return model;
@@ -152,5 +186,10 @@ public class UserController {
 
 	
 
+
+	@GetMapping(URI_PATH + "/registersuccess")
+	public ModelAndView registerSuccess() {
+		return new ModelAndView(FOLDER_PATH + "/registerSuccess");
+	}
 
 }
