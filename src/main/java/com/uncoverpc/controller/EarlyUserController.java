@@ -52,10 +52,10 @@ public class EarlyUserController {
 	public ModelAndView verifyUser(@Param("code") String code) {
 		System.out.println("verifying");
 	    if (verifyEarly(code)) {
-	    	ModelAndView model = new ModelAndView("verifySuccess.html");
+	    	ModelAndView model = new ModelAndView("/users/verifySuccess.html");
 	    	return model;
 	    } else {
-	    	ModelAndView model = new ModelAndView("verifyFail.html");
+	    	ModelAndView model = new ModelAndView("/users/verifyFail.html");
 	    	return model;
 	    }
 	}

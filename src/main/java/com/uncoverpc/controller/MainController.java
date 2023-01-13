@@ -9,17 +9,17 @@ public class MainController {
 
 	@GetMapping("/home")
 	public ModelAndView home() {
-		return new ModelAndView("homepage.html");
+		return new ModelAndView("/main/homepage.html");
 	}
 
 	@GetMapping("/admin/dashboard")
 	public ModelAndView adminDashbaord() {
-		return new ModelAndView("/admin_dashboard.html");
+		return new ModelAndView("/admin/admin_dashboard.html");
 	}
 	
 	@GetMapping("/explore")
 	public ModelAndView explorePage() {
-		return new ModelAndView("explore.html");
+		return new ModelAndView("/main/explore.html");
 	}
 
 	

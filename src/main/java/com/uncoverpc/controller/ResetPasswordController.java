@@ -18,12 +18,12 @@ public class ResetPasswordController {
 	@Autowired
 	private UserService userService;
 	
-	private static final String FOLDER_PATH = "";
+	private static final String FOLDER_PATH = "/users";
 	
 	@GetMapping("/resetPassword")
 	public ModelAndView resetPassword(@Param("code") String code) {
 		User user = userService.findByVerificationCode(code);
-		ModelAndView model = new ModelAndView("resetPassword.html");
+		ModelAndView model = new ModelAndView(FOLDER_PATH +"/resetPassword.html");
 		if(user.getEmail() == null) {
 			model.addObject("message","error");
 			return model;

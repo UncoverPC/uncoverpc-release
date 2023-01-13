@@ -32,7 +32,7 @@ public class UserController {
 	private EmailService emailService;
 
 	private static final String URI_PATH = "";
-	private static final String FOLDER_PATH = "";
+	private static final String FOLDER_PATH = "/users";
 	
     private String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();
@@ -172,13 +172,13 @@ public class UserController {
 	}
 	
 	@GetMapping(URI_PATH + "/verify")
-	public String verifyUser(@Param("code") String code) {
+	public ModelAndView verifyUser(@Param("code") String code) {
 
 	    if (emailService.verify(code)) {
-	    	ModelAndView model = new ModelAndView("verifySuccess.html");
+	    	ModelAndView model = new ModelAndView("/email/verifySuccess.html");
 	    	return model;
 	    } else {
-	    	ModelAndView model = new ModelAndView("verifyFail.html");
+	    	ModelAndView model = new ModelAndView("/email/verifyFail.html");
 	    	return model;
 	    }
 	}
