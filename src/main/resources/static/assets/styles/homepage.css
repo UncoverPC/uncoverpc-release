@@ -302,6 +302,18 @@ html {
       top: -3.6em;
   }
 }
+
+@media only screen and (max-width: 1500px) {
+  #mission-explained {
+    display: flex;
+    flex-direction: column;
+  }
+  .mission-div {
+    width: auto;
+    margin: 0;
+  }
+}
+
 @media only screen and (max-width: 650px) {
   #login {
     margin-left: 70%;

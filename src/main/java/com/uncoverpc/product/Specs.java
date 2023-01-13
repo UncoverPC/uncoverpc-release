@@ -1,5 +1,7 @@
 package com.uncoverpc.product;
 
+import java.util.HashMap;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Specs {
@@ -41,6 +43,20 @@ public class Specs {
 	public String toString() {
 		return "Specs [use=" + use + ", battery=" + battery + ", color=" + color + ", link=" + link + ", ram=" + ram
 				+ ", screenSize=" + screenSize + ", storage=" + storage + "]";
+	}
+	
+	public HashMap<String, String> getMap() {
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("use", this.use);
+		map.put("battery", String.valueOf(this.battery));
+		map.put("colour", this.color);
+		map.put("link", this.link);
+		map.put("ram", String.valueOf(this.ram));
+		map.put("screenSize", String.valueOf(this.screenSize));
+		map.put("storage", String.valueOf(this.storage));
+		
+		return map;
+		
 	}
 
 	public int getBattery() {
