@@ -52,7 +52,7 @@ body,
         font-weight: bold;
         color: white;
         text-align: center;
-        margin-top: 45vh;
+        margin-top: 40vh;
       }
 
       .question {
@@ -138,6 +138,46 @@ body,
         background-color: rgb(26, 25, 49);
       }
 
+      .productHolder {
+        margin: auto;
+        width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+        border-radius: 10px;
+      }
+      .productName {
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bolder;
+      }
+      .productImg {
+        width: 375px;
+        border-radius: 10px;
+      }
+      .productPrice {
+        color: white;
+        font-weight: bold;
+      }
+      .productName:hover {
+        color: rgb(120, 120, 210)
+      }
+      .propText {
+        color: white;
+        text-align: left;
+        font-weight: bolder;
+        font-size: 18px;
+        margin: 10px;
+      }
+      .productProperties {
+        background-color: rgb(38, 37, 37);
+        width: 375px;
+        border-radius: 10px;
+      }
+
+
       button:hover {
         background-color: rgb(43, 43, 133);
         transform: translateY(-5px);
@@ -199,5 +239,21 @@ body,
         100% {
           opacity: 0%;
           transform: translateY(30px);
+        }
+      }
+
+      @media only screen and (max-width: 750px) {
+        #wrapper {
+          width: 0;
+          overflow: hidden;
+        }
+      }
+
+      @media only screen and (max-width: 550px) {
+        .header {
+          font-size: 42px;
+        }
+        .answer-button {
+          width: 30vh;
         }
       }

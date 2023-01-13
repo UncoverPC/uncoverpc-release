@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uncoverpc.db.EarlyUserService;
@@ -24,8 +26,9 @@ public class EarlyUserController {
 	private EarlyUserService earlyUserService;
 	
 	
-	@PostMapping("/signup/early")
-	public ModelAndView registerEarlyAccess( EarlyUser earlyUser, HttpServletRequest request) {
+	@PostMapping("/earlyaccess")
+	@ResponseBody
+	public String registerEarlyAccess(@RequestBody EarlyUser earlyUser, HttpServletRequest request) {
 		try {
 			EarlyUser checkUser = earlyUserService.findByEmail(earlyUser.getEmail());
 			if (checkUser != null) {
@@ -39,15 +42,10 @@ public class EarlyUserController {
 			
 			emailService.sendEarlyVerificationEmail(earlyUser, getSiteURL(request));
 			
-			ModelAndView modelAndView = new ModelAndView("/home");
-			modelAndView.addObject("message", "Register Success!");
-			return modelAndView;
+			return "Register Success!";
 			
 		} catch (Exception e) {
-		
-		ModelAndView modelAndView = new ModelAndView("/home");
-		modelAndView.addObject("message", "Email Already Exists!");
-		return modelAndView;
+		return "Failed";
 	}
 }
 	@GetMapping("/verifyEarly")

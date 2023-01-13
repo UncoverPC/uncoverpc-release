@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="assets/Logo.svg" />
+    <link rel="icon" href="/static/assets/images/Logo.svg" />
+    <link rel="stylesheet" href="/static/assets/styles/admin_dashboard.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       rel="stylesheet"
@@ -16,302 +17,13 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-    <title>Add Product - UncoverPC</title>
-
-    <style>
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-          font-family: "Raleway", sans-serif;
-        }
-  
-        body,
-        html {
-          height: 100%;
-          line-height: 1.8;
-        }
-
-
-        .w3-bar .w3-button {
-          padding: 16px;
-        }
-        
-  
-        .color_theme {
-          background-color: rgb(17, 17, 23);
-          color: antiquewhite;
-        }
-  
-        * {
-          margin: 0;
-          padding: 0;
-        }
-        #titles{
-            position: relative;
-        }
-
-        .logo {
-            font-weight: 100;
-            opacity: 1;
-            font-size: 54px;
-            font-style: italic;
-            color: aliceblue;
-            margin: 0;
-            font-weight: bold;
-        }
-
-        #admin_logo {
-          font-size: 70px;
-          text-align: center;
-        }
-
-        #main_logo {
-          position: relative;
-          text-align: center;
-          font-weight: 100;
-          opacity: 1;
-          font-size: 96px;
-          font-style: italic;
-          background: -webkit-linear-gradient(
-            RGBA(200, 81, 81, 200),
-            RGBA(60, 150, 300, 200),
-            RGBA(250, 150, 300, 200)
-          );
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          margin: 0;
-        }
-        /* Statistics Section CSS */
-        .graph-label {
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            padding: 0px;
-            margin: 0px;
-        }
-
-        .edit_button {
-          width: 200px;
-          height: 50px;
-          border-radius: 10px;
-          font-size: 24px;
-          line-height: 26px;
-          text-align: center;
-          color: #FFFEFE;
-          background-color: #162252;
-          border-width: 0;
-          margin: auto;
-          margin-left: 37%;
-        }
-        .edit_button:hover{
-          background-color: #21337c;
-        }
-
-        .mainpage {
-            border-radius: 20px;
-            padding: 20px;
-            position: relative;
-            width: 100%;
-            margin: 0 8%;
-        }
-
-        #visits-box {
-            width: 798px;
-            height: 565px;
-            left: 37px;
-            top: 132px;
-            margin-left: 10px;
-            overflow: hidden;
-            background: #283B80;
-            border-radius: 20px;
-        }
-
-        #visits-graphbox {
-          width: 772px;
-          height: 502px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          margin: 0 auto;
-        }
-        #visits-graph {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        #quiztype-box {
-          position: absolute;
-          width: 582px;
-          height: 250px;
-          left: 847px;
-          top: 115px;
-          overflow: hidden;
-          background: #283B80;
-          border-radius: 20px;
-        }
-        #quiztype-graphbox {
-          width: 553px;
-          height: 195px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          margin: 0 auto;
-        }
-        #quiztype-graph {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        #productsales-box {
-          position: absolute;
-          width: 582px;
-          height: 260px;
-          left: 847px;
-          top: 419px;
-
-          background: #283B80;
-          border-radius: 20px;
-        }
-        #productsales-graphbox {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          width: 553px;
-          height: 200px;
-          margin: 0 auto;
-        }
-        .stats-graph{
-          background-color: white;
-        }
-
-        .box {
-          margin: 20px;
-        }
-
-        .row2box {
-          width: 412px;
-          height: 320px;
-          background: #283B80;
-          border-radius: 20px;
-          top: 689px;
-        }
-        .row2graphbox{
-          width: 370px;
-          height: 260px;
-          margin: 0 auto;
-        }
-
-        #socialmedia-box {
-          left: 1004px;
-        }
-        #socialmedia-graphbox {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        #rating-box {
-          position: absolute;
-          left: 475px;
-          top: 702px;
-          margin-top: 20px;
-        }
-
-        #rating-graphbox {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        #quizvsbuy-box {
-          position: absolute;
-          left: 930px;
-          top: 700px;
-          width: 500px;
-        }
-
-        #quizvsbuy-graphbox {
-          width: 460px;
-        }
-
-        .quizholder {
-          height: 300px;
-          width: 400px;
-          border: none;
-          border-radius: 20px;
-          margin: 50px;
-          background-color: #2e2f33;
-          background-blend-mode:overlay;
-          background-position: center;
-          background-size: cover;
-        }
-        /* Quiz Section CSS */
-        .quizholder:hover{
-          opacity: 60%;
-        }
-
-        .quizlabel {
-          color: white;
-          text-align: center;
-          font-size: 45px;
-          font-weight: bold;
-        }
-        #laptop-thumbnail {
-          background-image: url("thumbnails/laptop.jpg");
-        }
-        #pc-thumbnail {
-          background-image: url("thumbnails/pc.jpg");
-        }
-        #keyboard-thumbnail {
-          background-image: url("thumbnails/keyboard.jpg");
-        }
-        #mouse-thumbnail {
-          background-image: url("thumbnails/mouse.png");
-        }
-        #tablet-thumbnail {
-          background-image: url("thumbnails/tablet.jfif");
-        }
-        #headphone-thumbnail {
-          background-image: url("thumbnails/headphone.jpg");
-        }
-
-        /* Quiz Info Section CSS */
-        .quizinfo-select {
-          width: 300px;
-          height: 50px;
-          background-color: #1a1d2b;
-          color: #FFFEFE;
-          border-radius: 10px;
-          text-align: center;
-          font-size: 36px;
-          left: 35%;
-          top: 180px;
-          position: absolute;
-          margin-bottom: 20px;
-        }
-
-        .selector-label {
-          font-size: 36px;
-          text-align: center;
-          left: 37%;
-          top: 125px;
-          position: absolute;
-        }
-        #load_info {
-          position: absolute;
-          top: 250px;
-          margin-bottom: 20px;
-        }
-
-    </style>
+    <title>Admin Dashboard - UncoverPC</title>
   </head>
 
   <body class="color_theme" id="text_container">
+    <div id="navbar">
+      <button id="logout-button" onclick="goTo('/index')"> Log Out</button>
+    </div>
     <div id="main">
         <div id="titles">
             <h1 class="logo" id="main_logo">UncoverPC</h1>
@@ -372,32 +84,27 @@
 
       <div class="mainpage">
         <h1 class="logo">Quizzes</h1>
-        <button class="quizholder" id="laptop-thumbnail" onclick="goTo()">
+        <button class="quizholder" id="laptop-thumbnail" onclick="goTo('/quiz/laptop/')">
           <h2 class="quizlabel"> Laptop</h2>
         </button>
-        <button class="quizholder" id="pc-thumbnail" onclick="goTo()">
+        <button class="quizholder" id="pc-thumbnail" onclick="goTo('/quiz/pc/')">
           <h2 class="quizlabel"> PC</h2>
         </button>
-        <button class="quizholder" id="keyboard-thumbnail" onclick="goTo()">
+        <button class="quizholder" id="keyboard-thumbnail" onclick="goTo('/quiz/keyboard/')">
           <h2 class="quizlabel"> Keyboard</h2>
         </button>
-        <button class="quizholder" id="mouse-thumbnail" onclick="goTo()">
+        <button class="quizholder" id="mouse-thumbnail" onclick="goTo('/quiz/mouse/')">
           <h2 class="quizlabel"> Mouse</h2>
         </button>
-        <button class="quizholder" id="tablet-thumbnail" onclick="goTo()">
+        <button class="quizholder" id="tablet-thumbnail" onclick="goTo('/quiz/tablet/')">
           <h2 class="quizlabel"> Tablet</h2>
         </button>
-        <button class="quizholder" id="headphone-thumbnail" onclick="goTo()">
+        <button class="quizholder" id="headphone-thumbnail" onclick="goTo('/quiz/headphones/')">
           <h2 class="quizlabel"> Headphones</h2>
         </button>
         <button onClick="goTo('create_quiz1.html')" class="edit_button">New Quiz</button>
       </div>
 
-      <div class="mainpage" id="quiz-data">
-        <h1 class="logo">Quiz Data</h1>
-            
-
-      </div>
     </div>
   </body>
 
@@ -411,7 +118,19 @@
     }
 
     function goTo(link) {
-      window.location.href = link;
+      if (confirm("Are you sure you want to leave this page?")) {
+        $.ajax({
+          url: link,
+          type: "GET",
+          contentType: "application/json;charset=UTF-8",
+          success: function (response) {
+            alert(response);
+          },
+          error: function (e) {
+            alert("Error!");
+          },
+        });
+      }
     }
 
     const visitsChart = document.getElementById('visits-graph').getContext("2d");

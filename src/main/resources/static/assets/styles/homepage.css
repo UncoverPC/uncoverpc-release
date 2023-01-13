@@ -16,9 +16,9 @@ h3 {
 
 body,
 html {
-  height: 100%;
   line-height: 1.2;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 
@@ -39,37 +39,38 @@ html {
 #navbar {
   background-color: white;
   top:0;
-  position:fixed;
   width: 100%;
   height: auto;
   background-color: rgba(255, 255, 255);
   display: flex;
   flex-direction: row;
-  box-shadow: 1px 2px 5px grey;
   z-index: 100;
   opacity: 1;
 }
-.navigator {
-  color: rgb(163, 193, 201);
-  margin: auto 15px;
-  font-size: 20px;
-  font-weight: 600;
-  text-decoration: none;
+
+.scroller {
+  height: 1.2em;
+  line-height: 1.2em;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  width: 250px;
+  display: inline-flex;
 }
 
-.navigator:hover {
-  color: rgb(136, 187, 201);
-}
-#nav-holder {
-  margin-left: 60%;
-  flex-direction: row;
+.scroller>span {
   display: flex;
+  position:absolute;
+  top: 0;
+  animation: slide 7s infinite;
+  font-weight: bold;
 }
 
 #login {
+  margin-left: 80%;
+  margin-top: 10px;
   width: 80px;
   height: 35px;
-  margin: auto 15px;
   border: 0;
   color: aliceblue;
   background-color: rgb(150, 187, 202);
@@ -197,7 +198,7 @@ html {
 .main-text {
   text-align: left;
   margin-left: 10rem;
-  margin-top: 21em;
+  margin-top: 15em;
 }
 
 .home-text {
@@ -281,6 +282,108 @@ html {
   }
   100% {
     opacity: 100%;
+  }
+}
+
+@keyframes slide {
+  0% {
+      top: 0;
+  }
+
+  25% {
+      top: -1.2em;
+  }
+
+  50% {
+      top: -2.4em;
+  }
+
+  75% {
+      top: -3.6em;
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  #mission-explained {
+    display: flex;
+    flex-direction: column;
+  }
+  .mission-div {
+    width: auto;
+    margin: 0;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  #login {
+    margin-left: 70%;
+    width: 55px;
+    height: 25px;
+    font-size: 12px;
+  }
+  h3 {
+    font-size: 14px;
+  }
+  #landing {
+    height: auto;
+  }
+  .main-text {
+    margin-top: 12em;
+    margin-left: 0;
+    text-align: center;
+  }
+  .scroller {
+    text-align: center;
+  }
+  .scroller>span {
+    width: 100%;
+    left: 20%;
+  }
+  .home-text {
+    margin: 0;
+    font-size: 40px;
+    text-align: center;
+    font-weight: 700;
+  }
+  .subtitle-text {
+    font-size: 24px;
+    text-align: center;
+  }
+  .text1 {
+    width: 100%;
+    font-size: 14px;
+    padding-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  .text2 {
+    font-size: 14px;
+  }
+  .icon-thumbnail {
+    width: 150px;
+    height: 150px;
+  }
+  .mission-text {
+    font-size: 20px;
+  }
+  .counter {
+    font-size: 24px
+  }
+  #early-btn {
+    font-size: 14px;
+    width: 150px;
+    height: 40px;
+    border: 0px;
+    border-radius: 40px;
+    transition: 0.3s;
+  }
+  #mission-explained {
+    display: flex;
+    flex-direction: column;
+  }
+  .mission-div {
+    width: auto;
+    margin: 0;
   }
 }
 

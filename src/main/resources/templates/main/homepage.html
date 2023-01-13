@@ -8,6 +8,7 @@ lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
     <link rel="stylesheet" th:href="@{/assets/styles/homepage.css}" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/styles/homepage.css" />
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     
@@ -23,12 +24,7 @@ lang="en">
   <body class="color_theme" id="text_container">
     <div id="navbar">
       <img src="@{/assets/images/Logo.svg}" style="width: 2.5%; height:1%; margin-left: 10%; margin-top: 5px; margin-bottom: 5px;">
-      <div id="nav-holder">
-        <a href="#landing" class="navigator">Home</a>
-        <a href="#purpose" class="navigator">What We Do</a>
-        <a href="#contact" class="navigator">Contact Us</a>
-        <button id="login">Login</button>
-      </div>      
+      <button id="login" style="left: 90%;">Login</button>   
     </div>
 
     <div class="hidden" id="early-access">
@@ -36,16 +32,9 @@ lang="en">
         <h2 style="margin-left: 5%;">Get Updates</h2>
         <h4 style="margin-left: 5%;">Thank you for your interest and support!</h2>
 
-      <form id="ea-form" th:action="@{/signup/early}" method="post" th:object="${earlyuser}">
-        <input class="form-input" name="name" id="name" type="name" placeholder="Enter Name" />
-        <input class="form-input" name="email" id="email" type="email" placeholder=" Enter E-mail" />
-        <select class="form-input" name="referral" id="referral" type="referral" placeholder=" Referral"> 
-          <option value="" disabled selected class="select-placeholder">How did you hear about us?</option>
-          <option value="friends/family">Friends/Family </option>
-          <option value="instagram">Instagram </option>
-          <option value="tikok">Tiktok </option>
-          <option value="other">Other</option>
-        </select>
+      <form id="ea-form" th:action="@{/earlyaccess}" method="post" th:object="${EarlyUser}">
+        <input class="form-input" id="name" type="name" placeholder="Enter Name" />
+        <input class="form-input" id="email" type="email" placeholder=" Enter E-mail" />
         <input style="margin-bottom: 5px;" class="form-submit" type="submit" value="Submit"/>
         <h3 th:text="${message}"></h3>
       </form>
@@ -54,8 +43,17 @@ lang="en">
     <div id="main" class="visible">
       <div class="section" id="landing">
         <div class="main-text">
-          <h1 class="home-text">Shopping for electronics</h1>
-          <h1 class="home-text" style="color: rgb(31, 197, 31);">made easy</h1>
+          <h1 class="home-text">Shopping for </h1>
+          <h1 class="home-text">electronics made</h1>
+          <div class="scroller home-text" style="color:rgb(73, 226, 73);">
+
+            <span>
+            easy<br />
+            simpler<br />
+            faster<br />
+            better
+        </span>
+      </div>
           <h2 class="text1">Harnessing the power of Artificial Intelligence, UncoverPC seamlessly identifies the perfect electronic product without you conducting any research.</h4>
           <button id="early-btn" onclick="openForm()">Request Early Access</button>
         </div>
