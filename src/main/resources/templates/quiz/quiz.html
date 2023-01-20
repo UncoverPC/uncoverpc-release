@@ -12,7 +12,7 @@ lang="en">
     <link rel="icon" th:href="@{assets/Logo.svg}" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link rel="stylesheet" th:href="@{/assets/styles/quiz.css}"/>
-    <link rel="stylesheet" href="/main/resources/static/assets/styles/quiz.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/styles/quiz.css" />
     
     <link
       rel="stylesheet"
@@ -30,7 +30,8 @@ lang="en">
   <body>
     <div id="main">
       <div id="wrapper">
-        <div class="productHolder">
+        <img src="/src/main/resources/static/assets/images/Logo.svg" class="logo-small"/>
+        <!-- <div class="productHolder">
           <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
           <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
           <h1 class="productPrice">1499.00</h1>
@@ -38,10 +39,11 @@ lang="en">
             <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
             <h1 class="propText"> Screen Size: 15in</h1>
           </div>
-         </div>
+         </div> -->
       </div>
       <div id="holder">
         <div class="visible" id="homepage">
+
           <h1 class="header">Ready to find the perfect 
             <span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
           <button id="start-button" onclick="startQuiz('homepage')">Get Started!</button>
@@ -136,8 +138,11 @@ lang="en">
       else if(currentQuestion==0){
         setTimeout(() => {home.innerHTML = 
         `<div class='question-holder visible-q' id='question${questionSelector}'>
-            <h1 class='question'> ${questions[questionSelector].title} </h1>
-            <div class='answers' id=${id}> </div>
+            <h1 class='question'> What's your budget? </h1>
+            <div id="slider">
+              <input type="range" min="0" max="5000" value="0" step="10" class="slider" id="myRange" oninput="outValue.value='$'+this.value">
+              <output id="outValue" name="amount" for="rangeInput">$0</output> 
+            </div> 
             <div class='btn-holder'>
               <button class="next" onClick="nextQuestion(false)"> Next </button>
             </div>
@@ -185,9 +190,12 @@ lang="en">
       }
       else if(currentQuestion==0){
         setTimeout(() => {home.innerHTML = 
-        `<div class='question-holder visible-q' id='question${questionSelector}'>
-            <h1 class='question'> ${questions[questionSelector].title} </h1>
-            <div class='answers' id=${id}> </div>
+          `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> What's your budget? </h1>
+            <div id="slider">
+              <input type="range" min="0" max="5000" value="0" step="10" class="slider" id="myRange" oninput="outValue.value='$'+this.value">
+              <output id="outValue" name="amount" for="rangeInput">$0</output> 
+            </div> 
             <div class='btn-holder'>
               <button class="next" onClick="nextQuestion(false)"> Next </button>
             </div>
