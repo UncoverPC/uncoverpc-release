@@ -51,7 +51,7 @@ public class QuizController {
 
 	@GetMapping("/create_quiz1")
 	public ModelAndView testQuiz() {
-		ModelAndView model = new ModelAndView(ADMIN_PATH+"/create_quiz1.html");
+		ModelAndView model = new ModelAndView(ADMIN_PATH+"/create_quiz.html");
 		return model;
 	}
 	@PostMapping("/api/quiz/create")
