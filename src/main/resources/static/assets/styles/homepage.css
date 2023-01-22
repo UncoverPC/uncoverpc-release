@@ -6,7 +6,8 @@ h4,
 h5,
 h6 {
   font-family: "Raleway", sans-serif;
-  color: rgb(44, 46, 59);
+  /*color: rgb(44, 46, 59);*/
+  color: rgb(240,240,240);
 }
 
 h3 {
@@ -23,11 +24,22 @@ html {
 
 
 .color_theme {
-  background-color: rgb(255, 255, 255);
+  background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
   color: black;
 }
+
+
 .select-placeholder {
   color: grey;
+}
+
+.logo{
+	width:5vw;
+	height:5vw;
+	transition-duration: 0.25s;
+}
+.logo:hover{
+	transform: scale(110%);
 }
 
 
@@ -37,15 +49,17 @@ html {
 }
 
 #navbar {
-  background-color: white;
+
   top:0;
   width: 100%;
   height: auto;
-  background-color: rgba(255, 255, 255);
   display: flex;
   flex-direction: row;
   z-index: 100;
   opacity: 1;
+  padding-left:10vw;
+  padding-top:5vh;
+  padding-right:100vw;
 }
 
 .scroller {
@@ -54,7 +68,7 @@ html {
   text-align: left;
   position: relative;
   overflow: hidden;
-  width: 250px;
+  width: 40vw;
   display: inline-flex;
 }
 
@@ -67,21 +81,23 @@ html {
 }
 
 #login {
-  margin-left: 80%;
+  position: absolute;
+  right: 5vw;
   margin-top: 10px;
-  width: 80px;
-  height: 35px;
+  width: 6vw;
+  height: 2.5vw;
   border: 0;
   color: aliceblue;
-  background-color: rgb(150, 187, 202);
+  background: linear-gradient(45deg, red, blue);
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 80%;
   font-weight: 700;
-  transition: 0.3s;
+  transition-duration:0.25s;
 }
 
 #login:hover {
-  background-color: rgb(112, 145, 161);
+  opacity: 90%;
+  transform: scale(110%);
 }
 
 .hidden {
@@ -158,21 +174,22 @@ html {
 }
 
 #main {
-  animation: fadeIn 1s 1 forwards;
+  animation: fadeIn 2s 1 forwards;
 }
 
 #landing {
     color: rgb(44, 46, 59);
     display: flex;
     flex-direction: row;
-    height: 50em;
+    height:95vh;
 }
 .text1 {
-  width: 50%;
-  font-size: 24px;
+  width: 75%;
+  font-size: 2vw;
   padding-top: 1rem;
   text-align: left;
   font-weight: bold;
+  color: rgb(240,240,240);
 }
 .text2 {
   font-size: 22px;
@@ -182,9 +199,8 @@ html {
 
 #purpose {
   width: 100%;
-  margin-top: 10rem;
   text-align: center;
-  background-color: aliceblue;
+  height:100vh;
 }
 #contact-us {
   padding-top: 5%;
@@ -197,14 +213,238 @@ html {
 }
 .main-text {
   text-align: left;
-  margin-left: 10rem;
-  margin-top: 15em;
+  margin-left: 10vw;
+  margin-top: 10vh;
+}
+
+.box{
+	border-style:solid;
+	border-width:5px;
+	margin-left:30vw;
+	margin-top:8vw;
+	margin-right:30vw;
+	border-color:linear-gradient(45deg, #00DBDE 0%, #FC00FF 100%); 
+	border-radius:10px;
+}
+
+.glow {
+  text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;   
+}
+
+.flicker{
+	  animation: flicker 1.5s 1; 
+}
+
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #0fa,
+      0 0 80px #0fa,
+      0 0 90px #0fa,
+      0 0 100px #0fa,
+      0 0 150px #0fa;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}
+.footer {
+   position: relative;
+   font-size:15px;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: grey;
+   color: white;
+   text-align: center;
 }
 
 .home-text {
-    font-size: 64px;
+    font-size: 5vw;
     text-align: left;
     font-weight: 700;
+    color:rgb(240,240,240);
+}
+
+.reveal {
+  position: relative;
+  opacity: 0;
+}
+
+.reveal.active {
+  opacity: 1;
+}
+
+.active.fade-bottom {
+  -webkit-animation: fade-bottom 0.35s ease-in;
+          animation: fade-bottom 0.35s ease-in;
+}
+
+.active.fade-left {
+  -webkit-animation: fade-left 0.35s ease-in;
+          animation: fade-left 0.35s ease-in;
+}
+
+.active.fade-right {
+  -webkit-animation: fade-right 0.35s ease-in;
+          animation: fade-right 0.35s ease-in;
+}
+
+@-webkit-keyframes fade-bottom {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-bottom {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade-left {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-left {
+  0% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade-right {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-right {
+  0% {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.empower{
+	margin-top:10%; 	
+	font-size:20px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 10px;
+  text-align:center;
+  height: 300px; /* Should be removed. Only for demonstration */
+  transition: 0.1s linear;
+}
+.column:hover{
+	  transform: scale(105%);
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*.row > div:nth-child(1){
+background-image: linear-gradient(to bottom, #30cfd0 0%, #330867 100%);
+}
+
+.row > div:nth-child(2){
+background-image: radial-gradient( circle farthest-corner at -4.5% 34.3%,  rgba(13,20,174,1) 0%, rgba(243,165,140,1) 90% );
+
+}
+
+.row > div:nth-child(3){
+background-color: #FFFFFF;
+background-image: linear-gradient(180deg, #FFFFFF 0%, #6284FF 50%, #FF0000 100%);
+
+}*/
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+.triangle{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom right, #fff 0%, #fff 50%, rgb(30,30,250) 50%,rgb(210,50,50) 75%);
+    background-size:125%;
+    animation: 1s ease-out 0s 1 gradient;
+    background-position: 100% 50%;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 50%;
+	}
+
 }
 
 .subtitle-text {
@@ -213,15 +453,16 @@ html {
 }
 
 #early-btn {
-  font-size: 20px;
+  font-size: 100%;
   font-weight: 900;
   font-family: "Raleway";
   color: white;
   background-color: rgb(2,0,36);
-  background-image: linear-gradient(90deg, rgb(135, 130, 238) 0%, rgb(124, 214, 128) 100%);
-  width: 250px;
+  /*background-image: linear-gradient(90deg, rgb(135, 130, 238) 0%, rgb(124, 214, 128) 100%);*/
+  background: linear-gradient(45deg, red, blue);
+  width: 17vw;
   margin-top: 30px;
-  height: 60px;
+  height: 4vw;
   border: 0px;
   border-radius: 40px;
   transition: 0.3s;
@@ -257,6 +498,16 @@ html {
   font-size: 30px;
 }
 
+.title_container{
+	background: white;
+    padding: 20px;
+    width: 600px;
+    border-radius: 20px;
+    
+    box-shadow: 5px 5px blue;
+    
+}
+
 .mission-div {
   display: flex;
   flex-direction: column;
@@ -290,24 +541,21 @@ html {
       top: 0;
   }
 
-  25% {
+  33% {
       top: -1.2em;
   }
 
-  50% {
+  66% {
       top: -2.4em;
   }
-
-  75% {
-      top: -3.6em;
-  }
 }
+
 @media only screen and (max-width: 650px) {
   #login {
     margin-left: 70%;
     width: 55px;
     height: 25px;
-    font-size: 12px;
+    font-size: 80%;
   }
   h3 {
     font-size: 14px;
@@ -331,7 +579,7 @@ html {
     margin: 0;
     font-size: 40px;
     text-align: center;
-    font-weight: 700;
+    font-weight: 900;
   }
   .subtitle-text {
     font-size: 24px;
@@ -339,7 +587,7 @@ html {
   }
   .text1 {
     width: 100%;
-    font-size: 14px;
+    font-size: 4vw;
     padding-top: 1rem;
     text-align: center;
     font-weight: bold;

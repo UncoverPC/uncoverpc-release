@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
 
 <head>
 	<meta charset="UTF-8">
@@ -54,12 +56,12 @@
 	<div class="center-container">
 		<div class="absolute-center">
 			<div class="absolute-center-row">
-				<object class="custom-logo" data="../static/assets/images/Logo.svg" width="40" height="40"> </object>
+				<img class="custom-logo" th:src="@{/assets/images/Logo.svg}" width="40" height="40">
 		
 				<h3> | Oops - the page you've requested does not exist!</h3>
 			</div>
 			<div>
-				<h5>Click <a href="#home"><i>here</i></a> to go back to <a href="#home">home.</h5>
+				<h5>Click <a href="/"><i>here</i></a> to go back to <a href="/">home.</h5>
 			</div>
 		</div>
 	</div>
