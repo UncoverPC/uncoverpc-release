@@ -1,15 +1,32 @@
 package com.uncoverpc.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
+import com.uncoverpc.model.queryResult.queryResult;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,11 +39,11 @@ import com.uncoverpc.model.user.Roles;
 import com.uncoverpc.model.user.Roles.Role;
 import com.uncoverpc.model.user.User;
 
+
 import net.bytebuddy.utility.RandomString;
 
 @Controller
 public class UserController {
-
 	@Autowired
 	private UserService userService;
 	
@@ -54,6 +71,12 @@ public class UserController {
 			}
 		}
 		return new ModelAndView(FOLDER_PATH + "/login");
+	}
+
+	@GetMapping(URI_PATH + "/login/oauth2/code/google")
+	public ModelAndView OAuth2Login(OAuth2AuthenticationToken token) {
+		System.out.println(token);
+		return new ModelAndView(FOLDER_PATH+"/login");
 	}
 
 	@GetMapping(URI_PATH + "/forgotPassword")
@@ -135,4 +158,17 @@ public class UserController {
 		return new ModelAndView(FOLDER_PATH + "/registerSuccess");
 	}
 
+	@GetMapping(URI_PATH + "/queryResults")
+	public ModelAndView queryResults() throws IOException {
+		ModelAndView mav = new ModelAndView(FOLDER_PATH + "queryResults");
+		try {
+			String path = new File("").getAbsolutePath();
+			BufferedReader br = new BufferedReader(new FileReader(path+"/src/main/java/com/uncoverpc/controller/productTest.json"));
+			queryResult[] qr = new Gson().fromJson(br, queryResult[].class);
+			mav.addObject("products", qr);
+		}catch (Exception e){
+			System.out.println(e);
+		}
+		return mav;
+	}
 }

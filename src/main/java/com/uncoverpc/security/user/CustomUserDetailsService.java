@@ -17,19 +17,19 @@ public class CustomUserDetailsService implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
+		System.out.println("B " + email);
 		try {
 			User user = userService.findByEmail(email);
 
 			if (user == null) {
-				throw new UsernameNotFoundException("User not found");
+				throw new UsernameNotFoundException("This User not found");
 			}
 			System.out.println(user);
 			return new CustomUserDetails(user);
 		} catch (Exception e) {
-			System.err.println("User not found: " + email);
+			System.err.println("B User not found: " + email);
 		}
-		throw new UsernameNotFoundException("User not found");
+		throw new UsernameNotFoundException("That User not found");
 	}
 	
 	
