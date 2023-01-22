@@ -1,7 +1,6 @@
 package com.uncoverpc.controller;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -34,6 +33,7 @@ public class LaptopController {
 	
 	@PostMapping("/post/quizEnd")
 	@ResponseBody
+	
 	public List<Laptop> getProducts(  @RequestBody QuizResponse QuizResponse,  HttpServletRequest request ) {
 		
 		HashMap <String, String> map = new HashMap<String, String>();
@@ -53,7 +53,7 @@ public class LaptopController {
 		for(int j=0; j<QuizResponse.getQuestions().size(); j++) {
 			String key = QuizResponse.getQuestions().get(j);
 			for(int k=0; k<laptopsByUse.size(); k++) {
-				if(laptopsByUse.get(k).getQuizResponses().getMap().get(key) == map.get(key)) {
+				if(laptopsByUse.get(k).getQuizResponses().get(key) == map.get(key)) {
 					matchCounter[k]++;
 				}
 			}

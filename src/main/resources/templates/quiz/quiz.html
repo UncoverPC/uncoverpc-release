@@ -31,18 +31,40 @@ lang="en">
     <div id="main">
       <div id="wrapper">
         <img src="/src/main/resources/static/assets/images/Logo.svg" class="logo-small"/>
-        <!-- <div class="productHolder">
-          <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
-          <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
-          <h1 class="productPrice">1499.00</h1>
-          <div class="productProperties">
-            <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
-            <h1 class="propText"> Screen Size: 15in</h1>
-          </div>
-         </div> -->
       </div>
       <div id="holder">
         <div class="visible" id="homepage">
+
+          <!-- <div class="recHolder">
+          <div class="productHolder">
+            <div class="rankingNum"> <h1 class="rankingNum">#1</h1>  </div>
+            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
+            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
+            <h1 class="productPrice">1499.00</h1>
+            <div class="productProperties">
+              <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+              <h1 class="propText"> Screen Size: 15in</h1>
+            </div>
+           </div>
+           <div class="productHolder">
+            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
+            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
+            <h1 class="productPrice">1499.00</h1>
+            <div class="productProperties">
+              <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+
+            </div>
+           </div>
+           <div class="productHolder">
+            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
+            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
+            <h1 class="productPrice">1499.00</h1>
+            <div class="productProperties">
+              <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+              <h1 class="propText"> Screen Size: 15in</h1>
+            </div>
+           </div>
+          </div> -->
 
           <h1 class="header">Ready to find the perfect 
             <span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
@@ -57,7 +79,8 @@ lang="en">
 
     let questions = [{ }];
 
-    let questionsTest = ["battery", "screenSize", "storage", "ram", "use", "colour"];
+    let questionsTest = [];
+    
 
     questions = /*[[${questions}]]*/ 'questions';
     let userAnswers = ["test"];
@@ -86,6 +109,10 @@ lang="en">
       }
 
     function startQuiz(target) {
+      for(let i=0; i<questions.length; i++) {
+        questionsTest.push(questions[i].title);
+      }
+
       fadeOut(target);
       nextQuestion(true);
     }
@@ -96,8 +123,13 @@ lang="en">
     }
     
     function saveQuestion() {
-      selected = document.querySelector(".selected");
-      userAnswers[currentQuestion]= selected.innerHTML;
+      if(currentQuestion == 0) {
+        userAnswers[currentQuestion]= document.getElementById("myRange").value;
+        
+      } else {
+        let selected = document.querySelector(".selected");
+        userAnswers[currentQuestion]= selected.innerHTML;
+      }
     }
 
     function submitQuiz() {
@@ -109,6 +141,7 @@ lang="en">
     }
 
     function nextQuestion(start) {
+      console.log(userAnswers);
       if(!start) {
         saveQuestion(currentQuestion);
         currentQuestion++;
@@ -147,7 +180,6 @@ lang="en">
               <button class="next" onClick="nextQuestion(false)"> Next </button>
             </div>
           </div>`;       
-          addAnswers(id);
         }, 500);
       }
       else {
@@ -220,7 +252,6 @@ lang="en">
 
     function addAnswers(id) {
       let element = document.getElementById(id);
-      console.log(element)
       for(let i=0; i<questions[currentQuestion].answers.length; i++) {
         element.innerHTML += `<button class="answer-button" id="answer${currentQuestion}${i}" onClick='select("answer${currentQuestion}${i}")'">${questions[currentQuestion].answers[i]}</button>`;
       }   
@@ -271,20 +302,30 @@ lang="en">
         });
     }
 
-
-
     function loadRecommendations(products) {
       console.log(products[0])
       let home = document.getElementById("holder");
       home.innerHTML = "";
+      home.innerHTML += `<div class="recHolder"></div>`
       for(let i=0; i<products.length; i++) {
-        home.innerHTML +=
         `<div class="productHolder">
-          <h1 class="productName">${products[i].name}</h1>
+          <div class="rankingNum"> <h1 class="rankingNum">#${i+1}</h1></div>
+          <a href= ${products[i].link} class="productName">${products[i].name}</a>
           <img src=${products[i].img} class="productImg"/>
           <h1 class="productPrice">${products[i].price}</h1>
-          <a href="${products[i].link}" class="productLink">Link to Product</a>
+          <div id="properties${i}"class="productProperties">
+            <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+          </div>
+         </div>` 
+      }
+      let holder = document.getElementById("properties"+i);
+
+      for(let j=1; j<products[i].quizResponses.length; j++) {
+        holder +=
+        `<div class="propertyHolder"> 
+            <h1 class="propText">${products[i].quizResponses}</h1>
          </div>`
+        
       }
     }
   </script>

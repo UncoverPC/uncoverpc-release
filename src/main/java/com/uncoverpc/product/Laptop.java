@@ -1,6 +1,13 @@
 package com.uncoverpc.product;
 
+import java.util.HashMap;
+
+import javax.json.Json;
+
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.google.gson.Gson;
+
 
 @Document("Products")
 public class Laptop {
@@ -12,9 +19,9 @@ public class Laptop {
 	private String img;
 	private float price;
 	private Object properties;
-	private Specs quizResponses;
+	private HashMap<String, String> quizResponses;
 	
-	public Laptop(String id, String source, String img, String name, String link, float price, Object properties, Specs quizResponses) {
+	public Laptop(String id, String source, String img, String name, String link, float price, Object properties, Object quizResponses) {
 		super();
 		this.id = id;
 		this.source = source;
@@ -23,7 +30,7 @@ public class Laptop {
 		this.link = link;
 		this.price = price;
 		this.properties = properties;
-		this.quizResponses = quizResponses;
+		this.quizResponses = new Gson().fromJson(quizResponses.toString(), HashMap.class);
 	}
 	
 	@Override
@@ -88,14 +95,12 @@ public class Laptop {
 		this.properties = properties;
 	}
 
-	public Specs getQuizResponses() {
+	public HashMap<String, String> getQuizResponses() {
 		return quizResponses;
 	}
 
-	public void setQuizResponses(Specs quizResponses) {
+	public void setQuizResponses(HashMap<String, String> quizResponses) {
 		this.quizResponses = quizResponses;
 	}
-	
-	
 	
 }
