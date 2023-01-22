@@ -1,36 +1,41 @@
 package com.uncoverpc.product;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.json.Json;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
 
 
-@Document("Products")
+@Document("laptops")
 public class Laptop {
 	private String id;
 	
 	private String source;
 	private String name;
+	private String model;
 	private String link;
 	private String img;
-	private float price;
-	private Object properties;
-	private HashMap<String, String> quizResponses;
+	private String price;
+	private Map<String, String> properties;
+	private Map<String, String> quizResponses;
+	//private HashMap<String, String> quizResponses;
 	
-	public Laptop(String id, String source, String img, String name, String link, float price, Object properties, Object quizResponses) {
+	public Laptop(String id, String model, String source, String img, String name, String link, String price, String properties, String quizResponses) {
 		super();
 		this.id = id;
+		this.model=model;
 		this.source = source;
 		this.img = img;
 		this.name = name;
 		this.link = link;
 		this.price = price;
 		this.properties = properties;
-		this.quizResponses = new Gson().fromJson(quizResponses.toString(), HashMap.class);
+		this.quizResponses = quizResponses;//new Gson().fromJson(quizResponses.toString(), HashMap.class);
 	}
 	
 	@Override
@@ -79,11 +84,11 @@ public class Laptop {
 		this.img = img;
 	}
 
-	public float getPrice() {
+	public String getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(String price) {
 		this.price = price;
 	}
 
@@ -91,15 +96,15 @@ public class Laptop {
 		return properties;
 	}
 
-	public void setProperties(Object properties) {
+	public void setProperties(JsonNode properties) {
 		this.properties = properties;
 	}
 
-	public HashMap<String, String> getQuizResponses() {
+	public JsonNode getQuizResponses() {
 		return quizResponses;
 	}
 
-	public void setQuizResponses(HashMap<String, String> quizResponses) {
+	public void setQuizResponses(JsonNode quizResponses) {
 		this.quizResponses = quizResponses;
 	}
 	

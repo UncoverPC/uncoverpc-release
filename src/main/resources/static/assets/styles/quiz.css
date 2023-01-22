@@ -30,6 +30,7 @@ body,
 
       #holder {
         height: 100%;
+        overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-items: center;
@@ -231,6 +232,12 @@ body,
       }
       .propChecked {
         float: right;
+      }
+      .match {
+        float: right;
+        padding-right: 10px;
+        font-weight: 900;
+        font-size: 14px;
       }
 
 

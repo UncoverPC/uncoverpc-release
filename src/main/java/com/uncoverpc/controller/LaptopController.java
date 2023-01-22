@@ -33,7 +33,6 @@ public class LaptopController {
 	
 	@PostMapping("/post/quizEnd")
 	@ResponseBody
-	
 	public List<Laptop> getProducts(  @RequestBody QuizResponse QuizResponse,  HttpServletRequest request ) {
 		
 		HashMap <String, String> map = new HashMap<String, String>();
@@ -41,8 +40,8 @@ public class LaptopController {
 			map.put(QuizResponse.getQuestions().get(i), QuizResponse.getAnswers().get(i));
 
 		}
-
-		List<Laptop> laptopsByUse = laptopService.findbyLaptopUse(map.get("use"));
+		System.out.println("testing post");
+		List<Laptop> laptopsByUse = laptopService.findbyLaptopUse(map.get("Main use?"));
 		int[] matchCounter = new int[laptopsByUse.size()];
 		Arrays.fill(matchCounter, 0);
 		

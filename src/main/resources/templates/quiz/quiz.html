@@ -80,6 +80,8 @@ lang="en">
     let questions = [{ }];
 
     let questionsTest = [];
+
+    let productProperties = [];
     
 
     questions = /*[[${questions}]]*/ 'questions';
@@ -303,10 +305,16 @@ lang="en">
     }
 
     function loadRecommendations(products) {
-      console.log(products[0])
+      console.log(products[0]);
+
+      for(let i=0; i<products.length; i++) {
+        productProperties.push(Object.values(products[i].quizResponses));
+      }
+ 
       let home = document.getElementById("holder");
       home.innerHTML = "";
-      home.innerHTML += `<div class="recHolder"></div>`
+      home.innerHTML += `<div id="recHolder" class="recHolder"></div>`;
+      let holder = document.getElementById("recHolder");
       for(let i=0; i<products.length; i++) {
         `<div class="productHolder">
           <div class="rankingNum"> <h1 class="rankingNum">#${i+1}</h1></div>
@@ -316,16 +324,21 @@ lang="en">
           <div id="properties${i}"class="productProperties">
             <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
           </div>
-         </div>` 
-      }
-      let holder = document.getElementById("properties"+i);
-
-      for(let j=1; j<products[i].quizResponses.length; j++) {
-        holder +=
-        `<div class="propertyHolder"> 
-            <h1 class="propText">${products[i].quizResponses}</h1>
          </div>`
-        
+      }
+      let propertyHolder = document.getElementById("properties"+i);
+      for(let j=0; j<userAnswers.length; j++) {
+        propertyHolder +=
+        `<div class="propertyHolder" id="property${i+"_"+j}"> 
+            <h1 class="propText">${productProperties[i][j]}</h1>
+         </div>`;
+         let currentProperty = document.getElementById("property"+i+"_"+j);
+
+         if(productProperties[i][j] == userAnswers[j+1]) {
+          currentProperty += `<h1 class="match" style="color:green">✓</h1>`
+         } else {
+          currentProperty += `<h1 class="match" style="color:red">X</h1>`
+         }
       }
     }
   </script>
