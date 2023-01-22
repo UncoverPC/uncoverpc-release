@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.annotation.Id;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.api.core.ApiFuture;
@@ -17,8 +18,11 @@ public class Quiz {
 	@JsonProperty("question_bank")
 	private ArrayList<Question> questions = new ArrayList<Question>();
 	
+	@Id
+	private String quizId;
+	
 	@JsonProperty("quizTitle")
-	private String title;
+	private String quizTitle;
 	
 	@Autowired
 	private QuizService quizService;
@@ -26,18 +30,11 @@ public class Quiz {
 //	private ArrayList<Product> searchRecommendedProduct(){
 //		
 //	}
-	
-	
-	
-	public Object loadQuiz(String quizName) {
-		return quizService.getQuiz(quizName);
-	}
 
-	public Quiz(ArrayList<Question> questions, String title, QuizService quizService) {
+	public Quiz(ArrayList<Question> questions, String quizTitle) {
 	super();
 	this.questions = questions;
-	this.title = title;
-	this.quizService = quizService;
+	this.quizTitle = quizTitle;
 }
 
 	public ArrayList<Question> getQuestions() {
@@ -49,24 +46,17 @@ public class Quiz {
 	}
 
 	public String getTitle() {
-		return title;
+		return quizTitle;
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.quizTitle = title;
 	}
 
-	public QuizService getQuizService() {
-		return quizService;
-	}
-
-	public void setQuizService(QuizService quizService) {
-		this.quizService = quizService;
-	}
 
 	@Override
 	public String toString() {
-		return "Quiz [questions=" + questions + ", title=" + title + ", quizService=" + quizService + "]";
+		return "Quiz [questions=" + questions + ", title=" + quizTitle + "]";
 	}
 	
 	

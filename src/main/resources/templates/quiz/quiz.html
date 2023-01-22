@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="icon" th:href="@{assets/Logo.svg}" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" th:href="@{/assets/styles/quiz.css}"/>
+    <link rel="stylesheet" href="/src/main/resources/static/assets/styles/quiz.css" />
+    
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Quiz - UncoverPC</title>
+
+  </head>
+
+  <body>
+    <div id="main">
+      <div id="wrapper">
+        <img src="/src/main/resources/static/assets/images/Logo.svg" class="logo-small"/>
+      </div>
+      <div id="holder">
+        <div class="visible" id="homepage">
+
+          <!-- <div class="recHolder">
+          <div class="productHolder">
+            <div class="rankingNum"> <h1 class="rankingNum">#1</h1>  </div>
+            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
+            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
+            <h1 class="productPrice">1499.00</h1>
+            <div class="productProperties">
+              <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+              <h1 class="propText"> Screen Size: 15in</h1>
+            </div>
+           </div>
+           <div class="productHolder">
+            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
+            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
+            <h1 class="productPrice">1499.00</h1>
+            <div class="productProperties">
+              <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+
+            </div>
+           </div>
+           <div class="productHolder">
+            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
+            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
+            <h1 class="productPrice">1499.00</h1>
+            <div class="productProperties">
+              <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+              <h1 class="propText"> Screen Size: 15in</h1>
+            </div>
+           </div>
+          </div> -->
+
+          <h1 class="header">Ready to find the perfect 
+            <span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
+          <button id="start-button" onclick="startQuiz('homepage')">Get Started!</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+  <script th:inline="javascript">
+    let currentQuestion = 0;
+
+    let questions = [{ }];
+
+    let questionsTest = [];
+
+    let productProperties = [];
+    
+
+    questions = /*[[${questions}]]*/ 'questions';
+    let userAnswers = ["test"];
+    userAnswers.pop();
+    userAnswers = new Array(questions.length).fill("");
+    let answeredQuestions = new Array(questions.length);
+    answeredQuestions.fill(false);
+    
+    function select(id) {
+      let btn = document.getElementById(id);
+
+
+      if(btn.classList.contains("selected")) {
+        btn.classList.remove("selected");
+        answeredQuestions[currentQuestion] =false;
+
+      } else if(!answeredQuestions[currentQuestion]) {
+        btn.classList += " selected";
+        answeredQuestions[currentQuestion]=true;
+      }
+    }
+
+    let QuizResponse = {
+        questions: questionsTest,
+        answers: userAnswers,
+      }
+
+    function startQuiz(target) {
+      for(let i=0; i<questions.length; i++) {
+        questionsTest.push(questions[i].title);
+      }
+
+      fadeOut(target);
+      nextQuestion(true);
+    }
+
+    function fadeOut(target) {
+      let element = document.getElementById(target);
+      element.className = "hidden";
+    }
+    
+    function saveQuestion() {
+      if(currentQuestion == 0) {
+        userAnswers[currentQuestion]= document.getElementById("myRange").value;
+        
+      } else {
+        let selected = document.querySelector(".selected");
+        userAnswers[currentQuestion]= selected.innerHTML;
+      }
+    }
+
+    function submitQuiz() {
+      saveQuestion();
+      fadeOut("question"+currentQuestion);
+      let home = document.getElementById("holder");
+      setTimeout(() => {home.innerHTML = `<div class="lds-dual-ring"></div>`;
+                        submitToBack()},500);
+    }
+
+    function nextQuestion(start) {
+      console.log(userAnswers);
+      if(!start) {
+        saveQuestion(currentQuestion);
+        currentQuestion++;
+      }
+      let questionSelector = currentQuestion;
+      let qid = "question"+(questionSelector-1);
+
+      if(!start) {
+        fadeOut(qid);
+      }
+
+      let home = document.getElementById("holder");
+      let id = 'answers'+currentQuestion;
+      if(currentQuestion+1 == questions.length) {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="submitQuiz()"> Submit </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+      else if(currentQuestion==0){
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> What's your budget? </h1>
+            <div id="slider">
+              <input type="range" min="0" max="5000" value="0" step="10" class="slider" id="myRange" oninput="outValue.value='$'+this.value">
+              <output id="outValue" name="amount" for="rangeInput">$0</output> 
+            </div> 
+            <div class='btn-holder'>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+        }, 500);
+      }
+      else {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+          addAnswers(id);
+        }, 500);
+      }
+    }
+
+    function prevQuestion() {
+      fadeOut("question"+currentQuestion);
+      answeredQuestions[currentQuestion] = false;
+      currentQuestion--;
+      answeredQuestions[currentQuestion] = false;
+
+      let questionSelector = currentQuestion;
+      let home = document.getElementById("holder");
+      let id = 'answers'+currentQuestion;
+
+      if(currentQuestion+1 == questions.length) {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="submitQuiz()"> Submit </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+      else if(currentQuestion==0){
+        setTimeout(() => {home.innerHTML = 
+          `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> What's your budget? </h1>
+            <div id="slider">
+              <input type="range" min="0" max="5000" value="0" step="10" class="slider" id="myRange" oninput="outValue.value='$'+this.value">
+              <output id="outValue" name="amount" for="rangeInput">$0</output> 
+            </div> 
+            <div class='btn-holder'>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+      else {
+        setTimeout(() => {home.innerHTML = 
+        `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> ${questions[questionSelector].title} </h1>
+            <div class='answers' id=${id}> </div>
+            <div class='btn-holder'>
+              <button class="next" onClick="prevQuestion()"> Back </button>
+              <button class="next" onClick="nextQuestion(false)"> Next </button>
+            </div>
+          </div>`;       
+        addAnswers(id);
+        }, 500);
+      }
+    }
+
+    function addAnswers(id) {
+      let element = document.getElementById(id);
+      for(let i=0; i<questions[currentQuestion].answers.length; i++) {
+        element.innerHTML += `<button class="answer-button" id="answer${currentQuestion}${i}" onClick='select("answer${currentQuestion}${i}")'">${questions[currentQuestion].answers[i]}</button>`;
+      }   
+    }
+
+    let laptopTesting = {
+      name: "ASUS TUF Gaming F17 (2022) Gaming Laptop",
+      img: "https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg",
+      link: "https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14",
+      price: "1499.00",
+      quizResponses: {
+        screenSize: "17 inches",
+        ram: "16GB",
+        color: "Grey",
+        battery: "12+",
+        storage: "250-500",
+        use: "Gaming",
+      }
+    }
+    let products = [laptopTesting];
+
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+    function submitToBack() {
+      QuizResponse = {
+        questions: questionsTest,
+        answers: userAnswers,
+      }
+
+      console.log(JSON.stringify(QuizResponse))
+      console.log(token)
+      $.ajaxSetup({
+          headers:{"X-XSRF-TOKEN": token}
+      })
+      $.ajax({
+          url: "/post/quizEnd",
+          type: "POST",
+          contentType: "application/json;charset=UTF-8",
+          data: JSON.stringify(QuizResponse),
+          success: function (response) {
+            console.log(response);
+            loadRecommendations(products);
+          },
+          error: function (e) {
+            alert("Error!");
+          },
+        });
+    }
+
+    function loadRecommendations(products) {
+      console.log(products[0]);
+
+      for(let i=0; i<products.length; i++) {
+        productProperties.push(Object.values(products[i].quizResponses));
+      }
+ 
+      let home = document.getElementById("holder");
+      home.innerHTML = "";
+      home.innerHTML += `<div id="recHolder" class="recHolder"></div>`;
+      let holder = document.getElementById("recHolder");
+      for(let i=0; i<products.length; i++) {
+        `<div class="productHolder">
+          <div class="rankingNum"> <h1 class="rankingNum">#${i+1}</h1></div>
+          <a href= ${products[i].link} class="productName">${products[i].name}</a>
+          <img src=${products[i].img} class="productImg"/>
+          <h1 class="productPrice">${products[i].price}</h1>
+          <div id="properties${i}"class="productProperties">
+            <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+          </div>
+         </div>`
+      }
+      let propertyHolder = document.getElementById("properties"+i);
+      for(let j=0; j<userAnswers.length; j++) {
+        propertyHolder +=
+        `<div class="propertyHolder" id="property${i+"_"+j}"> 
+            <h1 class="propText">${productProperties[i][j]}</h1>
+         </div>`;
+         let currentProperty = document.getElementById("property"+i+"_"+j);
+
+         if(productProperties[i][j] == userAnswers[j+1]) {
+          currentProperty += `<h1 class="match" style="color:green">✓</h1>`
+         } else {
+          currentProperty += `<h1 class="match" style="color:red">X</h1>`
+         }
+      }
+    }
+  </script>
+</html>

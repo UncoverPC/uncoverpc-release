@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>UncoverPC - Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../static/assets/images/Logo.svg">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif
+        }
+
+        body,
+        html {
+            height: 100%;
+            line-height: 1.8;
+        }
+
+        /* Full height image header */
+        .bgimg-1 {
+            background-position: center;
+            background-size: cover;
+            background-image: url("assets/images/landingpage.jpg");
+            min-height: 100%;
+        }
+
+        .w3-bar .w3-button {
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar (sit on top) -->
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card" id="myNavbar">
+            <a href="#home" class="w3-bar-item w3-button w3-wide"> <object data="assets/Logo.svg" width="20"
+                    height="20"> </object></a>
+            <!-- Right-sided navbar links -->
+            <div class="w3-right w3-hide-small">
+                <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+                <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+                <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+                <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+            </div>
+            <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+            <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium"
+                onclick="w3_open()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+
+
+
+    <!-- Sidebar on small screens when clicking the menu icon -->
+    <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large"
+        style="display:none" id="mySidebar">
+        <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close
+            ×</a>
+        <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+        <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">TEAM</a>
+        <a href="#work" onclick="w3_close()" class="w3-bar-item w3-button">WORK</a>
+        <a href="#pricing" onclick="w3_close()" class="w3-bar-item w3-button">PRICING</a>
+        <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">CONTACT</a>
+    </nav>
+
+    <!-- Header with full-height image -->
+    <header class="bgimg-1 w3-display-container w3-grayscale-min" id="home">
+        <div id="text_container">
+            <div>
+                <h1 id="title">UncoverPC</h1>
+                <div>
+                    <p class="w3-center w3-large w3-animate-bottom" style="display:inline; color:white;">Find the &nbsp;
+                    </p>
+
+                    <div class="scroller w3-center w3-large w3-animate-bottom" style="color:white;"><span>
+                            optimal<br />
+                            perfect<br />
+                            ideal<br />
+                            flawless
+                        </span>
+                    </div>
+                    <p class="w3-center w3-large w3-animate-bottom" style="display: inline; color:white;">&nbsp;product
+                    </p>
+                </div>
+                <p><a class="w3-button" id="try_button" href="/explore">Try it out</a></p>
+            </div>
+        </div>
+
+        <!-- <p class="w3-center w3-large w3-animate-bottom" style="display:inline-block">Find the  </p> -->
+
+        <!-- <div class="w3-large w3-animate-bottom" style="display:inline-block; height:max-content">product</div> -->
+        <div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px">
+            <i class="fa fa-facebook-official w3-hover-opacity"></i>
+            <i class="fa fa-instagram w3-hover-opacity"></i>
+            <i class="fa fa-snapchat w3-hover-opacity"></i>
+            <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+            <i class="fa fa-twitter w3-hover-opacity"></i>
+            <i class="fa fa-linkedin w3-hover-opacity"></i>
+        </div>
+
+    </header>
+
+    <!-- <script>window.addEventListener(
+                "scroll",
+                () => {
+                    document.body.style.setProperty(
+                        "--scroll",
+                        window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+                    );
+                },
+                false
+            ); -->
+    <!-- </script> -->
+    <script>
+        window.onscroll = function () { scrollRotate() };
+        function scrollRotate() {
+            var navimg = document.getElementById("title");
+            // navimg.style.transform = "rotate(" + (window.pageYOffset / 5) + "deg)";
+            navimg.style.letterSpacing = (window.pageYOffset / 5) + "px";
+        }
+        window.addEventListener("scroll", detect_visibility);
+
+        function detect_visibility() {
+
+            var element = document.getElementById("mission");
+
+            var top_of_element = element.offsetTop;
+            var bottom_of_element = element.offsetTop + element.offsetHeight + element.style.marginTop;
+            var bottom_of_screen = window.scrollY + window.innerHeight;
+            var top_of_screen = window.scrollY;
+
+            if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)) {
+                // Element is visible write your codes here
+                // You can add animation or other codes here
+                element.style.color = "rgb(" + 100 + "," + (window.pageYOffset / 2) + "," + 100 + ")";
+            } else {
+                // the element is not visible, do something else
+                // alert("element is not visible")
+            }
+
+        }
+    </script>
+    <!-- CSS Code -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #text_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            height: 100vh;
+        }
+
+        #title {
+            font-weight: 100;
+            opacity: 1;
+            font-size: 72px;
+            font-style: italic;
+            background: -webkit-linear-gradient(RGBA(200, 81, 81, 200), RGBA(60, 150, 300, 200), RGBA(250, 150, 300, 200));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #try_button {
+            border-radius: 15%;
+            transition: all 0.5s;
+            background-color: blue;
+            color: white;
+            margin-top: 20px;
+            width: 200px;
+            position: relative;
+            font-style: bold;
+        }
+
+        #try_button:hover {
+            border-radius: 25%;
+            background-color: green;
+        }
+
+        .color_theme {
+            background-color: rgba(12, 12, 14, 255);
+            color: antiquewhite;
+        }
+
+        .card {
+            /* position: absolute; */
+            background-color: #F8F8F8;
+            border-radius: 1.5em;
+            min-width: 400px;
+            max-width: 1170px;
+            width: 30%;
+            padding: 2.6em 3.8em;
+            cursor: pointer;
+            top: 50%;
+            /* transform: translate(-50%, -50%); */
+            /* left: 40%; */
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1),
+                0 8px 8px rgba(0, 0, 0, 0.1),
+                0 16px 16px rgba(0, 0, 0, 0.1),
+                0 32px 32px rgba(0, 0, 0, 0.15),
+                0 64px 64px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* Scroller styling */
+        .scroller {
+            height: 1.2em;
+            line-height: 1.2em;
+            position: relative;
+            overflow: hidden;
+            width: 70px;
+            display: inline-flex;
+        }
+
+        .scroller>span {
+            display: flex;
+            position: absolute;
+            top: 0;
+            animation: slide 5s infinite;
+            font-weight: bold;
+
+        }
+
+        @keyframes slide {
+            0% {
+                top: 0;
+            }
+
+            25% {
+                top: -1.2em;
+            }
+
+            50% {
+                top: -2.4em;
+            }
+
+            75% {
+                top: -3.6em;
+            }
+        }
+    </style>
+
+
+
+
+
+
+    <!-- Mission Section -->
+    <div class="w3-container color_theme" style="padding:20px 16px" id="about">
+        <h3 class="w3-center w3-xxlarge" id="mission">Our Mission</h3>
+        <h1 class="w3-xxxlarge">In the U.S.,</h1>   
+        <h1 class="w3-xxxlarge counter" id="percentage_return" data-target="10.6" counted="false"
+        style="display:inline;">0</h1>
+    <h1 class="w3-xxxlarge" id="percentage_return" style="display:inline;">% of purchases are returned.</h1>
+    <br>
+    <h1 class="w3-xxxlarge" style="display:inline;">That's </h1>
+        <h1 class="w3-xxxlarge counter" id="percentage_return" data-target="428" counted="false"
+            style="display:inline;">0</h1>
+        <h1 class="w3-xxxlarge" id="percentage_return" style="display:inline;">&nbsp;billion worth of merchandise.</h1>
+        <br>
+        <p>We're on a mission to reduce returns.</p>
+        <p>
+            By providing consumers with professional product recommendation quizes, consumers can find their perfect product first try.</p>
+            <p>Our AI looks at analyzes reviews and matches the best product based off your needs</p>
+        <div class="w3-row-padding w3-center" style="margin-top:64px">
+            <div class="w3-quarter">
+            </div>
+        </div>
+
+
+        <!-- Popular Section -->
+        <div class="w3-container color_theme" style="padding:128px 16px" id="work">
+            <h3 class="w3-center">Most popular product recommendation quiz</h3>
+
+            <div class="w3-row-padding" style="margin-top:64px">
+                <div class="w3-col l3 m6">
+                    <img src="/w3images/tech_mic.jpg" style="width:100%" onclick="onClick(this)"
+                        class="w3-hover-opacity" alt="Laptop">
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="w3-container color_theme" style="padding:128px 16px" id="contact">
+            <h3 class="w3-center">CONTACT</h3>
+            <p class="w3-center w3-large">Lets get in touch. Send us a message:</p>
+            <div style="margin-top:48px">
+                <br>
+                <form action="/action_page.php" target="_blank">
+                    <p><input class="w3-input w3-border" type="text" placeholder="Name" required name="Name"></p>
+                    <p><input class="w3-input w3-border" type="text" placeholder="Email" required name="Email"></p>
+                    <p><input class="w3-input w3-border" type="text" placeholder="Subject" required name="Subject"></p>
+                    <p><input class="w3-input w3-border" type="text" placeholder="Message" required name="Message"></p>
+                    <p>
+                        <button class="w3-button w3-black" type="submit">
+                            <i class="fa fa-paper-plane"></i> SEND MESSAGE
+                        </button>
+                    </p>
+                </form> 
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="w3-center w3-black w3-padding-64">
+            <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+            <div class="w3-xlarge w3-section">
+                <i class="fa fa-instagram w3-hover-opacity"></i>
+                <p>2022 - UncoverPC</p>
+            </div>
+        </footer>
+
+        <script>
+            // Modal Image Gallery
+            function onClick(element) {
+                document.getElementById("img01").src = element.src;
+                document.getElementById("modal01").style.display = "block";
+                var captionText = document.getElementById("caption");
+                captionText.innerHTML = element.alt;
+            }
+
+
+            // Toggle between showing and hiding the sidebar when clicking the menu icon
+            var mySidebar = document.getElementById("mySidebar");
+
+            function w3_open() {
+                if (mySidebar.style.display === 'block') {
+                    mySidebar.style.display = 'none';
+                } else {
+                    mySidebar.style.display = 'block';
+                }
+            }
+
+            // Close the sidebar with the close button
+            function w3_close() {
+                mySidebar.style.display = "none";
+            }
+
+            //Number counting animationwindo
+            window.addEventListener("scroll", detect_visibility);
+
+            function detect_visibility() {
+                // Selector
+                const counters = document.querySelectorAll('.counter');
+                // Main function
+                for (let n of counters) {
+                    //Check if element has already been counted\
+                    if (n.getAttribute("counted") == "false") {
+                        //Check if element is visible
+                        var element = n;
+                        var top_of_element = element.offsetTop;
+                        var bottom_of_element = element.offsetTop + element.offsetHeight + element.style.marginTop;
+                        var bottom_of_screen = window.scrollY + window.innerHeight;
+                        var top_of_screen = window.scrollY;
+                        //If visisble, do animation
+                        if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)) {
+                            //Set counted to true when count starts
+                            n.setAttribute("counted", "true");
+                            const updateCount = () => {
+                                const target = + n.getAttribute('data-target');
+                                const count = + n.innerText;
+                                const speed = 5000; // change animation speed here
+                                const inc = target / speed;
+                                if (count < target) {
+                                    color = 255-(target-count);
+                                    if(color<150){
+                                        color=150;
+                                    }
+                                    n.style.color = "rgb("+ color +", 50,80)";
+                                    n.innerText = Math.ceil(count + 1);
+                                    setTimeout(updateCount, 2000/(target));
+                                } else {
+                                    n.innerText = target;
+                                }
+                            }
+                            updateCount();
+                        }
+                    }
+                }
+            }
+        </script>
+
+</body>
+
+</html>

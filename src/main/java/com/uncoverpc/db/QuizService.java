@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import com.google.api.core.ApiFuture;
@@ -15,44 +16,12 @@ import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import com.uncoverpc.model.quiz.Questions;
 import com.uncoverpc.model.quiz.Quiz;
+import com.uncoverpc.model.user.User;
 import com.uncoverpc.product.Product;
 
 @Service
-public class QuizService {
+public interface QuizService extends MongoRepository<Quiz, String> {
 
-	private static final String COLLECTION_NAME = "quizzes";
-
-	/**
-	 * Retrieve quiz
-	 * 
-	 * @param quizName
-	 * @return quiz
-	 */
-	public Object getQuiz(String quizName) {
-		try {
-			Firestore dbFirestore = FirestoreClient.getFirestore();
-			DocumentReference documentReference = dbFirestore.collection(COLLECTION_NAME).document(quizName);
-			ApiFuture<DocumentSnapshot> future = documentReference.get();
-
-			DocumentSnapshot document = future.get();
-			return document;
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	public String createQuiz(Quiz quiz) throws InterruptedException, ExecutionException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
-        System.out.println(quiz);
-        Questions questions = new Questions(quiz.getQuestions());
-        ApiFuture<WriteResult> collectionsApiFuture = 
-        		dbFirestore.collection(COLLECTION_NAME).document(quiz.getTitle()).set(questions);
-        return collectionsApiFuture.get().getUpdateTime().toString();
-	}
+	Quiz findByQuizTitle(String quizTitle);
 
 }
