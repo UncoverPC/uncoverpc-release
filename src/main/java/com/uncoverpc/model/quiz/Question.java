@@ -12,12 +12,18 @@ public class Question {
 	private boolean scalable;
 	@JsonProperty("answers")
 	private ArrayList<String> answers = new ArrayList<String>();
+	@JsonProperty("identifer")
+	private String identifier;
+	@JsonProperty("keywords")
+	private ArrayList<String> keywords = new ArrayList<String>();
 	
-	public Question(String question, boolean scalable, ArrayList<String> answers) {
+	public Question(String question, boolean scalable, ArrayList<String> answers, String identifier, ArrayList<String> keywords) {
 		super();
 		this.question = question;
 		this.scalable = scalable;
 		this.answers = answers;
+		this.identifier = identifier;
+		this.keywords = keywords;
 	}
 
 	public String getQuestion() {

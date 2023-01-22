@@ -20,17 +20,26 @@
 					class="w-full flex justify-end xs:justify-start">
 					<div class="flex items-center gap-x-3">
 						<img src="/assets/images/Logo.svg" alt="UncoverPC Logo"
-							class="w-12 xs:w-7 h-10 xs:h-12" />
-						<span class="hidden xs:block font-semibold text-md tracking-wide">UncoverPC</span>
+							class="w-12 xs:w-7 h-10 xs:h-12" /> <span
+							class="hidden xs:block font-semibold text-md tracking-wide">UncoverPC</span>
 					</div>
 				</div>
 				<div id="login-container"
 					class="flex flex-col items-stretch absolute top-1/2 left-1/2 w-full px-8 xs:px-16 sm:px-28 md:px-52 lg:px-16 xl:px-28">
 					<h1 class="text-3xl font-semibold mb-4">Welcome Back!</h1>
-					<div th:if="${message != null}" class="text-green-700" th:text="${message}"></div>
+					<div th:if="${message != null}" class="text-green-700"
+						th:text="${message}"></div>
 
-					<div th:if="${param.error}" class="text-red-700">Invalid email or
-						password</div>
+					<div th:if="${param.error}" class="text-red-700">
+						
+						<th:block  th:switch="${param.error[0]}">
+							<p th:case="'badCredentials'">Invalid email or password</p>
+							<p th:case="'unverified'">Please verify your email</p>
+							<p th:case="*">
+							<script> window.history.pushState("", "", '/login');</script>
+							</p>
+						</th:block>
+					</div>
 					<form th:action="@{/login}" method="post" th:object="${user}">
 						<div class="field-mb-4">
 							<input type="email" id="email" name="email"
@@ -59,8 +68,8 @@
 							<span><a href="/login/oauth2/code/google">Sign in with Google</a></span>
 						</button>
 						<div class="flex justify-center gap-2">
-							<span class="text-xs xs:text-sm">Don't
-								have an account?</span> <a href="/register"
+							<span class="text-xs xs:text-sm">Don't have an account?</span> <a
+								href="/register"
 								class="text-xs xs:text-sm font-medium underline decoration-solid">Sign
 								up for free</a>
 						</div>

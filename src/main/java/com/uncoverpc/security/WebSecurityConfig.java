@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -107,6 +108,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return roleHierarchy;
     }
     
+
     // @Bean
     // public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler() {
     //     DefaultWebSecurityExpressionHandler expressionHandler = new DefaultWebSecurityExpressionHandler();
@@ -122,44 +124,16 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         http.headers().xssProtection();
         http.authenticationProvider(authenticationProvider());
         //http.authorizeRequests().antMatchers("/", "/login", "/callback/", "/webjars/**", "/error/**").permitAll();
-        http.authorizeRequests().antMatchers("/admin/*").hasRole(Roles.Role.ADMIN.toString()).and().formLogin()
-                .failureHandler(authenticationFailureHandler()).loginPage("/login")
-                .usernameParameter("email").defaultSuccessUrl("/admin/dashboard");
-        http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().formLogin().loginPage("/login")
-                .usernameParameter("email").defaultSuccessUrl("/user/dashboard");
-        http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().oauth2Login().loginPage("/login").authorizationEndpoint(authorization -> authorization
-                .baseUri("/login/oauth2/code"));
-        http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID", "jwt");
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
-    /*
-    @Bean
-    @Order(2)
-    protected SecurityFilterChain userFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-        http.cors();
-        http.headers().xssProtection();
-        http.authenticationProvider(authenticationProvider());
-        http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().formLogin().loginPage("/login")
-                .usernameParameter("email").defaultSuccessUrl("/user/dashboard");
-        http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID", "jwt");
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
-    }
 
-    @Bean
-    @Order(1)
-    protected SecurityFilterChain OAuthFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-        http.cors();
-        http.headers().xssProtection();
-        http.authenticationProvider(OAuthProvider());
+        http.authorizeRequests().antMatchers("/admin/*").hasAuthority(Roles.Role.ADMIN.toString()).and().formLogin()
+                .failureHandler(authenticationFailureHandler()).loginPage("/login").defaultSuccessUrl("/admin/dashboard")
+                .usernameParameter("email").defaultSuccessUrl("/admin/dashboard");
+        http.authorizeRequests().antMatchers("/user/*").hasAuthority(Roles.Role.USER.toString()).and().formLogin().loginPage("/login")
+                .usernameParameter("email").defaultSuccessUrl("/user/dashboard");
         http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().oauth2Login().loginPage("/login").authorizationEndpoint(authorization -> authorization
                 .baseUri("/login/oauth2/code"));
         http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID", "jwt");
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-     */
 }
