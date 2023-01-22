@@ -1,41 +1,55 @@
 package com.uncoverpc.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.json.Json;
-
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Document("laptops")
 public class Laptop {
-	private String id;
 	
+	@Id
+	private String id;
+	@JsonProperty("Source")
 	private String source;
+	@JsonProperty("Name")
 	private String name;
+	@JsonProperty("Model")
 	private String model;
+	@JsonProperty("Link")
 	private String link;
+	@JsonProperty("Img")
 	private String img;
+	@JsonProperty("Price")
 	private String price;
-	private Map<String, String> properties;
-	private Map<String, String> quizResponses;
+	@JsonProperty("Properties")
+	private ArrayList<ArrayList<String>> properties;
+	@JsonProperty("Extras")
+	private ArrayList<String> extras;
+	@JsonProperty("QuizResponses")
+	private JsonNode quizResponses;
 	//private HashMap<String, String> quizResponses;
 	
-	public Laptop(String id, String model, String source, String img, String name, String link, String price, String properties, String quizResponses) {
+	public Laptop(String id, String model, String source, String img, String name, String link, String price, ArrayList<ArrayList<String>> properties, ArrayList<String>extras, JsonNode quizResponses) {
 		super();
 		this.id = id;
-		this.model=model;
+		this.model = model;
 		this.source = source;
 		this.img = img;
 		this.name = name;
 		this.link = link;
 		this.price = price;
 		this.properties = properties;
-		this.quizResponses = quizResponses;//new Gson().fromJson(quizResponses.toString(), HashMap.class);
+		this.extras = extras;
+		this.quizResponses = quizResponses;//new ObjectMapper().convertValue(quizResponses, new TypeReference <HashMap <String, Object>>(){});
 	}
 	
 	@Override
@@ -96,16 +110,24 @@ public class Laptop {
 		return properties;
 	}
 
-	public void setProperties(JsonNode properties) {
-		this.properties = properties;
+//	public void setProperties(JsonNode properties) {
+//		this.properties = new ObjectMapper().convertValue(properties, new TypeReference <HashMap <String, Object>>(){});
+//	}
+//
+//	public Map<String, Object> getQuizResponses() {
+//		return quizResponses;
+//	}
+//
+//	public void setQuizResponses(JsonNode quizResponses) {
+//		this.quizResponses = new ObjectMapper().convertValue(quizResponses, new TypeReference <HashMap <String, Object>>(){});
+//	}
+
+	public String getModel() {
+		return model;
 	}
 
-	public JsonNode getQuizResponses() {
-		return quizResponses;
-	}
-
-	public void setQuizResponses(JsonNode quizResponses) {
-		this.quizResponses = quizResponses;
+	public void setModel(String model) {
+		this.model = model;
 	}
 	
 }
