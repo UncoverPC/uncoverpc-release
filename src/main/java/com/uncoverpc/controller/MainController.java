@@ -6,7 +6,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MainController {
-
+	
+	@GetMapping("/")
+	public ModelAndView homepage() {
+		return new ModelAndView("/main/homepage.html");
+	}
+	
 	@GetMapping("/home")
 	public ModelAndView home() {
 		return new ModelAndView("/main/homepage.html");

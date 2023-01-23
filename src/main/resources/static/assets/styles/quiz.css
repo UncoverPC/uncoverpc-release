@@ -166,7 +166,7 @@ body,
         align-items: center;
       }
       .productHolder {
-        margin: 10px auto;
+        margin: 0 auto;
         width: 375px;
         display: flex;
         flex-direction: column;
@@ -194,7 +194,7 @@ body,
         margin-bottom: 5px;
       }
       .productImg {
-        width: 300px;
+        height: 200px;
       }
       .productPrice {
         color: white;
@@ -212,8 +212,10 @@ body,
         line-height: 1.2;
       }
       .propTitle {
+        width: 100%;
         line-height: 1.5;
         font-size: 22px;
+        text-align: center;
       }
       .productProperties {
         background-color: rgb(38, 37, 37);
