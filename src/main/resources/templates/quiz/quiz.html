@@ -56,10 +56,10 @@ lang="en">
 
     questions = /*[[${questions}]]*/ 'questions';
 
-    console.log(questions);
     let userAnswers = new Array(questions.length -1).fill("");
     let answeredQuestions = new Array(questions.length);
     answeredQuestions.fill(false);
+    console.log(questions);
     
     function select(id) {
       let btn = document.getElementById(id);
@@ -113,7 +113,6 @@ lang="en">
     }
 
     function nextQuestion(start) {
-      console.log(userAnswers);
       if(!start) {
         saveQuestion(currentQuestion);
         currentQuestion++;
@@ -238,8 +237,6 @@ lang="en">
         answers: userAnswers,
       }
 
-      console.log(JSON.stringify(QuizResponse))
-      console.log(token)
       $.ajaxSetup({
           headers:{"X-XSRF-TOKEN": token}
       })
@@ -249,7 +246,6 @@ lang="en">
           contentType: "application/json;charset=UTF-8",
           data: JSON.stringify(QuizResponse),
           success: function (response) {
-            console.log(response);
             loadRecommendations(response);
           },
           error: function (e) {
@@ -259,7 +255,6 @@ lang="en">
     }
 
     function loadRecommendations(products) {
-      console.log(products);
 
       for(let i=0; i<products.length; i++) {
         productProperties.push(Object.values(products[i].QuizResponses));
@@ -273,7 +268,7 @@ lang="en">
         holder.innerHTML +=
         `<div class="productHolder">
           <div class="rankingNum"> <h1 class="rankingNum">#${k+1}</h1></div>
-          <a href= ${products[k].link} class="productName">${products[k].name}</a>
+          <a rel="noopener noreferrer" target="_blank" href= ${products[k].link} class="productName">${products[k].name}</a>
           <img src=${products[k].img} class="productImg"/>
           <h1 class="productPrice">${products[k].price}</h1>
           <div id="properties${k}"class="productProperties">
@@ -289,9 +284,20 @@ lang="en">
          </div>`;
 
          let currentProperty = document.getElementById("property"+k+"_"+j);
+         console.log(products[k].QuizResponses[questions[j].title])
+         console.log(userAnswers[j]);
          if(products[k].QuizResponses[questions[j].title] == userAnswers[j]) {
           currentProperty.innerHTML += `<h1 class="match" style="color:green">✓</h1>`
-         } else {
+         } else if(questions[j].scalable) {
+          if(questions[j].answers.indexOf(userAnswers[j]) < questions[j].answers.indexOf(products[k].QuizResponses[questions[j].title])){
+            currentProperty.innerHTML += 
+            `<h1 class="match" style="color:green">✓</h1>
+            <h1 class="match" style="color:green">✓</h1>`
+          } else {
+            currentProperty.innerHTML += `<h1 class="match" style="color:red">X</h1>`
+          }
+         }
+         else {
           currentProperty.innerHTML += `<h1 class="match" style="color:red">X</h1>`
          }
         }
