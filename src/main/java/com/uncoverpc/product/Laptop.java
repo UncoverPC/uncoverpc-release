@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bson.types.Binary;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -13,32 +16,41 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
-@Document("laptops")
+@Document(collection = "laptops")
 public class Laptop {
 	
 	@Id
-	private String id;
-	@JsonProperty("Source")
+	private Binary id;
+	
+	@Field("Source")
 	private String source;
-	@JsonProperty("Name")
+	
+	@Field("Name")
 	private String name;
-	@JsonProperty("Model")
+	
+	@Field("Model")
 	private String model;
-	@JsonProperty("Link")
+	
+	@Field("Link")
 	private String link;
-	@JsonProperty("Img")
+	
+	@Field("Img")
 	private String img;
-	@JsonProperty("Price")
+	
+	@Field("Price")
 	private String price;
-	@JsonProperty("Properties")
-	private ArrayList<ArrayList<String>> properties;
-	@JsonProperty("Extras")
-	private ArrayList<String> extras;
-	@JsonProperty("QuizResponses")
-	private JsonNode quizResponses;
+	
+	@Field("Properties")
+	private ArrayList<String> properties;
+	
+	@Field("Extras")
+	private ArrayList<Object> extras;
+	
+	@Field("QuizResponses")
+	private Map<String, Object> quizResponses;
 	//private HashMap<String, String> quizResponses;
 	
-	public Laptop(String id, String model, String source, String img, String name, String link, String price, ArrayList<ArrayList<String>> properties, ArrayList<String>extras, JsonNode quizResponses) {
+	public Laptop(Binary id, String model, String source, String img, String name, String link, String price, ArrayList<String> properties, ArrayList<Object>extras, @JsonProperty("QuizResponses")Map<String, Object> quizResponses) {
 		super();
 		this.id = id;
 		this.model = model;
@@ -49,7 +61,7 @@ public class Laptop {
 		this.price = price;
 		this.properties = properties;
 		this.extras = extras;
-		this.quizResponses = quizResponses;//new ObjectMapper().convertValue(quizResponses, new TypeReference <HashMap <String, Object>>(){});
+		this.quizResponses = quizResponses;
 	}
 	
 	@Override
@@ -58,11 +70,11 @@ public class Laptop {
 				+ ", price=" + price + ", properties=" + properties + ", quizResponses=" + quizResponses + "]";
 	}
 
-	public String getId() {
+	public Binary getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Binary id) {
 		this.id = id;
 	}
 
@@ -106,21 +118,13 @@ public class Laptop {
 		this.price = price;
 	}
 
-	public Object getProperties() {
+	public ArrayList<String> getProperties() {
 		return properties;
 	}
 
-//	public void setProperties(JsonNode properties) {
-//		this.properties = new ObjectMapper().convertValue(properties, new TypeReference <HashMap <String, Object>>(){});
-//	}
-//
-//	public Map<String, Object> getQuizResponses() {
-//		return quizResponses;
-//	}
-//
-//	public void setQuizResponses(JsonNode quizResponses) {
-//		this.quizResponses = new ObjectMapper().convertValue(quizResponses, new TypeReference <HashMap <String, Object>>(){});
-//	}
+	public Map<String, Object> getQuizResponses() {
+		return quizResponses;
+	}
 
 	public String getModel() {
 		return model;

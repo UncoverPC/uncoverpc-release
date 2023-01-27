@@ -9,7 +9,7 @@ lang="en">
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="icon" th:href="@{assets/Logo.svg}" />
+    <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link rel="stylesheet" th:href="@{/assets/styles/quiz.css}"/>
     <link rel="stylesheet" href="/src/main/resources/static/assets/styles/quiz.css" />
@@ -30,44 +30,11 @@ lang="en">
   <body>
     <div id="main">
       <div id="wrapper">
-        <img src="/src/main/resources/static/assets/images/Logo.svg" class="logo-small"/>
+        <img th:src="@{/assets/images/Logo.svg}" class="logo-small"/>
       </div>
       <div id="holder">
         <div class="visible" id="homepage">
-
-          <!-- <div class="recHolder">
-          <div class="productHolder">
-            <div class="rankingNum"> <h1 class="rankingNum">#1</h1>  </div>
-            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
-            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
-            <h1 class="productPrice">1499.00</h1>
-            <div class="productProperties">
-              <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
-              <h1 class="propText"> Screen Size: 15in</h1>
-            </div>
-           </div>
-           <div class="productHolder">
-            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
-            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
-            <h1 class="productPrice">1499.00</h1>
-            <div class="productProperties">
-              <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
-
-            </div>
-           </div>
-           <div class="productHolder">
-            <a href="https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14" class="productName">ASUS TUF Gaming F17 (2022) Gaming Laptop</a>
-            <img src="https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg" class="productImg"/>
-            <h1 class="productPrice">1499.00</h1>
-            <div class="productProperties">
-              <h1 class="propText" style="font-size: 22px; text-align: center;"> Properties</h1>
-              <h1 class="propText"> Screen Size: 15in</h1>
-            </div>
-           </div>
-          </div> -->
-
-          <h1 class="header">Ready to find the perfect 
-            <span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
+          <h1 class="header">Ready to find the perfect<span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
           <button id="start-button" onclick="startQuiz('homepage')">Get Started!</button>
         </div>
       </div>
@@ -85,11 +52,11 @@ lang="en">
     
 
     questions = /*[[${questions}]]*/ 'questions';
-    let userAnswers = ["test"];
-    userAnswers.pop();
-    userAnswers = new Array(questions.length).fill("");
+
+    let userAnswers = new Array(questions.length -1).fill("");
     let answeredQuestions = new Array(questions.length);
     answeredQuestions.fill(false);
+    console.log(questions);
     
     function select(id) {
       let btn = document.getElementById(id);
@@ -143,7 +110,6 @@ lang="en">
     }
 
     function nextQuestion(start) {
-      console.log(userAnswers);
       if(!start) {
         saveQuestion(currentQuestion);
         currentQuestion++;
@@ -259,22 +225,6 @@ lang="en">
       }   
     }
 
-    let laptopTesting = {
-      name: "ASUS TUF Gaming F17 (2022) Gaming Laptop",
-      img: "https://m.media-amazon.com/images/I/71CDBtFfKGL._AC_SY355_.jpg",
-      link: "https://www.amazon.ca/IPS-Type-i7-12700H-GeForce-Thunderbolt-TUF707ZM-AS71-CA/dp/B09VCQDYC2/ref=sr_1_14?keywords=laptop&qid=1672278332&sr=8-14",
-      price: "1499.00",
-      quizResponses: {
-        screenSize: "17 inches",
-        ram: "16GB",
-        color: "Grey",
-        battery: "12+",
-        storage: "250-500",
-        use: "Gaming",
-      }
-    }
-    let products = [laptopTesting];
-
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
     
@@ -284,8 +234,6 @@ lang="en">
         answers: userAnswers,
       }
 
-      console.log(JSON.stringify(QuizResponse))
-      console.log(token)
       $.ajaxSetup({
           headers:{"X-XSRF-TOKEN": token}
       })
@@ -295,8 +243,7 @@ lang="en">
           contentType: "application/json;charset=UTF-8",
           data: JSON.stringify(QuizResponse),
           success: function (response) {
-            console.log(response);
-            loadRecommendations(products);
+            loadRecommendations(response);
           },
           error: function (e) {
             alert("Error!");
@@ -305,40 +252,52 @@ lang="en">
     }
 
     function loadRecommendations(products) {
-      console.log(products[0]);
 
       for(let i=0; i<products.length; i++) {
-        productProperties.push(Object.values(products[i].quizResponses));
+        productProperties.push(Object.values(products[i].QuizResponses));
       }
  
       let home = document.getElementById("holder");
       home.innerHTML = "";
       home.innerHTML += `<div id="recHolder" class="recHolder"></div>`;
       let holder = document.getElementById("recHolder");
-      for(let i=0; i<products.length; i++) {
+      for(let k=0; k<3; k++) {
+        holder.innerHTML +=
         `<div class="productHolder">
-          <div class="rankingNum"> <h1 class="rankingNum">#${i+1}</h1></div>
-          <a href= ${products[i].link} class="productName">${products[i].name}</a>
-          <img src=${products[i].img} class="productImg"/>
-          <h1 class="productPrice">${products[i].price}</h1>
-          <div id="properties${i}"class="productProperties">
+          <div class="rankingNum"> <h1 class="rankingNum">#${k+1}</h1></div>
+          <a rel="noopener noreferrer" target="_blank" href= ${products[k].link} class="productName">${products[k].name}</a>
+          <img src=${products[k].img} class="productImg"/>
+          <h1 class="productPrice">${products[k].price}</h1>
+          <div id="properties${k}"class="productProperties">
             <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
           </div>
          </div>`
-      }
-      let propertyHolder = document.getElementById("properties"+i);
-      for(let j=0; j<userAnswers.length; j++) {
-        propertyHolder +=
-        `<div class="propertyHolder" id="property${i+"_"+j}"> 
-            <h1 class="propText">${productProperties[i][j]}</h1>
+      
+      let propertyHolder = document.getElementById("properties"+k);
+      for(let j=1; j<userAnswers.length; j++) {
+        propertyHolder.innerHTML +=
+        `<div class="propertyHolder" id="property${k+"_"+j}"> 
+            <h1 class="propText">${questions[j].identifer+": "+products[k].QuizResponses[questions[j].title]}</h1>
          </div>`;
-         let currentProperty = document.getElementById("property"+i+"_"+j);
 
-         if(productProperties[i][j] == userAnswers[j+1]) {
-          currentProperty += `<h1 class="match" style="color:green">✓</h1>`
-         } else {
-          currentProperty += `<h1 class="match" style="color:red">X</h1>`
+         let currentProperty = document.getElementById("property"+k+"_"+j);
+         console.log(products[k].QuizResponses[questions[j].title])
+         console.log(userAnswers[j]);
+         if(products[k].QuizResponses[questions[j].title] == userAnswers[j]) {
+          currentProperty.innerHTML += `<h1 class="match" style="color:green">✓</h1>`
+         } else if(questions[j].scalable) {
+          if(questions[j].answers.indexOf(userAnswers[j]) < questions[j].answers.indexOf(products[k].QuizResponses[questions[j].title])){
+            currentProperty.innerHTML += 
+            `<h1 class="match" style="color:green">✓</h1>
+            <h1 class="match" style="color:green">✓</h1>`
+          } else {
+            currentProperty.innerHTML += `<h1 class="match" style="color:red">X</h1>`
+          }
          }
+         else {
+          currentProperty.innerHTML += `<h1 class="match" style="color:red">X</h1>`
+         }
+        }
       }
     }
   </script>
