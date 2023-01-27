@@ -124,11 +124,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         http.headers().xssProtection();
         http.authenticationProvider(authenticationProvider());
         //http.authorizeRequests().antMatchers("/", "/login", "/callback/", "/webjars/**", "/error/**").permitAll();
-
-        http.authorizeRequests().antMatchers("/admin/*").hasAuthority(Roles.Role.ADMIN.toString()).and().formLogin()
-                .failureHandler(authenticationFailureHandler()).loginPage("/login").defaultSuccessUrl("/admin/dashboard")
+        http.authorizeRequests().antMatchers("/admin/*").hasRole(Roles.Role.ADMIN.toString()).and().formLogin()
+                .failureHandler(authenticationFailureHandler()).loginPage("/login")
                 .usernameParameter("email").defaultSuccessUrl("/admin/dashboard");
-        http.authorizeRequests().antMatchers("/user/*").hasAuthority(Roles.Role.USER.toString()).and().formLogin().loginPage("/login")
+        http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().formLogin().loginPage("/login")
                 .usernameParameter("email").defaultSuccessUrl("/user/dashboard");
         http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().oauth2Login().loginPage("/login").authorizationEndpoint(authorization -> authorization
                 .baseUri("/login/oauth2/code"));
