@@ -1,112 +1,203 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org"
-lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
-    <link rel="stylesheet" th:href="@{/assets/styles/homepage.css}" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/styles/homepage.css" />
-    <meta th:name="_csrf" th:content="${_csrf.token}"/>
-    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-    
-    <link th:href='@{https://fonts.googleapis.com/css?family=Raleway}' rel='stylesheet'>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Home - UncoverPC</title>
-  </head>
+	xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" th:href="@{/assets/images/Logo.svg}" />
+<link rel="stylesheet" th:href="@{/assets/styles/homepage.css}" />
+<link rel="stylesheet"
+	href="/src/main/resources/static/assets/styles/homepage.css" />
+<meta th:name="_csrf" th:content="${_csrf.token}" />
+<meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
 
-  <body class="color_theme" id="text_container">
-    <div id="navbar">
-      <img src="@{/assets/images/Logo.svg}" style="width: 2.5%; height:1%; margin-left: 10%; margin-top: 5px; margin-bottom: 5px;">
-      <button id="login" style="left: 90%;">Login</button>   
-    </div>
+<link th:href='@{https://fonts.googleapis.com/css?family=Raleway}'
+	rel='stylesheet'>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Home - UncoverPC</title>
+</head>
 
-    <div class="hidden" id="early-access">
-      <button style="margin-left: 92%; margin-top: 3%;" class="close-button" onclick="closeForm()"> X</button>
-        <h2 style="margin-left: 5%;">Get Updates</h2>
-        <h4 style="margin-left: 5%;">Thank you for your interest and support!</h2>
+<body class="color_theme" id="text_container">
+	<div id="navbar">
+		<a href="/"><img th:src="@{/assets/images/Logo.svg}" class="logo"></a>
+		<a href="/login"><button id="login">Login</button> </a>
+	</div>
 
-      <form id="ea-form" th:action="@{/earlyaccess}" method="post" th:object="${EarlyUser}">
-        <input class="form-input" id="name" type="name" placeholder="Enter Name" />
-        <input class="form-input" id="email" type="email" placeholder=" Enter E-mail" />
-        <input style="margin-bottom: 5px;" class="form-submit" type="submit" value="Submit"/>
-        <h3 th:text="${message}"></h3>
-      </form>
-    </div>
+	<div class="hidden" id="early-access">
+		<button style="margin-left: 92%; margin-top: 3%;" class="close-button"
+			onclick="closeForm()">X</button>
+		<h2 style="margin-left: 5%;">Get Updates</h2>
+		<h4 style="margin-left: 5%;">
+			Thank you for your interest and support!
+			</h2>
 
-    <div id="main" class="visible">
-      <div class="section" id="landing">
-        <div class="main-text">
-          <h1 class="home-text">Shopping for </h1>
-          <h1 class="home-text">electronics made</h1>
-          <div class="scroller home-text" style="color:rgb(73, 226, 73);">
+			<form id="ea-form" th:action="@{/earlyaccess}" method="post"
+				th:object="${EarlyUser}">
+				<input class="form-input" id="name" type="name"
+					placeholder="Enter Name" /> <input class="form-input" id="email"
+					type="email" placeholder=" Enter E-mail" /> <input
+					style="margin-bottom: 5px;" class="form-submit" type="submit"
+					value="Submit" />
+				<h3 th:text="${message}"></h3>
+			</form>
+	</div>
 
-            <span>
-            easy<br />
-            simpler<br />
-            faster<br />
-            better
-        </span>
-      </div>
-          <h2 class="text1">Harnessing the power of Artificial Intelligence, UncoverPC seamlessly identifies the perfect electronic product without you conducting any research.</h4>
-          <button id="early-btn" onclick="openForm()">Request Early Access</button>
-        </div>
-      </div>
+	<div id="main" class="visible">
+		<div class="section" id="landing">
+			<div class="main-text">
+				<div class="">
+					<h1 class="home-text">Shopping for</h1>
+					<h1 class="home-text">electronics made</h1>
+					<div class="scroller home-text" style="color: orange;">
+
+						<span> easy<br /> simple<br /> effortless<br />
+
+						</span>
+					</div>
+					<h2 class="text1">
+						Streamline your shopping experience with <a style="color: green;">Artificial
+							Intelligence</a> that researches for you.
+					</h2>
+					<button id="early-btn" onclick="openForm()">Request Early
+						Access</button>
+				</div>
+			</div>
+		</div>
+		<div class="section" id="purpose">
+			<h2 class="subtitle-text reveal fade-bottom"
+				style="text-align: center;">
+				We're on a <a style="color: blue;">mission.</a>
+			</h2>
+
+			<div id="mission" class="visible	">
+				<div id="counter-holder">
+
+					<h1 class="mission-text">In the US,</h1>
+					<h1 class="counter" id="percentage_return" data-target="20.8"
+						counted="false" style="display: inline;">0</h1>
+					<h1 class="mission-text" id="percentage_return"
+						style="display: inline;">% of online purchases were returned.</h1>
+					<br>
+					<h1 class="mission-text" style="display: inline;">That's $</h1>
+					<h1 class="mission-text counter" id="percentage_return"
+						data-target="761" counted="false" style="display: inline;">0</h1>
+					<h1 class="mission-text" id="percentage_return"
+						style="display: inline;">&nbsp;billion worth of merchandise.</h1>
+						<br>
+						<div class="box reveal fade-right">
+						<h1 
+						style="display: inline; bottom:10px;">&nbsp;Buy the optimal product the <a style="color:rgb(106 255 115);" class="reveal fade-bottom">first time.</a></h1>
+						</div>
+				</div>
+			</div>
+		</div>
+		<h2 class="subtitle-text reveal fade-bottom"
+			style="text-align: center; margin-bottom: 1em;">
+			<a style="color: blue;" class="glow">Empower</a> your shopping.
+		</h2>
+
+		<div class="row reveal fade-bottom">
+			<div class="column"
+				style="border-color: #aaa; border-radius: 5px; border: 5px;">
+				<h2 class="mission-text">
+					<a style="color: #7CFC00">Save time &#10003;</a>
+				</h2>
+				<h1 class="empower">Say goodbye to endless hours of researching and hello to <a style="color:yellow;">effortless</a> shopping with our AI-powered search engine. Quickly and accurately find the perfect tech product for your needs.</h1>
+			</div>
+			<div class="column">
+				<h2 class="mission-text">
+					<a style="color: #7CFC00">Minimize Confusion &#10003;</a>
+				</h2>
+				<h1 class="empower">Focus on your product requirements without being confused on unfamiliar concepts behind it with our sophisticated search engine that gives direct answers. <h1>
+			</div>
+			<div class="column">
+				<h2 class="mission-text">
+					<a style="color: #7CFC00">Increase accuracy &#10003;</a>
+				</h2>
+				<h1 class="empower">Product recommendations are based on <a style="color:blue;">thousands</a> of customer
+					reviews and feedback—not just one individual's opinion.</h1>
+			</div>
+		</div>
+
+		<div class="section" id="how-it-works">
+			<h1 class="subtitle-text reveal fade-bottom" id='purpose-header'>How
+				it works</h1>
+
+			<div class="main-text" id="mission-explained">
+				<div class="mission-div">
+					<img src="/templates/thumbnails/dT487ankc.jpg"
+						class="icon-thumbnail" />
+					<h4 class="text2" style="margin-top: 10px; text-align: center;">
+						Through our countless quizzes, we help provide the best
+						professional recommendation for tech products based on your
+						personal needs.</h4>
+				</div>
+
+				<div class="mission-div">
+					<img src="/templates/thumbnails/dT487ankc.jpg"
+						class="icon-thumbnail" />
+					<h4 class="text2" style="margin-top: 10px; text-align: center;">
+						Our AI looks at analyzes reviews and matches the best product
+						based off your needs</h4>
+				</div>
+			</div>
+		</div>
 
 
 
-      <div class="section" id="purpose">
-        <h2 class="subtitle-text" style="text-align: center; margin-top: 3rem;">We're on a mission to reduce returns.</h2>
 
-        <div id="mission" class="visible">
-          <div id="counter-holder">
-          <h1 class="mission-text">In the U.S.,</h1>   
-            <h1 class="counter" id="percentage_return" data-target="10.6" counted="false"
-            style="display:inline;">0</h1>
-          <h1 class="mission-text" id="percentage_return" style="display:inline;">% of purchases are returned.</h1>
-          <br>
-          <h1 class="mission-text" style="display:inline;">That's $</h1>
-            <h1 class="mission-text counter" id="percentage_return" data-target="428" counted="false"
-                style="display: inline;">0</h1>
-            <h1 class="mission-text" id="percentage_return" style="display:inline;">&nbsp;billion worth of merchandise.</h1>
-          </div>
-          
-            <div class="main-text" id="mission-explained">
-              <div class="mission-div">
-                <img src="/templates/thumbnails/dT487ankc.jpg" class="icon-thumbnail" />
-                <h4 class="text2" style="margin-top: 10px; text-align: center;">
-                  Through our countless quizzes, we help provide the best professional recommendation for tech products based on your personal needs.</h4>
-              </div>
+		<div class="footer">
+			<p>
+				2023 UncoverPC &nbsp;&nbsp;<a
+					href="https://www.instagram.com/uncoverpc/" class="fa fa-instagram"
+					style="color: white;"></a>
+			</p>
 
-              <div class="mission-div">
-                <img src="/templates/thumbnails/dT487ankc.jpg" class="icon-thumbnail" />
-                <h4 class="text2" style="margin-top: 10px; text-align: center;">
-                  Our AI looks at analyzes reviews and matches the best product based off your needs</h4>
-              </div>
+		</div>
+	</div>
 
-              <div class="mission-div">
-                <img src="/templates/thumbnails/dT487ankc.jpg" class="icon-thumbnail" />
-                <h4 class="text2" style="margin-top: 10px; text-align: center;">
-                  Our AI looks at analyzes reviews and matches the best product based off your needs</h4>
-              </div>
-            </div>
-        </div>
-      </div>
+</body>
 
-      <div class="section" id="contact-us">
-        <h1 class="subtitle-text" id='purpose-header'>Contact</h1>
-      </div>
-    </div>
+<script>
+  
+  var color = 0;
+  
+  function changeColor(){
+	  var elements = document.querySelectorAll(".box");
+	  for (var i = 0; i < elements.length; i++) {
+	      var windowHeight = window.innerHeight;
+	      var elementTop = elements[i].getBoundingClientRect().top;
+	      var elementVisible = 50;
 
-  </body>
+	      if (elementTop < windowHeight - elementVisible) {
+	        elements[i].style.borderColor = "linear-gradient(45deg, #00DBDE 0%, #FC00FF 100%);";
 
-  <script>
+	      }
+	    }
+  }
+  
+  window.addEventListener("scroll",changeColor);
+  
+  function reveal() {
+	    var reveals = document.querySelectorAll(".reveal");
+
+	    for (var i = 0; i < reveals.length; i++) {
+	      var windowHeight = window.innerHeight;
+	      var elementTop = reveals[i].getBoundingClientRect().top;
+	      var elementVisible = 50;
+
+	      if (elementTop < windowHeight - elementVisible) {
+	        reveals[i].classList.add("active");
+	      }
+	    }
+	  }
+
+	  window.addEventListener("scroll", reveal);
+  
     //Number counting animationwindo
     window.addEventListener("scroll", detect_visibility);
 
