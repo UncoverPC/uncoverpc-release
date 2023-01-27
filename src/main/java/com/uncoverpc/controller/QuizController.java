@@ -23,11 +23,12 @@ public class QuizController {
 
 	@Autowired
 	QuizService quizService;
+	private static final String ADMIN_PATH = "/admin/quiz";
 
 	
 	@GetMapping("/quiz/{quizName}")
 	public ModelAndView getQuiz(@PathVariable(value = "quizName") String quizName) {
-		ModelAndView model = new ModelAndView("quiz.html");
+		ModelAndView model = new ModelAndView("/quiz/quiz.html");
 		Quiz quiz = quizService.findByQuizTitle(quizName);
 		model.addObject("questions", quiz.getQuestions());
 		model.addObject("quizTitle", quiz.getTitle());
@@ -44,13 +45,13 @@ public class QuizController {
 
 	@GetMapping("/quizCreateSuccess.html")
 	public ModelAndView success() {
-		ModelAndView model = new ModelAndView("quizCreateSuccess.html");
+		ModelAndView model = new ModelAndView(ADMIN_PATH+"/quizCreateSuccess.html");
 		return model;
 	}
 
 	@GetMapping("/create_quiz1")
 	public ModelAndView testQuiz() {
-		ModelAndView model = new ModelAndView("create_quiz1.html");
+		ModelAndView model = new ModelAndView(ADMIN_PATH+"/create_quiz.html");
 		return model;
 	}
 	@PostMapping("/api/quiz/create")
@@ -59,11 +60,11 @@ public class QuizController {
 		System.out.println("quiz: "+quiz.toString());
 		try {
 			quizService.save(quiz);
-			ModelAndView view = new ModelAndView("/quizCreateSuccess.html");
+			ModelAndView view = new ModelAndView(ADMIN_PATH+"/quizCreateSuccess.html");
 			return view;
 		}
 		catch(Exception e) {
-			ModelAndView view = new ModelAndView("/create_quiz1.html");
+			ModelAndView view = new ModelAndView(ADMIN_PATH+"/create_quiz1.html");
 			return view;
 		}
 	}

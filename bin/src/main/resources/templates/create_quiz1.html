@@ -8,8 +8,9 @@ lang="en">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta th:name="_csrf" th:content="${_csrf.token}"/>
     <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
-    <link rel="icon" href="assets/Logo.svg" />
+    <link rel="icon" href="/static/assets/images/Logo.svg" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="/static/assets/styles/create_quiz1.css"/>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Raleway"
@@ -19,440 +20,19 @@ lang="en">
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>Quiz - UncoverPC</title>
-    <style>
-      body,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-family: "Raleway", sans-serif;
-      }
-
-      ul{
-        list-style-type: none;
-      }
-
-      body,
-      html {
-        height: 100%;
-        line-height: 1.8;
-      }
-
-      .w3-bar .w3-button {
-        padding: 16px;
-      }
-
-
-
-      .color_theme {
-        background-color: rgba(12, 12, 14, 255);
-        color: antiquewhite;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      #text_container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        height: 100vh;
-        overflow: visible;
-      }
-
-      #creator_body{
-        background-color: rgb(21, 21, 27);
-        border-radius: 20px;
-        max-width: 1100px;
-        margin-bottom: 20px;
-      }
-
-
-
-      #quiz_creator{
-        font-size: 60px;
-      }
-
-      #titles{
-        position: relative;
-      }
-
-      li{
-        list-style-type: none;
-        display: inline-block;
-      }
-
-      .logo {
-        font-weight: 100;
-        opacity: 1;
-        font-size: 80px;
-        font-style: italic;
-        background: -webkit-linear-gradient(
-          RGBA(200, 81, 81, 200),
-          RGBA(60, 150, 300, 200),
-          RGBA(250, 150, 300, 200)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-
-      #start_button {
-        background-color: rgb(9, 186, 106);
-        /* background-color:  -webkit-linear-gradient(RGBA(200, 81, 81, 200), RGBA(60, 150, 300, 200), RGBA(250, 150, 300, 200)); */
-        /* -webkit-background-clip: text; */
-        /* -webkit-text-fill-color: transparent; */
-        width: 120px;
-        height: 50px;
-        transition: 0.25s;
-        border-radius: 20%;
-      }
-
-      #start_button:hover {
-        background-color: rgb(67, 229, 3);
-        /* background-color:  -webkit-linear-gradient(RGBA(200, 81, 81, 200), RGBA(60, 150, 300, 200), RGBA(250, 150, 300, 200)); */
-        /* -webkit-background-clip: text; */
-        /* -webkit-text-fill-color: transparent; */
-        border-radius: 30%;
-      }
-
-      .answer {
-        width: 500px;
-        padding: 10px;
-        border: 2px solid gray !important;
-        margin: 10px;
-        position: relative;
-        background-color: transparent;
-        color: gray;
-        animation: incomingQuestion 0.5s;
-      }
-
-      .answer:hover {
-        border: 2px solid rgb(42, 54, 148) !important;
-        color: rgb(42, 54, 148) !important;
-      }
-
-      .answer_selected {
-        border: 2px solid rgb(196, 80, 80) !important;
-        color: rgb(196, 80, 80) !important;
-      }
-
-      .delete_answer {
-        border: transparent;
-        background-color: transparent;
-        color:rgb(202, 96, 96);
-        font-size: 20px;
-        font-weight: bold;
-        animation: newDeleteButton 0.5s;
-      }
-
-      .delete_answer:hover{
-        color:rgb(218, 45, 45);
-      }
-
-      .delete_question {
-        padding: 5px;
-        margin-top: 10px;
-        border: 2px solid rgb(202, 96, 96);
-        border-radius: 10px;
-        background-color: transparent;
-        color:rgb(202, 96, 96);
-        font-size: 18px;
-      }
-
-      .delete_question:hover{
-        color:rgb(218, 45, 45);
-      }
-
-      .back {
-        margin-top: 15px;
-        padding: 5px;
-        border: transparent;
-        position: relative;
-        background-color: transparent;
-        color: red;
-        border-radius: 20%;
-        display: inline-flex;
-      }
-
-
-      .question_holder{
-        border-radius: 50px;
-        margin: 10px 10px;
-        max-width: 1000px;
-        width: 1000px;
-      }
-
-      #sidenav{
-        height: 100%;
-        width: 250px;
-        position: fixed;
-        z-index: 1; /* Stay on top */
-        top: 0; /* Stay at the top */
-        left: 0;
-        background-color: rgb(18, 13, 37);
-        overflow-x: hidden; /* Disable horizontal scroll */
-        padding-top: 20px;
-      }
-
-      .navbar_question{
-        font-size: x-large;
-        color: white;
-        background-color: rgb(55, 40, 104);
-        width: 90%;
-        border-radius: 20px;
-        border-color: rgb(192, 190, 190);
-        margin: 10px;
-        text-decoration: none;
-        padding: 10px;
-        float: left;
-      }
-
-      #save_button{
-        background-color: rgb(32, 23, 65);
-        margin-bottom: 20px;
-        color: aliceblue;
-        width: 100px;
-        height: 50px;
-      }
-
-      #save_button:hover{
-        background-color:rgb(41, 41, 77);
-      }
-
-      .navbar_question:hover{
-        background-color: rgb(32, 23, 65);
-      }
-
-      #nav_header{
-        font-size: 32px;
-      }
-
-      .question_holder:hover {
-        background-color:rgb(24, 24, 32);
-        opacity: 80%;
-        border-radius: 20px;
-
-      }
-
-      .submit {
-        padding: 10px;
-        border: 2px solid green;
-        position: relative;
-        background-color: transparent;
-        color: rgb(119, 201, 111);
-        border-radius: 20%;
-        display: inline-flex;
-      }
-
-      .submit:hover {
-        background-color: green;
-      }
-
-      #main{
-        position: relative;
-        margin-left: 10%;
-        height: 100%;
-      }
-
-      #main_logo{
-        max-height: 100px;
-      }
-
-      #submit_button{
-          position: relative;
-          margin-top: 600px;
-          margin-left: 10px;
-      }
-
-
-
-      .questionButton {
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 2px solid rgb(27, 48, 134);
-        position: relative;
-        background-color: transparent;
-        color: rgb(27, 165, 156);
-        border-radius: 20%;
-        display: inline-flex;
-      }
-
-      .questionButton:hover {
-        background-color: blue;
-      }
-
-      .addAnswer {
-        padding: 10px;
-        margin-left: 10px;
-        border: 2px solid rgb(134, 64, 27);
-        position: relative;
-        background-color: transparent;
-        color: rgba(106, 151, 55, 0.719);
-        border-radius: 20%;
-        display: inline-flex;
-      }
-
-      .addAnswer:hover {
-        background-color: rgb(208, 109, 86);
-      }
-
-      .back:hover {
-        /* border: 2px solid rgb(104, 44, 6); */
-        color: rgb(42, 54, 148);
-      }
-
-      .textfield {
-        width: 40vw;
-        background-color: transparent;
-        border-color: transparent;
-        color: antiquewhite;
-      }
-
-      #quiz_title {
-        font-size: 50px;
-      }
-
-      .question_title{
-        font-size: 35px;
-      }
-
-      .footer{
-        position: static;
-        text-align: center;
-        width: 100%;
-
-      }
-
-      .lds-ring {
-        display: inline-block;
-        position: relative;
-        width: 80px;
-        height: 80px;
-      }
-
-      .lds-ring div {
-        box-sizing: border-box;
-        display: block;
-        position: absolute;
-        width: 64px;
-        height: 64px;
-        margin: 8px;
-        border: 8px solid #fff;
-        border-radius: 50%;
-        animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        border-color: #fff transparent transparent transparent;
-      }
-
-      .lds-ring div:nth-child(1) {
-        animation-delay: -0.45s;
-      }
-
-      .lds-ring div:nth-child(2) {
-        animation-delay: -0.3s;
-      }
-
-      .lds-ring div:nth-child(3) {
-        animation-delay: -0.15s;
-      }
-
-      @keyframes lds-ring {
-        0% {
-          transform: rotate(0deg);
-        }
-
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .progress_bar_container {
-        width: 0vw;
-        height: 2px;
-        background-color: green;
-        position: relative;
-        transition: 0.6s;
-      }
-
-
-
-      /* Next question animation */
-      @keyframes newDeleteButton {
-        0% {
-          transform: translateX(100vw);
-        }
-        100% {
-          transform: translateX(0vw);
-        }
-      }
-      @keyframes nextQuestion {
-        0% {
-          right: 0vw;
-        }
-
-        100% {
-          right: 100vw;
-        }
-      }
-
-      /* Next question animation */
-      @keyframes incomingQuestion {
-        0% {
-          left: 100vw;
-        }
-
-        100% {
-          left: 0vw;
-        }
-      }
-
-      /* Next question animation */
-      @keyframes previousQuestion {
-        0% {
-          left: 0vw;
-        }
-
-        100% {
-          left: 100vw;
-        }
-      }
-
-      /* Next question animation */
-      @keyframes outcomingQuestion {
-        0% {
-          right: 100vw;
-        }
-
-        100% {
-          right: 0vw;
-        }
-      }
-    </style>
-
-    <script></script>
+    <title>Quiz Creator - UncoverPC</title>
   </head>
-
-
 
   <body class="color_theme" id="text_container">
 
     <div id="sidenav">
-        <h4 class = "logo" id="nav_header">Quiz Navigator</h1>
-        <button class="questionButton" onclick="newQuestion()" id="add_question">
-                Add Question
-        </button>
-
-        <div id="navbar_questions">
-          <a href="#creator_body" class ="navbar_question">To the Top</a>
-          <a href="#quiz_footer" class ="navbar_question">To the Bottom</a>
-
-        </div>
+      <button class="questionButton" onclick="newQuestion()" id="add_question">
+              +
+      </button>
+      <div id="navbar_questions">
+        <a href="#main" class ="navbar_question">↑</a>
+        <a href="#quiz_footer" class ="navbar_question">↓</a>
+      </div>
     </div>
 
     <div class="w3-top">
@@ -480,16 +60,25 @@ lang="en">
         <h1 class="logo" id="main_logo">UncoverPC</h1>
         <h1 class="logo" id="quiz_creator"> Quiz Creator</h1>
       </div>
-
+      
       <!-- Title -->
-      <input
-        type="text"
-        class="w3-center textfield"
-        id="quiz_title"
-        oninput="onChangeQuizTitle(this)"
-        name="quiz_title"
-        placeholder = "Quiz Title"
-      />
+      <div id="edit-holder">
+        <button id="edit-button" onClick="showEdit()">✎</button>
+        <div class="form-popup" id="myForm" >
+            <input id="edit-input" type="text" placeholder="Enter Quiz" name="quiz" required>
+            <button id="submit-form" onClick="getQuiz()">Go!</button>
+        </div>
+      </div>
+      <div>
+        <input
+          type="text"
+          class="w3-center textfield"
+          id="quiz_title"
+          oninput="onChangeQuizTitle(this)"
+          name="quiz_title"
+          placeholder = "Quiz Title"
+        />
+      </div>
       <!--Quiz Creator Body-->
       <ul id="creator_body">
         <!-- Question Element -->
@@ -520,10 +109,36 @@ lang="en">
             </div>
           </div>
           Scalable:
-          <input type="checkbox" id="scalable_1" />
+          <input type="checkbox" id="scalable_1" onclick="saveScalable(1)"/>
           <button class="addAnswer" onclick="addAnswer(1)" id="add_question">
             Add Answer
           </button>
+         </div>
+         <div>
+          <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="keywords_1"
+              name="keywords"
+              placeholder="Keywords (separate by commas)"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="identifier_1"
+              name="identifier"
+              placeholder="Identifier"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="image_1"
+              name="image"
+              placeholder="Insert Image Link"
+             />
          </div>
          <button class="delete_question" onclick = "delQuestion(1)"> Delete Question</button>
 
@@ -539,9 +154,7 @@ lang="en">
 
 
   <script>
-   var quiz = { quizTitle: "", questions: []};
 
-    var current_question = 0;
     var question_counter =1;
 
     //Questions & answers (injected from backend)
@@ -569,6 +182,7 @@ lang="en">
         answers: ["<1year", "1-3years", "3-5years", "6-8years"],
       },
     ];
+    var quiz = { quizTitle: "laptop", questions: questions};
 
     function QuestionAndAnswer (question, answers) {
       this.question = question;
@@ -577,29 +191,90 @@ lang="en">
 
     var answerCounter = [1];
 
-    // start_quiz()
-    //Start the quiz
-    function start_quiz() {
-      //Make home screen disapear
+    var scalableArr = [false];
 
-      //Make first question appear
-      nextQuestion(0);
+    function getQuiz() {
+      var quizTitle = document.getElementById("edit-input").value
+      console.log(quizTitle);
+        $.ajax({
+          url: "/create_quiz1/edit",
+          type: "GET",
+          contentType: "application/json;charset=UTF-8",
+          data: {quizTitle: quizTitle},
+          success: function (response) {
+            loadQuiz(response);
+          },
+          error: function (e) {
+            alert("Error!");
+          },
+        });
+      }
+
+    function loadQuiz(quiz) {
+      question_counter =0;
+      answerCounter =[];
+
+      var titleElement  = document.getElementById("quiz_title");
+      titleElement.placeholder = quiz.quizTitle;
+      titleElement.value = quiz.quizTitle;
+      document.getElementById("creator_body").innerHTML ="";
+     
+      for (let i=0; i<quiz.question_bank.length; i++) {
+        var currentQuestion = quiz.question_bank[i];
+        newQuestion();
+        document.getElementById("question_title_"+question_counter).placeholder = currentQuestion.title;
+        document.getElementById("question_title_"+question_counter).value = currentQuestion.title;
+        console.log("question_title_"+question_counter);
+        
+        for (let j=1; j<=currentQuestion.answers.length; j++) {
+          if(j!=1) {
+            addAnswer(question_counter);
+          }
+            document.getElementById("ainput_"+question_counter+"_"+j).placeholder = currentQuestion.answers[j-1];
+            document.getElementById("ainput_"+question_counter+"_"+j).value = currentQuestion.answers[j-1];
+        }
+      }
+    }
+
+    function showEdit() {
+      var doc = document.getElementById("myForm");
+      if (doc.style.display == "block") {
+        doc.style.display = "none";
+      }
+      else {
+        doc.style.display = "block";
+      }
+    }
+
+    function saveScalable(num) {
+      scalableArr[num-1] = document.getElementById("scalable_"+num).checked;
+    }
+
+    function renderScalables() {
+      for(let i=1; i<=question_counter;i++){
+        var cScalable = document.getElementById("scalable_"+i);
+        if(cScalable !== null) {
+          cScalable.checked = scalableArr[i-1];
+        }
+      }
     }
 
     function saveQuiz() {
       quiz.questions = [];
-      quiz.title ="";
-      quiz.title = document.getElementById("quiz_title").value;
+      quiz.quizTitle ="";
+      quiz.quizTitle = document.getElementById("quiz_title").value;
 
       for(let i = 1; i<=question_counter; i++) {
         var cAnswers = [];
         var cQuestion = document.getElementById("question_title_"+i).placeholder;
         var cScalable = document.getElementById("scalable_"+i).checked;
-        console.log(cScalable);
+        var keywordsAsStr = document.getElementById("keywords_"+i).placeholder;
+        var cKeywords = keywordsAsStr.split(",");
+        var cIdentifier = document.getElementById("identifier_"+i).placeholder;
+        var cImage = document.getElementById("image_"+i).placeholder;
 
         if(cQuestion != null){
             for(let j = 1; j <= answerCounter[i-1]; j++) {
-              console.log("ainput_"+i+"_"+j);
               var cAnswer = document.getElementById("ainput_"+i+"_"+j).value;
               cAnswers.push(cAnswer);
             }
@@ -608,13 +283,14 @@ lang="en">
               question: cQuestion,
               answers: cAnswers,
               scalable: cScalable,
+              identifier: cIdentifier,
+              keywords: cKeywords,
+              imageLink: cImage,
             }
             quiz.questions.push(tempQuestion);
           }
       }
 
-      console.log(quiz);
-      console.log(JSON.stringify(quiz));
       var token = $("meta[name='_csrf']").attr("content");
       var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -635,7 +311,6 @@ lang="en">
             alert(response);
           },
           error: function (e) {
-            console.log(e);
             alert("Error!");
           },
         });
@@ -693,18 +368,18 @@ lang="en">
     }
 
     function onChangeQuizTitle(element) {
-      quiz.title = element.value;
+      quiz.quizTitle = element.value;
     }
 
     //In Use
     function newQuestion() {
         question_counter++;
+        scalableArr.push(false);
         answerCounter.push(1);
         var loc = document.getElementById("creator_body");
         var id = "answers_"+question_counter;
         var qid = "question_"+question_counter;
         var aCounter = answerCounter[question_counter-1];
-        console.log(aCounter);
         loc.innerHTML += `<li class="question_holder" id="question_${question_counter}">
          <div>
           <!--Question Input-->
@@ -732,23 +407,48 @@ lang="en">
             </div>
           </div>
           Scalable:
-          <input type="checkbox" id="scalable_${question_counter}" />
+          <input type="checkbox" id="scalable_${question_counter}" onclick="saveScalable(${question_counter})"/>
           <button class="addAnswer" id=${qid} onclick="addAnswer(${question_counter})" id="add_question">
             Add Answer
           </button>
+         </div>
+         <div>
+          <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="keywords_${question_counter}"
+              name="keywords"
+              placeholder="Keywords (separate by commas)"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="identifier_${question_counter}"
+              name="identifier"
+              placeholder="Identifier"
+             />
+             <input
+              type="text"
+              class="w3-center textfield keywords"
+              oninput="onType(this)"
+              id="image_1"
+              name="image"
+              placeholder="Insert Image Link"
+             />
          </div>
          <button class="delete_question" onclick ="delQuestion(${question_counter})"> Delete Question</button>
         </div>
       </li>`;
       setQuestionTitles();
+      renderScalables();
     }
 
     function setQuestionTitles() {
       for(let i=1; i<=question_counter; i++) {
         var question = document.getElementById("question_title_"+i);
-        if(question==null){
-        }
-        else{
+        if(question!=null){
           if(question.placeholder != "Question"){
             question.value = question.placeholder;
           }
@@ -760,6 +460,18 @@ lang="en">
               item.value = item.placeholder;
           }
         });
+        var identifier = document.getElementById("identifier_"+i)
+        var keywords = document.getElementById("keywords_"+i)
+        var image = document.getElementById("image_1")
+        if(identifier.placeholder != "Identifier") {
+          identifier.value = identifier.placeholder;
+        }
+        if(keywords.placeholder!="Keywords (separate by space)") {
+          keywords.value = keywords.placeholder;
+        }
+        if(image.placeholder!="Insert Image Link") {
+          image.value = image.placeholder;
+        }
         }
       }
     }

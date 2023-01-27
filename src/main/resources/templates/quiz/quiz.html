@@ -6,9 +6,13 @@ lang="en">
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="assets/Logo.svg" />
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <link rel="stylesheet" href="/static/assets/styles/quiz.css" />
+    <link rel="stylesheet" th:href="@{/assets/styles/quiz.css}"/>
+    <link rel="stylesheet" href="/src/main/resources/static/assets/styles/quiz.css" />
     
     <link
       rel="stylesheet"
@@ -26,12 +30,11 @@ lang="en">
   <body>
     <div id="main">
       <div id="wrapper">
-        <img src="thumbnails/Logo.svg" class="logo-small" />
+        <img th:src="@{/assets/images/Logo.svg}" class="logo-small"/>
       </div>
       <div id="holder">
         <div class="visible" id="homepage">
-          <h1 class="header">Ready to find the perfect 
-            <span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
+          <h1 class="header">Ready to find the perfect<span class="header" id="quiz-type" th:text="${quizTitle}"></span>?</h1>
           <button id="start-button" onclick="startQuiz('homepage')">Get Started!</button>
         </div>
       </div>
@@ -41,24 +44,19 @@ lang="en">
   <script th:inline="javascript">
     let currentQuestion = 0;
 
-    let questions = [{
-        question: "How many hours of battery life?",
-        answers: ["1-3 hours", "3-5 hours", "5-9 hours", "9-12 hours"],
-      },
-      {
-        question: "How much RAM",
-        answers: ["8", "12", "16", "32"],
-      },
-      {
-        question: "How much storage",
-        answers: ["250", "500", "1000", "2000"],
-      }];
+    let questions = [{ }];
+
+    let questionsTest = [];
+
+    let productProperties = [];
+    
 
     questions = /*[[${questions}]]*/ 'questions';
-    let userAnswers = new Array(questions.length);
-    userAnswers.fill("");
+
+    let userAnswers = new Array(questions.length -1).fill("");
     let answeredQuestions = new Array(questions.length);
     answeredQuestions.fill(false);
+    console.log(questions);
     
     function select(id) {
       let btn = document.getElementById(id);
@@ -74,7 +72,16 @@ lang="en">
       }
     }
 
+    let QuizResponse = {
+        questions: questionsTest,
+        answers: userAnswers,
+      }
+
     function startQuiz(target) {
+      for(let i=0; i<questions.length; i++) {
+        questionsTest.push(questions[i].title);
+      }
+
       fadeOut(target);
       nextQuestion(true);
     }
@@ -85,15 +92,21 @@ lang="en">
     }
     
     function saveQuestion() {
-      selected = document.querySelector(".selected");
-      userAnswers[currentQuestion]= selected.innerHTML;
+      if(currentQuestion == 0) {
+        userAnswers[currentQuestion]= document.getElementById("myRange").value;
+        
+      } else {
+        let selected = document.querySelector(".selected");
+        userAnswers[currentQuestion]= selected.innerHTML;
+      }
     }
 
-    function saveQuiz() {
+    function submitQuiz() {
       saveQuestion();
       fadeOut("question"+currentQuestion);
       let home = document.getElementById("holder");
-      setTimeout(() => {home.innerHTML = `<div class="lds-dual-ring"></div>`;},500);
+      setTimeout(() => {home.innerHTML = `<div class="lds-dual-ring"></div>`;
+                        submitToBack()},500);
     }
 
     function nextQuestion(start) {
@@ -117,7 +130,7 @@ lang="en">
             <div class='answers' id=${id}> </div>
             <div class='btn-holder'>
               <button class="next" onClick="prevQuestion()"> Back </button>
-              <button class="next" onClick="saveQuiz()"> Save </button>
+              <button class="next" onClick="submitQuiz()"> Submit </button>
             </div>
           </div>`;       
           addAnswers(id);
@@ -126,13 +139,15 @@ lang="en">
       else if(currentQuestion==0){
         setTimeout(() => {home.innerHTML = 
         `<div class='question-holder visible-q' id='question${questionSelector}'>
-            <h1 class='question'> ${questions[questionSelector].title} </h1>
-            <div class='answers' id=${id}> </div>
+            <h1 class='question'> What's your budget? </h1>
+            <div id="slider">
+              <input type="range" min="0" max="5000" value="0" step="10" class="slider" id="myRange" oninput="outValue.value='$'+this.value">
+              <output id="outValue" name="amount" for="rangeInput">$0</output> 
+            </div> 
             <div class='btn-holder'>
               <button class="next" onClick="nextQuestion(false)"> Next </button>
             </div>
           </div>`;       
-          addAnswers(id);
         }, 500);
       }
       else {
@@ -175,9 +190,12 @@ lang="en">
       }
       else if(currentQuestion==0){
         setTimeout(() => {home.innerHTML = 
-        `<div class='question-holder visible-q' id='question${questionSelector}'>
-            <h1 class='question'> ${questions[questionSelector].title} </h1>
-            <div class='answers' id=${id}> </div>
+          `<div class='question-holder visible-q' id='question${questionSelector}'>
+            <h1 class='question'> What's your budget? </h1>
+            <div id="slider">
+              <input type="range" min="0" max="5000" value="0" step="10" class="slider" id="myRange" oninput="outValue.value='$'+this.value">
+              <output id="outValue" name="amount" for="rangeInput">$0</output> 
+            </div> 
             <div class='btn-holder'>
               <button class="next" onClick="nextQuestion(false)"> Next </button>
             </div>
@@ -202,21 +220,28 @@ lang="en">
 
     function addAnswers(id) {
       let element = document.getElementById(id);
-      console.log(element)
       for(let i=0; i<questions[currentQuestion].answers.length; i++) {
         element.innerHTML += `<button class="answer-button" id="answer${currentQuestion}${i}" onClick='select("answer${currentQuestion}${i}")'">${questions[currentQuestion].answers[i]}</button>`;
       }   
     }
 
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    
+    function submitToBack() {
+      QuizResponse = {
+        questions: questionsTest,
+        answers: userAnswers,
+      }
 
-    function submitQuiz() {
+      $.ajaxSetup({
+          headers:{"X-XSRF-TOKEN": token}
+      })
       $.ajax({
-          url: "/api/quiz/submit",
-          type: "GET",
+          url: "/post/quizEnd",
+          type: "POST",
           contentType: "application/json;charset=UTF-8",
-          data: JSON.stringify(
-            userAnswers
-          ),
+          data: JSON.stringify(QuizResponse),
           success: function (response) {
             loadRecommendations(response);
           },
@@ -227,7 +252,53 @@ lang="en">
     }
 
     function loadRecommendations(products) {
+
+      for(let i=0; i<products.length; i++) {
+        productProperties.push(Object.values(products[i].QuizResponses));
+      }
+ 
+      let home = document.getElementById("holder");
+      home.innerHTML = "";
+      home.innerHTML += `<div id="recHolder" class="recHolder"></div>`;
+      let holder = document.getElementById("recHolder");
+      for(let k=0; k<3; k++) {
+        holder.innerHTML +=
+        `<div class="productHolder">
+          <div class="rankingNum"> <h1 class="rankingNum">#${k+1}</h1></div>
+          <a rel="noopener noreferrer" target="_blank" href= ${products[k].link} class="productName">${products[k].name}</a>
+          <img src=${products[k].img} class="productImg"/>
+          <h1 class="productPrice">${products[k].price}</h1>
+          <div id="properties${k}"class="productProperties">
+            <h1 class="propTitle propText" style="font-size: 22px; text-align: center;"> Properties</h1>
+          </div>
+         </div>`
       
+      let propertyHolder = document.getElementById("properties"+k);
+      for(let j=1; j<userAnswers.length; j++) {
+        propertyHolder.innerHTML +=
+        `<div class="propertyHolder" id="property${k+"_"+j}"> 
+            <h1 class="propText">${questions[j].identifer+": "+products[k].QuizResponses[questions[j].title]}</h1>
+         </div>`;
+
+         let currentProperty = document.getElementById("property"+k+"_"+j);
+         console.log(products[k].QuizResponses[questions[j].title])
+         console.log(userAnswers[j]);
+         if(products[k].QuizResponses[questions[j].title] == userAnswers[j]) {
+          currentProperty.innerHTML += `<h1 class="match" style="color:green">✓</h1>`
+         } else if(questions[j].scalable) {
+          if(questions[j].answers.indexOf(userAnswers[j]) < questions[j].answers.indexOf(products[k].QuizResponses[questions[j].title])){
+            currentProperty.innerHTML += 
+            `<h1 class="match" style="color:green">✓</h1>
+            <h1 class="match" style="color:green">✓</h1>`
+          } else {
+            currentProperty.innerHTML += `<h1 class="match" style="color:red">X</h1>`
+          }
+         }
+         else {
+          currentProperty.innerHTML += `<h1 class="match" style="color:red">X</h1>`
+         }
+        }
+      }
     }
   </script>
 </html>

@@ -15,9 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 
 public class ProductController {
+	private static final String ADMIN_PATH = "/admin/product";
 	@GetMapping("/add_product")
 	public ModelAndView addProduct() {
-		return new ModelAndView("/add_product.html");
+		return new ModelAndView(ADMIN_PATH+"/add_product.html");
 	}
 
 }
