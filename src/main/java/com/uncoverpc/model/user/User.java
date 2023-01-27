@@ -39,6 +39,9 @@ public class User {
 
     private boolean enabled;
 
+	//local, google, etc...
+	private Provider provider = Provider.LOCAL;
+
     public User(String id, String email, Set<Role> roles, String password, String confirmPassword, String username,
             String firstName, String lastName) {
         super();
@@ -156,8 +159,15 @@ public class User {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 
+	public Provider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(Provider provider) {
+		this.provider = provider;
+	}
 }

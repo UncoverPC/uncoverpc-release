@@ -1,0 +1,65 @@
+[
+  {
+    "title": "Lenovo IdeaPad 1 15.6' Laptop",
+    "imageLink": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/163/16391/16391561.jpg",
+    "purchaseLink": "https://www.bestbuy.ca/en-ca/product/lenovo-ideapad-1-15-6-laptop-cloud-grey-amd-athlon-silver-3050u-128gb-emmc-4gb-ram-windows-11-s/16391561",
+    "price": "$529.99",
+    "lastUpdated": "2022-12-27 16:48:05",
+    "articles": [
+      {
+        "link": "https://www.pcmag.com/reviews/lenovo-ideapad-1-15",
+        "title": "Lenovo IdeaPad 1 15 Review"
+      },
+      {
+        "link": "https://www.bestbuy.com/site/reviews/lenovo-ideapad-1-15-6-fhd-touch-screen-laptop-ryzen-7-5700u-12gb-memory-512gb-ssd-cloud-grey/6502660?variant=A",
+        "title": "Customer Reviews: Lenovo Ideapad 1 15.6' FHD Touch ..."
+      },
+      {
+        "link": "https://laptopmedia.com/review/lenovo-ideapad-1-15-2022/",
+        "title": "Lenovo IdeaPad 1 (15', 2022) review | LaptopMedia.com"
+      }
+    ]
+  },
+  {
+    "title": "ASUS VivoBook 15 X515 Thin and Light Laptop",
+    "imageLink": "https://m.media-amazon.com/images/I/71HEF+d4UEL._AC_SX355_.jpg",
+    "purchaseLink": "https://www.amazon.ca/VivoBook-Pentium%C2%AE-Microsoft-Personal-X515MA-AH09-CA/dp/B09HN325SY/ref=sr_1_2?keywords=laptop&qid=1671759439&sr=8-2",
+    "price": "$399.00",
+    "lastUpdated": "2022-12-27 18:21:25",
+    "articles": [
+      {
+        "link": "https://beebom.com/asus-chromebook-c223-review/",
+        "title": "Asus Chromebook C223 Review: Affordable Laptop for ..."
+      },
+      {
+        "link": "https://www.asus.com/ca-en/laptops/for-home/chromebook/asus-chromebook-c223/",
+        "title": "ASUS Chromebook C223｜Laptops For Home"
+      },
+      {
+        "link": "https://installornot.com/reviews/asus-chromebook-c223-review-the-budget-laptop-for-everyone/",
+        "title": "Asus Chromebook C223 Review | The Budget Laptop for ..."
+      }
+    ]
+  },
+  {
+    "title": "Apple MacBook Air 13.3' w/ Touch ID (Fall 2020)",
+    "imageLink": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/151/15136/15136919.jpg",
+    "purchaseLink": "https://www.bestbuy.ca/en-ca/product/apple-macbook-air-13-3-w-touch-id-fall-2020-space-grey-apple-m1-chip-256gb-ssd-8gb-ram-en/15136919",
+    "price": "$1,149.99",
+    "lastUpdated": "2022-12-27 15:11:42",
+    "articles": [
+      {
+        "link": "https://www.pcmag.com/reviews/apple-macbook-air-m1-late-2020",
+        "title": "Apple MacBook Air (M1, Late 2020) Review"
+      },
+      {
+        "link": "https://www.techradar.com/reviews/apple-macbook-air-m12020",
+        "title": "Apple MacBook Air (M1, 2020) review"
+      },
+      {
+        "link": "https://www.tomsguide.com/reviews/macbook-air-2020-m1",
+        "title": "MacBook Air with M1 review: A great value"
+      }
+    ]
+  }
+]
