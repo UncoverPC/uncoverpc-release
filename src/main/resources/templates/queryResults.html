@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="ISO-8859-1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Search Results - UncoverPC</title>
+  <link rel="icon" href="/assets/images/Logo.svg">
+  <link rel="stylesheet" th:href="@{/assets/dist/styles.css}" />
+</head>
+<body class="bg-black overflow-x-hidden my-8">
+<div class="flex flex-wrap justify-center w-screen h-screen items-center">
+  <div class="w-2/5 h-2/3 bg-blue-100 flex m-4 rounded-2xl" th:each="product: ${products}" >
+      <div class="h-full w-2/5 bg-white flex flex-col items-center justify-evenly">
+        <a target="_blank" class="w-full m-2 h-1/2 flex justify-center px-2" th:href="${product.purchaseLink}">
+            <img class="object-contain" th:src="${product.imageLink}" />
+        </a>
+          <div class="text-2xl font-bold h-1/2 flex items-center text-green-500" th:text="${product.price}"></div>
+      </div>
+      <div class="h-full w-3/5 flex flex-col items-center justify-between m-2 py-6 px-4">
+          <div class="text-3xl font-bold block h-2/5 w-full flex justify-center items-center text-center">
+              <a target="_blank" th:href="${product.purchaseLink}" class="w-full h-full"><p th:text="${product.title}" ></p></a>
+          </div>
+          <hr class="h-px w-full bg-gray-600 border-0 "/>
+          <p class="w-full text-center text-lg">Related Articles</p>
+          <ul class="flex flex-wrap w-full h-2/5 justify-center items-center">
+            <li th:each="article: ${product.articles}" class="m-2 h-1/4 w-2/5">
+              <a th:href="${article.link}" target="_blank" class="flex px-2 py-1 items-center transition duration-200 ease-in-out
+              bg-gradient-to-r from-blue-500 to-violet-700 hover:from-blue-700 hover:to-violet-900 hover:scale-110
+               text-white text-sm rounded-md h-full w-full truncate" th:text="${article.title}"></a>
+            </li>
+          </ul>
+      </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" th:href="assets/Logo.svg" />
+    <link rel="icon" th:href="@{/assets/Logo.svg}" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       rel="stylesheet"
@@ -40,7 +41,7 @@
       }
 
       .color_theme {
-        background-color: lightgreen;
+        background-color: white;
         color: antiquewhite;
       }
 
@@ -53,6 +54,7 @@
         width: 100vw;
         height: calc(100vh - 72px);
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
       }
@@ -62,12 +64,16 @@
         font-weight: bold;
         font-style: italic;
         margin: 0 auto;
-
-        background: -webkit-linear-gradient(
-          RGBA(200, 81, 81, 200),
+        background: green;
+        /* background: -webkit-linear-gradient( */
+          /* RGBA(200, 81, 81, 200),
           RGBA(60, 150, 300, 200),
-          RGBA(250, 150, 300, 200)
-        );
+          RGBA(250, 150, 300, 200) */
+          /* RGBA(0, 0, 0, 0),
+          RGBA(300, 300, 300, 300),
+          RGBA(250, 150, 300, 200) */
+          
+        /* ); */
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
@@ -83,43 +89,26 @@
         grid-template-columns: auto auto;
         grid-column-gap: 300px;
       }
-      /* form.example input[type="text"] {
-        padding: 10px;
-        font-size: 17px;
-        border: 1px solid grey;
-        float: left;
-        width: 80%;
-        background: #f1f1f1;
-        border-radius: 10px;
-      }
-
-      form.example button {
-        float: left;
-        width: 20%;
-        padding: 10px;
-        background: #2196f3;
+      #login{
+        background-color: blue;
         color: white;
-        font-size: 17px;
-        border: 1px solid grey;
-        border-left: none;
-        cursor: pointer;
+        border-radius: 5px;
+        border-color: transparent;
+        width:5vw;
+        height:5vh;
+        margin-top: 2vh;
+        margin-right: 2vw;
+        float:right;
       }
-
-      form.example button:hover {
-        background: #0b7dda;
-      }
-
-      form.example::after {
-        content: "";
-        clear: both;
-        display: table;
-      } */
 
       form.example {
         display: flex;
       }
       .card {
-        background: lightblue;
+
+        background: linear-gradient(skyblue,white);
+        display:flex;
+        flex-direction: row;
         padding: calc(4 * var(--size-bezel));
         margin-top: calc(4 * var(--size-bezel));
         border-radius: var(--size-radius);
@@ -129,7 +118,7 @@
       .card--inverted {
         --color-background: var(--color-dark);
         color: var(--color-light);
-        --color-shadow: var(--color-accent);
+        --color-shadow: black;
       }
       .input {
         position: relative;
@@ -137,10 +126,12 @@
         width: 100%;
       }
       .input__field {
-        /* box-sizing: border-box; */
+        box-sizing: border-box;
         border: none;
+        /* border-bottom:solid; */
         outline: none;
         display: block;
+        height:100%;
         width: 100%;
         padding-left: 10px;
         padding-right: 10px;
@@ -150,25 +141,24 @@
         background: transparent;
         /* border-radius: var(--size-radius); */
       }
+      .input__field :focus{
+        padding-bottom: 100px;
+      }
 
       .submit {
         appearance: none;
         background: darkblue;
-        border: 1px solid rgba(27, 31, 35, 0.15);
-        border-radius: 6px;
-        box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+        border: 1px solid black;
+        width:100%;
         box-sizing: border-box;
         color: #fff;
         cursor: pointer;
-        display: inline-block;
         font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
           sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
         font-size: 14px;
         font-weight: 600;
         line-height: 20px;
         padding: 6px 16px;
-        position: relative;
-        text-align: center;
         text-decoration: none;
         user-select: none;
         -webkit-user-select: none;
@@ -184,6 +174,7 @@
 
       .submit:hover {
         background-color: lightblue;
+        transition: background-color 0.5s ease-in-out;
       }
 
       .submit:focus {
@@ -260,16 +251,11 @@
   </head>
 
   <body class="color_theme" id="body">
+    <button id="login">Login</button>
+     
     <div class="main_container" id="main">
-      <!-- Quiz -->
-
-      <!-- Search Bar -->
-      <form style="width: 500px; transform: scale(1.5, 1.5)">
-        <div class="card card--inverted">
-          <!-- Logo -->
-          <div class="center">
-            <!-- <h1 id="logo">UncoverPC</h1> -->
-            <svg viewbox="0 0 100 20">
+  
+            <svg viewbox="0 0 300 20">
               <defs>
                 <linearGradient id="gradient">
                   <stop color="#F0FFFF" />
@@ -279,7 +265,7 @@
                   x="0"
                   y="1"
                   width="100%"
-                  height="80%"
+                  height="100%"
                   patternUnits="userSpaceOnUse"
                 >
                   <path
@@ -293,8 +279,8 @@
                       begin="0s"
                       dur="1.5s"
                       type="translate"
-                      from="0,0"
-                      to="40,0"
+                      from="80,0"
+                      to="120,0"
                       repeatCount="indefinite"
                     />
                   </path>
@@ -302,7 +288,7 @@
               </defs>
               <text
                 text-anchor="middle"
-                x="50"
+                x="150"
                 y="15"
                 font-size="17"
                 fill="blue"
@@ -313,7 +299,7 @@
               </text>
               <text
                 text-anchor="middle"
-                x="50"
+                x="150"
                 y="15"
                 font-size="17"
                 fill="url(#wave)"
@@ -323,7 +309,13 @@
                 UncoverPC
               </text>
             </svg>
-          </div>
+          
+
+      <!-- Search Bar -->
+      <form style="width: 40%; transform: scale(1.5, 1.5)">
+        <div class="card card--inverted">
+          <!-- Logo -->
+          
 
           <label class="input">
             <input
@@ -331,11 +323,12 @@
               id="inp-field"
               type="text"
               placeholder="Search"
+              autocomplete="off"
             />
           </label>
 
           <div class="center">
-            <button class="submit" id="submit">Search</button>
+            <button class="submit" id="submit">🔍</button>
           </div>
         </div>
 
