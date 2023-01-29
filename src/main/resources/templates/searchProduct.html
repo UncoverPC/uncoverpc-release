@@ -18,8 +18,18 @@ lang="en">
             outline: none;
             box-sizing: border-box;
         }
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif;
+        }
+        
         body{
-            background: linear-gradient( #30cfd0 0%, #600fc3 100%);
+            background-color: rgba(12, 12, 14, 255);
             margin:0;
             padding:0;  
              
@@ -34,6 +44,11 @@ lang="en">
             height: 100vh;
             width: 100vw;
             
+        }
+        .logo-small {
+            float: left;
+            width: 100px;
+            margin-bottom: 30px;
         }
         #product-select{
         
@@ -77,12 +92,12 @@ lang="en">
         }
         #include-property{
            /* box-sizing: border-box; */
-           /* width:99%; */
+           width:99%;
            height:100%;
            border: 0;
            outline:none;
-           font-size: 16px;
-           padding-left: 0.5vw;
+           font-size: 18px;
+           padding-left: 20px;
            color: #6f768d;
            /* padding-right:1vw; */
         }
@@ -131,7 +146,7 @@ lang="en">
             height:100%;
             border-style:solid;
             border-color: lightgray;
-            border-radius: 5px;
+            border-radius: 40px;
             display:flex;
             padding: 10px;
             box-shadow: 0 8px 6px -10px #b3c6ff;
@@ -170,6 +185,7 @@ lang="en">
 
   <body>
     <div class = content>
+        <img src="/src/main/resources/static/assets/images/Logo.svg" class="logo-small"/>
         <form id="property-form" onsubmit = "send(event)">
             <div id = "input-wrapper">
                 <div class = "dropdown">
@@ -195,7 +211,7 @@ lang="en">
             </div>
             <div id = "btn-wrapper">
                 <button id = "add-btn" type="button" onclick="addProperty()" disabled>Add Property</button>    
-                <input id = "submit-btn" type="submit" data-action="search" value = "Go">
+                <input id = "submit-btn" type="submit" data-action="search" value = "🔎">
             </div>
         </form>
         <div style="height: 2vw"></div>

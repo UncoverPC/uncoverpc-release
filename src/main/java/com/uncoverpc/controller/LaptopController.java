@@ -40,13 +40,14 @@ public class LaptopController {
 	@PostMapping("/post/quizEnd")
 	@ResponseBody
 	public List<Laptop> getProducts(  @RequestBody QuizResponse QuizResponse,  HttpServletRequest request ) {
+		System.out.println(QuizResponse);
 		
 		HashMap <String, String> map = new HashMap<String, String>();
 		for(int i=0; i<QuizResponse.getAnswers().size(); i++) {
 			map.put(QuizResponse.getQuestions().get(i), QuizResponse.getAnswers().get(i));
 
 		}
-		List<Laptop> laptopsByUse = laptopService.findbyLaptopUse(map.get("Main use?"));
+		List<Laptop> laptopsByUse = laptopService.findbyLaptopUse(map.get("Operating System?"));
 		int[] matchCounter = new int[laptopsByUse.size()];
 		Arrays.fill(matchCounter, 0);
 		
