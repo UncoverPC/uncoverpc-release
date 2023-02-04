@@ -50,7 +50,9 @@ lang="en">
     let questionsTest = [];
 
     let productProperties = [];
-    
+
+    var quizName = /*[[${quizName}]]*/ 'default';
+    console.log(quizName);
 
     questions = /*[[${questions}]]*/ 'questions';
 
@@ -231,6 +233,7 @@ lang="en">
     
     function submitToBack() {
       QuizResponse = {
+        quizName: quizName,
         questions: questionsTest,
         answers: userAnswers,
       }

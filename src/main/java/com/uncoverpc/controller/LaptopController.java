@@ -1,6 +1,7 @@
 package com.uncoverpc.controller;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -16,6 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.uncoverpc.product.Laptop;
 import com.uncoverpc.db.LaptopService;
+import com.uncoverpc.db.QuizService;
+import com.uncoverpc.model.quiz.Question;
+import com.uncoverpc.model.quiz.Questions;
+import com.uncoverpc.model.quiz.Quiz;
 import com.uncoverpc.model.quiz.QuizResponse;
 
 
@@ -24,6 +29,8 @@ import com.uncoverpc.model.quiz.QuizResponse;
 public class LaptopController {
 	@Autowired
 	private LaptopService laptopService;
+	@Autowired
+	private QuizService quizService;
 	
 	@GetMapping("/api/get/findbyLaptopUse")
 	@ResponseBody
@@ -37,16 +44,20 @@ public class LaptopController {
 		return laptopService.findbyLaptopUse(use);
 	}
 	
+	
 	@PostMapping("/post/quizEnd")
 	@ResponseBody
 	public List<Laptop> getProducts(  @RequestBody QuizResponse QuizResponse,  HttpServletRequest request ) {
-		System.out.println(QuizResponse);
+		try {
+		Quiz quiz = quizService.findByQuizTitle(QuizResponse.getQuizName());
+		ArrayList<Question> questions = quiz.getQuestions();
 		
 		HashMap <String, String> map = new HashMap<String, String>();
 		for(int i=0; i<QuizResponse.getAnswers().size(); i++) {
 			map.put(QuizResponse.getQuestions().get(i), QuizResponse.getAnswers().get(i));
 
 		}
+		
 		List<Laptop> laptopsByUse = laptopService.findbyLaptopUse(map.get("Operating System?"));
 		int[] matchCounter = new int[laptopsByUse.size()];
 		Arrays.fill(matchCounter, 0);
@@ -56,14 +67,24 @@ public class LaptopController {
 		}
 		
 		
-		for(int j=0; j<QuizResponse.getQuestions().size(); j++) {
+		for(int j=0; j<questions.size(); j++) {
 			String key = QuizResponse.getQuestions().get(j);
+			
 			for(int k=0; k<laptopsByUse.size(); k++) {
-				if(laptopsByUse.get(k).getQuizResponses().get(key) == map.get(key)) {
-					matchCounter[k]++;
+				if(questions.get(j).isScalable()) {
+					int respIndex = questions.get(j).getAnswers().indexOf(map.get(key));
+					int ind2 = questions.get(j).getAnswers().indexOf(laptopsByUse.get(k).getQuizResponses().get(key));
+					if(respIndex <= ind2) {
+						matchCounter[k]++;
+					}
+				} else {
+					if(laptopsByUse.get(k).getQuizResponses().get(key) == map.get(key)) {
+						matchCounter[k]++;
+					}
 				}
 			}
 		}
+		
 		
 		int max = matchCounter[0];
 		int second = matchCounter[1];
@@ -87,5 +108,10 @@ public class LaptopController {
 	    }
 		List<Laptop> recommendations = Arrays.asList(laptopsByUse.get(index), laptopsByUse.get(index2), laptopsByUse.get(index3));
 		return recommendations;
+		}
+		catch(Exception e) {
+			System.out.println(e);
+		}
+		return null;
 	}
 }

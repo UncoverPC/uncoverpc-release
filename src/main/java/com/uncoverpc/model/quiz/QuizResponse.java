@@ -5,18 +5,29 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class QuizResponse {
+	@JsonProperty("quizName")
+	private String quizName;
 	@JsonProperty("questions")
 	private ArrayList<String> questions = new ArrayList<String>();
 	@JsonProperty("answers")
 	private ArrayList<String> answers = new ArrayList<String>();
 
 	
-	public QuizResponse(ArrayList<String> questions, ArrayList<String> answers) {
+	public QuizResponse(String quizName, ArrayList<String> questions, ArrayList<String> answers) {
 		super();
+		this.quizName = quizName;
 		this.questions = questions;
 		this.answers = answers;
 	}
 	
+	public String getQuizName() {
+		return quizName;
+	}
+
+	public void setQuizName(String quizName) {
+		this.quizName = quizName;
+	}
+
 	public ArrayList<String> getQuestions() {
 		return questions;
 	}
