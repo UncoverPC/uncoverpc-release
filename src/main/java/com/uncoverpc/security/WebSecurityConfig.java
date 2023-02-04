@@ -131,7 +131,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .usernameParameter("email").defaultSuccessUrl("/user/dashboard");
         http.authorizeRequests().antMatchers("/user/*").hasAnyRole().and().oauth2Login().loginPage("/login").authorizationEndpoint(authorization -> authorization
                 .baseUri("/login/oauth2/code"));
-        http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID", "jwt").and().rememberMe().key("uniqueAndSecret").tokenValiditySeconds(86400);
+        http.logout().invalidateHttpSession(true).deleteCookies("JSESSIONID", "jwt");
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

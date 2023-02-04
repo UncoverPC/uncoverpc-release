@@ -217,7 +217,7 @@ public class UserController {
 
 	@GetMapping(URI_PATH + "/queryResults")
 	public ModelAndView queryResults() throws IOException {
-		ModelAndView mav = new ModelAndView(FOLDER_PATH + "query_results");
+		ModelAndView mav = new ModelAndView( "/query_results");
 		try {
 			String path = new File("").getAbsolutePath();
 			BufferedReader br = new BufferedReader(new FileReader(path+"/src/main/java/com/uncoverpc/controller/productTest.json"));
