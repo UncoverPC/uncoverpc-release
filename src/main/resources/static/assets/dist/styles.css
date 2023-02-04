@@ -621,6 +621,16 @@ video {
   margin-right: auto;
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.my-24 {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -631,6 +641,18 @@ video {
 
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+
+.mt-24 {
+  margin-top: 6rem;
+}
+
+.mb-12 {
+  margin-bottom: 3rem;
+}
+
+.mt-12 {
+  margin-top: 3rem;
 }
 
 .block {
@@ -721,6 +743,10 @@ video {
   height: 1.25rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .max-h-\[1\/5\] {
   max-height: 1/5;
 }
@@ -763,6 +789,14 @@ video {
 
 .w-1\/2 {
   width: 50%;
+}
+
+.w-7 {
+  width: 1.75rem;
+}
+
+.w-9\/12 {
+  width: 75%;
 }
 
 .max-w-3xl {
@@ -1047,6 +1081,26 @@ video {
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.py-12 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .pt-4 {
@@ -1419,6 +1473,22 @@ input[type='password']:focus + .line:after {
 }
 
 @media (min-width: 640px) {
+  .sm\:m-4 {
+    margin: 1rem;
+  }
+
+  .sm\:h-12 {
+    height: 3rem;
+  }
+
+  .sm\:w-12 {
+    width: 3rem;
+  }
+
+  .sm\:justify-start {
+    justify-content: flex-start;
+  }
+
   .sm\:px-24 {
     padding-left: 6rem;
     padding-right: 6rem;
@@ -1427,6 +1497,16 @@ input[type='password']:focus + .line:after {
   .sm\:px-28 {
     padding-left: 7rem;
     padding-right: 7rem;
+  }
+
+  .sm\:px-32 {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  .sm\:py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   .sm\:text-4xl {
@@ -1463,6 +1543,10 @@ input[type='password']:focus + .line:after {
 
   .md\:w-24 {
     width: 6rem;
+  }
+
+  .md\:justify-start {
+    justify-content: flex-start;
   }
 
   .md\:border-2 {
@@ -1525,6 +1609,10 @@ input[type='password']:focus + .line:after {
 
   .lg\:w-1\/2 {
     width: 50%;
+  }
+
+  .lg\:justify-start {
+    justify-content: flex-start;
   }
 
   .lg\:border-r-2 {
