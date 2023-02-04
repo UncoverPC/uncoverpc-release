@@ -588,6 +588,18 @@ video {
   right: 0px;
 }
 
+.left-\[1\%\] {
+  left: 1%;
+}
+
+.right-\[1\%\] {
+  right: 1%;
+}
+
+.z-10 {
+  z-index: 10;
+}
+
 .m-4 {
   margin: 1rem;
 }
@@ -655,8 +667,16 @@ video {
   margin-top: 3rem;
 }
 
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .inline {
@@ -747,6 +767,14 @@ video {
   height: 1.75rem;
 }
 
+.h-\[5\%\] {
+  height: 5%;
+}
+
+.h-6 {
+  height: 1.5rem;
+}
+
 .max-h-\[1\/5\] {
   max-height: 1/5;
 }
@@ -811,6 +839,10 @@ video {
   width: 75%;
 }
 
+.w-6 {
+  width: 1.5rem;
+}
+
 .max-w-3xl {
   max-width: 48rem;
 }
@@ -869,6 +901,10 @@ video {
 
 .gap-2\.5 {
   gap: 0.625rem;
+}
+
+.gap-1 {
+  gap: 0.25rem;
 }
 
 .gap-x-4 {
@@ -1050,6 +1086,10 @@ video {
   padding: 0.75rem;
 }
 
+.p-\[8px\] {
+  padding: 8px;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1129,6 +1169,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.align-middle {
+  vertical-align: middle;
 }
 
 .text-2xl {
@@ -1248,6 +1292,14 @@ video {
 
 .decoration-solid {
   text-decoration-style: solid;
+}
+
+.opacity-50 {
+  opacity: 0.5;
+}
+
+.opacity-100 {
+  opacity: 1;
 }
 
 .shadow-md {
@@ -1533,6 +1585,14 @@ input[type='password']:focus + .line:after {
 }
 
 @media (min-width: 768px) {
+  .md\:left-\[3\%\] {
+    left: 3%;
+  }
+
+  .md\:right-\[3\%\] {
+    right: 3%;
+  }
+
   .md\:h-16 {
     height: 4rem;
   }
@@ -1543,6 +1603,10 @@ input[type='password']:focus + .line:after {
 
   .md\:h-24 {
     height: 6rem;
+  }
+
+  .md\:h-8 {
+    height: 2rem;
   }
 
   .md\:w-16 {
@@ -1557,12 +1621,20 @@ input[type='password']:focus + .line:after {
     width: 6rem;
   }
 
+  .md\:w-8 {
+    width: 2rem;
+  }
+
   .md\:justify-start {
     justify-content: flex-start;
   }
 
   .md\:border-2 {
     border-width: 2px;
+  }
+
+  .md\:p-\[12px\] {
+    padding: 12px;
   }
 
   .md\:px-32 {
@@ -1595,6 +1667,11 @@ input[type='password']:focus + .line:after {
     line-height: 1.75rem;
   }
 
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
   .md\:placeholder\:text-base::-moz-placeholder {
     font-size: 1rem;
     line-height: 1.5rem;
@@ -1615,20 +1692,44 @@ input[type='password']:focus + .line:after {
     left: 0px;
   }
 
+  .lg\:left-\[5\%\] {
+    left: 5%;
+  }
+
+  .lg\:right-\[5\%\] {
+    right: 5%;
+  }
+
   .lg\:block {
     display: block;
+  }
+
+  .lg\:h-12 {
+    height: 3rem;
   }
 
   .lg\:w-1\/2 {
     width: 50%;
   }
 
+  .lg\:w-12 {
+    width: 3rem;
+  }
+
   .lg\:justify-start {
     justify-content: flex-start;
   }
 
+  .lg\:gap-2 {
+    gap: 0.5rem;
+  }
+
   .lg\:border-r-2 {
     border-right-width: 2px;
+  }
+
+  .lg\:p-\[16px\] {
+    padding: 16px;
   }
 
   .lg\:px-44 {
@@ -1640,12 +1741,56 @@ input[type='password']:focus + .line:after {
     padding-left: 4rem;
     padding-right: 4rem;
   }
+
+  .lg\:text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .lg\:text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .lg\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .lg\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 
 @media (min-width: 1280px) {
+  .xl\:w-4\/5 {
+    width: 80%;
+  }
+
   .xl\:px-28 {
     padding-left: 7rem;
     padding-right: 7rem;
+  }
+
+  .xl\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .xl\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .xl\:text-lg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+
+  .xl\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
