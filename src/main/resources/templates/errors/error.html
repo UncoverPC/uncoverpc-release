@@ -60,12 +60,12 @@ lang="en">
 	<div class="center-container">
 		<div class="absolute-center">
 			<div class="absolute-center-row">
-				<object class="custom-logo" data="../static/assets/images/Logo.svg" width="60" height="60"> </object>
+				<img class="custom-logo" th:src="@{/assets/images/Logo.svg}" width="60" height="60">
 				<div class="horizontal-bar"></div>
 				<h3 th:inline="text"> Oops. An unexpected error has occurred. <br> Status: [[${statusCode}]].</h3>
 			</div>
 			<div>
-				<h5>Please contact support@uncoverpc.com if this proceeds further. Click <a href="#home"><i>here</i></a> to go back to <a href="#home">home.</h5>
+				<h5>Please contact support@uncoverpc.com if this proceeds further. Click <a href="/"><i>here</i></a> to go back to <a href="/">home.</h5>
 			</div>
 		</div>
 	</div>

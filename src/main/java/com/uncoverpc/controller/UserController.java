@@ -29,8 +29,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.uncoverpc.db.EmailService;
@@ -51,7 +49,7 @@ public class UserController {
 	private EmailService emailService;
 
 	private static final String URI_PATH = "";
-	private static final String FOLDER_PATH = "";
+	private static final String FOLDER_PATH = "/users";
 	
     private String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();
@@ -82,6 +80,24 @@ public class UserController {
 	@GetMapping(URI_PATH + "/forgotPassword")
 	public ModelAndView forgotPassword() {
 		return new ModelAndView(FOLDER_PATH + "/forgotPassword");
+	}
+	@PostMapping(URI_PATH +"/forgotPassword")
+	public ModelAndView resetPassword(String email, HttpServletRequest request) {
+		User user = userService.findByEmail(email);
+		if (user == null) {
+            ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/forgotPassword");
+            modelAndView.addObject("message", "Email doesn't exist!");
+            return modelAndView;
+		}
+		String randomCode = RandomString.make(64);
+		user.setVerificationCode(randomCode);
+		
+		userService.save(user);
+		emailService.sendResetPasswordEmail(user, getSiteURL(request));
+		
+		ModelAndView modelAndView = new ModelAndView(FOLDER_PATH + "/forgotPassword");
+		modelAndView.addObject("message", "Email sent successfully!");
+		return modelAndView;
 	}
 	
 	@GetMapping(URI_PATH + "/register")
@@ -117,7 +133,7 @@ public class UserController {
 			roles.add(Roles.Role.USER);
 			user.setRoles(roles);
 			
-			//Deleting confirmpassword
+			//Deleting confirm password
 			user.setConfirmPassword(null);
 
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -143,7 +159,7 @@ public class UserController {
 			return modelAndView;
 		}
 	}
-	
+
 	@PostMapping(URI_PATH+"/register/early") 
 	public ModelAndView registerEarly(User user, HttpServletRequest request){
 		try {
@@ -179,13 +195,20 @@ public class UserController {
 	}
 	
 	@GetMapping(URI_PATH + "/verify")
-	public String verifyUser(@Param("code") String code) {
+	public ModelAndView verifyUser(@Param("code") String code) {
+
 	    if (emailService.verify(code)) {
-	        return "verifySuccess.html";
+	    	ModelAndView model = new ModelAndView("/email/verifySuccess.html");
+	    	return model;
 	    } else {
-	        return "verifyFail.html";
+	    	ModelAndView model = new ModelAndView("/email/verifyFail.html");
+	    	return model;
 	    }
 	}
+	
+
+	
+
 
 	@GetMapping(URI_PATH + "/registersuccess")
 	public ModelAndView registerSuccess() {
