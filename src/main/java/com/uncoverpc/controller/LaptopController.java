@@ -106,6 +106,7 @@ public class LaptopController {
 	    	  index3 =i;
 	      }
 	    }
+		
 		List<Laptop> recommendations = Arrays.asList(laptopsByUse.get(index), laptopsByUse.get(index2), laptopsByUse.get(index3));
 		return recommendations;
 		}
