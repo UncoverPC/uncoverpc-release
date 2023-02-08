@@ -16,6 +16,11 @@ public class MainController {
 	public ModelAndView home() {
 		return new ModelAndView("/main/homepage.html");
 	}
+	
+	@GetMapping("test")
+	public ModelAndView home2() {
+	    return new ModelAndView("/main/homepagev2.html");
+	}
 
 	@GetMapping("/admin/dashboard")
 	public ModelAndView adminDashbaord() {

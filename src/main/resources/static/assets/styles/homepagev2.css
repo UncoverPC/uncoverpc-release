@@ -1,0 +1,323 @@
+body,h1,h2,h3,h4,h5,h6 {
+	font-family: "Raleway", sans-serif;
+	color: rgb(44, 46, 59);
+	/*color: rgb(240,240,240);*/
+}
+
+h3 {
+	line-height: 1.3;
+	font-size: 24px;
+}
+
+body,html {
+	line-height: 1.2;
+	scroll-behavior: smooth;
+	overflow-x: hidden;
+}
+
+.color_theme {
+	/*color: rgb(44, 46, 59);*/
+	/*color:rgb(20, 30, 53);*/
+	background-color: #d5fefd;
+	background-image: linear-gradient(180deg, #d5fefd 0%, #fffcff 80%);
+
+	/* color: white;*/
+}
+
+.select-placeholder {
+	color: grey;
+}
+
+.logo {
+	width: 70px;
+	height: 70px;
+	transition-duration: 0.25s;
+}
+
+.logo:hover {
+	transform: scale(110%);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#navbar {
+	top: 0;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	text-align: center;
+	z-index: 100;
+	opacity: 1;
+	padding-top: 5vh;
+	justify-content: space-between;
+}
+
+.scroller {
+	height: 1.2em;
+	line-height: 1.2em;
+	position: relative;
+	overflow: hidden;
+	justify-content: center;
+	width: 100%;
+	display: inline-flex;
+	text-align: center;
+}
+
+.scroller>span {
+	display: flex;
+	position: absolute;
+	top: 0;
+	animation: slide 7s infinite;
+	justify-content: center;
+	font-weight: bold;
+	width: 100%;
+}
+
+
+@keyframes slide {
+  0% {
+      top: 0;
+  }
+
+  33% {
+      top: -1.2em;
+  }
+
+  66% {
+      top: -2.4em;
+  }
+}
+#login {
+	width: 100px;
+	height: 40px;
+	border: 0;
+	color: aliceblue;
+	background: linear-gradient(45deg, red, blue);
+	border-radius: 10px;
+	font-size: 80%;
+	font-weight: 700;
+	transition-duration: 0.25s;
+}
+
+#login:hover {
+	opacity: 90%;
+	transform: scale(110%);
+}
+
+.hidden {
+	opacity: 0;
+	display: none;
+}
+
+.faded {
+	opacity: 0.5 !important;
+}
+
+.visible {
+	opacity: 100%;
+}
+
+#early-access {
+	z-index: 1;
+	background-color: rgb(207, 241, 248);
+	width: 30%;
+	height: 32%;
+	border-radius: 30px;
+}
+
+#ea-form {
+	margin-top: 5%;
+	display: flex;
+	flex-direction: column;
+}
+
+.form-input {
+	width: 90%;
+	height: 30px;
+	background: transparent;
+	border-radius: 1px solid grey;
+	text-align: left;
+	margin: 5px auto;
+	border-radius: 5px;
+}
+
+.form-submit {
+	width: 80%;
+	height: 30px;
+	margin: 10px auto;
+	border: 0px;
+	border-radius: 20px;
+	background-color: rgb(112, 145, 161);
+	color: white;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.form-submit:hover {
+	background-color: rgb(92, 118, 131);
+}
+
+.close-button {
+	width: 25px;
+	height: 25px;
+	font-size: 16px;
+	font-weight: 700;
+	border: 0;
+	border-radius: 12px;
+	background-color: transparent;
+}
+
+.close-button:hover {
+	color: rgb(228, 72, 72);
+}
+
+.section {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+#main {
+	animation: fadeIn 2s 1 forwards;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+}
+
+#landing {
+	height: 100vh;
+	width: auto;
+}
+
+#benefits{
+	height:auto;
+	width:auto;
+}
+
+.intro_text {
+	font-size: 21px;
+	padding-top: 1rem;
+	text-align: center;
+	font-weight: bold;
+}
+
+.text2 {
+	font-size: 22px;
+	padding-top: 0.5rem;
+	text-align: left;
+}
+
+.main-text {
+	text-align: center;
+	display: column;
+}
+
+@media screen and (min-width: 900px) {
+	.home-text {
+		font-size: 76px;
+		text-align: center;
+		font-weight: 700;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.home-text {
+		font-size: 52px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.home-text {
+		font-size: 30px;
+	}
+}
+
+.subtitle-text {
+	font-size: 56px;
+	text-align: left;
+}
+
+#early-btn {
+	font-size: 100%;
+	font-weight: 900;
+	font-family: "Raleway";
+	color: white;
+	background-color: rgb(2, 0, 36);
+	/*background-image: linear-gradient(90deg, rgb(135, 130, 238) 0%, rgb(124, 214, 128) 100%);*/
+	background: linear-gradient(45deg, red, blue);
+	width: 200px;
+	margin-top: 30px;
+	height: 50px;
+	border: 0px;
+	border-radius: 10px;
+	transition: 0.3s;
+}
+
+#early-btn:hover {
+	opacity: 80%;
+	transform: scale(110%);
+}
+
+.glow {
+	text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px #0fa,
+		0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa, 0 0 151px #0fa;
+}
+
+.column {
+	padding: 10px;
+	text-align: center;
+	transition: 0.1s linear;
+}
+
+.benefits {
+	color: rgb(75, 0, 130);
+}
+
+.mission-text {
+	text-align: left;
+	display: inherit;
+}
+
+.mission-text1 {
+	text-align: right;
+	display: inherit;
+}
+
+.box-container {
+	padding-bottom:10px;
+	border-radius: 10px;
+	/*box-shadow: 2px 2px 2px 2px;*/
+	border:2px black;
+	display:flex;
+}
+
+.empower_description{
+	justify-content:center;
+}
+
+
+.box-container>img {
+	max-width: 400px;
+	display: block;
+	width: auto;
+ 	 height: auto;
+}
+
+
+.description_text {
+	width: 80%;
+	padding-top: 20px;
+	text-align: left;
+}
+
+.description_text1 {
+	text-align: right;
+}
