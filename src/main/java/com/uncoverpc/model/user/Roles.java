@@ -1,8 +1,12 @@
 package com.uncoverpc.model.user;
 
-public class Roles {
-
-	public static final String user = "USER";
-	public static final String admin = "ADMIN";
-	
+public class Roles{
+    
+    public static enum Role{
+	    USER,
+	    TEST,
+	    ADMIN,
+	    DEV
+	}
+    
 }

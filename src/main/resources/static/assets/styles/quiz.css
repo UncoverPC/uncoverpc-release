@@ -1,0 +1,471 @@
+body,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Raleway", sans-serif;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      body,
+      html {
+        height: 100%;
+        line-height: 1.8;
+      }
+      body {
+        background-color: rgba(12, 12, 14, 255);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #main {
+        height: 100%;
+        display: flexbox;
+        justify-content: center;
+      }
+
+      #holder {
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+      }
+
+      #homepage {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+      }
+      
+      .question-holder {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .header {
+        padding: 20px;
+        font-size: 68px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        margin-top: 40vh;
+      }
+
+      .question {
+        font-size: 60px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        margin-top: 25%;
+      }
+
+      #wrapper {
+        justify-content: center;
+        background-color: rgba(48, 48, 48, 0.13);
+        display: flex;
+        float: left;
+        width: 30%;
+        height: 100vh;
+      }
+      .logo-small {
+        width: 200px;
+        margin: auto;
+      }
+
+      #quiz-type {
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        -webkit-text-fill-color: transparent; 
+        -moz-text-fill-color: transparent;
+        background-color: rgb(2,0,36);
+        background-image: linear-gradient(90deg, rgb(74, 68, 177) 0%, rgba(104,104,187,1) 46%, rgb(92, 16, 143) 100%);
+      }
+
+     
+
+      input[type=range]::-ms-track {
+        width: 100%;
+        cursor: pointer;
+      
+        /* Hides the slider so custom styles can be added */
+        background: transparent; 
+        border-color: transparent;
+        color: transparent;
+      }
+
+
+      button {
+        font-size: 22px;
+        font-weight: bold;
+        border-radius: 10px;
+        width: 250px;
+        height: 60px;
+        background-color: rgb(27, 27, 83);
+        color: white;
+        border: 0px;
+        text-align: center;
+        margin: 0 auto;
+        transition:0.3s;
+      }
+
+      .answer-button {
+        color: aliceblue;
+        background-color: rgb(27, 27, 83);
+        width: 40vh;
+        margin: 20px;
+      }
+      .answers {
+        text-align: center;
+      }
+      .btn-holder {
+        text-align: center;
+      }
+      .hidden {
+        animation: fadeOut 1s 1 forwards;
+      }
+      .selected {
+        background-color: rgb(108, 108, 204);
+      }
+
+      .selected:hover {
+        background-color: rgb(108, 108, 204);
+      }
+      
+      .visible {
+        animation: fadeIn 1.5s 1 forwards;
+      }
+
+      .visible-q {
+        animation: fadeInQuestion 1s 1 forwards;
+      }
+      
+      .next {
+        text-align: center;
+        margin-top: 50px;
+        margin-left: 20px;
+        background-color: rgb(26, 25, 49);
+      }
+
+      .recHolder {
+        height: 90%;
+        width: 100%;
+        margin-top: 3%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .productHolder {
+        margin: 0 auto;
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: fit-content;
+        border-radius: 10px;
+      }
+      .ranking {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+      }
+      .rankingNum {
+        font-weight: 900;
+        text-align: center;
+        color: white;
+        font-size: 36px;
+      }
+      .productName {
+        color: white;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bolder;
+        text-decoration: none;
+        margin-bottom: 5px;
+      }
+      .productImg {
+        max-height: 150px;
+      }
+      .productPrice {
+        color: white;
+        font-weight: bold;
+      }
+      .productName:hover {
+        color: rgb(120, 120, 210)
+      }
+      .propText {
+        color: white;
+        text-align: left;
+        font-weight: bolder;
+        font-size: 18px;
+        margin: 10px;
+        line-height: 1.2;
+      }
+      .propTitle {
+        width: 100%;
+        line-height: 1.5;
+        font-size: 22px;
+        text-align: center;
+      }
+      .productProperties {
+        background-color: rgb(38, 37, 37);
+        width: 90%;
+        border-radius: 10px;
+      }
+
+      .propertyHolder {
+        width: 90%;
+        display: flex;
+        flex-direction: row;
+      }
+      .propText {
+        text-align: left;
+        float: left;
+      }
+      .propChecked {
+        float: right;
+      }
+      .match {
+        float: right;
+        padding-right: 10px;
+        font-weight: 900;
+        font-size: 14px;
+      }
+
+
+      button:hover {
+        background-color: rgb(43, 43, 133);
+        transform: translateY(-5px);
+      }
+
+      .lds-dual-ring {
+        display: inline-flex;
+        margin: 35% auto;
+        width: 80px;
+        height: 80px;
+      }
+      .lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+      }
+
+      #slider {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+      }
+      #outValue {
+        margin-top: 30px;
+        color: white;
+        font-size: 32px;
+        font-weight: bold;
+      }
+
+
+      input[type=range] {
+        margin: auto;
+        height: 58px;
+        -webkit-appearance: none;
+        width: 70%;
+        background: transparent;
+      }
+      input[type=range]:focus {
+        outline: none;
+      }
+      input[type=range]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 30px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 1px 1px 1px #000000;
+        background: rgb(43, 43, 133);
+        border-radius: 22px;
+        border: 0px solid #010101;
+      }
+      input[type=range]::-webkit-slider-thumb {
+        box-shadow: 1px 1px 1px #000031;
+        border: 1px solid #00001E;
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        background: #FFFFFF;
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -10.5px;
+      }
+      input[type=range]:focus::-webkit-slider-runnable-track {
+        background: rgb(43, 43, 133);
+      }
+      input[type=range]::-moz-range-track {
+        width: 100%;
+        height: 30px;
+        cursor: pointer;
+        animate: 0.2s;
+        box-shadow: 1px 1px 1px #000000;
+        background: rgb(43, 43, 133);
+        border-radius: 22px;
+        border: 0px solid #010101;
+      }
+      input[type=range]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px #000031;
+        border: 1px solid #00001E;
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        background: #FFFFFF;
+        cursor: pointer;
+      }
+      input[type=range]::-ms-track {
+        width: 100%;
+        height: 30px;
+        cursor: pointer;
+        transition: 0.2s;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+      }
+      input[type=range]::-ms-fill-lower {
+        background: rgb(43, 43, 133);
+        border: 0px solid #010101;
+        border-radius: 44px;
+        box-shadow: 1px 1px 1px #000000;
+      }
+      input[type=range]::-ms-fill-upper {
+        background: rgb(43, 43, 133);
+        border: 0px solid #010101;
+        border-radius: 44px;
+        box-shadow: 1px 1px 1px #000000;
+      }
+      input[type=range]::-ms-thumb {
+        margin-top: 1px;
+        box-shadow: 1px 1px 1px #000031;
+        border: 1px solid #00001E;
+        height: 50px;
+        width: 50px;
+        border-radius: 50px;
+        background: #FFFFFF;
+        cursor: pointer;
+      }
+      input[type=range]:focus::-ms-fill-lower {
+        background: rgb(43, 43, 133);
+      }
+      input[type=range]:focus::-ms-fill-upper {
+        background: rgb(43, 43, 133);
+      }
+
+
+      @keyframes lds-dual-ring {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeInQuestion{
+        0% {
+          opacity: 0%;
+          transform: translateY(-30px);
+        }
+        100% {
+          opacity: 100%;
+          transform: translateY(0px);
+        }
+      }
+
+      @keyframes fadeIn{
+        0% {
+          opacity: 0%;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 100%;
+          transform: translateY(0px);
+        }
+      }
+
+      @keyframes fadeOut{
+        0% {
+          opacity: 100%;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0%;
+          transform: translateY(30px);
+        }
+      }
+
+      
+      @media only screen and (max-width: 1400px) {
+        .productPrice {
+          font-size: 24px;
+        }
+        #wrapper {
+          width: 20%;
+          overflow: hidden;
+        }
+        .logo-small {
+          width: 80%;
+        }
+      }
+
+      @media only screen and (max-width: 1100px) {
+        .header {
+          font-size: 42px;
+        }
+        .answer-button {
+          width: 30vh;
+        }
+      }
+
+      @media only screen and (max-width: 1000px) {
+        #wrapper {
+          height: 100%;
+          width: 0;
+          overflow: hidden;
+        }
+        #holder {
+          overflow: scroll;
+        }
+        .productHolder {
+          width: 50%;
+        }
+        .recHolder {
+          height: 400vh;
+          flex-direction: column;
+        }
+      }
+
+      @media only screen and (max-width: 550px) {
+        .header {
+          font-size: 42px;
+        }
+        .answer-button {
+          width: 30vh;
+        }
+      }
+

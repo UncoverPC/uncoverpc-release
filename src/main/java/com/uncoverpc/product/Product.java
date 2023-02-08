@@ -3,8 +3,11 @@ package com.uncoverpc.product;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@Document("products")
 public class Product {
 
 	@JsonProperty("iframe")
@@ -13,6 +16,8 @@ public class Product {
 	private String link;
 	@JsonProperty("price")
 	private String price;
+	@JsonProperty("referenceQuiz")
+	private String referenceQuiz;
 	@JsonProperty("imageLink")
 	private String imageLink;
 	@JsonProperty("title")
@@ -20,12 +25,13 @@ public class Product {
 	@JsonProperty("productAnswer")
 	private Map<String, Object> answerBank = new HashMap<String, Object>();
 	
-	public Product(String iframe, String link, String price, String imageLink, String title,
+	public Product(String iframe, String link, String price, String referenceQuiz, String imageLink, String title,
 			Map<String, Object> answerBank) {
 		super();
 		this.iframe = iframe;
 		this.link = link;
 		this.price = price;
+		this.referenceQuiz = referenceQuiz;
 		this.imageLink = imageLink;
 		this.title = title;
 		this.answerBank = answerBank;
@@ -69,10 +75,19 @@ public class Product {
 	public void setAnswerBank(Map<String, Object> answerBank) {
 		this.answerBank = answerBank;
 	}
+	
+	
+	public String getReferenceQuiz() {
+		return referenceQuiz;
+	}
+	public void setReferenceQuiz(String referenceQuiz) {
+		this.referenceQuiz = referenceQuiz;
+	}
 	@Override
 	public String toString() {
-		return "Answers [iframe=" + iframe + ", link=" + link + ", price=" + price + ", imageLink=" + imageLink
-				+ ", title=" + title + ", answerBank=" + answerBank + "]";
+		return "Product [iframe=" + iframe + ", link=" + link + ", price=" + price + ", referenceQuiz=" + referenceQuiz
+				+ ", imageLink=" + imageLink + ", title=" + title + ", answerBank=" + answerBank + "]";
 	}
+	
 	
 }

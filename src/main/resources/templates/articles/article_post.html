@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Article Post</title>
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body{
+			display:flex;
+			flex-direction: column;
+			background-color: gainsboro;
+			font-family: 'Raleway', sans-serif;
+			gap: 3rem;
+			padding:0px;
+			margin:0px;
+		}
+		.navbar{
+			width: 100%;
+			background-color: black;
+			color: white;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			padding: 0.5rem 15%;
+			gap: 0.3rem;
+			font-size: 1.5rem;
+		}
+
+		.article-header{
+			display:flex;
+			flex-direction: column;
+			padding-left:15%;
+			gap:0.5rem;
+		}
+		.article-header-title{
+			font-size:2.5rem;
+			font-weight: bold;
+		}
+
+		.article-intro{
+			padding-left: 15%;
+			padding-right: 35%;
+		}
+
+		.article-product-section{
+			display: flex;
+			flex-direction: column;
+			padding-left: 15%;
+			padding-right: 35%;
+		}
+		.article-product-image img{
+			width: 100%;
+			height: auto;
+			padding-bottom: 2rem;
+		}
+		.article-product-title{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.title-text{
+			font-size: 2rem;
+			color: purple;
+			font-weight: 700;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 1rem;
+		}
+		.stars{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.tagline{
+			font-size: 1.3rem;
+			font-weight: 100;
+		}
+
+		.article-product-table hr{
+			border: 0.5px solid black;
+		}
+		.table-row{
+			display: flex;
+			flex-direction: row;
+			align-items: flex-start;
+			justify-content: start;
+			margin-bottom: 1rem;
+		}
+		.table-row-header{
+			flex-basis: 40%;
+			font-weight:900;
+		}
+		.table-row-description{
+			flex-basis: 60%;
+		}
+	</style>
+</head>
+<body>
+	<div class="w3-display-bottomleft w3-text-grey w3-large" style="padding:24px 48px; position: fixed;">
+		<i class="fa fa-facebook-official w3-hover-opacity"></i>
+		<i class="fa fa-instagram w3-hover-opacity"></i>
+		<i class="fa fa-snapchat w3-hover-opacity"></i>
+		<i class="fa fa-pinterest-p w3-hover-opacity"></i>
+		<i class="fa fa-twitter w3-hover-opacity"></i>
+		<i class="fa fa-linkedin w3-hover-opacity"></i>
+	</div>
+	<div class="navbar"> <object class="custom-logo" data="../static/assets/images/Logo.svg" width="40" height="40"> </object> UNCOVER PC </div>
+	<div class="article-header">
+		<div class="article-header-title">ARTICLE TITLE</div>
+		<div class="author-date">By AUTHOR | Published DATE</div>
+		<div class="article-headerpreview">PREVIEW TEXT</div>
+	</div>
+	<div class="article-intro">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+		Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+		Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<br /> <br/>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+		Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+		Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+		Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</div>
+
+	<!--Copy and Paste the following for each product added-->
+	<!--Text and images used here are only examples, edit/add/remove as needed-->
+	<div class="article-product-section">
+		<div class="article-product-image">
+			<img src="https://cdn.mos.cms.futurecdn.net/oKG8af4ZbJqjttMd2jKGzZ-1200-80.jpg.webp" />
+		</div>
+		<div class="article-product-title">
+			<div class="title-text">
+				<div>
+					1. Razer DeathAdder V2
+				</div>
+				<div class="stars w3-text-purple w3-large">
+					<i class="fa fa-solid fa-star w3-hover-opacity"></i>
+					<i class="fa fa-solid fa-star w3-hover-opacity"></i>
+					<i class="fa fa-solid fa-star w3-hover-opacity"></i>
+					<i class="fa fa-solid fa-star w3-hover-opacity"></i>
+					<i class="fa fa-solid fa-star-half w3-hover-opacity"></i>
+				</div>
+			</div>
+			<div class="tagline">
+				The best gaming mouse for the majority of PC gamers
+			</div>
+		</div>
+		<div class="article-product-table">
+			<hr/>
+			<!-- entries in the table can also be added/removed as needed -->
+			<div class="table-row">
+				<div class="table-row-header">SPECIFICATIONS</div>
+				<div class="table-row-description">
+					DPI: 20,000 Sensor: Optical Interface: USB Buttons: 6 Ergonomic: Right-handed Weight: 82g (2.9oz) Battery life: N/A
+				</div>
+			</div>
+			<div class="table-row">
+				<div class="table-row-header">TODAY'S BEST DEALS</div>
+				<div class="table-row-description">
+					<a href="#">Buy</a> <br>
+					<a href="#">Buy</a> <br>
+					<a href="#">Buy</a>
+				</div>
+			</div>
+			<div class="table-row">
+				<div class="table-row-header">REASONS TO BUY</div>
+				<div class="table-row-description">
+					+ One of the best sensors available <br>
+					+ Ideal shape for palm or claw grips <br>
+					+ Supports a variety of hand sizes 
+				</div>
+			</div>
+			<div class="table-row">
+				<div class="table-row-header">REASONS TO AVOID</div>
+				<div class="table-row-description">
+					- Buttons on the flimsy side
+				</div>
+			</div>
+			<hr/>
+		</div>
+		<div class="article-product-description">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			<br /> <br/>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+			Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+			Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+			Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</div>
+	</div>
+
+</body>
+</html>

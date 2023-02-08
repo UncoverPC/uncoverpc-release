@@ -12,6 +12,10 @@
     transform: translateY(-50%) translateX(-50%);
 }
 
+.fade-in-animate{
+    animation: fade-in 2s;
+}
+
 @keyframes fade-in {
     0% {
         opacity: 0;
