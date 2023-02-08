@@ -11,6 +11,6 @@ import com.uncoverpc.product.Laptop;
 @Service
 public interface LaptopService extends MongoRepository<Laptop, String>{
 	
-	@Query("{'QuizResponses.Main use?' : ?0}")
+	@Query("{'QuizResponses.Operating System?' : ?0}")
 	List<Laptop> findbyLaptopUse(String use);
 }

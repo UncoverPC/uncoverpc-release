@@ -18,12 +18,24 @@ lang="en">
             outline: none;
             box-sizing: border-box;
         }
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif;
+        }
+        
         body{
-            background: linear-gradient( #30cfd0 0%, #600fc3 100%);
+            background-color: rgba(12, 12, 14, 255);
             margin:0;
             padding:0;  
              
         }
+
+
         .content{
             position:relative;
             display:flex;
@@ -34,6 +46,12 @@ lang="en">
             height: 100vh;
             width: 100vw;
             
+        }
+        .logo-small {
+            float: left;
+            width: 100px;
+            margin-bottom: 20px;
+            margin-right: 20px;
         }
         #product-select{
         
@@ -77,12 +95,12 @@ lang="en">
         }
         #include-property{
            /* box-sizing: border-box; */
-           /* width:99%; */
+           width:90%;
            height:100%;
            border: 0;
            outline:none;
-           font-size: 16px;
-           padding-left: 0.5vw;
+           font-size: 18px;
+           padding-left: 20px;
            color: #6f768d;
            /* padding-right:1vw; */
         }
@@ -107,14 +125,13 @@ lang="en">
             
         }
         #property-table{
-            table-layout: fixed;
+            table-layout:fixed;
             width: 100%;
             background-color: lightgreen;
             
         }
         #property-table .property-text{
             border: 1px solid black;
-
         }
         .property-text{
             /* height:5%; */
@@ -131,31 +148,46 @@ lang="en">
             height:100%;
             border-style:solid;
             border-color: lightgray;
-            border-radius: 5px;
+            border-radius: 40px;
             display:flex;
-            padding: 10px;
+            padding-left: 10px;
+            padding: 5px;
             box-shadow: 0 8px 6px -10px #b3c6ff;
         }
         #btn-wrapper{
             height:100%;
             border-style:none;
             display:flex;
-
             box-shadow: 0 8px 6px -10px #b3c6ff;
         }
         #add-btn{
-            background-color:lightgreen ;
+            background-color:rgb(88, 212, 88);
+            font-size: 30px;
             height:100%;
-            border-style: solid 1px;
-            border-color: gray;
+            width: 60px;
+            margin-right: 5px;
+            border-radius: 40px;
+            color: #ffffff;
+            border: none;
+            transition: 0.2s;
+        }
+        #add-btn:disabled {
+            background-color:rgb(62, 73, 62)
         }
         #submit-btn{
             background-color:skyblue;
-            border-style: solid 1px;
-            border-color: gray;
+            border-style: none;
+            font-size: 24px;
+            width: 70px;
+            border-radius: 20px;
             height:100%;
+            margin-left: 10px;
             /* border-width: 1px; */
             box-shadow: none;
+        }
+
+        #submit-btn:active {
+            background-color:rgb(110, 165, 187);
         }
         .del-cell{
             color:red;
@@ -170,6 +202,10 @@ lang="en">
 
   <body>
     <div class = content>
+        <div style="display: flex; flex-direction: row;">
+            <img src="/src/main/resources/static/assets/images/Logo.svg" class="logo-small"/>
+            <h1 style="font-size:56px; padding: 10px; color: #cac3c3;">Find your perfect product.</h1>
+        </div>
         <form id="property-form" onsubmit = "send(event)">
             <div id = "input-wrapper">
                 <div class = "dropdown">
@@ -191,17 +227,14 @@ lang="en">
                 <div id = search-wrapper>
                     <input type = "text" id = "include-property" placeholder = "Insert Property" onkeyup="checkProp()" autocomplete="off">
                 </div>
-                
+                <button id = "add-btn" type="button" onclick="addProperty()" disabled>+</button>
             </div>
             <div id = "btn-wrapper">
-                <button id = "add-btn" type="button" onclick="addProperty()" disabled>Add Property</button>    
-                <input id = "submit-btn" type="submit" data-action="search" value = "Go">
+               
+                <input id = "submit-btn" type="submit" data-action="search" value = "🔎">
             </div>
         </form>
-        <div style="height: 2vw"></div>
-        <h2>
-            Properties:
-        </h2>
+        <div style="height: 1vw"></div>
         <div id = "table-wrapper">
             <table id = "property-table">
                 <!-- <tr><td> </td></tr> -->
