@@ -10,7 +10,6 @@
     <link rel="stylesheet" th:href="@{/assets/dist/styles.css}" />
     <style>
         .prev, .next{
-            padding: 16px;
             margin-top: -50px;
             user-select: none;
             -webkit-user-select: none;
@@ -27,108 +26,118 @@
 
 </head>
 <script src="https://kit.fontawesome.com/fa0e1fe1ec.js" crossorigin="anonymous"></script>
-<body class="bg-slate-500 overflow-x-hidden my-8">
-<div class="flex flex-wrap justify-center w-screen h-screen items-center relative">
+<body class="bg-slate-500 overflow-hidden my-4">
+
+<div class="flex flex-wrap justify-center w-screen h-screen items-center relative ">
+    <div class="w-screen flex justify-center items-center text-white h-[5%]">
+        <p class="text-md md:text-lg lg:text-xl xl:text-3xl inline-block text-center flex items-center">
+            <img src="/assets/images/Logo.svg" alt="UncoverPC Logo"
+                 class="w-6 md:w-8 lg:w-12 h-6 md:h-8 lg:h-12 align-middle" />
+            <span class="align-middle">Uncover Your Results:</span>
+        </p>
+    </div>
     <button onclick="showSlides(-1)" class="text-white hover:scale-105 hover:bg-white hover:text-black transition duration-200 ease-in-out
         prev
-        absolute left-[5%] text-3xl border-2 border-white rounded-l-lg">
+        absolute p-[8px] md:p-[12px] lg:p-[16px] left-[1%] md:left-[3%] lg:left-[5%] text-3xl border-2 border-white rounded-l-lg">
         <
     </button>
     <button onclick="showSlides(1)" class="text-white hover:scale-105 hover:bg-white hover:text-black transition duration-200 ease-in-out
         next
-        absolute right-[5%] text-3xl border-2 border-white rounded-r-lg">
+        absolute p-[8px] md:p-[12px] lg:p-[16px] right-[1%] md:right-[3%] lg:right-[5%] text-3xl border-2 border-white rounded-r-lg">
         >
     </button>
 
 
-    <div class="w-4/5 h-4/5 bg-slate-300 flex m-4 rounded-2xl fade" id="product1">
-        <div class="h-full w-2/5 bg-white flex flex-col items-center justify-evenly">
-            <a target="_blank" class="w-full m-2 h-2/3 flex justify-center px-2"
+    <div class="w-4/5 h-4/5 bg-slate-300 flex flex-col xs:flex-row my-4 rounded-2xl fade" id="product1">
+        <div class="h-1/3 xs:h-full w-full xs:w-2/5 bg-white flex flex-col items-center justify-evenly">
+            <a target="_blank" class="w-full xs:m-2 h-4/5 xs:h-2/3 flex justify-center px-2"
                href="https://www.bestbuy.ca/en-ca/product/lenovo-ideapad-1-15-6-laptop-cloud-grey-amd-athlon-silver-3050u-128gb-emmc-4gb-ram-windows-11-s/16391561">
                 <img class="object-contain" src="https://multimedia.bbycastatic.ca/multimedia/products/500x500/163/16391/16391561.jpg" />
             </a>
-            <div class="text-4xl font-bold h-1/3 flex items-center text-green-500">$529.99</div>
+            <div class="text-xl xs:text-4xl font-bold h-1/3 flex items-center text-green-500">$529.99</div>
         </div>
-        <div class="h-full w-3/5 flex flex-col items-center justify-start m-2 py-1 px-4">
-            <div class="text-3xl font-bold block max-h-[1/5] w-full flex justify-center items-center text-center pt-4 pb-2">
+        <div class="h-2/3 xs:h-full w-full xs:w-3/5 flex flex-col items-center justify-start m-2 py-1 px-4">
+            <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold block max-h-[1/5] w-full flex justify-center items-center text-center pt-4 pb-2">
                 <a target="_blank"
                    href="https://www.bestbuy.ca/en-ca/product/lenovo-ideapad-1-15-6-laptop-cloud-grey-amd-athlon-silver-3050u-128gb-emmc-4gb-ram-windows-11-s/16391561"
                    class="w-full h-full">
                     <p>Lenovo IdeaPad 1 15.6' Laptop</p>
                 </a>
             </div>
-            <div class="h-1/5 w-2/3 mb-4 font-bold text-lg flex justify-between items-center">
-                    <p><span class="font-black text-3xl text-green-500">&#10003;</span> Long Battery Life</p>
-                    <p><span class="font-black text-3xl text-green-500">&#10003;</span> High Performance</p>
-                    <p><span class="font-black text-3xl text-green-500">&#10003;</span> Smooth Finish</p>
+            <div class="h-1/5 w-full xl:w-4/5 font-bold text-xs md:text-sm lg:text-md xl:text-lg flex justify-between items-center">
+                <p class="text-center"><span class="font-black text-xl text-green-500">&#10003;</span> Long Battery Life</p>
+                <p class="text-center"><span class="font-black text-xl text-green-500">&#10003;</span> High Performance</p>
+                <p class="text-center"><span class="font-black text-xl text-green-500">&#10003;</span> Smooth Finish</p>
             </div>
-            <ul class="flex flex-wrap w-full h-3/5 justify-center items-center gap-2">
+            <ul class="flex flex-wrap w-full h-3/5 justify-center items-center gap-1 lg:gap-2">
                 <li class="h-1/3 w-full">
                     <div class="flex rounded-md bg-gradient-to-br from-red-500 to-blue-700 hover:from-red-700 hover:to-blue-700 hover:scale-105 transition duration-200 ease-in-out
                             items-center text-white h-full w-full">
                         <div class="w-1/3 h-full">
-                           <a target="_blank" href="https://www.pcmag.com/reviews/lenovo-ideapad-1-15">
-                            <img class="h-full" src="https://i.pcmag.com/imagery/reviews/01CiwZKirWUthUrS9ILBxfq-1.fit_scale.size_1028x578.v1670374433.jpg" />
-                           </a>
+                            <a target="_blank" href="https://www.pcmag.com/reviews/lenovo-ideapad-1-15">
+                                <img class="h-full" src="https://i.pcmag.com/imagery/reviews/01CiwZKirWUthUrS9ILBxfq-1.fit_scale.size_1028x578.v1670374433.jpg" />
+                            </a>
                         </div>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
-                        <a href="https://www.pcmag.com/reviews/lenovo-ideapad-1-15"
-                           target="_blank" class="text-lg font-semibold">Lenovo IdeaPad 1 15 Review</a>
-                        <p class="text-sm">... 47Wh battery out to more than 12 hours of use. That's especially impressive in the context of similar budget systems...</p>
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
+                            <a href="https://www.pcmag.com/reviews/lenovo-ideapad-1-15"
+                               target="_blank" class="text-xs xs:text-sm lg:text-md xl:text-lg font-semibold">Lenovo IdeaPad 1 15 Review</a>
+                            <p class="text-[8px] xs:text-xs xl:text-sm leading-3 xs:leading-4">... 47Wh battery out to more than 12 hours of use. That's especially impressive in the context of similar budget systems...</p>
                         </div>
                     </div>
                 </li>
                 <li class="h-1/3 w-full">
                     <div class="flex rounded-md bg-gradient-to-br from-red-500 to-blue-700 hover:from-red-700 hover:to-blue-700 hover:scale-105 transition duration-200 ease-in-out
                             items-center text-white text-sm h-full w-full">
-                        <a target="_blank" class="w-1/3 h-full flex justify-center"
-                           href="https://www.bestbuy.com/site/reviews/lenovo-ideapad-1-15-6-fhd-touch-screen-laptop-ryzen-7-5700u-12gb-memory-512gb-ssd-cloud-grey/6502660?variant=A">
-                            <img class="h-full" src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png" />
-                        </a>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-1/3 h-full flex justify-center">
+                            <a target="_blank"
+                               href="https://www.bestbuy.com/site/reviews/lenovo-ideapad-1-15-6-fhd-touch-screen-laptop-ryzen-7-5700u-12gb-memory-512gb-ssd-cloud-grey/6502660?variant=A">
+                                <img class="h-full" src="https://p3-ofp.static.pub/fes/cms/2021/10/25/caqm6xeo57daq7nij26glvewaqvt02706786.png" />
+                            </a>
+                        </div>
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
                             <a href="https://www.bestbuy.com/site/reviews/lenovo-ideapad-1-15-6-fhd-touch-screen-laptop-ryzen-7-5700u-12gb-memory-512gb-ssd-cloud-grey/6502660?variant=A"
-                               target="_blank" class="text-lg font-semibold">Customer Reviews: Lenovo Ideapad 1 15.6' FHD Touch</a>
-                            <p class="text-sm">The pro is that it charges super quick...  I can also have a ton of tabs open and this computer does not judge. It's hard-working and very perseverant.</p>
+                               target="_blank" class="text-xs xs:text-sm lg:text-md xl:text-lg font-semibold">Customer Reviews: Lenovo Ideapad 1 15.6' FHD Touch</a>
+                            <p class="text-[8px] xs:text-xs xl:text-sm leading-3 xs:leading-4">The pro is that it charges super quick... It's hard-working and very perseverant.</p>
                         </div>
                     </div>
                 </li>
                 <li class="h-1/3 w-full">
-                    <div class="flex rounded-md bg-gradient-to-br from-red-500 to-blue-700 hover:from-red-700 hover:to-blue-700 hover:scale-105 transition duration-200 ease-in-out
+                    <div class="flex flex-wrap rounded-md bg-gradient-to-br from-red-500 to-blue-700 hover:from-red-700 hover:to-blue-700 hover:scale-105 transition duration-200 ease-in-out
                             items-center text-white text-sm h-full w-full">
                         <a target="_blank" class="w-1/3 h-full"
                            href="https://laptopmedia.com/review/lenovo-ideapad-1-15-2022/">
                             <img class="h-full" src="https://laptopmedia.com/wp-content/uploads/2022/10/5-7-1536x864.jpg" />
                         </a>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-2/3 h-full flex flex-col justify-evenly px-1 xl:px-2">
                             <a href="https://laptopmedia.com/review/lenovo-ideapad-1-15-2022/"
-                               target="_blank" class="text-lg font-semibold">Lenovo IdeaPad 1 (15', 2022) review | LaptopMedia.com</a>
-                            <p class="text-sm">... Lenovo uses a combination of polycarbonate and ABS, which has a surprisingly good feel.</p>
+                               target="_blank" class="text-xs xs:text-sm lg:text-md xl:text-lg font-semibold">Lenovo IdeaPad 1 (15', 2022) review | LaptopMedia.com</a>
+                            <p class="text-[8px] xs:text-xs xl:text-sm leading-3 xs:leading-4">... Lenovo uses a combination of polycarbonate and ABS, which has a surprisingly good feel.</p>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="w-4/5 h-4/5 bg-slate-300 flex m-4 rounded-2xl fade" id="product2">
-        <div class="h-full w-2/5 bg-white flex flex-col items-center justify-evenly">
-            <a target="_blank" class="w-full m-2 h-2/3 flex justify-center px-2"
+    <div class="w-4/5 h-4/5 bg-slate-300 flex flex-col xs:flex-row my-4 rounded-2xl fade" id="product2">
+        <div class="h-1/3 xs:h-full w-full xs:w-2/5 bg-white flex flex-col items-center justify-evenly">
+            <a target="_blank" class="w-full xs:m-2 h-4/5 xs:h-2/3 flex justify-center px-2"
                href="https://www.amazon.ca/VivoBook-Pentium%C2%AE-Microsoft-Personal-X515MA-AH09-CA/dp/B09HN325SY/ref=sr_1_2?keywords=laptop&qid=1671759439&sr=8-2">
                 <img class="object-contain" src="https://dlcdnwebimgs.asus.com/gain/4f316a82-d281-4409-aadf-d359e19e9cc2/" />
             </a>
-            <div class="text-4xl font-bold h-1/3 flex items-center text-green-500">$529.99</div>
+            <div class="text-xl xs:text-4xl font-bold h-1/3 flex items-center text-green-500">$399.00</div>
         </div>
-        <div class="h-full w-3/5 flex flex-col items-center justify-start m-2 py-1 px-4">
-            <div class="text-3xl font-bold block max-h-[1/5] w-full flex justify-center items-center text-center pt-4 pb-2">
+        <div class="h-2/3 xs:h-full w-full xs:w-3/5 flex flex-col items-center justify-start m-2 py-1 px-4">
+            <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold block max-h-[1/5] w-full flex justify-center items-center text-center pt-4 pb-2">
                 <a target="_blank"
                    href="https://www.amazon.ca/VivoBook-Pentium%C2%AE-Microsoft-Personal-X515MA-AH09-CA/dp/B09HN325SY/ref=sr_1_2?keywords=laptop&qid=1671759439&sr=8-2"
                    class="w-full h-full">
-                    <p>ASUS VivoBook 15 X515 Thin and Light Laptop</p>
+                    <p>ASUS VivoBook 15 X515 Laptop</p>
                 </a>
             </div>
-            <div class="h-1/5 w-2/3 mb-4 font-bold text-lg flex justify-between items-center">
-                <p><span class="font-black text-3xl text-green-500">&#10003;</span> Easily Portable</p>
-                <p><span class="font-black text-3xl text-red-500">&#10005;</span> Weaker Battery</p>
-                <p><span class="font-black text-3xl text-green-500">&#10003;</span> Budget Friendly</p>
+            <div class="h-1/5 w-full xl:w-4/5 font-bold text-xs md:text-sm lg:text-md xl:text-lg flex justify-between items-center">
+                <p class="text-center"><span class="font-black text-3xl text-green-500">&#10003;</span> Easily Portable</p>
+                <p class="text-center"><span class="font-black text-3xl text-red-500">&#10005;</span> Weaker Battery</p>
+                <p class="text-center"><span class="font-black text-3xl text-green-500">&#10003;</span> Budget Friendly</p>
             </div>
             <ul class="flex flex-wrap w-full h-3/5 justify-center items-center gap-2">
                 <li class="h-1/3 w-full">
@@ -139,10 +148,10 @@
                                 <img class="h-full" src="https://i.rtings.com/assets/products/ZFcEjnO4/asus-x515-2020/build-quality-small.jpg" />
                             </a>
                         </div>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
                             <a href="https://www.rtings.com/laptop/reviews/asus/x515-2020"
-                               target="_blank" class="text-lg font-semibold">ASUS X515 (2020) Laptop Review</a>
-                            <p class="text-sm">The ASUS X515 is... well-built, with a thin and light design that makes it very portable... its battery doesn't last long enough to get you through a typical 8-hour day...</p>
+                               target="_blank" class="text-xs xs:text-sm md:text-md lg:text-lg font-semibold">ASUS X515 (2020) Laptop Review</a>
+                            <p class="text-[8px] xs:text-xs lg:text-sm leading-3 xs:leading-4">The ASUS X515 is... well-built, with a thin and light design that makes it very portable... its battery doesn't last long enough to get you through a typical 8-hour day...</p>
                         </div>
                     </div>
                 </li>
@@ -153,10 +162,10 @@
                            href="https://www.tomsguide.com/reviews/asus-vivobook-15">
                             <img class="object-cover h-full" src="https://cdn.mos.cms.futurecdn.net/MqZkhGt255c2NnTpas49WM-970-80.jpg.webp" />
                         </a>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
                             <a href="https://www.tomsguide.com/reviews/asus-vivobook-15"
-                               target="_blank" class="text-lg font-semibold">Asus VivoBook 15 review ? a budget laptop with low-budget battery life</a>
-                            <p class="text-sm">... you're paying for less performance and less battery life and opting for a less vibrant display.</p>
+                               target="_blank" class="text-xs xs:text-sm md:text-md lg:text-lg font-semibold">Asus VivoBook 15 review</a>
+                            <p class="text-[8px] xs:text-xs lg:text-sm leading-3 xs:leading-4">... you're paying for less performance and less battery life and opting for a less vibrant display.</p>
                         </div>
                     </div>
                 </li>
@@ -167,36 +176,36 @@
                            href="https://www.digitweek.com/asus-vivobook-15-x515ea-review/">
                             <img class="object-cover h-full" src="https://dlcdnwebimgs.asus.com/gain/5c6b756c-ca00-409c-8341-c5ac5eeabf56/" />
                         </a>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
                             <a href="https://www.digitweek.com/asus-vivobook-15-x515ea-review/"
-                               target="_blank" class="text-lg font-semibold">Asus VivoBook 15 X515EA Review</a>
-                            <p class="text-sm">The Asus VivoBook 15 strikes a nice balance between price, its premium design, and its highly portable design while delivering strong all-round performance...</p>
+                               target="_blank" class="text-xs xs:text-sm md:text-md lg:text-lg font-semibold">Asus VivoBook 15 X515EA Review</a>
+                            <p class="text-[8px] xs:text-xs lg:text-sm leading-3 xs:leading-4">The Asus VivoBook 15 strikes a nice balance between price, its premium design, and its highly portable design while delivering strong all-round performance...</p>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
-    <div class="w-4/5 h-4/5 bg-slate-300 flex m-4 rounded-2xl fade" id="product3">
-        <div class="h-full w-2/5 bg-white flex flex-col items-center justify-evenly">
-            <a target="_blank" class="w-full m-2 h-2/3 flex justify-center px-2"
+    <div class="w-4/5 h-4/5 bg-slate-300 flex flex-col xs:flex-row m-4 rounded-2xl fade" id="product3">
+        <div class="h-1/3 xs:h-full w-full xs:w-2/5 bg-white flex flex-col items-center justify-evenly">
+            <a target="_blank" class="w-full xs:m-2 h-4/5 xs:h-2/3 flex justify-center px-2"
                href="https://www.bestbuy.ca/en-ca/product/apple-macbook-air-13-3-w-touch-id-fall-2020-space-grey-apple-m1-chip-256gb-ssd-8gb-ram-en/15136919">
                 <img class="object-contain" src="https://multimedia.bbycastatic.ca/multimedia/products/500x500/151/15136/15136919.jpg" />
             </a>
-            <div class="text-4xl font-bold h-1/3 flex items-center text-green-500">$529.99</div>
+            <div class="text-xl xs:text-4xl font-bold h-1/3 flex items-center text-green-500">$1,149.99</div>
         </div>
-        <div class="h-full w-3/5 flex flex-col items-center justify-start m-2 py-1 px-4">
-            <div class="text-3xl font-bold block max-h-[1/5] w-full flex justify-center items-center text-center pt-4 pb-2">
+        <div class="h-2/3 xs:h-full w-full xs:w-3/5 flex flex-col items-center justify-start m-2 py-1 px-4">
+            <div class="text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold block max-h-[1/5] w-full flex justify-center items-center text-center pt-4 pb-2">
                 <a target="_blank"
                    href="https://www.bestbuy.ca/en-ca/product/apple-macbook-air-13-3-w-touch-id-fall-2020-space-grey-apple-m1-chip-256gb-ssd-8gb-ram-en/15136919"
                    class="w-full h-full">
-                    <p>Apple MacBook Air 13.3' w/ Touch ID (Fall 2020)</p>
+                    <p class="w-full text-center">Apple MacBook Air w/ Touch ID</p>
                 </a>
             </div>
-            <div class="h-1/5 w-2/3 mb-4 font-bold text-lg flex justify-between items-center">
-                <p><span class="font-black text-3xl text-green-500">&#10003;</span> Incredible Value</p>
-                <p><span class="font-black text-3xl text-green-500">&#10003;</span> Long Battery Life</p>
-                <p><span class="font-black text-3xl text-green-500">&#10003;</span> High Performance</p>
+            <div class="h-1/5 w-full xl:w-4/5 font-bold text-xs md:text-sm lg:text-md xl:text-lg flex justify-between items-center">
+                <p class="text-center"><span class="font-black text-3xl text-green-500">&#10003;</span> Incredible Value</p>
+                <p class="text-center"><span class="font-black text-3xl text-green-500">&#10003;</span> Long Battery Life</p>
+                <p class="text-center"><span class="font-black text-3xl text-green-500">&#10003;</span> High Performance</p>
             </div>
             <ul class="flex flex-wrap w-full h-3/5 justify-center items-center gap-2">
                 <li class="h-1/3 w-full">
@@ -207,10 +216,10 @@
                                 <img class="h-full" src="https://i.pcmag.com/imagery/reviews/02pPlSC851BxRP4BFdufSBJ-1.fit_scale.size_1028x578.v1605566017.jpg" />
                             </a>
                         </div>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
                             <a href="https://www.pcmag.com/reviews/apple-macbook-air-m1-late-2020"
-                               target="_blank" class="text-lg font-semibold">Apple MacBook Air (M1, Late 2020) Review</a>
-                            <p class="text-sm">... it's the best value among Mac laptops, especially when combined with its nearly 30-hour battery life and premium super-slim build.</p>
+                               target="_blank" class="text-xs xs:text-sm md:text-md lg:text-lg font-semibold">Apple MacBook Air (M1, Late 2020) Review</a>
+                            <p class="text-[8px] xs:text-xs lg:text-sm leading-3 xs:leading-4">... it's the best value among Mac laptops, especially when combined with its nearly 30-hour battery life and premium super-slim build.</p>
                         </div>
                     </div>
                 </li>
@@ -221,10 +230,10 @@
                            href="https://www.techradar.com/reviews/apple-macbook-air-m12020">
                             <img class="h-full" src="https://cdn.mos.cms.futurecdn.net/V77RHxVtRWt9oN8fUu6Gre-1200-80.jpg.webp" />
                         </a>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
                             <a href="https://www.techradar.com/reviews/apple-macbook-air-m12020"
-                               target="_blank" class="text-lg font-semibold">Apple MacBook Air (M1, 2020) review</a>
-                            <p class="text-sm">...easily one of the most exciting Apple laptops of recent years. Its M1 chip is a real game-changer... Battery life is also great, and performance is excellent as well.</p>
+                               target="_blank" class="text-xs xs:text-sm md:text-md lg:text-lg font-semibold">Apple MacBook Air (M1, 2020) review</a>
+                            <p class="text-[8px] xs:text-xs lg:text-sm leading-3 xs:leading-4">...easily one of the most exciting Apple laptops of recent years. Its M1 chip is a real game-changer... Battery life is also great, and performance is excellent as well.</p>
                         </div>
                     </div>
                 </li>
@@ -235,10 +244,10 @@
                            href="https://www.tomsguide.com/reviews/macbook-air-2020-m1">
                             <img class="h-full" src="https://cdn.mos.cms.futurecdn.net/t5SWUYqwxKAjLgqiGc4i5S-1200-80.jpg.webp" />
                         </a>
-                        <div class="w-2/3 flex flex-col justify-between pr-2">
+                        <div class="w-2/3 flex flex-col h-full justify-evenly px-1 xl:px-2">
                             <a href="https://www.tomsguide.com/reviews/macbook-air-2020-m1"
-                               target="_blank" class="text-lg font-semibold">MacBook Air with M1 review: A great value</a>
-                            <p class="text-sm">... the new MacBook Air offers serious performance gains over its predecessor, and many more hours of battery life as well.</p>
+                               target="_blank" class="text-xs xs:text-sm md:text-md lg:text-lg font-semibold">MacBook Air with M1 review: A great value</a>
+                            <p class="text-[8px] xs:text-xs lg:text-sm leading-3 xs:leading-4">... the new MacBook Air offers serious performance gains over its predecessor, and many more hours of battery life as well.</p>
                         </div>
                     </div>
                 </li>
@@ -247,7 +256,7 @@
     </div>
 </div>
 <script>
-    let activeProduct = 2;
+    let activeProduct = 0;
     showSlides(1);
 
     function showSlides(n){

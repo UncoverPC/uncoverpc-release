@@ -41,17 +41,22 @@
 						</th:block>
 					</div>
 					<form th:action="@{/login}" method="post" th:object="${user}">
+						<p class="text-red-500 text-sm font-thin" style="display: none;" id="missingEmailText">Enter your email!</p>
 						<div class="field-mb-4">
 							<input type="email" id="email" name="email"
 								placeholder="Enter your email"
 								class="focus:outline-none mb-4 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700" />
 							<div class="line"></div>
 						</div>
+						<p class="text-red-500 text-sm font-thin" style="display: none;" id="missingPasswordText">Enter your password!</p>
 						<div class="field-mb-6">
 							<input type="password" id="password" name="password"
 								placeholder="Password"
 								class="focus:outline-none mb-6 px-1 py-2.5 md:py-3 w-full text-sm md:text-base placeholder:text-sm md:placeholder:text-base placeholder:text-gray-700" />
 							<div class="line"></div>
+						</div>
+						<div class="field-mb-6">
+							<input type="checkbox" id="remember-me" name="remember-me"/> Remember me
 						</div>
 						<div class="flex justify-center mb-6">
 							<a href="/forgotPassword"
@@ -60,7 +65,7 @@
 						</div>
 						<input
 							class="cursor-pointer bg-slate-800 hover:bg-slate-900 mb-4 text-sm md:text-base text-white font-semibold p-3 rounded-md inline-flex justify-center w-full"
-							type="submit" value="Sign in" />
+							type="submit" id="submitButton" value="Sign in" />
 						<button
 							class="cursor-pointer mb-6 border md:border-2 border-black text-sm md:text-base font-semibold p-3 rounded-md inline-flex justify-center items-center gap-2.5 w-full">
 							<img src="/assets/images/Google Icon.svg" alt="Google icon"
@@ -81,4 +86,38 @@
 		</div>
 	</div>
 </body>
+<script>
+	window.onload = () => {
+		submitButton.disabled = true;
+	}
+	var password = document.getElementById("password");
+	var passwordText = document.getElementById("missingPasswordText");
+	var email = document.getElementById("email");
+	var emailText = document.getElementById("missingEmailText");
+
+	var submitButton = document.getElementById("submitButton");
+
+	email.onblur = () => {
+		if (email.value.length !== 0 && password.value.length !== 0){
+			submitButton.disabled = false;
+			emailText.style.display = "none";
+		} else if (email.value.length !== 0){
+			emailText.style.display = "none";
+			submitButton.disabled = true;
+		} else {
+			emailText.style.display = "block";
+		}
+	}
+	password.onblur = () => {
+		if (password.value.length !== 0 && email.value.length !== 0){
+			submitButton.disabled = false;
+			passwordText.style.display = "none";
+		} else if (password.value.length !== 0){
+			passwordText.style.display = "none";
+			submitButton.disabled = true;
+		} else {
+			passwordText.style.display = "block";
+		}
+	}
+</script>
 </html>
