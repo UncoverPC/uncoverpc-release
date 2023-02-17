@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org"
+lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="icon" th:href="@{/assets/images/Logo.svg}" />
+    <link rel="icon" href="/src/main/resources/static/assets/images/Logo.svg" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" th:href="@{/assets/styles/history.css}"/>
+    <link rel="stylesheet" href="/src/main/resources/static/assets/styles/history.css" />
+    
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Raleway"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Settings - UncoverPC</title>
+  </head>
+
+  <body>
+    <div class="header">
+        <img src="/src/main/resources/static/assets/images/Logo.svg" class="logoSmall"/>
+        <h1 class="headerText">Settings</h1>
+    </div>
+    <div class="search">
+        <input class="searchBar" placeholder="Search..."></input>
+    </div>
+
+    <div class="resultsHolder">
+        <h1 class="resultText" style="font-size: 30px; padding-top:20px;">Settings</h1>
+        <hr style="width:95%; margin: auto; opacity: 30%;">
+        <div class="result" style="margin-top: 10px;">
+            <h1 class="settingText" style="color:rgb(53, 53, 77)">></h1>
+            <h1 class="settingText">Insert Setting</h1>
+        </div>
+
+        <div class="result">
+            <h1 class="settingText" style="color:rgb(53, 53, 77)">></h1>
+            <h1 class="settingText">Insert Setting</h1>
+        </div>
+        <div class="result">
+            <h1 class="settingText" style="color:rgb(53, 53, 77)">></h1>
+            <h1 class="settingText">Insert Setting</h1>
+        </div>
+    </div>
+
+   </body>
+</html>
